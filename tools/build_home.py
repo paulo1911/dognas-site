@@ -1,8 +1,11 @@
 """Landing pages (pt at /, en at /en/, es at /es/) with the store screenshots — 2026-10-16.
 Run: python3 tools/build_home.py (screenshots live in assets/shots/<lang>/)."""
-import os, html
+import os, html, hashlib
 ROOT = os.path.expanduser('~/workspace/dognas/dognas-site')
 EMAIL = 'me.pauloleite.dev@gmail.com'
+# Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
+# stylesheet broke the layout. The CSS URL changes whenever its content does.
+CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
 LANGS = {'pt': ('pt-BR', ''), 'en': ('en', 'en/'), 'es': ('es', 'es/')}
 NAMES = {'pt': 'Português', 'en': 'English', 'es': 'Español'}
 T = {
@@ -65,7 +68,7 @@ for L, t in T.items():
 <meta property="og:url" content="https://dognas.app/{LANGS[L][1]}">
 <meta name="twitter:card" content="summary_large_image">
 ''' + ''.join(f'<link rel="alternate" hreflang="{LANGS[l][0]}" href="https://dognas.app/{LANGS[l][1]}">\n' for l in LANGS) + f'''<link rel="icon" href="{base}assets/icon.png">
-<link rel="stylesheet" href="{base}assets/style.css">
+<link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{base}{LANGS[L][1]}"><img src="{base}assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>

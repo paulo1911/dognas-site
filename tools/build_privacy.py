@@ -1,7 +1,10 @@
 """Privacy page (PT, EN, ES in one page at /privacy/). Run: python3 tools/build_privacy.py"""
-import os, html
+import os, html, hashlib
 ROOT = os.path.expanduser('~/workspace/dognas/dognas-site')
 EMAIL = 'me.pauloleite.dev@gmail.com'
+# Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
+# stylesheet broke the layout. The CSS URL changes whenever its content does.
+CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
 LANGS = {'pt': ('pt-BR', '/', 'Português'), 'en': ('en', '/en/', 'English'), 'es': ('es', '/es/', 'Español')}
 
 def page(lang, title, desc, body, base):
@@ -15,7 +18,7 @@ def page(lang, title, desc, body, base):
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="icon" href="{base}assets/icon.png">
-<link rel="stylesheet" href="{base}assets/style.css">
+<link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{base}{LANGS[lang][1].lstrip("/")}"><img src="{base}assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
