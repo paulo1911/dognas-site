@@ -2,6 +2,17 @@
 import os, html, hashlib
 ROOT = os.path.expanduser('~/workspace/dognas/dognas-site')
 EMAIL = 'me.pauloleite.dev@gmail.com'
+# Google Analytics 4 on the site only (2026-10-16) — the apps collect nothing; see the privacy page.
+GA_TAG = '''<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJDFSS9D15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HJDFSS9D15');
+</script>
+'''
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
@@ -13,7 +24,7 @@ def page(lang, title, desc, body, base):
     return f'''<!doctype html>
 <html lang="{LANGS[lang][0]}">
 <head>
-<meta charset="utf-8">
+{GA_TAG}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
@@ -51,7 +62,7 @@ HOME = {
         'Dos apps', [('DogNAS', 'El servidor: instálalo en el Android que guardará los archivos.'), ('DogNAS Lite', 'La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.')]),
 }
 POLICY = {
-'pt': ('Política de privacidade', 'Última atualização: 14 de outubro de 2026', '''
+'pt': ('Política de privacidade', 'Última atualização: 16 de outubro de 2026', '''
 <p>Esta política vale para os dois apps: <b>DogNAS</b> (o servidor, <code>com.dognas.server</code>) e <b>DogNAS Lite</b> (o app de acesso, <code>com.dognas.client.lite</code>).</p>
 <h3>Resumo</h3><ul>
 <li>Seus arquivos ficam <b>nos seus aparelhos</b>. Não existe servidor ou nuvem do DogNAS.</li>
@@ -79,9 +90,10 @@ POLICY = {
 <h3>Seus controles</h3><ul>
 <li>Revogue o acesso de um dispositivo no DogNAS (Perfis → Dispositivos autorizados) ou remova um DogNAS no DogNAS Lite (pede o PIN do perfil).</li>
 <li>Desinstalar um app apaga os dados dele no aparelho. Os seus arquivos na pasta DogNAS <b>não</b> são apagados — eles são seus.</li></ul>
+<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b> para contar visitas e entender quais páginas são lidas (páginas vistas, país aproximado, tipo de aparelho e navegador). Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
 <h3>Crianças</h3><p>Os apps não são direcionados a crianças e não coletam dados de ninguém.</p>
 <h3>Mudanças e contato</h3><p>Se esta política mudar, a nova versão será publicada neste mesmo endereço, com a data acima atualizada. Dúvidas: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
-'en': ('Privacy policy', 'Last updated: October 14, 2026', '''
+'en': ('Privacy policy', 'Last updated: October 16, 2026', '''
 <p>Applies to both apps: <b>DogNAS</b> (the server, <code>com.dognas.server</code>) and <b>DogNAS Lite</b> (the access app, <code>com.dognas.client.lite</code>).</p>
 <h3>Summary</h3><ul>
 <li>Your files stay <b>on your own devices</b>. There is no DogNAS server or cloud.</li>
@@ -109,9 +121,10 @@ POLICY = {
 <h3>Your controls</h3><ul>
 <li>Revoke a device in DogNAS (Profiles → Authorized devices) or remove a DogNAS in DogNAS Lite (asks for the profile PIN).</li>
 <li>Uninstalling an app deletes its data on the device. Your files in the DogNAS folder are <b>not</b> deleted — they are yours.</li></ul>
+<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b> to count visits and see which pages are read (page views, approximate country, device type and browser). This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
 <h3>Children</h3><p>The apps are not directed to children and collect no data from anyone.</p>
 <h3>Changes and contact</h3><p>If this policy changes, the new version will be published at this same address with an updated date. Questions: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
-'es': ('Política de privacidad', 'Última actualización: 14 de octubre de 2026', '''
+'es': ('Política de privacidad', 'Última actualización: 16 de octubre de 2026', '''
 <p>Se aplica a las dos apps: <b>DogNAS</b> (el servidor, <code>com.dognas.server</code>) y <b>DogNAS Lite</b> (la app de acceso, <code>com.dognas.client.lite</code>).</p>
 <h3>Resumen</h3><ul>
 <li>Tus archivos se quedan <b>en tus dispositivos</b>. No existe un servidor ni una nube de DogNAS.</li>
@@ -139,6 +152,7 @@ POLICY = {
 <h3>Tus controles</h3><ul>
 <li>Revoca el acceso de un dispositivo en DogNAS (Perfiles → Dispositivos autorizados) o elimina un DogNAS en DogNAS Lite (pide el PIN del perfil).</li>
 <li>Desinstalar una app borra sus datos en el dispositivo. Tus archivos en la carpeta DogNAS <b>no</b> se borran — son tuyos.</li></ul>
+<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b> para contar visitas y saber qué páginas se leen (páginas vistas, país aproximado, tipo de dispositivo y navegador). Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
 <h3>Menores</h3><p>Las apps no están dirigidas a menores y no recopilan datos de nadie.</p>
 <h3>Cambios y contacto</h3><p>Si esta política cambia, la nueva versión se publicará en esta misma dirección, con la fecha actualizada. Dudas: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
 }

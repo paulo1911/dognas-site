@@ -3,6 +3,17 @@ Run: python3 tools/build_home.py (screenshots live in assets/shots/<lang>/)."""
 import os, html, hashlib
 ROOT = os.path.expanduser('~/workspace/dognas/dognas-site')
 EMAIL = 'me.pauloleite.dev@gmail.com'
+# Google Analytics 4 on the site only (2026-10-16) — the apps collect nothing; see the privacy page.
+GA_TAG = '''<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJDFSS9D15"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HJDFSS9D15');
+</script>
+'''
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
@@ -58,7 +69,7 @@ for L, t in T.items():
     page = f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
 <head>
-<meta charset="utf-8">
+{GA_TAG}<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
