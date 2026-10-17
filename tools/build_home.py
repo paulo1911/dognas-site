@@ -29,6 +29,10 @@ ICONS = {
  'smart-home': '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9.5 15.5a3.5 3.5 0 0 1 5 0M8 13.2a6 6 0 0 1 8 0"/><path d="M12 18h.01"/>',
  'shield': '<path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/>',
  'power': '<path d="M12 3v8"/><path d="M6.6 6.6a8 8 0 1 0 10.8 0"/>',
+ 'ssd': '<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h3"/><path d="M17 10v4"/>',
+ 'hdd': '<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="10" r=".6"/><path d="M8 17.5h8"/>',
+ 'sd': '<path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M10 3v4M13 3v4"/><path d="M9 14h6"/>',
+ 'devices': '<rect x="2" y="6" width="7" height="13" rx="1.5"/><rect x="15" y="6" width="7" height="13" rx="1.5"/><path d="M9 12.5h6"/><path d="M12 9v7"/>',
  'home': '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
  'terminal': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12.5 15H17"/>',
 }
@@ -60,6 +64,9 @@ T = {
    specs=[('Protocolo', 'SFTP sobre SSH-2'), ('Autenticação', 'Usuário e senha — uma credencial por dispositivo, revogável'),
           ('Armazenamento', 'Memória interna, cartão SD, HD ou pendrive USB'), ('Clientes', 'DogNAS Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH e scripts'),
           ('Requisitos', 'Android 7.0 ou mais recente, na mesma rede')],
+   more_kicker='Para todos', more_h2='Monte um DogNAS robusto', more_lead='Quer o máximo de armazenamento? Combine o DogNAS com outros dispositivos: ligue um SSD externo ou até aquele HD que você tirou do notebook antigo. Tudo funciona junto, de forma fácil e segura, na sua rede Wi-Fi.',
+   more_feats=[('SSD externo', 'Ligue um SSD USB e ganhe espaço e velocidade para guardar tudo da casa.'), ('O HD do notebook antigo', 'Coloque o HD trocado do notebook numa case USB e dê uma nova vida a ele como armazenamento da casa.'), ('Cartão SD ou pendrive', 'O jeito mais simples de aumentar o espaço do celular que virou servidor.'), ('Vários DogNAS na casa', 'Tem mais de um Android parado? Cada um pode ser um DogNAS; o DogNAS Lite mostra todos em “Meus armazenamentos”.')],
+   more_note='Discos USB precisam de um celular com USB OTG. HDs mecânicos podem pedir mais energia do que o celular fornece: nesse caso, use um hub USB com fonte. No plano Grátis, o DogNAS gerencia até 64 GB; no Pro, o disco inteiro.',
    watch='Acompanhe tudo', cap1='Transferências e clientes no servidor', cap2='Fila de transferências no celular',
    plans='Grátis para começar', planhead=('', 'Grátis', 'Pro'),
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
@@ -91,6 +98,9 @@ T = {
    specs=[('Protocol', 'SFTP over SSH-2'), ('Authentication', 'Username and password — one credential per device, revocable'),
           ('Storage', 'Internal memory, SD card, USB drive'), ('Clients', 'DogNAS Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH and scripts'),
           ('Requirements', 'Android 7.0 or newer, on the same network')],
+   more_kicker='For everyone', more_h2='Build a robust DogNAS', more_lead='Want as much storage as possible? Combine DogNAS with other devices: plug in an external SSD, or even the hard drive you took out of your old laptop. It all works together, easily and securely, on your Wi-Fi.',
+   more_feats=[('External SSD', 'Plug in a USB SSD for room and speed to keep everything at home.'), ('Your old laptop’s hard drive', 'Put the drive you swapped out of your laptop in a USB enclosure and give it a new life as home storage.'), ('SD card or USB stick', 'The simplest way to add space to the phone that became a server.'), ('Several DogNAS at home', 'More than one Android in a drawer? Each can be a DogNAS; DogNAS Lite shows them all in “My storages”.')],
+   more_note='USB drives need a phone with USB OTG. Spinning hard drives may need more power than the phone provides — use a powered USB hub in that case. On the Free plan DogNAS manages up to 64 GB; with Pro, the whole drive.',
    watch='Follow everything', cap1='Transfers and clients on the server', cap2='Transfer queue on your phone',
    plans='Free to start', planhead=('', 'Free', 'Pro'),
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('With the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
@@ -122,6 +132,9 @@ T = {
    specs=[('Protocolo', 'SFTP sobre SSH-2'), ('Autenticación', 'Usuario y contraseña — una credencial por dispositivo, revocable'),
           ('Almacenamiento', 'Memoria interna, tarjeta SD, disco o pendrive USB'), ('Clientes', 'DogNAS Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH y scripts'),
           ('Requisitos', 'Android 7.0 o más reciente, en la misma red')],
+   more_kicker='Para todos', more_h2='Arma un DogNAS robusto', more_lead='¿Quieres el máximo almacenamiento? Combina DogNAS con otros dispositivos: conecta un SSD externo o incluso el disco duro que sacaste de tu portátil viejo. Todo funciona junto, de forma fácil y segura, en tu red Wi-Fi.',
+   more_feats=[('SSD externo', 'Conecta un SSD USB y gana espacio y velocidad para guardar todo lo de casa.'), ('El disco del portátil viejo', 'Pon el disco que cambiaste del portátil en una carcasa USB y dale una nueva vida como almacenamiento de casa.'), ('Tarjeta SD o pendrive', 'La forma más sencilla de ampliar el espacio del teléfono que se convirtió en servidor.'), ('Varios DogNAS en casa', '¿Tienes más de un Android olvidado? Cada uno puede ser un DogNAS; DogNAS Lite los muestra todos en “Mis almacenamientos”.')],
+   more_note='Los discos USB necesitan un teléfono con USB OTG. Los discos mecánicos pueden pedir más energía de la que da el teléfono: en ese caso, usa un hub USB con alimentación. En el plan Gratis, DogNAS gestiona hasta 64 GB; con Pro, el disco entero.',
    watch='Sigue todo', cap1='Transferencias y clientes en el servidor', cap2='Cola de transferencias en el teléfono',
    plans='Gratis para empezar', planhead=('', 'Gratis', 'Pro'),
    rows=[('Almacenamiento', '64 GB', 'Todo el dispositivo'), ('Perfiles', 'Casa + 2', 'Ilimitados'), ('Dispositivos vinculados', '3', 'Ilimitados'), ('Rendimiento', 'Bueno', 'Máximo optimizado'), ('Con la app cerrada', 'Se pausan', 'Continúan'), ('Tras reiniciar', 'Toca para iniciar', 'Se inicia solo')],
@@ -130,6 +143,7 @@ T = {
 }
 def phone(src, alt): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" loading="lazy"></div>'
 HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
+MORE_ICONS = ['ssd', 'hdd', 'sd', 'devices']
 TECH_ICONS = ['server', 'smart-home', 'shield', 'power']
 def cards(items, keys): return '<div class="grid feats">' + ''.join(f'<div class="card">{icon(k)}<h3>{h}</h3><p>{p}</p></div>' for k, (h, p) in zip(keys, items)) + '</div>'
 for L, t in T.items():
@@ -174,6 +188,11 @@ for L, t in T.items():
 {cards(t['tech_feats'], TECH_ICONS)}
 <h3 class="sub">{t['specs_h3']}</h3>
 <div class="table-wrap"><table class="plans specs"><tbody>{specs}</tbody></table></div>
+</section>
+<section id="mais" class="audience more">
+<p class="kicker">{t['more_kicker']}</p><h2>{t['more_h2']}</h2><p class="lead">{t['more_lead']}</p>
+{cards(t['more_feats'], MORE_ICONS)}
+<p class="note">{t['more_note']}</p>
 </section>
 <h2>{t['watch']}</h2>
 <div class="twoup"><figure>{phone(sh + 'server-monitor.webp', t['cap1'])}<figcaption>{t['cap1']}</figcaption></figure><figure>{phone(sh + 'lite-transfers.webp', t['cap2'])}<figcaption>{t['cap2']}</figcaption></figure></div>
