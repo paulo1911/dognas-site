@@ -33,6 +33,7 @@ ICONS = {
  'hdd': '<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="10" r=".6"/><path d="M8 17.5h8"/>',
  'sd': '<path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M10 3v4M13 3v4"/><path d="M9 14h6"/>',
  'devices': '<rect x="2" y="6" width="7" height="13" rx="1.5"/><rect x="15" y="6" width="7" height="13" rx="1.5"/><path d="M9 12.5h6"/><path d="M12 9v7"/>',
+ 'briefcase': '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/><path d="M11 13v2h2v-2"/>',
  'home': '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
  'terminal': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12.5 15H17"/>',
 }
@@ -60,6 +61,7 @@ T = {
                ('Smart home e IoT', 'Receba arquivos de câmeras e NVRs com envio por SFTP, backups de outros servidores e scripts de automação (Home Assistant, Node-RED, cron).'),
                ('Seguro por padrão', 'SSH-2 com AES-GCM ou ChaCha20, chave do servidor fixada no pareamento e uma credencial por dispositivo, revogável a qualquer hora.'),
                ('Feito para ficar ligado', 'Grava na memória interna, num cartão SD ou num HD ou pendrive USB. No Pro, volta sozinho depois de reiniciar.')],
+   prod=('Produtividade no escritório', 'Ideal para quem trabalha com fotos, vídeos e documentos e precisa organizar tudo: os arquivos ficam acessíveis no PC, no tablet e no smartphone, sem pendrives nem cabos. O DogNAS é toda a facilidade pelo seu Wi-Fi.'),
    specs_h3='Especificações',
    specs=[('Protocolo', 'SFTP sobre SSH-2'), ('Autenticação', 'Usuário e senha — uma credencial por dispositivo, revogável'),
           ('Armazenamento', 'Memória interna, cartão SD, HD ou pendrive USB'), ('Clientes', 'DogNAS Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH e scripts'),
@@ -94,6 +96,7 @@ T = {
                ('Smart home and IoT', 'Receive files from cameras and NVRs that upload over SFTP, backups from other servers, and automation scripts (Home Assistant, Node-RED, cron).'),
                ('Secure by default', 'SSH-2 with AES-GCM or ChaCha20, the server key pinned at pairing, and one credential per device, revocable at any time.'),
                ('Built to stay on', 'Stores to internal memory, an SD card or a USB drive. With Pro it comes back by itself after a reboot.')],
+   prod=('Productivity at the office', 'Ideal for anyone who works with photos, videos and documents and needs to keep it all organized: your files stay reachable from PC, tablet and smartphone, with no USB sticks or cables. DogNAS makes it easy, over your Wi-Fi.'),
    specs_h3='Specifications',
    specs=[('Protocol', 'SFTP over SSH-2'), ('Authentication', 'Username and password — one credential per device, revocable'),
           ('Storage', 'Internal memory, SD card, USB drive'), ('Clients', 'DogNAS Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH and scripts'),
@@ -128,6 +131,7 @@ T = {
                ('Casa inteligente e IoT', 'Recibe archivos de cámaras y NVR que suben por SFTP, copias de seguridad de otros servidores y scripts de automatización (Home Assistant, Node-RED, cron).'),
                ('Seguro por defecto', 'SSH-2 con AES-GCM o ChaCha20, la clave del servidor fijada al vincular y una credencial por dispositivo, revocable en cualquier momento.'),
                ('Hecho para estar encendido', 'Guarda en la memoria interna, en una tarjeta SD o en un disco o pendrive USB. Con Pro vuelve solo tras reiniciar.')],
+   prod=('Productividad en la oficina', 'Ideal para quien trabaja con fotos, videos y documentos y necesita organizarlo todo: los archivos quedan accesibles desde el PC, la tableta y el smartphone, sin pendrives ni cables. DogNAS es toda la facilidad por tu Wi-Fi.'),
    specs_h3='Especificaciones',
    specs=[('Protocolo', 'SFTP sobre SSH-2'), ('Autenticación', 'Usuario y contraseña — una credencial por dispositivo, revocable'),
           ('Almacenamiento', 'Memoria interna, tarjeta SD, disco o pendrive USB'), ('Clientes', 'DogNAS Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH y scripts'),
@@ -186,6 +190,7 @@ for L, t in T.items():
 <section id="tech" class="audience tech">
 <p class="kicker">{t['tech_kicker']}</p><h2>{t['tech_h2']}</h2><p class="lead">{t['tech_lead']}</p>
 {cards(t['tech_feats'], TECH_ICONS)}
+<div class="card wide">{icon('briefcase')}<h3>{t['prod'][0]}</h3><p>{t['prod'][1]}</p></div>
 <h3 class="sub">{t['specs_h3']}</h3>
 <div class="table-wrap"><table class="plans specs"><tbody>{specs}</tbody></table></div>
 </section>

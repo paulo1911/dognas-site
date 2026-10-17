@@ -87,3 +87,5 @@ table.specs td { color:var(--text); font-weight:400 !important; }
 .aud .ico { width:52px; height:52px; }
 .aud-casa .ico { background:rgba(244,67,54,.12); color:var(--red); }
 .audience.more .kicker { color:var(--text); opacity:.7; }
+.card.wide { margin-top:14px; border-left:3px solid var(--green); }
+.card.wide p { max-width:720px; }
