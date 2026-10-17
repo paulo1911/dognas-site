@@ -64,3 +64,23 @@ table.plans td, table.plans th { overflow-wrap:anywhere; }
   .wrap { overflow-x:hidden; }
   footer { flex-direction:column; }
 }
+
+/* Two audiences: home users and tech / smart-home users */
+.audiences { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; }
+.aud { display:block; background:var(--card); border:1px solid var(--line); border-top:3px solid var(--red); border-radius:16px; padding:20px; text-decoration:none; color:var(--text); }
+.aud-tech { border-top-color:var(--green); }
+.aud h3 { margin:0 0 6px; font-size:19px; } .aud p { margin:0 0 12px; color:var(--muted); font-size:15px; }
+.aud span { color:var(--red); font-weight:600; font-size:15px; } .aud-tech span { color:var(--green); }
+.aud:hover { border-color:#3a3a3a; }
+.audience { margin-top:48px; padding-top:8px; border-top:1px solid var(--line); scroll-margin-top:16px; }
+.audience h2 { margin-top:6px; }
+.kicker { margin:28px 0 0; color:var(--red); font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.audience.tech .kicker { color:var(--green); }
+.audience .lead { color:var(--muted); font-size:17px; margin:0; max-width:680px; }
+.audience .grid { margin-top:20px; grid-template-columns:repeat(2,1fr); }
+.audience.tech .card { border-left:3px solid var(--green); }
+h3.sub { margin:32px 0 0; font-size:18px; }
+table.specs th { width:34%; color:var(--muted); font-weight:600; }
+table.specs td { color:var(--text); font-weight:400 !important; }
+code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.92em; background:#202020; padding:1px 5px; border-radius:6px; }
+@media (max-width:760px) { .audiences, .audience .grid { grid-template-columns:1fr; } table.specs th { width:40%; } }
