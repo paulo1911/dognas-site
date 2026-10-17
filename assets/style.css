@@ -82,5 +82,4 @@ table.plans td, table.plans th { overflow-wrap:anywhere; }
 h3.sub { margin:32px 0 0; font-size:18px; }
 table.specs th { width:34%; color:var(--muted); font-weight:600; }
 table.specs td { color:var(--text); font-weight:400 !important; }
-code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.92em; background:#202020; padding:1px 5px; border-radius:6px; }
 @media (max-width:760px) { .audiences, .audience .grid { grid-template-columns:1fr; } table.specs th { width:40%; } }
