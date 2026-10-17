@@ -83,3 +83,6 @@ h3.sub { margin:32px 0 0; font-size:18px; }
 table.specs th { width:34%; color:var(--muted); font-weight:600; }
 table.specs td { color:var(--text); font-weight:400 !important; }
 @media (max-width:760px) { .audiences, .audience .grid { grid-template-columns:1fr; } table.specs th { width:40%; } }
+.ico { display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; border-radius:14px; background:rgba(34,197,94,.12); color:var(--green); margin-bottom:12px; }
+.aud .ico { width:52px; height:52px; }
+.aud-casa .ico { background:rgba(244,67,54,.12); color:var(--red); }

@@ -19,6 +19,20 @@ GA_TAG = '''<!-- Google tag (gtag.js) -->
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
 LANGS = {'pt': ('pt-BR', ''), 'en': ('en', 'en/'), 'es': ('es', 'es/')}
 NAMES = {'pt': 'Português', 'en': 'English', 'es': 'Español'}
+# Inline SVG icons (24×24, stroke = currentColor), one per feature card and audience.
+ICONS = {
+ 'phone-free': '<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18.5h4"/><path d="m9 10 2 2 4-4"/>',
+ 'people': '<circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/>',
+ 'qr': '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/>',
+ 'no-cloud': '<path d="M7 18h10a4 4 0 0 0 .7-7.94A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"/><path d="m3 3 18 18"/>',
+ 'server': '<rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01M11 7.5h6M11 16.5h6"/>',
+ 'smart-home': '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9.5 15.5a3.5 3.5 0 0 1 5 0M8 13.2a6 6 0 0 1 8 0"/><path d="M12 18h.01"/>',
+ 'shield': '<path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m8.5 12 2.5 2.5 4.5-4.5"/>',
+ 'power': '<path d="M12 3v8"/><path d="M6.6 6.6a8 8 0 1 0 10.8 0"/>',
+ 'home': '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
+ 'terminal': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12.5 15H17"/>',
+}
+def icon(k): return f'<span class="ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[k]}</svg></span>'
 T = {
  'pt': dict(title='DogNAS — Seu Android vira um servidor de arquivos', desc='Use um Android como armazenamento particular na sua rede Wi-Fi: para guardar os arquivos da família ou como servidor SFTP para casa inteligente e escritório. Sem nuvem.',
    h1='Seus arquivos em casa.', lead='O DogNAS transforma um Android que você já tem num servidor de arquivos particular, na sua rede Wi-Fi. Sem nuvem e sem mensalidade.',
@@ -115,12 +129,14 @@ T = {
    apps='Dos apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', privacy='Política de privacidad'),
 }
 def phone(src, alt): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" loading="lazy"></div>'
-def cards(items, cls='grid'): return f'<div class="{cls}">' + ''.join(f'<div class="card"><h3>{h}</h3><p>{p}</p></div>' for h, p in items) + '</div>'
+HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
+TECH_ICONS = ['server', 'smart-home', 'shield', 'power']
+def cards(items, keys): return '<div class="grid feats">' + ''.join(f'<div class="card">{icon(k)}<h3>{h}</h3><p>{p}</p></div>' for k, (h, p) in zip(keys, items)) + '</div>'
 for L, t in T.items():
     base = '' if L == 'pt' else '../'
     sh = f'{base}assets/shots/{L}/'
     nav = ''.join(f'<a href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
-    aud = ''.join(f'<a class="aud aud-{k}" href="#{k}"><h3>{h}</h3><p>{p}</p><span>{more} →</span></a>' for k, h, p, more in t['aud'])
+    aud = ''.join(f'<a class="aud aud-{k}" href="#{k}">{icon("home" if k == "casa" else "terminal")}<h3>{h}</h3><p>{p}</p><span>{more} →</span></a>' for k, h, p, more in t['aud'])
     steps = ''.join(f'<div class="step"><div class="num">{i}</div><h3>{h}</h3><p>{p}</p>{phone(sh + img + ".webp", h)}</div>' for i, (h, p, img) in enumerate(t['steps'], 1))
     specs = ''.join(f'<tr><th>{a}</th><td>{b}</td></tr>' for a, b in t['specs'])
     rows = ''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in t['rows'])
@@ -150,12 +166,12 @@ for L, t in T.items():
 <h2>{t['who']}</h2><div class="audiences">{aud}</div>
 <section id="casa" class="audience">
 <p class="kicker">{t['home_kicker']}</p><h2>{t['home_h2']}</h2><p class="lead">{t['home_lead']}</p>
-{cards(t['home_feats'])}
+{cards(t['home_feats'], HOME_ICONS)}
 <h3 class="sub">{t['how']}</h3><div class="steps">{steps}</div>
 </section>
 <section id="tech" class="audience tech">
 <p class="kicker">{t['tech_kicker']}</p><h2>{t['tech_h2']}</h2><p class="lead">{t['tech_lead']}</p>
-{cards(t['tech_feats'])}
+{cards(t['tech_feats'], TECH_ICONS)}
 <h3 class="sub">{t['specs_h3']}</h3>
 <div class="table-wrap"><table class="plans specs"><tbody>{specs}</tbody></table></div>
 </section>
