@@ -69,6 +69,8 @@ T = {
    more_kicker='Para todos', more_h2='Monte um DogNAS robusto', more_lead='Quer o máximo de armazenamento? Combine o DogNAS com outros dispositivos: ligue um SSD externo ou até aquele HD que você tirou do notebook antigo. Tudo funciona junto, de forma fácil e segura, na sua rede Wi-Fi.',
    more_feats=[('SSD externo', 'Ligue um SSD USB e ganhe espaço e velocidade para guardar tudo da casa.'), ('O HD do notebook antigo', 'Coloque o HD trocado do notebook numa case USB e dê uma nova vida a ele como armazenamento da casa.'), ('Cartão SD ou pendrive', 'O jeito mais simples de aumentar o espaço do celular que virou servidor.'), ('Vários DogNAS na casa', 'Tem mais de um Android parado? Cada um pode ser um DogNAS; o DogNAS Lite mostra todos em “Meus armazenamentos”.')],
    more_note='Discos USB precisam de um celular com USB OTG. HDs mecânicos podem pedir mais energia do que o celular fornece: nesse caso, use um hub USB com fonte. No plano Grátis, o DogNAS gerencia até 64 GB; no Pro, o disco inteiro.',
+   tech_photo='O Monitor do servidor: velocidade, clientes conectados e sessões TCP em tempo real.',
+   more_photo='Servidor com um HD externo numa dock USB, acessado pelo celular.',
    watch='Acompanhe tudo', cap1='Transferências e clientes no servidor', cap2='Fila de transferências no celular',
    plans='Grátis para começar', planhead=('', 'Grátis', 'Pro'),
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
@@ -104,6 +106,8 @@ T = {
    more_kicker='For everyone', more_h2='Build a robust DogNAS', more_lead='Want as much storage as possible? Combine DogNAS with other devices: plug in an external SSD, or even the hard drive you took out of your old laptop. It all works together, easily and securely, on your Wi-Fi.',
    more_feats=[('External SSD', 'Plug in a USB SSD for room and speed to keep everything at home.'), ('Your old laptop’s hard drive', 'Put the drive you swapped out of your laptop in a USB enclosure and give it a new life as home storage.'), ('SD card or USB stick', 'The simplest way to add space to the phone that became a server.'), ('Several DogNAS at home', 'More than one Android in a drawer? Each can be a DogNAS; DogNAS Lite shows them all in “My storages”.')],
    more_note='USB drives need a phone with USB OTG. Spinning hard drives may need more power than the phone provides — use a powered USB hub in that case. On the Free plan DogNAS manages up to 64 GB; with Pro, the whole drive.',
+   tech_photo='The server Monitor: speed, connected clients and TCP sessions in real time.',
+   more_photo='A server with an external drive in a USB dock, reached from the phone.',
    watch='Follow everything', cap1='Transfers and clients on the server', cap2='Transfer queue on your phone',
    plans='Free to start', planhead=('', 'Free', 'Pro'),
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('With the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
@@ -139,12 +143,17 @@ T = {
    more_kicker='Para todos', more_h2='Arma un DogNAS robusto', more_lead='¿Quieres el máximo almacenamiento? Combina DogNAS con otros dispositivos: conecta un SSD externo o incluso el disco duro que sacaste de tu portátil viejo. Todo funciona junto, de forma fácil y segura, en tu red Wi-Fi.',
    more_feats=[('SSD externo', 'Conecta un SSD USB y gana espacio y velocidad para guardar todo lo de casa.'), ('El disco del portátil viejo', 'Pon el disco que cambiaste del portátil en una carcasa USB y dale una nueva vida como almacenamiento de casa.'), ('Tarjeta SD o pendrive', 'La forma más sencilla de ampliar el espacio del teléfono que se convirtió en servidor.'), ('Varios DogNAS en casa', '¿Tienes más de un Android olvidado? Cada uno puede ser un DogNAS; DogNAS Lite los muestra todos en “Mis almacenamientos”.')],
    more_note='Los discos USB necesitan un teléfono con USB OTG. Los discos mecánicos pueden pedir más energía de la que da el teléfono: en ese caso, usa un hub USB con alimentación. En el plan Gratis, DogNAS gestiona hasta 64 GB; con Pro, el disco entero.',
+   tech_photo='El Monitor del servidor: velocidad, clientes conectados y sesiones TCP en tiempo real.',
+   more_photo='Un servidor con un disco externo en un dock USB, al que se accede desde el teléfono.',
    watch='Sigue todo', cap1='Transferencias y clientes en el servidor', cap2='Cola de transferencias en el teléfono',
    plans='Gratis para empezar', planhead=('', 'Gratis', 'Pro'),
    rows=[('Almacenamiento', '64 GB', 'Todo el dispositivo'), ('Perfiles', 'Casa + 2', 'Ilimitados'), ('Dispositivos vinculados', '3', 'Ilimitados'), ('Rendimiento', 'Bueno', 'Máximo optimizado'), ('Con la app cerrada', 'Se pausan', 'Continúan'), ('Tras reiniciar', 'Toca para iniciar', 'Se inicia solo')],
    plannote='DogNAS Pro: compra única, sin suscripción. DogNAS Lite siempre es gratis.',
    apps='Dos apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', privacy='Política de privacidad'),
 }
+# Real photos from tools/build_photos.py (900 px wide WebP); sizes keep the layout from jumping.
+PHOTO_H = {'always-on': 1129, 'usb-drive': 1347}
+def photo(base, name, cap): return f'<figure class="real"><img src="{base}assets/photos/{name}.webp" alt="{html.escape(cap)}" width="900" height="{PHOTO_H[name]}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
 def phone(src, alt): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" loading="lazy"></div>'
 HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
 MORE_ICONS = ['ssd', 'hdd', 'sd', 'devices']
@@ -189,14 +198,14 @@ for L, t in T.items():
 </section>
 <section id="tech" class="audience tech">
 <p class="kicker">{t['tech_kicker']}</p><h2>{t['tech_h2']}</h2><p class="lead">{t['tech_lead']}</p>
-{cards(t['tech_feats'], TECH_ICONS)}
+<div class="split">{photo(base, 'always-on', t['tech_photo'])}{cards(t['tech_feats'], TECH_ICONS)}</div>
 <div class="card wide">{icon('briefcase')}<h3>{t['prod'][0]}</h3><p>{t['prod'][1]}</p></div>
 <h3 class="sub">{t['specs_h3']}</h3>
 <div class="table-wrap"><table class="plans specs"><tbody>{specs}</tbody></table></div>
 </section>
 <section id="mais" class="audience more">
 <p class="kicker">{t['more_kicker']}</p><h2>{t['more_h2']}</h2><p class="lead">{t['more_lead']}</p>
-{cards(t['more_feats'], MORE_ICONS)}
+<div class="split">{photo(base, 'usb-drive', t['more_photo'])}{cards(t['more_feats'], MORE_ICONS)}</div>
 <p class="note">{t['more_note']}</p>
 </section>
 <h2>{t['watch']}</h2>
