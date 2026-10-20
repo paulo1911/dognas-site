@@ -100,3 +100,18 @@ figure.real figcaption { margin-top:8px; }
   .split { grid-template-columns:1fr; }
   .split figure.real { max-width:420px; margin:0 auto; }
 }
+/* Benefits: each everyday pain and how DogNAS solves it */
+.benefits-sec .kicker { color:var(--text); opacity:.7; }
+.benefits { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:20px; }
+.bcard { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; }
+.bcard h3 { margin:0 0 4px; font-size:18px; }
+.bcard ul { list-style:none; margin:0; padding:0; }
+.bcard li { padding:12px 0; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:6px; font-size:15px; }
+.bcard li:first-child { border-top:0; }
+.bcard .pain, .bcard .fix { position:relative; padding-left:24px; }
+.bcard .pain { color:var(--muted); }
+.bcard .fix { color:var(--text); }
+.bcard .pain::before, .bcard .fix::before { position:absolute; left:0; top:0; font-weight:700; }
+.bcard .pain::before { content:"✕"; color:var(--red); }
+.bcard .fix::before { content:"✓"; color:var(--green); }
+@media (max-width:760px) { .benefits { grid-template-columns:1fr; } }

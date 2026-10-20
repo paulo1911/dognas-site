@@ -43,6 +43,19 @@ T = {
    h1='Seus arquivos em casa.', lead='O DogNAS transforma um Android que você já tem num servidor de arquivos particular, na sua rede Wi-Fi. Sem nuvem e sem mensalidade.',
    soon='Em breve na Google Play', alt1='Servidor DogNAS online', alt2='Arquivos no DogNAS Lite',
    who='Para quem é o DogNAS?',
+   ben_kicker='Benefícios', ben_h2='Os problemas que o DogNAS resolve', ben_lead='Em casa, no home office ou na casa inteligente, o DogNAS acaba com dores do dia a dia usando um Android que você já tem.',
+   ben=[('home', 'Uso doméstico', [
+          ('Celular sempre cheio, sem espaço para fotos e vídeos.', 'Mande fotos e vídeos para o DogNAS pelo Wi-Fi e libere espaço sem apagar nada.'),
+          ('Mensalidade de nuvem que só aumenta.', 'Use o Android parado na gaveta: o Grátis guarda até 64 GB e o Pro é compra única, sem assinatura.'),
+          ('Fotos da família espalhadas e guardadas em servidores de terceiros.', 'Tudo num lugar só, dentro de casa: um perfil e um PIN para cada pessoa, sem nuvem e sem conta.')]),
+        ('briefcase', 'Home office', [
+          ('Arquivos de trabalho presos em pendrives e em e-mails para si mesmo.', 'Abra do PC, do Mac, do tablet ou do celular pela rede: FileZilla, WinSCP, Cyberduck ou DogNAS Lite.'),
+          ('NAS tradicional caro e difícil de configurar.', 'Instale um app, toque em Iniciar e pareie com QR Code e PIN. Sem mexer no roteador.'),
+          ('Documentos de clientes em nuvem pública.', 'Ficam na sua rede, cifrados no caminho (SSH/SFTP), com uma credencial por aparelho que você revoga quando quiser.')]),
+        ('smart-home', 'Smart home', [
+          ('Gravações das câmeras presas à nuvem paga do fabricante.', 'Câmeras e NVRs com envio por SFTP gravam direto no DogNAS, na sua rede.'),
+          ('Automações sem um lugar para guardar arquivos.', 'Home Assistant, Node-RED, rclone e scripts enviam e buscam arquivos por SFTP.'),
+          ('Servidor que para quando falta luz.', 'A bateria do celular segura quedas curtas e, no Pro, o DogNAS volta sozinho depois de reiniciar.')])],
    aud=[('casa', 'Para sua casa', 'Seu Android antigo vira o armazenamento da família, pelo Wi-Fi. Sem complicação.', 'Ver como funciona'),
         ('tech', 'Para quem é de tecnologia', 'Um servidor SFTP sempre ligado: NAS em casa ou no escritório, smart home e IoT.', 'Ver detalhes técnicos')],
    home_kicker='Para sua casa', home_h2='Seu Android antigo como armazenamento da casa, pelo Wi-Fi',
@@ -80,6 +93,19 @@ T = {
    h1='Your files at home.', lead='DogNAS turns an Android you already own into a private file server on your Wi-Fi. No cloud, no monthly fee.',
    soon='Coming soon to Google Play', alt1='DogNAS server online', alt2='Files in DogNAS Lite',
    who='Who is DogNAS for?',
+   ben_kicker='Benefits', ben_h2='The problems DogNAS solves', ben_lead='At home, in your home office or in your smart home, DogNAS ends everyday headaches with an Android you already own.',
+   ben=[('home', 'Home use', [
+          ('Your phone is always full, with no room for photos and videos.', 'Send photos and videos to DogNAS over Wi-Fi and free up space without deleting anything.'),
+          ('A cloud subscription that keeps going up.', 'Use the Android sitting in a drawer: Free keeps up to 64 GB and Pro is a one-time purchase, no subscription.'),
+          ('Family photos scattered around and kept on someone else’s servers.', 'Everything in one place, inside your home: a profile and a PIN for each person, no cloud and no account.')]),
+        ('briefcase', 'Home office', [
+          ('Work files stuck on USB sticks and in emails to yourself.', 'Open them from your PC, Mac, tablet or phone over the network: FileZilla, WinSCP, Cyberduck or DogNAS Lite.'),
+          ('A traditional NAS is expensive and hard to set up.', 'Install an app, tap Start and pair with a QR Code and a PIN. No router settings.'),
+          ('Client documents on a public cloud.', 'They stay on your network, encrypted in transit (SSH/SFTP), with one credential per device that you can revoke at any time.')]),
+        ('smart-home', 'Smart home', [
+          ('Camera recordings locked into the maker’s paid cloud.', 'Cameras and NVRs that upload over SFTP record straight to DogNAS, on your network.'),
+          ('Automations with nowhere to keep files.', 'Home Assistant, Node-RED, rclone and scripts send and fetch files over SFTP.'),
+          ('A server that stops when the power goes out.', 'The phone’s battery rides out short outages and, on Pro, DogNAS starts again by itself after a reboot.')])],
    aud=[('casa', 'For your home', 'Your old Android becomes the family’s storage, over Wi-Fi. No hassle.', 'See how it works'),
         ('tech', 'For tech people', 'An always-on SFTP server: a NAS for home or office, smart home and IoT.', 'See the tech details')],
    home_kicker='For your home', home_h2='Your old Android as home storage, over Wi-Fi',
@@ -117,6 +143,19 @@ T = {
    h1='Tus archivos en casa.', lead='DogNAS convierte un Android que ya tienes en un servidor de archivos privado, en tu red Wi-Fi. Sin nube y sin cuotas mensuales.',
    soon='Próximamente en Google Play', alt1='Servidor DogNAS en línea', alt2='Archivos en DogNAS Lite',
    who='¿Para quién es DogNAS?',
+   ben_kicker='Beneficios', ben_h2='Los problemas que DogNAS resuelve', ben_lead='En casa, en la oficina en casa o en tu casa inteligente, DogNAS acaba con molestias diarias usando un Android que ya tienes.',
+   ben=[('home', 'Uso doméstico', [
+          ('El teléfono siempre lleno, sin espacio para fotos y videos.', 'Envía fotos y videos a DogNAS por Wi-Fi y libera espacio sin borrar nada.'),
+          ('Una suscripción de nube que no deja de subir.', 'Usa el Android olvidado en un cajón: Gratis guarda hasta 64 GB y Pro es una compra única, sin suscripción.'),
+          ('Fotos de la familia dispersas y guardadas en servidores ajenos.', 'Todo en un solo lugar, dentro de casa: un perfil y un PIN para cada persona, sin nube y sin cuenta.')]),
+        ('briefcase', 'Oficina en casa', [
+          ('Archivos de trabajo atrapados en memorias USB y en correos a ti mismo.', 'Ábrelos desde el PC, el Mac, la tablet o el teléfono por la red: FileZilla, WinSCP, Cyberduck o DogNAS Lite.'),
+          ('Un NAS tradicional es caro y difícil de configurar.', 'Instala una app, toca Iniciar y vincula con un código QR y un PIN. Sin tocar el router.'),
+          ('Documentos de clientes en una nube pública.', 'Se quedan en tu red, cifrados en tránsito (SSH/SFTP), con una credencial por dispositivo que revocas cuando quieras.')]),
+        ('smart-home', 'Casa inteligente', [
+          ('Grabaciones de cámaras atadas a la nube de pago del fabricante.', 'Las cámaras y NVR que envían por SFTP graban directo en DogNAS, en tu red.'),
+          ('Automatizaciones sin un lugar donde guardar archivos.', 'Home Assistant, Node-RED, rclone y scripts envían y buscan archivos por SFTP.'),
+          ('Un servidor que se detiene cuando se va la luz.', 'La batería del teléfono aguanta cortes breves y, en Pro, DogNAS vuelve a arrancar solo tras reiniciar.')])],
    aud=[('casa', 'Para tu casa', 'Tu Android viejo se convierte en el almacenamiento de la familia, por Wi-Fi. Sin complicaciones.', 'Ver cómo funciona'),
         ('tech', 'Para gente de tecnología', 'Un servidor SFTP siempre encendido: NAS en casa o en la oficina, casa inteligente e IoT.', 'Ver detalles técnicos')],
    home_kicker='Para tu casa', home_h2='Tu Android viejo como almacenamiento de casa, por Wi-Fi',
@@ -154,6 +193,9 @@ T = {
 # Real photos from tools/build_photos.py (900 px wide WebP); sizes keep the layout from jumping.
 PHOTO_H = {'always-on': 1129, 'usb-drive': 1347}
 def photo(base, name, cap): return f'<figure class="real"><img src="{base}assets/photos/{name}.webp" alt="{html.escape(cap)}" width="900" height="{PHOTO_H[name]}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
+def benefits(groups): return '<div class="benefits">' + ''.join(
+    f'<div class="bcard">{icon(k)}<h3>{h}</h3><ul>' + ''.join(f'<li><span class="pain">{a}</span><span class="fix">{b}</span></li>' for a, b in items) + '</ul></div>'
+    for k, h, items in groups) + '</div>'
 def phone(src, alt): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" loading="lazy"></div>'
 HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
 MORE_ICONS = ['ssd', 'hdd', 'sd', 'devices']
@@ -191,6 +233,10 @@ for L, t in T.items():
 <div class="phones">{phone(sh + 'server-status.webp', t['alt1'])}{phone(sh + 'lite-files.webp', t['alt2'])}</div>
 </div>
 <h2>{t['who']}</h2><div class="audiences">{aud}</div>
+<section id="beneficios" class="audience benefits-sec">
+<p class="kicker">{t['ben_kicker']}</p><h2>{t['ben_h2']}</h2><p class="lead">{t['ben_lead']}</p>
+{benefits(t['ben'])}
+</section>
 <section id="casa" class="audience">
 <p class="kicker">{t['home_kicker']}</p><h2>{t['home_h2']}</h2><p class="lead">{t['home_lead']}</p>
 {cards(t['home_feats'], HOME_ICONS)}
