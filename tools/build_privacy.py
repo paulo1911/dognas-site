@@ -1,6 +1,6 @@
 """Privacy page (PT, EN, ES in one page at /privacy/). Run: python3 tools/build_privacy.py"""
 import os, html, hashlib
-ROOT = os.path.expanduser('~/workspace/dognas/dognas-site')
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 # Google Analytics 4 on the site only (2026-10-16) — the apps collect nothing; see the privacy page.
 GA_TAG = '''<!-- Google tag (gtag.js) -->
