@@ -115,3 +115,4 @@ figure.real figcaption { margin-top:8px; }
 .bcard .pain::before { content:"✕"; color:var(--red); }
 .bcard .fix::before { content:"✓"; color:var(--green); }
 @media (max-width:760px) { .benefits { grid-template-columns:1fr; } }
+.apps a.card { text-decoration:none; color:inherit; }

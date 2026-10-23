@@ -4,7 +4,7 @@ Public static site (GitHub Pages, custom domain `dognas.app` at GoDaddy, HTTPS e
 never put app code, keys or personal data here. Workspace context: `../CLAUDE.md`.
 
 - Pages are **generated** — edit the generators, not the HTML:
-  `python3 tools/build_home.py` (landing `/`, `/en/`, `/es/`) and `python3 tools/build_privacy.py` (`/privacy/`).
+  `python3 tools/build_home.py` (landing `/`, `/en/`, `/es/`) and `python3 tools/build_privacy.py` (`/privacy/`), `python3 tools/build_client.py` (`/client/`, `/en/client/`, `/es/client/`; store links in `STORE`, empty = "Coming soon").
   Texts live inside the scripts; screenshots in `assets/shots/<lang>/` (WebP, 540 px wide).
 - Real photos: `tools/build_photos.py` (needs Pillow) crops/grades the originals in `../store-assets/real-images`
   into `assets/photos/`, blurring the framed family photo and dropping EXIF. Never publish people or EXIF.

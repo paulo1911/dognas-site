@@ -1,7 +1,7 @@
 """Landing pages (pt at /, en at /en/, es at /es/) for two audiences: home users and tech /
 smart-home users. Run: python3 tools/build_home.py (screenshots live in assets/shots/<lang>/)."""
 import os, html, hashlib
-ROOT = os.path.expanduser('~/workspace/dognas/dognas-site')
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 # Google Analytics 4 on the site only — the apps collect nothing; see the privacy page.
 GA_TAG = '''<!-- Google tag (gtag.js) -->
@@ -88,7 +88,7 @@ T = {
    plans='Grátis para começar', planhead=('', 'Grátis', 'Pro'),
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
    plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client Lite é sempre gratuito.',
-   apps='Dois apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', privacy='Política de privacidade'),
+   apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='Novo: o app completo para Android e iPhone, em breve.', privacy='Política de privacidade'),
  'en': dict(title='DogNAS — Turn an Android into a file server', desc='Use an Android as private storage on your Wi-Fi: to keep the family’s files, or as an SFTP server for your smart home and office. No cloud.',
    h1='Your files at home.', lead='DogNAS turns an Android you already own into a private file server on your Wi-Fi. No cloud, no monthly fee.',
    soon='Coming soon to Google Play', alt1='DogNAS server online', alt2='Files in DogNAS Client Lite',
@@ -138,7 +138,7 @@ T = {
    plans='Free to start', planhead=('', 'Free', 'Pro'),
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('With the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
    plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client Lite is always free.',
-   apps='Two apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', privacy='Privacy policy'),
+   apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', app3='New: the full app for Android and iPhone, coming soon.', privacy='Privacy policy'),
  'es': dict(title='DogNAS — Tu Android se convierte en un servidor de archivos', desc='Usa un Android como almacenamiento privado en tu Wi-Fi: para guardar los archivos de la familia o como servidor SFTP para tu casa inteligente y tu oficina. Sin nube.',
    h1='Tus archivos en casa.', lead='DogNAS convierte un Android que ya tienes en un servidor de archivos privado, en tu red Wi-Fi. Sin nube y sin cuotas mensuales.',
    soon='Próximamente en Google Play', alt1='Servidor DogNAS en línea', alt2='Archivos en DogNAS Client Lite',
@@ -188,7 +188,7 @@ T = {
    plans='Gratis para empezar', planhead=('', 'Gratis', 'Pro'),
    rows=[('Almacenamiento', '64 GB', 'Todo el dispositivo'), ('Perfiles', 'Casa + 2', 'Ilimitados'), ('Dispositivos vinculados', '3', 'Ilimitados'), ('Rendimiento', 'Bueno', 'Máximo optimizado'), ('Con la app cerrada', 'Se pausan', 'Continúan'), ('Tras reiniciar', 'Toca para iniciar', 'Se inicia solo')],
    plannote='DogNAS Pro: compra única, sin suscripción. DogNAS Client Lite siempre es gratis.',
-   apps='Dos apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', privacy='Política de privacidad'),
+   apps='Las apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', app3='Nuevo: la app completa para Android y iPhone, próximamente.', privacy='Política de privacidad'),
 }
 # Real photos from tools/build_photos.py (900 px wide WebP); sizes keep the layout from jumping.
 PHOTO_H = {'always-on': 1129, 'usb-drive': 1347}
@@ -260,7 +260,7 @@ for L, t in T.items():
 <div class="table-wrap"><table class="plans"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">{t['plannote']}</p>
 <h2>{t['apps']}</h2>
-<div class="grid apps"><div class="card"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></div><div class="card"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></div></div>
+<div class="grid apps"><div class="card"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></div><div class="card"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></div><a class="card" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
 <footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
