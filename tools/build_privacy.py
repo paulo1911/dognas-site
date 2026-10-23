@@ -62,8 +62,8 @@ HOME = {
         'Dos apps', [('DogNAS', 'El servidor: instálalo en el Android que guardará los archivos.'), ('DogNAS Client Lite', 'La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.')]),
 }
 POLICY = {
-'pt': ('Política de privacidade', 'Última atualização: 20 de outubro de 2026', '''
-<p>Esta política vale para os dois apps: <b>DogNAS</b> (o servidor, <code>com.dognas.server</code>) e <b>DogNAS Client Lite</b> (o app de acesso, <code>com.dognas.client.lite</code>).</p>
+'pt': ('Política de privacidade', 'Última atualização: 21 de outubro de 2026', '''
+<p>Esta política vale para os três apps: <b>DogNAS</b> (o servidor, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (o app de acesso para Android, <code>com.dognas.client.lite</code>) e <b>DogNAS Client</b> (o app de acesso completo, para Android e iOS, <code>com.dognas.client</code>).</p>
 <h3>Resumo</h3><ul>
 <li>Seus arquivos ficam <b>nos seus aparelhos</b>. Não existe servidor ou nuvem do DogNAS.</li>
 <li>Os apps <b>não coletam, não enviam e não vendem</b> dados pessoais. Não há anúncios, contas, analytics nem SDKs de terceiros que coletem dados.</li>
@@ -79,23 +79,33 @@ POLICY = {
 <li>A lista dos DogNAS pareados (nome, endereço na rede local, porta, nome de usuário).</li>
 <li>A senha de cada pareamento e a impressão digital da chave do servidor, <b>cifradas</b> com o Android Keystore, e o <i>hash</i> do PIN de cada perfil.</li>
 <li>A fila de transferências e suas preferências.</li></ul>
+<p><b>DogNAS Client (app de acesso completo)</b></p><ul>
+<li>A lista dos DogNAS pareados (nome do servidor e do perfil, endereço na rede local, porta, nome de usuário) e o perfil escolhido.</li>
+<li>A senha de cada pareamento e a impressão digital da chave do servidor, <b>cifradas</b> pelo Android Keystore ou pelo Keychain do iOS, e o <i>hash</i> do PIN de cada perfil.</li>
+<li>A fila de transferências (nomes e caminhos dos arquivos, andamento) e o banco de dados local que a guarda.</li>
+<li>O nome do seu aparelho (o modelo, no Android; o nome do aparelho, no iOS), informado <b>somente ao seu próprio DogNAS</b> ao conectar, para ele mostrar qual aparelho está conectado.</li></ul>
 <h3>Permissões e para que servem</h3><ul>
-<li><b>Câmera</b> (DogNAS Client Lite): só para ler o QR Code de pareamento. As imagens são processadas no aparelho e não são guardadas nem enviadas.</li>
+<li><b>Câmera</b> (DogNAS Client Lite e DogNAS Client): só para ler o QR Code de pareamento. As imagens são processadas no aparelho e não são guardadas nem enviadas.</li>
 <li><b>Acesso a arquivos / armazenamento</b> (DogNAS): guardar e ler os arquivos na pasta que você escolher. O acesso a todos os arquivos é opcional e serve para gravar direto na pasta, mais rápido; o app só usa a pasta DogNAS.</li>
 <li><b>Rede e Wi-Fi</b>: comunicação entre seus aparelhos na rede local e descoberta do servidor na mesma rede.</li>
+<li><b>Fotos e vídeos</b> (DogNAS Client): listar e ler as fotos e vídeos que você escolhe enviar ao seu DogNAS. Os arquivos vão só para o seu DogNAS; o app não os copia nem os envia a nenhum outro lugar.</li>
+<li><b>Armazenamento</b> (DogNAS Client, Android 9 ou anterior): gravar na pasta Downloads os arquivos que você baixa do DogNAS. Em versões mais novas do Android não é necessária.</li>
+<li><b>Rede local</b> (DogNAS Client, iOS): o iOS pede a sua permissão para o app encontrar e conectar ao seu DogNAS no Wi-Fi de casa.</li>
 <li><b>Notificações e serviço em primeiro plano</b>: no DogNAS, manter a conexão com os seus aparelhos pareados enquanto o servidor está ligado (dispositivo conectado), com uma notificação fixa e o botão Parar; no DogNAS Client Lite, manter as transferências em andamento (sincronização de dados) e mostrar o progresso.</li>
-<li><b>Iniciar após reiniciar</b> (DogNAS): ligar o servidor sozinho, se você ativar a opção.</li></ul>
-<h3>Serviços do Google</h3><ul>
+<li><b>Iniciar após reiniciar</b> (DogNAS): ligar o servidor sozinho, se você ativar a opção.</li>
+<li>No DogNAS Client (Android), o mesmo serviço em primeiro plano e a notificação mantêm as transferências em andamento.</li></ul>
+<h3>Serviços do Google e da Apple</h3><ul>
 <li><b>Compras</b> (DogNAS Pro): são processadas pelo Google Play. O app só recebe a confirmação de que a compra existe; dados de pagamento ficam com o Google, conforme a <a href="https://policies.google.com/privacy">política de privacidade do Google</a>.</li>
-<li><b>Estabilidade</b>: o Google Play pode coletar relatórios de falhas e de desempenho do Android (Android Vitals), conforme as configurações de "uso e diagnóstico" do seu aparelho. Os apps não incluem nenhuma ferramenta própria de telemetria.</li></ul>
+<li><b>Estabilidade</b>: o Google Play pode coletar relatórios de falhas e de desempenho do Android (Android Vitals), conforme as configurações de "uso e diagnóstico" do seu aparelho. Os apps não incluem nenhuma ferramenta própria de telemetria.</li>
+<li><b>Estabilidade no iOS</b>: a Apple pode fornecer ao desenvolvedor relatórios de falhas se você permitir compartilhar dados de análise do aparelho. O DogNAS Client não inclui telemetria própria.</li></ul>
 <h3>Seus controles</h3><ul>
-<li>Revogue o acesso de um dispositivo no DogNAS (Perfis → Dispositivos autorizados) ou remova um DogNAS no DogNAS Client Lite (pede o PIN do perfil).</li>
+<li>Revogue o acesso de um dispositivo no DogNAS (Perfis → Dispositivos autorizados) ou remova um DogNAS no DogNAS Client Lite ou no DogNAS Client (pede o PIN do perfil).</li>
 <li>Desinstalar um app apaga os dados dele no aparelho. Os seus arquivos na pasta DogNAS <b>não</b> são apagados — eles são seus.</li></ul>
 <h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b> para contar visitas e entender quais páginas são lidas (páginas vistas, país aproximado, tipo de aparelho e navegador). Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
 <h3>Crianças</h3><p>Os apps não são direcionados a crianças e não coletam dados de ninguém.</p>
 <h3>Mudanças e contato</h3><p>Se esta política mudar, a nova versão será publicada neste mesmo endereço, com a data acima atualizada. Dúvidas: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
-'en': ('Privacy policy', 'Last updated: October 20, 2026', '''
-<p>Applies to both apps: <b>DogNAS</b> (the server, <code>com.dognas.server</code>) and <b>DogNAS Client Lite</b> (the access app, <code>com.dognas.client.lite</code>).</p>
+'en': ('Privacy policy', 'Last updated: October 21, 2026', '''
+<p>Applies to the three apps: <b>DogNAS</b> (the server, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (the access app for Android, <code>com.dognas.client.lite</code>) and <b>DogNAS Client</b> (the full access app, for Android and iOS, <code>com.dognas.client</code>).</p>
 <h3>Summary</h3><ul>
 <li>Your files stay <b>on your own devices</b>. There is no DogNAS server or cloud.</li>
 <li>The apps <b>do not collect, send or sell</b> personal data. No ads, accounts, analytics or third-party data-collecting SDKs.</li>
@@ -111,23 +121,33 @@ POLICY = {
 <li>The list of paired DogNAS (name, local network address, port, user name).</li>
 <li>Each pairing's password and the server key fingerprint, <b>encrypted</b> with the Android Keystore, and each profile PIN's <i>hash</i>.</li>
 <li>The transfer queue and your settings.</li></ul>
+<p><b>DogNAS Client (full access app)</b></p><ul>
+<li>The list of paired DogNAS (server and profile names, local network address, port, user name) and the selected profile.</li>
+<li>Each pairing's password and the server key fingerprint, <b>encrypted</b> by the Android Keystore or the iOS Keychain, and each profile PIN's <i>hash</i>.</li>
+<li>The transfer queue (file names and paths, progress) and the local database that holds it.</li>
+<li>Your device's name (the model on Android; the device name on iOS), told <b>only to your own DogNAS</b> when connecting, so it can show which device is connected.</li></ul>
 <h3>Permissions and what they are for</h3><ul>
-<li><b>Camera</b> (DogNAS Client Lite): only to read the pairing QR Code. Frames are processed on the device, never stored or sent.</li>
+<li><b>Camera</b> (DogNAS Client Lite and DogNAS Client): only to read the pairing QR Code. Frames are processed on the device, never stored or sent.</li>
 <li><b>Files / storage</b> (DogNAS): keep and read files in the folder you pick. All Files Access is optional and only used to write directly to the folder, faster; the app only uses the DogNAS folder.</li>
 <li><b>Network and Wi-Fi</b>: communication between your devices on the local network and finding the server on the same network.</li>
+<li><b>Photos and videos</b> (DogNAS Client): list and read the photos and videos you choose to send to your DogNAS. The files go only to your DogNAS; the app does not copy them or send them anywhere else.</li>
+<li><b>Storage</b> (DogNAS Client, Android 9 or earlier): write the files you download from your DogNAS to the Downloads folder. Not needed on newer Android versions.</li>
+<li><b>Local network</b> (DogNAS Client, iOS): iOS asks for your permission for the app to find and connect to your DogNAS on your home Wi-Fi.</li>
 <li><b>Notifications and foreground service</b>: in DogNAS, keep the connection to your paired devices while the server is on (connected device), with a persistent notification and a Stop button; in DogNAS Client Lite, keep transfers running (data sync) and show progress.</li>
-<li><b>Start after reboot</b> (DogNAS): start the server by itself, if you turn it on.</li></ul>
-<h3>Google services</h3><ul>
+<li><b>Start after reboot</b> (DogNAS): start the server by itself, if you turn it on.</li>
+<li>In DogNAS Client (Android), the same foreground service and notification keep transfers running.</li></ul>
+<h3>Google and Apple services</h3><ul>
 <li><b>Purchases</b> (DogNAS Pro) are processed by Google Play. The app only receives the confirmation that a purchase exists; payment data stays with Google, under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</li>
-<li><b>Stability</b>: Google Play may collect Android crash and performance reports (Android Vitals) according to your device's usage &amp; diagnostics settings. The apps include no telemetry of their own.</li></ul>
+<li><b>Stability</b>: Google Play may collect Android crash and performance reports (Android Vitals) according to your device's usage &amp; diagnostics settings. The apps include no telemetry of their own.</li>
+<li><b>Stability on iOS</b>: Apple may provide the developer with crash reports if you allow sharing device analytics. DogNAS Client includes no telemetry of its own.</li></ul>
 <h3>Your controls</h3><ul>
-<li>Revoke a device in DogNAS (Profiles → Authorized devices) or remove a DogNAS in DogNAS Client Lite (asks for the profile PIN).</li>
+<li>Revoke a device in DogNAS (Profiles → Authorized devices) or remove a DogNAS in DogNAS Client Lite or DogNAS Client (asks for the profile PIN).</li>
 <li>Uninstalling an app deletes its data on the device. Your files in the DogNAS folder are <b>not</b> deleted — they are yours.</li></ul>
 <h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b> to count visits and see which pages are read (page views, approximate country, device type and browser). This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
 <h3>Children</h3><p>The apps are not directed to children and collect no data from anyone.</p>
 <h3>Changes and contact</h3><p>If this policy changes, the new version will be published at this same address with an updated date. Questions: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
-'es': ('Política de privacidad', 'Última actualización: 20 de octubre de 2026', '''
-<p>Se aplica a las dos apps: <b>DogNAS</b> (el servidor, <code>com.dognas.server</code>) y <b>DogNAS Client Lite</b> (la app de acceso, <code>com.dognas.client.lite</code>).</p>
+'es': ('Política de privacidad', 'Última actualización: 21 de octubre de 2026', '''
+<p>Se aplica a las tres apps: <b>DogNAS</b> (el servidor, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (la app de acceso para Android, <code>com.dognas.client.lite</code>) y <b>DogNAS Client</b> (la app de acceso completa, para Android e iOS, <code>com.dognas.client</code>).</p>
 <h3>Resumen</h3><ul>
 <li>Tus archivos se quedan <b>en tus dispositivos</b>. No existe un servidor ni una nube de DogNAS.</li>
 <li>Las apps <b>no recopilan, no envían ni venden</b> datos personales. Sin anuncios, cuentas, analítica ni SDK de terceros que recopilen datos.</li>
@@ -143,17 +163,27 @@ POLICY = {
 <li>La lista de DogNAS vinculados (nombre, dirección en la red local, puerto, nombre de usuario).</li>
 <li>La contraseña de cada vinculación y la huella de la clave del servidor, <b>cifradas</b> con el Android Keystore, y el <i>hash</i> del PIN de cada perfil.</li>
 <li>La cola de transferencias y tus preferencias.</li></ul>
+<p><b>DogNAS Client (app de acceso completa)</b></p><ul>
+<li>La lista de DogNAS vinculados (nombre del servidor y del perfil, dirección en la red local, puerto, nombre de usuario) y el perfil elegido.</li>
+<li>La contraseña de cada vinculación y la huella de la clave del servidor, <b>cifradas</b> por el Android Keystore o el Keychain de iOS, y el <i>hash</i> del PIN de cada perfil.</li>
+<li>La cola de transferencias (nombres y rutas de los archivos, progreso) y la base de datos local que la guarda.</li>
+<li>El nombre de tu dispositivo (el modelo en Android; el nombre del dispositivo en iOS), informado <b>solo a tu propio DogNAS</b> al conectar, para que muestre qué dispositivo está conectado.</li></ul>
 <h3>Permisos y para qué sirven</h3><ul>
-<li><b>Cámara</b> (DogNAS Client Lite): solo para leer el código QR de vinculación. Las imágenes se procesan en el dispositivo y no se guardan ni se envían.</li>
+<li><b>Cámara</b> (DogNAS Client Lite y DogNAS Client): solo para leer el código QR de vinculación. Las imágenes se procesan en el dispositivo y no se guardan ni se envían.</li>
 <li><b>Archivos / almacenamiento</b> (DogNAS): guardar y leer archivos en la carpeta que elijas. El acceso a todos los archivos es opcional y sirve para escribir directamente en la carpeta, más rápido; la app solo usa la carpeta DogNAS.</li>
 <li><b>Red y Wi-Fi</b>: comunicación entre tus dispositivos en la red local y localización del servidor en la misma red.</li>
+<li><b>Fotos y vídeos</b> (DogNAS Client): listar y leer las fotos y vídeos que eliges enviar a tu DogNAS. Los archivos van solo a tu DogNAS; la app no los copia ni los envía a ningún otro lugar.</li>
+<li><b>Almacenamiento</b> (DogNAS Client, Android 9 o anterior): guardar en la carpeta Descargas los archivos que descargas de tu DogNAS. En versiones más nuevas de Android no es necesario.</li>
+<li><b>Red local</b> (DogNAS Client, iOS): iOS pide tu permiso para que la app encuentre y se conecte a tu DogNAS en el Wi-Fi de casa.</li>
 <li><b>Notificaciones y servicio en primer plano</b>: en DogNAS, mantener la conexión con tus dispositivos vinculados mientras el servidor está encendido (dispositivo conectado), con una notificación fija y el botón Detener; en DogNAS Client Lite, mantener las transferencias en curso (sincronización de datos) y mostrar el progreso.</li>
-<li><b>Iniciar tras reiniciar</b> (DogNAS): encender el servidor solo, si activas la opción.</li></ul>
-<h3>Servicios de Google</h3><ul>
+<li><b>Iniciar tras reiniciar</b> (DogNAS): encender el servidor solo, si activas la opción.</li>
+<li>En DogNAS Client (Android), el mismo servicio en primer plano y la notificación mantienen las transferencias en curso.</li></ul>
+<h3>Servicios de Google y de Apple</h3><ul>
 <li><b>Compras</b> (DogNAS Pro): las procesa Google Play. La app solo recibe la confirmación de que la compra existe; los datos de pago se quedan con Google, según la <a href="https://policies.google.com/privacy">política de privacidad de Google</a>.</li>
-<li><b>Estabilidad</b>: Google Play puede recopilar informes de fallos y rendimiento de Android (Android Vitals), según la configuración de "uso y diagnóstico" de tu dispositivo. Las apps no incluyen ninguna herramienta propia de telemetría.</li></ul>
+<li><b>Estabilidad</b>: Google Play puede recopilar informes de fallos y rendimiento de Android (Android Vitals), según la configuración de "uso y diagnóstico" de tu dispositivo. Las apps no incluyen ninguna herramienta propia de telemetría.</li>
+<li><b>Estabilidad en iOS</b>: Apple puede proporcionar al desarrollador informes de fallos si permites compartir datos de análisis del dispositivo. DogNAS Client no incluye telemetría propia.</li></ul>
 <h3>Tus controles</h3><ul>
-<li>Revoca el acceso de un dispositivo en DogNAS (Perfiles → Dispositivos autorizados) o elimina un DogNAS en DogNAS Client Lite (pide el PIN del perfil).</li>
+<li>Revoca el acceso de un dispositivo en DogNAS (Perfiles → Dispositivos autorizados) o elimina un DogNAS en DogNAS Client Lite o en DogNAS Client (pide el PIN del perfil).</li>
 <li>Desinstalar una app borra sus datos en el dispositivo. Tus archivos en la carpeta DogNAS <b>no</b> se borran — son tuyos.</li></ul>
 <h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b> para contar visitas y saber qué páginas se leen (páginas vistas, país aproximado, tipo de dispositivo y navegador). Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
 <h3>Menores</h3><p>Las apps no están dirigidas a menores y no recopilan datos de nadie.</p>
@@ -161,5 +191,5 @@ POLICY = {
 }
 sections = ''.join(f'<section class="legal" id="{l}"><h2>{t}</h2><p class="meta">{m}</p>{b.replace("EMAIL", EMAIL)}</section>' for l, (t, m, b) in POLICY.items())
 jump = '<p class="meta"><a href="#pt">Português</a> · <a href="#en">English</a> · <a href="#es">Español</a></p>'
-open(os.path.join(ROOT, 'privacy/index.html'), 'w').write(page('pt', 'DogNAS — Política de privacidade / Privacy policy', 'Política de privacidade do DogNAS e do DogNAS Client Lite.', '<h1 style="margin-top:32px">Política de privacidade · Privacy policy · Política de privacidad</h1>' + jump + sections, '../'))
+open(os.path.join(ROOT, 'privacy/index.html'), 'w').write(page('pt', 'DogNAS — Política de privacidade / Privacy policy', 'Política de privacidade do DogNAS, do DogNAS Client Lite e do DogNAS Client.', '<h1 style="margin-top:32px">Política de privacidade · Privacy policy · Política de privacidad</h1>' + jump + sections, '../'))
 print('ok')
