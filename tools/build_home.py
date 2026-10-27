@@ -357,7 +357,22 @@ for L, t in T.items():
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
 <footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
-</div></body></html>
+</div>
+<div class="float-cta" hidden><a class="btn primary" data-ev="server_store_click" data-loc="float" href="{play('server', 'float_cta')}" rel="noopener">{t['cta']}</a></div>
+<script>
+// Floating CTA: shown only after the hero button scrolled away, never while the cookie banner is open, and hidden
+// while an in-page CTA (bands / final) is on screen so it never stacks with them.
+(function () {{
+  var f = document.querySelector('.float-cta'), hero = document.querySelector('.hero .cta'); if (!f || !hero || !('IntersectionObserver' in window)) return;
+  var heroPast = false, busy = 0;
+  function update() {{ f.hidden = !(heroPast && !busy && !document.getElementById('dn-consent')); }}
+  new IntersectionObserver(function (e) {{ heroPast = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; update(); }}).observe(hero);
+  var io = new IntersectionObserver(function (es) {{ es.forEach(function (x) {{ busy += x.isIntersecting ? 1 : -1; }}); busy = Math.max(0, busy); update(); }});
+  document.querySelectorAll('.cta-band, .final').forEach(function (n) {{ io.observe(n); }});
+  new MutationObserver(update).observe(document.body, {{childList: true}});
+}})();
+</script>
+</body></html>
 '''
     out = os.path.join(ROOT, 'index.html' if L == 'pt' else f'{L}/index.html')
     open(out, 'w').write(page)
