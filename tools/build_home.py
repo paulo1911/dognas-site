@@ -38,10 +38,12 @@ ICONS = {
  'terminal': '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M12.5 15H17"/>',
 }
 def icon(k): return f'<span class="ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[k]}</svg></span>'
+PLAY = {'server': 'https://play.google.com/store/apps/details?id=com.dognas.server',
+        'lite': 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'}
 T = {
  'pt': dict(title='DogNAS — Seu Android vira um servidor de arquivos', desc='Use um Android como armazenamento particular na sua rede Wi-Fi: para guardar os arquivos da família ou como servidor SFTP para casa inteligente e escritório. Sem nuvem.',
    h1='Seus arquivos em casa.', lead='O DogNAS transforma um Android que você já tem num servidor de arquivos particular, na sua rede Wi-Fi. Sem nuvem e sem mensalidade.',
-   soon='Em breve na Google Play', alt1='Servidor DogNAS online', alt2='Arquivos no DogNAS Client Lite',
+   soon='Em breve na Google Play', get_server='Baixar o DogNAS (servidor)', get_lite='Baixar o DogNAS Client Lite', alt1='Servidor DogNAS online', alt2='Arquivos no DogNAS Client Lite',
    who='Para quem é o DogNAS?',
    ben_kicker='Benefícios', ben_h2='Os problemas que o DogNAS resolve', ben_lead='Em casa, no home office ou na casa inteligente, o DogNAS acaba com dores do dia a dia usando um Android que você já tem.',
    ben=[('home', 'Uso doméstico', [
@@ -91,7 +93,7 @@ T = {
    apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='Novo: o app completo para Android e iPhone, em breve.', privacy='Política de privacidade'),
  'en': dict(title='DogNAS — Turn an Android into a file server', desc='Use an Android as private storage on your Wi-Fi: to keep the family’s files, or as an SFTP server for your smart home and office. No cloud.',
    h1='Your files at home.', lead='DogNAS turns an Android you already own into a private file server on your Wi-Fi. No cloud, no monthly fee.',
-   soon='Coming soon to Google Play', alt1='DogNAS server online', alt2='Files in DogNAS Client Lite',
+   soon='Coming soon to Google Play', get_server='Get DogNAS (server)', get_lite='Get DogNAS Client Lite', alt1='DogNAS server online', alt2='Files in DogNAS Client Lite',
    who='Who is DogNAS for?',
    ben_kicker='Benefits', ben_h2='The problems DogNAS solves', ben_lead='At home, in your home office or in your smart home, DogNAS ends everyday headaches with an Android you already own.',
    ben=[('home', 'Home use', [
@@ -141,7 +143,7 @@ T = {
    apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', app3='New: the full app for Android and iPhone, coming soon.', privacy='Privacy policy'),
  'es': dict(title='DogNAS — Tu Android se convierte en un servidor de archivos', desc='Usa un Android como almacenamiento privado en tu Wi-Fi: para guardar los archivos de la familia o como servidor SFTP para tu casa inteligente y tu oficina. Sin nube.',
    h1='Tus archivos en casa.', lead='DogNAS convierte un Android que ya tienes en un servidor de archivos privado, en tu red Wi-Fi. Sin nube y sin cuotas mensuales.',
-   soon='Próximamente en Google Play', alt1='Servidor DogNAS en línea', alt2='Archivos en DogNAS Client Lite',
+   soon='Próximamente en Google Play', get_server='Descargar DogNAS (servidor)', get_lite='Descargar DogNAS Client Lite', alt1='Servidor DogNAS en línea', alt2='Archivos en DogNAS Client Lite',
    who='¿Para quién es DogNAS?',
    ben_kicker='Beneficios', ben_h2='Los problemas que DogNAS resuelve', ben_lead='En casa, en la oficina en casa o en tu casa inteligente, DogNAS acaba con molestias diarias usando un Android que ya tienes.',
    ben=[('home', 'Uso doméstico', [
@@ -229,7 +231,7 @@ for L, t in T.items():
 <header class="top"><a class="brand" href="{base}{LANGS[L][1]}"><img src="{base}assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 <div class="hero-grid">
 <section class="hero"><img class="logo" src="{base}assets/icon.png" alt="DogNAS"><h1>{t['h1']}</h1><p>{t['lead']}</p>
-<div class="cta"><span class="btn primary soon">{t['soon']}</span></div></section>
+<div class="cta"><a class="btn primary" href="{PLAY['server']}" rel="noopener">{t['get_server']}</a><a class="btn" href="{PLAY['lite']}" rel="noopener">{t['get_lite']}</a></div></section>
 <div class="phones">{phone(sh + 'server-status.webp', t['alt1'])}{phone(sh + 'lite-files.webp', t['alt2'])}</div>
 </div>
 <h2>{t['who']}</h2><div class="audiences">{aud}</div>
@@ -260,7 +262,7 @@ for L, t in T.items():
 <div class="table-wrap"><table class="plans"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">{t['plannote']}</p>
 <h2>{t['apps']}</h2>
-<div class="grid apps"><div class="card"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></div><div class="card"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></div><a class="card" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
+<div class="grid apps"><a class="card" href="{PLAY['server']}" rel="noopener"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" href="{PLAY['lite']}" rel="noopener"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
 <footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
