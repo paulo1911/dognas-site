@@ -258,7 +258,7 @@ def photo(base, name, cap): return f'<figure class="real"><img src="{base}assets
 def benefits(groups): return '<div class="benefits">' + ''.join(
     f'<div class="bcard">{icon(k)}<h3>{h}</h3><ul>' + ''.join(f'<li><span class="pain">{a}</span><span class="fix">{b}</span></li>' for a, b in items) + '</ul></div>'
     for k, h, items in groups) + '</div>'
-def phone(src, alt): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" loading="lazy"></div>'
+def phone(src, alt, eager=False): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" {"fetchpriority=high" if eager else "loading=lazy"}></div>'
 PRIV_ICONS = ['no-cloud', 'shield', 'people', 'qr']
 HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
 MORE_ICONS = ['ssd', 'hdd', 'sd', 'devices']
@@ -297,18 +297,18 @@ for L, t in T.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}{faq_ld}<link rel="icon" href="{base}assets/icon.png">
+{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}{faq_ld}<link rel="icon" href="{base}assets/icon-192.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{base}{LANGS[L][1]}"><img src="{base}assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<header class="top"><a class="brand" href="{base}{LANGS[L][1]}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 <div class="hero-grid">
-<section class="hero"><img class="logo" src="{base}assets/icon.png" alt="DogNAS"><h1>{t['h1']}</h1><p>{t['lead']}</p>
+<section class="hero"><img class="logo" src="{base}assets/icon-192.png" alt="DogNAS" width="120" height="120"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <ul class="points">{points}</ul>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero_primary" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p>
 <p class="cta-sub">{sub_cta}</p></section>
-<div class="phones">{phone(sh + 'server-status.webp', t['alt1'])}{phone(sh + 'lite-files.webp', t['alt2'])}</div>
+<div class="phones">{phone(sh + 'server-status.webp', t['alt1'], True)}{phone(sh + 'lite-files.webp', t['alt2'], True)}</div>
 </div>
 <section id="como-funciona" class="audience">
 <h2>{t['how_h2']}</h2><p class="lead">{t['how_lead']}</p>

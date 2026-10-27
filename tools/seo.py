@@ -27,7 +27,7 @@ def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=Fa
     ] + [f'<meta property="og:locale:alternate" content="{LOCALES[l]}">' for l in (alternates or {}) if l != lang] + [
         f'<meta property="og:title" content="{t}">', f'<meta property="og:description" content="{d}">',
         f'<meta property="og:url" content="{url}">', f'<meta property="og:image" content="{SITE}assets/og-{lang}.jpg">',
-        '<meta property="og:image:width" content="1024"><meta property="og:image:height" content="500">',
+        '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
         f'<meta property="og:image:alt" content="{t}">',
         '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{t}">',
         f'<meta name="twitter:description" content="{d}">', f'<meta name="twitter:image" content="{SITE}assets/og-{lang}.jpg">',

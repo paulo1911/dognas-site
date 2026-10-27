@@ -67,11 +67,11 @@ for L, t in T.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], '', L, os_='Android, iOS')])}<link rel="icon" href="{base}assets/icon.png">
+{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], '', L, os_='Android, iOS')])}<link rel="icon" href="{base}assets/icon-192.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 <section class="hero"><img class="logo" src="{base}assets/icon.png" alt="DogNAS Client"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <div class="cta" style="justify-content:center">{ctas}</div>{soon_note}</section>
 <h2>{t['feats_h']}</h2>

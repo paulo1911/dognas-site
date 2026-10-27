@@ -1,6 +1,6 @@
 """Share images (og-<lang>.jpg, 1024x500): keeps the logo + phone art of the existing files and redraws the headline
 block (left, below the logo). Idempotent: the text area is cleared before drawing. Needs Pillow.
-Run: python3 tools/build_og.py"""
+Run: python3 tools/build_og.py. NOTE: written for the 1024x500 art; the committed files are now 1200x630 (LinkedIn/Facebook ratio, padded) — redraw from the 1024x500 originals in git history if you rerun it."""
 import os
 from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

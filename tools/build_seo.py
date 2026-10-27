@@ -115,8 +115,8 @@ exp = (datetime.date.today() + datetime.timedelta(days=365)).isoformat() + 'T00:
 w('.well-known/security.txt', f'Contact: mailto:{EMAIL}\nExpires: {exp}\nPreferred-Languages: pt, en, es\nCanonical: {SITE}.well-known/security.txt\n')
 w('404.html', f'''<!doctype html>
 <html lang="pt-BR"><head>{GA_TAG}<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-<title>DogNAS — 404</title><link rel="icon" href="/assets/icon.png"><link rel="stylesheet" href="/assets/style.css?v={CSS_V}"></head>
-<body><div class="wrap"><header class="top"><a class="brand" href="/"><img src="/assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a></header>
+<title>DogNAS — 404</title><link rel="icon" href="/assets/icon-192.png"><link rel="stylesheet" href="/assets/style.css?v={CSS_V}"></head>
+<body><div class="wrap"><header class="top"><a class="brand" href="/"><img src="/assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a></header>
 <section class="hero"><h1>404</h1><p>Página não encontrada · Page not found · Página no encontrada</p><div class="cta"><a class="btn primary" href="/">DogNAS</a></div></section></div></body></html>
 ''')
 key = hashlib.sha256(b'dognas.app-indexnow').hexdigest()[:32]
