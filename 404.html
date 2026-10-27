@@ -36,11 +36,12 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     });
     var plans = document.getElementById('planos');
     if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
     document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
   });
 })();
 </script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-<title>DogNAS — 404</title><link rel="icon" href="/assets/icon.png"><link rel="stylesheet" href="/assets/style.css?v=42809437"></head>
+<title>DogNAS — 404</title><link rel="icon" href="/assets/icon.png"><link rel="stylesheet" href="/assets/style.css?v=b46bdcd7"></head>
 <body><div class="wrap"><header class="top"><a class="brand" href="/"><img src="/assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a></header>
 <section class="hero"><h1>404</h1><p>Página não encontrada · Page not found · Página no encontrada</p><div class="cta"><a class="btn primary" href="/">DogNAS</a></div></section></div></body></html>

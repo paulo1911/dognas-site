@@ -59,3 +59,7 @@ def webpage(lang, path, title, desc, breadcrumbs=None):
         out.append({'@type': 'BreadcrumbList', 'itemListElement': [
             {'@type': 'ListItem', 'position': i, 'name': n, 'item': SITE + p} for i, (n, p) in enumerate(breadcrumbs, 1)]})
     return out
+
+def faq(items):
+    """FAQPage from (question, answer) pairs; the same text is visible on the page."""
+    return {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}
