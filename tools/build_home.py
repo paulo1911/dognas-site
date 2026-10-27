@@ -92,8 +92,8 @@ def play(app, loc):
     # `referrer` lets Play Console attribute store visits to this site (the apps themselves collect nothing).
     return f"{PLAY[app]}&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D{loc}"
 T = {
- 'pt': dict(title='DogNAS — Seu celular antigo. Seu armazenamento particular.', desc='Transforme um Android compatível em armazenamento particular pelo Wi-Fi: fotos, vídeos e documentos em casa. Sem nuvem, sem mensalidade e sem comprar um NAS.',
-   h1='Seu celular antigo. Seu armazenamento particular.', lead='Transforme um Android compatível em um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.',
+ 'pt': dict(title='DogNAS — Seu celular antigo. Seu armazenamento particular.', desc='Transforme um celular ou tablet Android em armazenamento particular pelo Wi-Fi: fotos, vídeos e documentos em casa. Sem nuvem, sem mensalidade e sem comprar um NAS.',
+   h1='Seu celular antigo. Seu armazenamento particular.', lead='Transforme um celular ou tablet Android compatível em um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.',
    points=['Use um Android que você já tem', 'Conecte outros celulares por QR Code', 'Comece grátis, sem assinatura'], cta='Baixar o DogNAS grátis',
    micro='Confira os requisitos de compatibilidade antes de instalar.', sub='Já tem o servidor? Baixe o Client Lite', sub_client='Já tem o servidor? Baixe o DogNAS Client', lite_alt='Prefere algo mais leve? Use o Client Lite',
    important='Seus arquivos ficam no armazenamento configurado no seu dispositivo servidor. O acesso depende da configuração de rede e das credenciais do DogNAS. Para arquivos importantes, mantenha uma cópia de backup independente.', important_h='Importante', cookies='Preferências de cookies',
@@ -145,8 +145,8 @@ T = {
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Transferências no app cliente, com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
    plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client Lite é sempre gratuito.',
    apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='Novo: o app completo para Android e iPhone, em breve.', privacy='Política de privacidade'),
- 'en': dict(title='DogNAS — Your old phone. Your private storage.', desc='Turn a compatible Android into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.',
-   h1='Your old phone. Your private storage.', lead='Turn a compatible Android into a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.',
+ 'en': dict(title='DogNAS — Your old phone. Your private storage.', desc='Turn an Android phone or tablet into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.',
+   h1='Your old phone. Your private storage.', lead='Turn a compatible Android phone or tablet into a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.',
    points=['Use an Android you already own', 'Connect other phones with a QR Code', 'Start free, no subscription'], cta='Download DogNAS free',
    micro='Check the compatibility requirements before installing.', sub='Already have the server? Get DogNAS Client Lite', sub_client='Already have the server? Get DogNAS Client', lite_alt='Want something lighter? Use Client Lite',
    important='Your files stay in the storage set up on your server device. Access depends on your network setup and your DogNAS credentials. For important files, keep an independent backup copy.', important_h='Important', cookies='Cookie preferences',
@@ -198,8 +198,8 @@ T = {
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('Client app transfers, with the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
    plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client Lite is always free.',
    apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', app3='New: the full app for Android and iPhone, coming soon.', privacy='Privacy policy'),
- 'es': dict(title='DogNAS — Tu móvil viejo. Tu almacenamiento privado.', desc='Convierte un Android compatible en almacenamiento privado por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
-   h1='Tu móvil viejo. Tu almacenamiento privado.', lead='Convierte un Android compatible en un espacio para guardar y acceder a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
+ 'es': dict(title='DogNAS — Tu móvil viejo. Tu almacenamiento privado.', desc='Convierte un móvil o tableta Android en almacenamiento privado por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
+   h1='Tu móvil viejo. Tu almacenamiento privado.', lead='Convierte un móvil o tableta Android compatible en un espacio para guardar y acceder a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
    points=['Usa un Android que ya tienes', 'Conecta otros móviles con un código QR', 'Empieza gratis, sin suscripción'], cta='Descargar DogNAS gratis',
    micro='Consulta los requisitos de compatibilidad antes de instalar.', sub='¿Ya tienes el servidor? Descarga DogNAS Client Lite', sub_client='¿Ya tienes el servidor? Descarga DogNAS Client', lite_alt='¿Prefieres algo más ligero? Usa Client Lite',
    important='Tus archivos se guardan en el almacenamiento configurado en tu dispositivo servidor. El acceso depende de la configuración de tu red y de las credenciales de DogNAS. Para archivos importantes, mantén una copia de respaldo independiente.', important_h='Importante', cookies='Preferencias de cookies',

@@ -1,6 +1,6 @@
 # DogNAS
 
-> DogNAS turns a compatible Android phone into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
+> DogNAS turns a compatible Android phone or tablet into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
 
 Key facts: the server app runs on Android 7.0 or newer; files stay in the storage you choose on the server device (internal memory, SD card or USB drive); access is encrypted (SFTP over SSH-2); the apps collect no personal data. DogNAS is not a backup: keep an independent copy of important files.
 

@@ -39,7 +39,7 @@ w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://
 # ---- llms.txt (llmstxt.org format) and llms-full.txt --------------------------------------------------------------
 llms = f'''# DogNAS
 
-> DogNAS turns a compatible Android phone into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
+> DogNAS turns a compatible Android phone or tablet into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
 
 Key facts: the server app runs on Android 7.0 or newer; files stay in the storage you choose on the server device (internal memory, SD card or USB drive); access is encrypted (SFTP over SSH-2); the apps collect no personal data. DogNAS is not a backup: keep an independent copy of important files.
 
@@ -65,7 +65,7 @@ full = f'''# DogNAS — full description for language models
 Canonical site: {SITE} · Contact: {EMAIL} · Languages: pt-BR (default), en, es.
 
 ## What it is
-DogNAS is a file server for Android. It turns a compatible Android phone (for example one that is no longer used every day) into private storage on the home Wi-Fi network. It is not a cloud service: files are kept on the server device, in the storage the user chooses (internal memory, SD card, or a USB drive with a phone that supports USB OTG).
+DogNAS is a file server for Android. It turns a compatible Android phone or tablet (for example one that is no longer used every day) into private storage on the home Wi-Fi network. It is not a cloud service: files are kept on the server device, in the storage the user chooses (internal memory, SD card, or a USB drive with a phone that supports USB OTG).
 
 ## How it works
 1. Install the DogNAS server app on the Android that will keep the files, choose where to store them and tap Start.
