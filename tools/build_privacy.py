@@ -2,17 +2,7 @@
 import os, html, hashlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
-# Google Analytics 4 on the site only (2026-10-16) — the apps collect nothing; see the privacy page.
-GA_TAG = '''<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJDFSS9D15"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HJDFSS9D15');
-</script>
-'''
+from build_home import GA_TAG  # shared: consent banner + GA4 loaded only after acceptance
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
@@ -34,7 +24,7 @@ def page(lang, title, desc, body, base):
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{base}{LANGS[lang][1].lstrip("/")}"><img src="{base}assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 {body}
-<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{lang}">{priv}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{lang}">{priv}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
 
@@ -101,7 +91,7 @@ POLICY = {
 <h3>Seus controles</h3><ul>
 <li>Revogue o acesso de um dispositivo no DogNAS (Perfis → Dispositivos autorizados) ou remova um DogNAS no DogNAS Client Lite ou no DogNAS Client (pede o PIN do perfil).</li>
 <li>Desinstalar um app apaga os dados dele no aparelho. Os seus arquivos na pasta DogNAS <b>não</b> são apagados — eles são seus.</li></ul>
-<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b> para contar visitas e entender quais páginas são lidas (páginas vistas, país aproximado, tipo de aparelho e navegador). Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
+<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b>, <b>somente depois que você aceita</b> no aviso de cookies, para contar visitas e entender quais páginas e botões (como os de download) ajudam as pessoas (páginas vistas, cliques, país aproximado, tipo de aparelho e navegador). Você pode recusar ou mudar a escolha em “Preferências de cookies”, no rodapé. Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
 <h3>Crianças</h3><p>Os apps não são direcionados a crianças e não coletam dados de ninguém.</p>
 <h3>Mudanças e contato</h3><p>Se esta política mudar, a nova versão será publicada neste mesmo endereço, com a data acima atualizada. Dúvidas: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
 'en': ('Privacy policy', 'Last updated: October 21, 2026', '''
@@ -143,7 +133,7 @@ POLICY = {
 <h3>Your controls</h3><ul>
 <li>Revoke a device in DogNAS (Profiles → Authorized devices) or remove a DogNAS in DogNAS Client Lite or DogNAS Client (asks for the profile PIN).</li>
 <li>Uninstalling an app deletes its data on the device. Your files in the DogNAS folder are <b>not</b> deleted — they are yours.</li></ul>
-<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b> to count visits and see which pages are read (page views, approximate country, device type and browser). This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
+<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b>, <b>only after you accept</b> in the cookie notice, to count visits and see which pages and buttons (such as the download ones) help people (page views, clicks, approximate country, device type and browser). You can decline or change your choice under “Cookie preferences” in the footer. This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
 <h3>Children</h3><p>The apps are not directed to children and collect no data from anyone.</p>
 <h3>Changes and contact</h3><p>If this policy changes, the new version will be published at this same address with an updated date. Questions: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
 'es': ('Política de privacidad', 'Última actualización: 21 de octubre de 2026', '''
@@ -185,7 +175,7 @@ POLICY = {
 <h3>Tus controles</h3><ul>
 <li>Revoca el acceso de un dispositivo en DogNAS (Perfiles → Dispositivos autorizados) o elimina un DogNAS en DogNAS Client Lite o en DogNAS Client (pide el PIN del perfil).</li>
 <li>Desinstalar una app borra sus datos en el dispositivo. Tus archivos en la carpeta DogNAS <b>no</b> se borran — son tuyos.</li></ul>
-<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b> para contar visitas y saber qué páginas se leen (páginas vistas, país aproximado, tipo de dispositivo y navegador). Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
+<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b>, <b>solo después de que aceptes</b> en el aviso de cookies, para contar visitas y saber qué páginas y botones (como los de descarga) ayudan a las personas (páginas vistas, clics, país aproximado, tipo de dispositivo y navegador). Puedes rechazar o cambiar tu elección en «Preferencias de cookies», en el pie de página. Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
 <h3>Menores</h3><p>Las apps no están dirigidas a menores y no recopilan datos de nadie.</p>
 <h3>Cambios y contacto</h3><p>Si esta política cambia, la nueva versión se publicará en esta misma dirección, con la fecha actualizada. Dudas: <a href="mailto:EMAIL">EMAIL</a>.</p>'''),
 }

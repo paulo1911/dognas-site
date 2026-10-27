@@ -84,7 +84,7 @@ for L, t in T.items():
 <h2>{t['req_h']}</h2><p>{t['req']}</p>
 <h2>{t['lite_h']}</h2><p>{t['lite']}</p>
 <p><a href="{home}">← {t['back']}</a></p>
-<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
     out = os.path.join(ROOT, path, 'index.html')

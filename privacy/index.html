@@ -1,21 +1,53 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJDFSS9D15"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-HJDFSS9D15');
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), {location: a.getAttribute('data-loc') || '', lang: L});
+    });
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DogNAS — Política de privacidade / Privacy policy</title>
 <meta name="description" content="Política de privacidade do DogNAS, do DogNAS Client Lite e do DogNAS Client.">
 <link rel="icon" href="../assets/icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=c7ec27e6">
+<link rel="stylesheet" href="../assets/style.css?v=42809437">
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="../"><img src="../assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../" class=on>Português</a><a href="../en/">English</a><a href="../es/">Español</a></nav></header>
@@ -58,7 +90,7 @@
 <h3>Seus controles</h3><ul>
 <li>Revogue o acesso de um dispositivo no DogNAS (Perfis → Dispositivos autorizados) ou remova um DogNAS no DogNAS Client Lite ou no DogNAS Client (pede o PIN do perfil).</li>
 <li>Desinstalar um app apaga os dados dele no aparelho. Os seus arquivos na pasta DogNAS <b>não</b> são apagados — eles são seus.</li></ul>
-<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b> para contar visitas e entender quais páginas são lidas (páginas vistas, país aproximado, tipo de aparelho e navegador). Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
+<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b>, <b>somente depois que você aceita</b> no aviso de cookies, para contar visitas e entender quais páginas e botões (como os de download) ajudam as pessoas (páginas vistas, cliques, país aproximado, tipo de aparelho e navegador). Você pode recusar ou mudar a escolha em “Preferências de cookies”, no rodapé. Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
 <h3>Crianças</h3><p>Os apps não são direcionados a crianças e não coletam dados de ninguém.</p>
 <h3>Mudanças e contato</h3><p>Se esta política mudar, a nova versão será publicada neste mesmo endereço, com a data acima atualizada. Dúvidas: <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a>.</p></section><section class="legal" id="en"><h2>Privacy policy</h2><p class="meta">Last updated: October 21, 2026</p>
 <p>Applies to the three apps: <b>DogNAS</b> (the server, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (the access app for Android, <code>com.dognas.client.lite</code>) and <b>DogNAS Client</b> (the full access app, for Android and iOS, <code>com.dognas.client</code>).</p>
@@ -99,7 +131,7 @@
 <h3>Your controls</h3><ul>
 <li>Revoke a device in DogNAS (Profiles → Authorized devices) or remove a DogNAS in DogNAS Client Lite or DogNAS Client (asks for the profile PIN).</li>
 <li>Uninstalling an app deletes its data on the device. Your files in the DogNAS folder are <b>not</b> deleted — they are yours.</li></ul>
-<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b> to count visits and see which pages are read (page views, approximate country, device type and browser). This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
+<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b>, <b>only after you accept</b> in the cookie notice, to count visits and see which pages and buttons (such as the download ones) help people (page views, clicks, approximate country, device type and browser). You can decline or change your choice under “Cookie preferences” in the footer. This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
 <h3>Children</h3><p>The apps are not directed to children and collect no data from anyone.</p>
 <h3>Changes and contact</h3><p>If this policy changes, the new version will be published at this same address with an updated date. Questions: <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a>.</p></section><section class="legal" id="es"><h2>Política de privacidad</h2><p class="meta">Última actualización: 21 de octubre de 2026</p>
 <p>Se aplica a las tres apps: <b>DogNAS</b> (el servidor, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (la app de acceso para Android, <code>com.dognas.client.lite</code>) y <b>DogNAS Client</b> (la app de acceso completa, para Android e iOS, <code>com.dognas.client</code>).</p>
@@ -140,8 +172,8 @@
 <h3>Tus controles</h3><ul>
 <li>Revoca el acceso de un dispositivo en DogNAS (Perfiles → Dispositivos autorizados) o elimina un DogNAS en DogNAS Client Lite o en DogNAS Client (pide el PIN del perfil).</li>
 <li>Desinstalar una app borra sus datos en el dispositivo. Tus archivos en la carpeta DogNAS <b>no</b> se borran — son tuyos.</li></ul>
-<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b> para contar visitas y saber qué páginas se leen (páginas vistas, país aproximado, tipo de dispositivo y navegador). Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
+<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b>, <b>solo después de que aceptes</b> en el aviso de cookies, para contar visitas y saber qué páginas y botones (como los de descarga) ayudan a las personas (páginas vistas, clics, país aproximado, tipo de dispositivo y navegador). Puedes rechazar o cambiar tu elección en «Preferencias de cookies», en el pie de página. Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
 <h3>Menores</h3><p>Las apps no están dirigidas a menores y no recopilan datos de nadie.</p>
 <h3>Cambios y contacto</h3><p>Si esta política cambia, la nueva versión se publicará en esta misma dirección, con la fecha actualizada. Dudas: <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a>.</p></section>
-<footer><span>© 2026 DogNAS</span><span><a href="../privacy/#pt">Política de privacidade</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span><a href="../privacy/#pt">Política de privacidade</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
 </div></body></html>
