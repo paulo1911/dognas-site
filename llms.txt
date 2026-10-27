@@ -1,0 +1,21 @@
+# DogNAS
+
+> DogNAS turns a compatible Android phone into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
+
+Key facts: the server app runs on Android 7.0 or newer; files stay in the storage you choose on the server device (internal memory, SD card or USB drive); access is encrypted (SFTP over SSH-2); the apps collect no personal data. DogNAS is not a backup: keep an independent copy of important files.
+
+## Apps
+- [DogNAS (server) on Google Play](https://play.google.com/store/apps/details?id=com.dognas.server): installs on the Android that will keep the files; free plan, optional one-time Pro purchase.
+- [DogNAS Client Lite on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client.lite): free, lightweight Android app to browse, upload and download files from a DogNAS.
+- [DogNAS Client (Android and iPhone)](https://dognas.app/client/): the full client app, coming soon.
+
+## Site
+- [Home (Português)](https://dognas.app/): what DogNAS is, how it works, plans, requirements.
+- [Home (English)](https://dognas.app/en/): same content in English.
+- [Home (Español)](https://dognas.app/es/): same content in Spanish.
+- [Privacy policy](https://dognas.app/privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
+
+## Optional
+- [Full text for LLMs](https://dognas.app/llms-full.txt): longer plain-text description of the product.
+- [Sitemap](https://dognas.app/sitemap.xml)
+- [Agent access notes](https://dognas.app/agents.txt)
