@@ -3,6 +3,7 @@ smart-home users. Run: python3 tools/build_home.py (screenshots live in assets/s
 import os, html, hashlib, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import seo
+from home_copy import NEW
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 # Google Analytics 4 on the site only — the apps collect nothing; see the privacy page.
@@ -43,6 +44,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     });
     var plans = document.getElementById('planos');
     if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
     document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
   });
 })();
@@ -130,7 +132,7 @@ T = {
    more_photo='Servidor com um HD externo numa dock USB, acessado pelo celular.',
    watch='Acompanhe tudo', cap1='Transferências e clientes no servidor', cap2='Fila de transferências no celular',
    plans='Grátis para começar', planhead=('', 'Grátis', 'Pro'),
-   rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
+   rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Transferências no app cliente, com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
    plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client Lite é sempre gratuito.',
    apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='Novo: o app completo para Android e iPhone, em breve.', privacy='Política de privacidade'),
  'en': dict(title='DogNAS — Your old phone. Your private storage.', desc='Turn a compatible Android into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.',
@@ -183,7 +185,7 @@ T = {
    more_photo='A server with an external drive in a USB dock, reached from the phone.',
    watch='Follow everything', cap1='Transfers and clients on the server', cap2='Transfer queue on your phone',
    plans='Free to start', planhead=('', 'Free', 'Pro'),
-   rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('With the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
+   rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('Client app transfers, with the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
    plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client Lite is always free.',
    apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', app3='New: the full app for Android and iPhone, coming soon.', privacy='Privacy policy'),
  'es': dict(title='DogNAS — Tu móvil viejo. Tu almacenamiento privado.', desc='Convierte un Android compatible en almacenamiento privado por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
@@ -236,7 +238,7 @@ T = {
    more_photo='Un servidor con un disco externo en un dock USB, al que se accede desde el teléfono.',
    watch='Sigue todo', cap1='Transferencias y clientes en el servidor', cap2='Cola de transferencias en el teléfono',
    plans='Gratis para empezar', planhead=('', 'Gratis', 'Pro'),
-   rows=[('Almacenamiento', '64 GB', 'Todo el dispositivo'), ('Perfiles', 'Casa + 2', 'Ilimitados'), ('Dispositivos vinculados', '3', 'Ilimitados'), ('Rendimiento', 'Bueno', 'Máximo optimizado'), ('Con la app cerrada', 'Se pausan', 'Continúan'), ('Tras reiniciar', 'Toca para iniciar', 'Se inicia solo')],
+   rows=[('Almacenamiento', '64 GB', 'Todo el dispositivo'), ('Perfiles', 'Casa + 2', 'Ilimitados'), ('Dispositivos vinculados', '3', 'Ilimitados'), ('Rendimiento', 'Bueno', 'Máximo optimizado'), ('Transferencias de la app cliente, con la app cerrada', 'Se pausan', 'Continúan'), ('Tras reiniciar', 'Toca para iniciar', 'Se inicia solo')],
    plannote='DogNAS Pro: compra única, sin suscripción. DogNAS Client Lite siempre es gratis.',
    apps='Las apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', app3='Nuevo: la app completa para Android y iPhone, próximamente.', privacy='Política de privacidad'),
 }
@@ -247,23 +249,33 @@ def benefits(groups): return '<div class="benefits">' + ''.join(
     f'<div class="bcard">{icon(k)}<h3>{h}</h3><ul>' + ''.join(f'<li><span class="pain">{a}</span><span class="fix">{b}</span></li>' for a, b in items) + '</ul></div>'
     for k, h, items in groups) + '</div>'
 def phone(src, alt): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" loading="lazy"></div>'
+PRIV_ICONS = ['no-cloud', 'shield', 'people', 'qr']
 HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
 MORE_ICONS = ['ssd', 'hdd', 'sd', 'devices']
 TECH_ICONS = ['server', 'smart-home', 'shield', 'power']
 def cards(items, keys): return '<div class="grid feats">' + ''.join(f'<div class="card">{icon(k)}<h3>{h}</h3><p>{p}</p></div>' for k, (h, p) in zip(keys, items)) + '</div>'
 for L, t in T.items():
+    t = {**t, **NEW[L]}
     base = '' if L == 'pt' else '../'
     sh = f'{base}assets/shots/{L}/'
     nav = ''.join(f'<a data-ev="lang_switch" data-loc="{l}" href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     jsonld = seo.ld([seo.ORG, seo.website(L, LANGS[L][1])] + seo.webpage(L, LANGS[L][1], t['title'], t['desc']) + [
         seo.app('DogNAS', {'pt': 'Servidor de arquivos para Android: transforma um Android compatível em armazenamento particular na rede Wi-Fi, com SFTP.', 'en': 'File server for Android: turns a compatible Android into private storage on your Wi-Fi network, with SFTP.', 'es': 'Servidor de archivos para Android: convierte un Android compatible en almacenamiento privado en tu red Wi-Fi, con SFTP.'}[L], seo.PLAY_SERVER, L, app_id='#app-server'),
         seo.app('DogNAS Client Lite', {'pt': 'App leve e gratuito para Android que acessa os arquivos do seu DogNAS pelo Wi-Fi de casa.', 'en': 'Lightweight, free Android app that reaches your DogNAS files over your home Wi-Fi.', 'es': 'App ligera y gratuita para Android que accede a los archivos de tu DogNAS por el Wi-Fi de casa.'}[L], seo.PLAY_LITE, L, app_id='#app-lite')])
+    faq_ld = seo.ld([seo.faq(t['faq'])])
     points = ''.join(f'<li>{x}</li>' for x in t['points'])
     if CLIENT_PLAY:
         sub_cta = f'<a data-ev="client_store_click" data-loc="hero" href="{CLIENT_PLAY}" rel="noopener">{t["sub_client"]}</a> · <a data-ev="lite_store_click" data-loc="hero" href="{play("lite", "hero_lite")}" rel="noopener">{t["lite_alt"]}</a>'
     else:
         sub_cta = f'<a data-ev="lite_store_click" data-loc="hero" href="{play("lite", "hero_secondary")}" rel="noopener">{t["sub"]}</a>'
     aud = ''.join(f'<a class="aud aud-{k}" href="#{k}">{icon("home" if k == "casa" else "terminal")}<h3>{h}</h3><p>{p}</p><span>{more} →</span></a>' for k, h, p, more in t['aud'])
+    def band(i, loc):
+        h, btn = t['bands'][i]
+        return f'<div class="cta-band"><p>{h}</p><a class="btn primary" data-ev="server_store_click" data-loc="{loc}" href="{play("server", loc)}" rel="noopener">{btn}</a></div>'
+    goals = ''.join(f'<div class="goal goal-{i}"><span class="tag">{n}</span><h3>{tag}</h3><p>{txt}</p></div>' for i, (n, tag, txt) in enumerate(t['goals']))
+    req = ''.join(f'<div class="card"><h3>{h}</h3><p>{p}</p></div>' for h, p in t['req'])
+    faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
+    trust = ''.join(f'<a class="btn{" primary" if i == 0 else ""}" data-ev="support_click" data-loc="{i}" href="{u.format(EMAIL=EMAIL, base=base)}">{n}</a>' for i, (n, u) in enumerate(t['trust_links']))
     steps = ''.join(f'<div class="step"><div class="num">{i}</div><h3>{h}</h3><p>{p}</p>{phone(sh + img + ".webp", h)}</div>' for i, (h, p, img) in enumerate(t['steps'], 1))
     specs = ''.join(f'<tr><th>{a}</th><td>{b}</td></tr>' for a, b in t['specs'])
     rows = ''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in t['rows'])
@@ -275,7 +287,7 @@ for L, t in T.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}<link rel="icon" href="{base}assets/icon.png">
+{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}{faq_ld}<link rel="icon" href="{base}assets/icon.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">
@@ -288,7 +300,12 @@ for L, t in T.items():
 <p class="cta-sub">{sub_cta}</p></section>
 <div class="phones">{phone(sh + 'server-status.webp', t['alt1'])}{phone(sh + 'lite-files.webp', t['alt2'])}</div>
 </div>
-<h2>{t['who']}</h2><div class="audiences">{aud}</div>
+<section id="como-funciona" class="audience">
+<h2>{t['how_h2']}</h2><p class="lead">{t['how_lead']}</p>
+<div class="steps">{steps}</div>
+<p class="note"><a href="#tech">{t['adv_link']}</a></p>
+{band(0, 'mid_how')}
+</section>
 <section id="beneficios" class="audience benefits-sec">
 <p class="kicker">{t['ben_kicker']}</p><h2>{t['ben_h2']}</h2><p class="lead">{t['ben_lead']}</p>
 {benefits(t['ben'])}
@@ -296,13 +313,26 @@ for L, t in T.items():
 <section id="casa" class="audience">
 <p class="kicker">{t['home_kicker']}</p><h2>{t['home_h2']}</h2><p class="lead">{t['home_lead']}</p>
 {cards(t['home_feats'], HOME_ICONS)}
-<h3 class="sub">{t['how']}</h3><div class="steps">{steps}</div>
+</section>
+<h2>{t['watch']}</h2>
+<div class="twoup"><figure>{phone(sh + 'server-monitor.webp', t['cap1'])}<figcaption>{t['cap1']}</figcaption></figure><figure>{phone(sh + 'lite-transfers.webp', t['cap2'])}<figcaption>{t['cap2']}</figcaption></figure></div>
+<section id="privacidade" class="audience">
+<p class="kicker">{t['priv_kicker']}</p><h2>{t['priv_h2']}</h2><p class="lead">{t['priv_lead']}</p>
+{cards(t['priv'], PRIV_ICONS)}
+<p class="note backup">{t['important']}</p>
+</section>
+<section id="planos" class="audience">
+<h2>{t['plans_h2']}</h2>
+<div class="goals">{goals}</div>
+<div class="table-wrap"><table class="plans"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
+<p class="note">{t['plannote']}</p>
+{band(1, 'mid_plans')}
 </section>
 <section id="tech" class="audience tech">
 <p class="kicker">{t['tech_kicker']}</p><h2>{t['tech_h2']}</h2><p class="lead">{t['tech_lead']}</p>
 <div class="split">{photo(base, 'always-on', t['tech_photo'])}{cards(t['tech_feats'], TECH_ICONS)}</div>
 <div class="card wide">{icon('briefcase')}<h3>{t['prod'][0]}</h3><p>{t['prod'][1]}</p></div>
-<h3 class="sub" id="requisitos">{t['specs_h3']}</h3>
+<h3 class="sub">{t['specs_h3']}</h3>
 <div class="table-wrap"><table class="plans specs"><tbody>{specs}</tbody></table></div>
 </section>
 <section id="mais" class="audience more">
@@ -310,14 +340,22 @@ for L, t in T.items():
 <div class="split">{photo(base, 'usb-drive', t['more_photo'])}{cards(t['more_feats'], MORE_ICONS)}</div>
 <p class="note">{t['more_note']}</p>
 </section>
-<h2>{t['watch']}</h2>
-<div class="twoup"><figure>{phone(sh + 'server-monitor.webp', t['cap1'])}<figcaption>{t['cap1']}</figcaption></figure><figure>{phone(sh + 'lite-transfers.webp', t['cap2'])}<figcaption>{t['cap2']}</figcaption></figure></div>
-<h2 id="planos">{t['plans']}</h2>
-<div class="table-wrap"><table class="plans"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
-<p class="note">{t['plannote']}</p>
-<h2>{t['important_h']}</h2><p class="note backup">{t['important']}</p>
+<section id="requisitos" class="audience">
+<p class="kicker">{t['req_kicker']}</p><h2>{t['req_h2']}</h2>
+<div class="grid feats">{req}</div>
+<h3 class="sub" id="faq">{t['faq_h2']}</h3>
+<div class="faq">{faq}</div>
+{band(2, 'mid_faq')}
+</section>
+<section id="suporte" class="audience">
+<h2>{t['trust_h2']}</h2><p class="lead">{t['trust_lead']}</p>
+<div class="cta">{trust}</div>
+</section>
 <h2>{t['apps']}</h2>
 <div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
+<section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
+<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
+<p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
 <footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''

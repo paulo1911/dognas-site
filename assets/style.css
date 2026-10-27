@@ -131,3 +131,25 @@ figure.real figcaption { margin-top:8px; }
 #dn-consent a { color:var(--muted); text-decoration:underline; }
 #dn-consent button { font:inherit; font-weight:600; padding:8px 14px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--text); cursor:pointer; margin-left:6px; }
 #dn-consent button[data-v=granted] { background:var(--red); border-color:var(--red); color:#fff; }
+/* Landing structure: plans by goal, FAQ, final CTA */
+.goals { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0; }
+.goal { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px; }
+.goal .tag { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
+.goal-1 { border-color:var(--red); } .goal-1 .tag { background:var(--red); border-color:var(--red); color:#fff; }
+.goal h3 { margin:12px 0 6px; } .goal p { margin:0; color:var(--muted); }
+.faq { display:grid; gap:10px; margin-top:14px; }
+.faq details { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:2px 16px; }
+.faq summary { cursor:pointer; font-weight:600; padding:14px 0; list-style:none; }
+.faq summary::-webkit-details-marker { display:none; }
+.faq summary::after { content:"+"; float:right; color:var(--red); font-weight:700; }
+.faq details[open] summary::after { content:"–"; }
+.faq details p { margin:0 0 14px; color:var(--muted); }
+.final { text-align:center; padding:48px 0 24px; } .final .cta { justify-content:center; }
+.final p { color:var(--muted); max-width:560px; margin:0 auto; }
+.final .micro { margin-top:10px; font-size:14px; } .final .micro a { color:var(--muted); text-decoration:underline; }
+@media (max-width:760px) { .goals { grid-template-columns:1fr; } }
+/* Mid-page call to action */
+.cta-band { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin:28px 0 8px; padding:18px 20px; border:1px solid var(--red); border-radius:18px; background:linear-gradient(135deg, rgba(255,59,48,.14), rgba(255,59,48,.04)); }
+.cta-band p { margin:0; font-size:18px; font-weight:700; flex:1 1 260px; }
+.cta-band .btn { flex:0 0 auto; }
+@media (max-width:760px) { .cta-band { text-align:center; justify-content:center; } .cta-band .btn { width:100%; text-align:center; } }

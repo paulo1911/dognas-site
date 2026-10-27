@@ -15,13 +15,13 @@ DogNAS is a file server for Android. It turns a compatible Android phone (for ex
 Connections use SFTP over SSH-2 (AES-GCM or ChaCha20); the server key is pinned when a device is paired and each device has its own revocable credential. The apps do not collect, send or sell personal data and contain no ads or third-party analytics. The website uses Google Analytics only after the visitor accepts the cookie notice. See https://dognas.app/privacy/.
 
 ## Plans
-- Free: DogNAS manages up to 64 GB, the Home profile plus 2 more, 3 paired devices; transfers pause when the app is closed.
-- Pro: one-time purchase, no subscription: the whole storage, unlimited profiles and devices, transfers keep going with the app closed, the server can start by itself after a reboot, and maximum optimized performance.
+- Free: DogNAS manages up to 64 GB, the Home profile plus 2 more, 3 paired devices. In the client app, transfers pause when you leave the client app (this is a client behavior; the server keeps running).
+- Pro: one-time purchase, no subscription: the whole storage, unlimited profiles and devices, client-app transfers keep going with the app closed, the server can start by itself after a reboot, and maximum optimized performance.
 - DogNAS Client Lite is always free. (Prices are shown in the store, not on this site.)
 
 ## Requirements and limits
 - Android 7.0 or newer on the server and on the client phones, all on the same network.
-- Background behavior depends on the phone maker and Android power settings; do not assume the server runs forever without checking battery and permission settings.
+- The server runs as a foreground service with a persistent notification and stays active with the screen off and the app closed; Android or the phone maker can still stop it to save battery, so check battery and permission settings.
 - USB drives need USB OTG; spinning hard drives may need a powered USB hub.
 - Each disk or DogNAS is an independent storage: DogNAS does not combine several drives into one volume.
 - DogNAS is not a backup. A single disk can fail: keep an independent copy of important files.
