@@ -2,6 +2,7 @@
 Run: python3 tools/build_client.py. Reuses the shell of build_home.py. Store links stay
 "Coming soon" until the app is published (BACKLOG REL-7 / FC-74): then fill STORE below."""
 import os, html
+import seo
 from build_home import ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
 # Fill with the real URLs when published; empty = shows "Coming soon".
 STORE = {'play': '', 'apple': ''}
@@ -66,12 +67,7 @@ for L, t in T.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-<meta property="og:title" content="{html.escape(t['title'])}">
-<meta property="og:description" content="{html.escape(t['desc'])}">
-<meta property="og:image" content="https://dognas.app/assets/og-{L}.jpg">
-<meta property="og:url" content="https://dognas.app/{path}">
-<meta name="twitter:card" content="summary_large_image">
-''' + ''.join(f'<link rel="alternate" hreflang="{LANGS[l][0]}" href="https://dognas.app/{LANGS[l][1]}client/">\n' for l in LANGS) + f'''<link rel="icon" href="{base}assets/icon.png">
+{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], '', L, os_='Android, iOS')])}<link rel="icon" href="{base}assets/icon.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">

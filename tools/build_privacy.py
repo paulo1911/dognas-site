@@ -2,6 +2,7 @@
 import os, html, hashlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
+import seo
 from build_home import GA_TAG  # shared: consent banner + GA4 loaded only after acceptance
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
@@ -18,7 +19,7 @@ def page(lang, title, desc, body, base):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-<link rel="icon" href="{base}assets/icon.png">
+{seo.meta(lang, 'privacy/', title, desc, None)}<link rel="icon" href="{base}assets/icon.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">

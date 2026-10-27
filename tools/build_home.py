@@ -1,6 +1,8 @@
 """Landing pages (pt at /, en at /en/, es at /es/) for two audiences: home users and tech /
 smart-home users. Run: python3 tools/build_home.py (screenshots live in assets/shots/<lang>/)."""
-import os, html, hashlib
+import os, html, hashlib, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import seo
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 # Google Analytics 4 on the site only — the apps collect nothing; see the privacy page.
@@ -78,7 +80,7 @@ def play(app, loc):
     # `referrer` lets Play Console attribute store visits to this site (the apps themselves collect nothing).
     return f"{PLAY[app]}&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D{loc}"
 T = {
- 'pt': dict(title='DogNAS — Seu celular antigo. Seu armazenamento particular.', desc='Transforme um Android compatível em um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.',
+ 'pt': dict(title='DogNAS — Seu celular antigo. Seu armazenamento particular.', desc='Transforme um Android compatível em armazenamento particular pelo Wi-Fi: fotos, vídeos e documentos em casa. Sem nuvem, sem mensalidade e sem comprar um NAS.',
    h1='Seu celular antigo. Seu armazenamento particular.', lead='Transforme um Android compatível em um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.',
    points=['Use um Android que você já tem', 'Conecte outros celulares por QR Code', 'Comece grátis, sem assinatura'], cta='Baixar o DogNAS grátis',
    micro='Confira os requisitos de compatibilidade antes de instalar.', sub='Já tem o servidor? Baixe o Client Lite', sub_client='Já tem o servidor? Baixe o DogNAS Client', lite_alt='Prefere algo mais leve? Use o Client Lite',
@@ -131,7 +133,7 @@ T = {
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
    plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client Lite é sempre gratuito.',
    apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='Novo: o app completo para Android e iPhone, em breve.', privacy='Política de privacidade'),
- 'en': dict(title='DogNAS — Your old phone. Your private storage.', desc='Turn a compatible Android into a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.',
+ 'en': dict(title='DogNAS — Your old phone. Your private storage.', desc='Turn a compatible Android into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.',
    h1='Your old phone. Your private storage.', lead='Turn a compatible Android into a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.',
    points=['Use an Android you already own', 'Connect other phones with a QR Code', 'Start free, no subscription'], cta='Download DogNAS free',
    micro='Check the compatibility requirements before installing.', sub='Already have the server? Get DogNAS Client Lite', sub_client='Already have the server? Get DogNAS Client', lite_alt='Want something lighter? Use Client Lite',
@@ -184,7 +186,7 @@ T = {
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('With the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
    plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client Lite is always free.',
    apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', app3='New: the full app for Android and iPhone, coming soon.', privacy='Privacy policy'),
- 'es': dict(title='DogNAS — Tu móvil viejo. Tu almacenamiento privado.', desc='Convierte un Android compatible en un espacio para guardar y acceder a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
+ 'es': dict(title='DogNAS — Tu móvil viejo. Tu almacenamiento privado.', desc='Convierte un Android compatible en almacenamiento privado por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
    h1='Tu móvil viejo. Tu almacenamiento privado.', lead='Convierte un Android compatible en un espacio para guardar y acceder a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
    points=['Usa un Android que ya tienes', 'Conecta otros móviles con un código QR', 'Empieza gratis, sin suscripción'], cta='Descargar DogNAS gratis',
    micro='Consulta los requisitos de compatibilidad antes de instalar.', sub='¿Ya tienes el servidor? Descarga DogNAS Client Lite', sub_client='¿Ya tienes el servidor? Descarga DogNAS Client', lite_alt='¿Prefieres algo más ligero? Usa Client Lite',
@@ -253,6 +255,9 @@ for L, t in T.items():
     base = '' if L == 'pt' else '../'
     sh = f'{base}assets/shots/{L}/'
     nav = ''.join(f'<a data-ev="lang_switch" data-loc="{l}" href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
+    jsonld = seo.ld([seo.ORG, seo.website(L, LANGS[L][1])] + seo.webpage(L, LANGS[L][1], t['title'], t['desc']) + [
+        seo.app('DogNAS', {'pt': 'Servidor de arquivos para Android: transforma um Android compatível em armazenamento particular na rede Wi-Fi, com SFTP.', 'en': 'File server for Android: turns a compatible Android into private storage on your Wi-Fi network, with SFTP.', 'es': 'Servidor de archivos para Android: convierte un Android compatible en almacenamiento privado en tu red Wi-Fi, con SFTP.'}[L], seo.PLAY_SERVER, L, app_id='#app-server'),
+        seo.app('DogNAS Client Lite', {'pt': 'App leve e gratuito para Android que acessa os arquivos do seu DogNAS pelo Wi-Fi de casa.', 'en': 'Lightweight, free Android app that reaches your DogNAS files over your home Wi-Fi.', 'es': 'App ligera y gratuita para Android que accede a los archivos de tu DogNAS por el Wi-Fi de casa.'}[L], seo.PLAY_LITE, L, app_id='#app-lite')])
     points = ''.join(f'<li>{x}</li>' for x in t['points'])
     if CLIENT_PLAY:
         sub_cta = f'<a data-ev="client_store_click" data-loc="hero" href="{CLIENT_PLAY}" rel="noopener">{t["sub_client"]}</a> · <a data-ev="lite_store_click" data-loc="hero" href="{play("lite", "hero_lite")}" rel="noopener">{t["lite_alt"]}</a>'
@@ -270,12 +275,7 @@ for L, t in T.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-<meta property="og:title" content="{html.escape(t['title'])}">
-<meta property="og:description" content="{html.escape(t['desc'])}">
-<meta property="og:image" content="https://dognas.app/assets/og-{L}.jpg">
-<meta property="og:url" content="https://dognas.app/{LANGS[L][1]}">
-<meta name="twitter:card" content="summary_large_image">
-''' + ''.join(f'<link rel="alternate" hreflang="{LANGS[l][0]}" href="https://dognas.app/{LANGS[l][1]}">\n' for l in LANGS) + f'''<link rel="icon" href="{base}assets/icon.png">
+{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}<link rel="icon" href="{base}assets/icon.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 </head>
 <body><div class="wrap">

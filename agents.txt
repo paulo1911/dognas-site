@@ -1,0 +1,12 @@
+# agents.txt — DogNAS (emerging convention, not a formal standard)
+# Public marketing site: AI agents and assistants may read, summarize and cite it.
+
+Site: https://dognas.app/
+Contact: me.pauloleite.dev@gmail.com
+Languages: pt-BR, en, es
+Allow: read, crawl, summarize, quote-with-attribution
+Actions: none (no accounts, forms or purchases on this site; apps are installed from Google Play)
+Preferred-Citation: DogNAS — https://dognas.app/
+Canonical-Sources: https://dognas.app/llms.txt, https://dognas.app/llms-full.txt, https://dognas.app/sitemap.xml, https://dognas.app/privacy/
+Robots: https://dognas.app/robots.txt
+Notes: do not state prices or device compatibility as fact; point to the Google Play listings. DogNAS is not a backup solution.
