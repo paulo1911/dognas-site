@@ -269,6 +269,9 @@ for L, t in T.items():
     else:
         sub_cta = f'<a data-ev="lite_store_click" data-loc="hero" href="{play("lite", "hero_secondary")}" rel="noopener">{t["sub"]}</a>'
     aud = ''.join(f'<a class="aud aud-{k}" href="#{k}">{icon("home" if k == "casa" else "terminal")}<h3>{h}</h3><p>{p}</p><span>{more} →</span></a>' for k, h, p, more in t['aud'])
+    def band(i, loc):
+        h, btn = t['bands'][i]
+        return f'<div class="cta-band"><p>{h}</p><a class="btn primary" data-ev="server_store_click" data-loc="{loc}" href="{play("server", loc)}" rel="noopener">{btn}</a></div>'
     goals = ''.join(f'<div class="goal goal-{i}"><span class="tag">{n}</span><h3>{tag}</h3><p>{txt}</p></div>' for i, (n, tag, txt) in enumerate(t['goals']))
     req = ''.join(f'<div class="card"><h3>{h}</h3><p>{p}</p></div>' for h, p in t['req'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
@@ -301,6 +304,7 @@ for L, t in T.items():
 <h2>{t['how_h2']}</h2><p class="lead">{t['how_lead']}</p>
 <div class="steps">{steps}</div>
 <p class="note"><a href="#tech">{t['adv_link']}</a></p>
+{band(0, 'mid_how')}
 </section>
 <section id="beneficios" class="audience benefits-sec">
 <p class="kicker">{t['ben_kicker']}</p><h2>{t['ben_h2']}</h2><p class="lead">{t['ben_lead']}</p>
@@ -322,6 +326,7 @@ for L, t in T.items():
 <div class="goals">{goals}</div>
 <div class="table-wrap"><table class="plans"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>
 <p class="note">{t['plannote']}</p>
+{band(1, 'mid_plans')}
 </section>
 <section id="tech" class="audience tech">
 <p class="kicker">{t['tech_kicker']}</p><h2>{t['tech_h2']}</h2><p class="lead">{t['tech_lead']}</p>
@@ -340,6 +345,7 @@ for L, t in T.items():
 <div class="grid feats">{req}</div>
 <h3 class="sub" id="faq">{t['faq_h2']}</h3>
 <div class="faq">{faq}</div>
+{band(2, 'mid_faq')}
 </section>
 <section id="suporte" class="audience">
 <h2>{t['trust_h2']}</h2><p class="lead">{t['trust_lead']}</p>

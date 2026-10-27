@@ -148,3 +148,8 @@ figure.real figcaption { margin-top:8px; }
 .final p { color:var(--muted); max-width:560px; margin:0 auto; }
 .final .micro { margin-top:10px; font-size:14px; } .final .micro a { color:var(--muted); text-decoration:underline; }
 @media (max-width:760px) { .goals { grid-template-columns:1fr; } }
+/* Mid-page call to action */
+.cta-band { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin:28px 0 8px; padding:18px 20px; border:1px solid var(--red); border-radius:18px; background:linear-gradient(135deg, rgba(255,59,48,.14), rgba(255,59,48,.04)); }
+.cta-band p { margin:0; font-size:18px; font-weight:700; flex:1 1 260px; }
+.cta-band .btn { flex:0 0 auto; }
+@media (max-width:760px) { .cta-band { text-align:center; justify-content:center; } .cta-band .btn { width:100%; text-align:center; } }

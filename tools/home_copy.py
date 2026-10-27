@@ -32,6 +32,7 @@ NEW = {
        ('Como começo?', 'Instale o DogNAS no Android que vai guardar os arquivos, toque em Iniciar, gere o QR Code de um perfil e leia com o app cliente. Veja os três passos acima.')],
   trust_h2='Dúvidas e suporte', trust_lead='O DogNAS está no começo e o seu retorno ajuda a melhorar. Escreva se algo não funcionar ou faltar.',
   trust_links=[('Falar com a gente', 'mailto:{EMAIL}'), ('Política de privacidade', '{base}privacy/#pt')],
+  bands=[('Pronto para usar seu Android como armazenamento?', 'Quero instalar no meu Android agora'), ('Comece grátis e veja funcionar na sua casa.', 'Começar a usar meu Android como armazenamento hoje'), ('Sem mais dúvidas? Teste com os seus próprios arquivos.', 'Instalar o DogNAS grátis')],
   final_h2='Comece pelo servidor, grátis', final_lead='Instale o DogNAS num Android compatível, conecte o seu celular pelo QR Code e teste com os seus próprios arquivos.',
  ),
  'en': dict(
@@ -64,6 +65,7 @@ NEW = {
        ('How do I start?', 'Install DogNAS on the Android that will keep the files, tap Start, generate a profile’s QR Code and scan it with the client app. See the three steps above.')],
   trust_h2='Questions and support', trust_lead='DogNAS is just getting started and your feedback helps it improve. Write to us if something does not work or is missing.',
   trust_links=[('Contact us', 'mailto:{EMAIL}'), ('Privacy policy', '{base}privacy/#en')],
+  bands=[('Ready to turn your Android into storage?', 'I want to install it on my Android now'), ('Start free and see it work at home.', 'Start using my Android as storage today'), ('No more questions? Try it with your own files.', 'Install DogNAS free')],
   final_h2='Start with the server, free', final_lead='Install DogNAS on a compatible Android, connect your phone with the QR Code and try it with your own files.',
  ),
  'es': dict(
@@ -96,6 +98,7 @@ NEW = {
        ('¿Cómo empiezo?', 'Instala DogNAS en el Android que guardará los archivos, toca Iniciar, genera el código QR de un perfil y escanéalo con la app cliente. Mira los tres pasos arriba.')],
   trust_h2='Dudas y soporte', trust_lead='DogNAS está empezando y tu opinión ayuda a mejorarlo. Escríbenos si algo no funciona o falta.',
   trust_links=[('Escríbenos', 'mailto:{EMAIL}'), ('Política de privacidad', '{base}privacy/#es')],
+  bands=[('¿Listo para usar tu Android como almacenamiento?', 'Quiero instalarlo en mi Android ahora'), ('Empieza gratis y míralo funcionar en casa.', 'Empezar hoy a usar mi Android como almacenamiento'), ('¿Sin más dudas? Pruébalo con tus propios archivos.', 'Instalar DogNAS gratis')],
   final_h2='Empieza por el servidor, gratis', final_lead='Instala DogNAS en un Android compatible, conecta tu móvil con el código QR y pruébalo con tus propios archivos.',
  ),
 }
