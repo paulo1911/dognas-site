@@ -21,6 +21,11 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
@@ -34,8 +39,13 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (!read()) banner();
     document.addEventListener('click', function (e) {
       var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
-      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), {location: a.getAttribute('data-loc') || '', lang: L});
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
     });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
     var plans = document.getElementById('planos');
     if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
     document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
@@ -72,16 +82,16 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/en/#page","url":"https://dognas.app/en/","name":"DogNAS — Your old phone. Your private storage.","description":"Turn a compatible Android into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.","inLanguage":"en","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"SoftwareApplication","name":"DogNAS","description":"File server for Android: turns a compatible Android into private storage on your Wi-Fi network, with SFTP.","applicationCategory":"UtilitiesApplication","operatingSystem":"Android 7.0+","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"@id":"https://dognas.app/#app-server","downloadUrl":"https://play.google.com/store/apps/details?id=com.dognas.server","installUrl":"https://play.google.com/store/apps/details?id=com.dognas.server"},{"@type":"SoftwareApplication","name":"DogNAS Client Lite","description":"Lightweight, free Android app that reaches your DogNAS files over your home Wi-Fi.","applicationCategory":"UtilitiesApplication","operatingSystem":"Android 7.0+","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"@id":"https://dognas.app/#app-lite","downloadUrl":"https://play.google.com/store/apps/details?id=com.dognas.client.lite","installUrl":"https://play.google.com/store/apps/details?id=com.dognas.client.lite"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need to buy a new device?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily: you can reuse a compatible Android (Android 7.0 or newer). See the requirements above."}},{"@type":"Question","name":"Do I need internet?","acceptedAnswer":{"@type":"Answer","text":"To use it at home you only need the Wi-Fi network that connects your devices; you need internet to install the apps. Access from outside your home is not part of the product today."}},{"@type":"Question","name":"Does DogNAS send my files to the cloud?","acceptedAnswer":{"@type":"Answer","text":"No. Files stay in the server device’s storage and travel between your devices, on your network. The apps collect no personal data; this website uses Google Analytics only if you accept."}},{"@type":"Question","name":"Can I use an external drive?","acceptedAnswer":{"@type":"Answer","text":"Yes, with a phone that has USB OTG and a drive Android recognizes. Spinning hard drives may need a powered USB hub. Each drive is an independent storage."}},{"@type":"Question","name":"Does the server keep running with the screen off or the app closed?","acceptedAnswer":{"@type":"Answer","text":"Yes, on any plan: the server runs as a foreground service with a persistent notification (and a Stop button), which keeps it active with the screen off and after you close the app. Android or the maker can still stop it to save battery: if you notice interruptions, adjust DogNAS permissions and battery saving."}},{"@type":"Question","name":"Is the Free plan transfer pause a server behavior?","acceptedAnswer":{"@type":"Answer","text":"No. It is a client app behavior, not a server one. On the Free plan, uploads and downloads made by the client app pause when you leave the client app and resume when you return; on Pro they keep going in the background. The server keeps running in both cases."}},{"@type":"Question","name":"Does this replace a backup?","acceptedAnswer":{"@type":"Answer","text":"No. A single disk or phone can fail. Keep an independent copy of what matters."}},{"@type":"Question","name":"Can I connect several servers?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each DogNAS shows up as an independent destination under “My storages” in the client app."}},{"@type":"Question","name":"Do several drives become one volume?","acceptedAnswer":{"@type":"Answer","text":"No. DogNAS does not combine drives into one volume (no RAID, no splitting files across drives): each drive or device is a separate storage."}},{"@type":"Question","name":"How do I start?","acceptedAnswer":{"@type":"Answer","text":"Install DogNAS on the Android that will keep the files, tap Start, generate a profile’s QR Code and scan it with the client app. See the three steps above."}}]}]}</script>
 <link rel="icon" href="../assets/icon.png">
-<link rel="stylesheet" href="../assets/style.css?v=dfc6db6a">
+<link rel="stylesheet" href="../assets/style.css?v=acfe2ac4">
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="../en/"><img src="../assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang"><a data-ev="lang_switch" data-loc="pt" href="../">Português</a><a data-ev="lang_switch" data-loc="en" href="../en/" class=on>English</a><a data-ev="lang_switch" data-loc="es" href="../es/">Español</a></nav></header>
 <div class="hero-grid">
 <section class="hero"><img class="logo" src="../assets/icon.png" alt="DogNAS"><h1>Your old phone. Your private storage.</h1><p>Turn a compatible Android into a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.</p>
 <ul class="points"><li>Use an Android you already own</li><li>Connect other phones with a QR Code</li><li>Start free, no subscription</li></ul>
-<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_primary" rel="noopener">Download DogNAS free</a></div>
+<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero_primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_primary" rel="noopener">Download DogNAS free</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">Check the compatibility requirements before installing.</a></p>
-<p class="cta-sub"><a data-ev="lite_store_click" data-loc="hero" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_secondary" rel="noopener">Already have the server? Get DogNAS Client Lite</a></p></section>
+<p class="cta-sub"><a data-ev="lite_store_click" data-loc="hero_secondary" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_secondary" rel="noopener">Already have the server? Get DogNAS Client Lite</a></p></section>
 <div class="phones"><div class="phone"><img src="../assets/shots/en/server-status.webp" alt="DogNAS server online" width="540" height="1080" loading="lazy"></div><div class="phone"><img src="../assets/shots/en/lite-files.webp" alt="Files in DogNAS Client Lite" width="540" height="1080" loading="lazy"></div></div>
 </div>
 <section id="como-funciona" class="audience">
@@ -133,12 +143,27 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 </section>
 <section id="suporte" class="audience">
 <h2>Questions and support</h2><p class="lead">DogNAS is just getting started and your feedback helps it improve. Write to us if something does not work or is missing.</p>
-<div class="cta"><a class="btn primary" data-ev="support_click" data-loc="0" href="mailto:me.pauloleite.dev@gmail.com">Contact us</a><a class="btn" data-ev="support_click" data-loc="1" href="../privacy/#en">Privacy policy</a></div>
+<div class="cta"><a class="btn primary" data-ev="support_click" data-loc="support_0" href="mailto:me.pauloleite.dev@gmail.com">Contact us</a><a class="btn" data-ev="support_click" data-loc="support_1" href="../privacy/#en">Privacy policy</a></div>
 </section>
 <h2>The apps</h2>
-<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="../assets/icon.png" alt=""><div><h3>DogNAS</h3><p>The server: install it on the Android that will keep your files.</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="../assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>The access app: install it on your phone to browse, upload and download.</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps" href="../en/client/"><img src="../assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>New: the full app for Android and iPhone, coming soon.</p></div></a></div>
+<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="../assets/icon.png" alt=""><div><h3>DogNAS</h3><p>The server: install it on the Android that will keep your files.</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="../assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>The access app: install it on your phone to browse, upload and download.</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps_client" href="../en/client/"><img src="../assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>New: the full app for Android and iPhone, coming soon.</p></div></a></div>
 <section class="final"><h2>Start with the server, free</h2><p>Install DogNAS on a compatible Android, connect your phone with the QR Code and try it with your own files.</p>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dfinal_cta" rel="noopener">Download DogNAS free</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">Check the compatibility requirements before installing.</a></p></section>
 <footer><span>© 2026 DogNAS</span><span><a href="../privacy/#en">Privacy policy</a> · <a href="#" data-cookie-prefs>Cookie preferences</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
-</div></body></html>
+</div>
+<div class="float-cta" hidden><a class="btn primary" data-ev="server_store_click" data-loc="float" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dfloat_cta" rel="noopener">Download DogNAS free</a></div>
+<script>
+// Floating CTA: shown only after the hero button scrolled away, never while the cookie banner is open, and hidden
+// while an in-page CTA (bands / final) is on screen so it never stacks with them.
+(function () {
+  var f = document.querySelector('.float-cta'), hero = document.querySelector('.hero .cta'); if (!f || !hero || !('IntersectionObserver' in window)) return;
+  var heroPast = false, busy = 0;
+  function update() { f.hidden = !(heroPast && !busy && !document.getElementById('dn-consent')); }
+  new IntersectionObserver(function (e) { heroPast = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; update(); }).observe(hero);
+  var io = new IntersectionObserver(function (es) { es.forEach(function (x) { busy += x.isIntersecting ? 1 : -1; }); busy = Math.max(0, busy); update(); });
+  document.querySelectorAll('.cta-band, .final').forEach(function (n) { io.observe(n); });
+  new MutationObserver(update).observe(document.body, {childList: true});
+})();
+</script>
+</body></html>

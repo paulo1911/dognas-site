@@ -21,6 +21,11 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
@@ -34,8 +39,13 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (!read()) banner();
     document.addEventListener('click', function (e) {
       var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
-      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), {location: a.getAttribute('data-loc') || '', lang: L});
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
     });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
     var plans = document.getElementById('planos');
     if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
     document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
@@ -71,7 +81,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 <meta name="twitter:image" content="https://dognas.app/assets/og-en.jpg">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/en/client/#page","url":"https://dognas.app/en/client/","name":"DogNAS Client — The full app to reach your DogNAS","description":"DogNAS Client: the free app for Android and iPhone that reaches your files on DogNAS over your home Wi-Fi. No cloud.","inLanguage":"en","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/en/"},{"@type":"ListItem","position":2,"name":"DogNAS Client","item":"https://dognas.app/en/client/"}]},{"@type":"SoftwareApplication","name":"DogNAS Client","description":"DogNAS Client: the free app for Android and iPhone that reaches your files on DogNAS over your home Wi-Fi. No cloud.","applicationCategory":"UtilitiesApplication","operatingSystem":"Android, iOS","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}]}</script>
 <link rel="icon" href="../../assets/icon.png">
-<link rel="stylesheet" href="../../assets/style.css?v=b46bdcd7">
+<link rel="stylesheet" href="../../assets/style.css?v=acfe2ac4">
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="../../en/"><img src="../../assets/icon.png" alt=""><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../client/">Português</a><a href="../../en/client/" class=on>English</a><a href="../../es/client/">Español</a></nav></header>
