@@ -27,6 +27,11 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
@@ -40,8 +45,13 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (!read()) banner();
     document.addEventListener('click', function (e) {
       var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
-      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), {location: a.getAttribute('data-loc') || '', lang: L});
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
     });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
     var plans = document.getElementById('planos');
     if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
     document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
@@ -265,9 +275,9 @@ for L, t in T.items():
     faq_ld = seo.ld([seo.faq(t['faq'])])
     points = ''.join(f'<li>{x}</li>' for x in t['points'])
     if CLIENT_PLAY:
-        sub_cta = f'<a data-ev="client_store_click" data-loc="hero" href="{CLIENT_PLAY}" rel="noopener">{t["sub_client"]}</a> · <a data-ev="lite_store_click" data-loc="hero" href="{play("lite", "hero_lite")}" rel="noopener">{t["lite_alt"]}</a>'
+        sub_cta = f'<a data-ev="client_store_click" data-loc="hero_client" href="{CLIENT_PLAY}" rel="noopener">{t["sub_client"]}</a> · <a data-ev="lite_store_click" data-loc="hero_lite" href="{play("lite", "hero_lite")}" rel="noopener">{t["lite_alt"]}</a>'
     else:
-        sub_cta = f'<a data-ev="lite_store_click" data-loc="hero" href="{play("lite", "hero_secondary")}" rel="noopener">{t["sub"]}</a>'
+        sub_cta = f'<a data-ev="lite_store_click" data-loc="hero_secondary" href="{play("lite", "hero_secondary")}" rel="noopener">{t["sub"]}</a>'
     aud = ''.join(f'<a class="aud aud-{k}" href="#{k}">{icon("home" if k == "casa" else "terminal")}<h3>{h}</h3><p>{p}</p><span>{more} →</span></a>' for k, h, p, more in t['aud'])
     def band(i, loc):
         h, btn = t['bands'][i]
@@ -275,7 +285,7 @@ for L, t in T.items():
     goals = ''.join(f'<div class="goal goal-{i}"><span class="tag">{n}</span><h3>{tag}</h3><p>{txt}</p></div>' for i, (n, tag, txt) in enumerate(t['goals']))
     req = ''.join(f'<div class="card"><h3>{h}</h3><p>{p}</p></div>' for h, p in t['req'])
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
-    trust = ''.join(f'<a class="btn{" primary" if i == 0 else ""}" data-ev="support_click" data-loc="{i}" href="{u.format(EMAIL=EMAIL, base=base)}">{n}</a>' for i, (n, u) in enumerate(t['trust_links']))
+    trust = ''.join(f'<a class="btn{" primary" if i == 0 else ""}" data-ev="support_click" data-loc="support_{i}" href="{u.format(EMAIL=EMAIL, base=base)}">{n}</a>' for i, (n, u) in enumerate(t['trust_links']))
     steps = ''.join(f'<div class="step"><div class="num">{i}</div><h3>{h}</h3><p>{p}</p>{phone(sh + img + ".webp", h)}</div>' for i, (h, p, img) in enumerate(t['steps'], 1))
     specs = ''.join(f'<tr><th>{a}</th><td>{b}</td></tr>' for a, b in t['specs'])
     rows = ''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in t['rows'])
@@ -295,7 +305,7 @@ for L, t in T.items():
 <div class="hero-grid">
 <section class="hero"><img class="logo" src="{base}assets/icon.png" alt="DogNAS"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <ul class="points">{points}</ul>
-<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a></div>
+<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero_primary" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p>
 <p class="cta-sub">{sub_cta}</p></section>
 <div class="phones">{phone(sh + 'server-status.webp', t['alt1'])}{phone(sh + 'lite-files.webp', t['alt2'])}</div>
@@ -352,7 +362,7 @@ for L, t in T.items():
 <div class="cta">{trust}</div>
 </section>
 <h2>{t['apps']}</h2>
-<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
+<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps_client" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
 <section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>

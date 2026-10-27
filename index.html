@@ -21,6 +21,11 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
@@ -34,8 +39,13 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (!read()) banner();
     document.addEventListener('click', function (e) {
       var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
-      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), {location: a.getAttribute('data-loc') || '', lang: L});
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
     });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
     var plans = document.getElementById('planos');
     if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
     document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
@@ -79,9 +89,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 <div class="hero-grid">
 <section class="hero"><img class="logo" src="assets/icon.png" alt="DogNAS"><h1>Seu celular antigo. Seu armazenamento particular.</h1><p>Transforme um Android compatível em um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.</p>
 <ul class="points"><li>Use um Android que você já tem</li><li>Conecte outros celulares por QR Code</li><li>Comece grátis, sem assinatura</li></ul>
-<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_primary" rel="noopener">Baixar o DogNAS grátis</a></div>
+<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero_primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_primary" rel="noopener">Baixar o DogNAS grátis</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">Confira os requisitos de compatibilidade antes de instalar.</a></p>
-<p class="cta-sub"><a data-ev="lite_store_click" data-loc="hero" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_secondary" rel="noopener">Já tem o servidor? Baixe o Client Lite</a></p></section>
+<p class="cta-sub"><a data-ev="lite_store_click" data-loc="hero_secondary" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dhero_secondary" rel="noopener">Já tem o servidor? Baixe o Client Lite</a></p></section>
 <div class="phones"><div class="phone"><img src="assets/shots/pt/server-status.webp" alt="Servidor DogNAS online" width="540" height="1080" loading="lazy"></div><div class="phone"><img src="assets/shots/pt/lite-files.webp" alt="Arquivos no DogNAS Client Lite" width="540" height="1080" loading="lazy"></div></div>
 </div>
 <section id="como-funciona" class="audience">
@@ -133,10 +143,10 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 </section>
 <section id="suporte" class="audience">
 <h2>Dúvidas e suporte</h2><p class="lead">O DogNAS está no começo e o seu retorno ajuda a melhorar. Escreva se algo não funcionar ou faltar.</p>
-<div class="cta"><a class="btn primary" data-ev="support_click" data-loc="0" href="mailto:me.pauloleite.dev@gmail.com">Falar com a gente</a><a class="btn" data-ev="support_click" data-loc="1" href="privacy/#pt">Política de privacidade</a></div>
+<div class="cta"><a class="btn primary" data-ev="support_click" data-loc="support_0" href="mailto:me.pauloleite.dev@gmail.com">Falar com a gente</a><a class="btn" data-ev="support_click" data-loc="support_1" href="privacy/#pt">Política de privacidade</a></div>
 </section>
 <h2>Os apps</h2>
-<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="assets/icon.png" alt=""><div><h3>DogNAS</h3><p>O servidor: instale no Android que vai guardar os arquivos.</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>O app de acesso: instale no celular para ver, enviar e baixar os arquivos.</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps" href="client/"><img src="assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>Novo: o app completo para Android e iPhone, em breve.</p></div></a></div>
+<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="assets/icon.png" alt=""><div><h3>DogNAS</h3><p>O servidor: instale no Android que vai guardar os arquivos.</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="https://play.google.com/store/apps/details?id=com.dognas.client.lite&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dapps_card" rel="noopener"><img src="assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>O app de acesso: instale no celular para ver, enviar e baixar os arquivos.</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps_client" href="client/"><img src="assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>Novo: o app completo para Android e iPhone, em breve.</p></div></a></div>
 <section class="final"><h2>Comece pelo servidor, grátis</h2><p>Instale o DogNAS num Android compatível, conecte o seu celular pelo QR Code e teste com os seus próprios arquivos.</p>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dfinal_cta" rel="noopener">Baixar o DogNAS grátis</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">Confira os requisitos de compatibilidade antes de instalar.</a></p></section>
