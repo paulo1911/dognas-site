@@ -1,0 +1,32 @@
+# DogNAS — full description for language models
+
+Canonical site: https://dognas.app/ · Contact: me.pauloleite.dev@gmail.com · Languages: pt-BR (default), en, es.
+
+## What it is
+DogNAS is a file server for Android. It turns a compatible Android phone (for example one that is no longer used every day) into private storage on the home Wi-Fi network. It is not a cloud service: files are kept on the server device, in the storage the user chooses (internal memory, SD card, or a USB drive with a phone that supports USB OTG).
+
+## How it works
+1. Install the DogNAS server app on the Android that will keep the files, choose where to store them and tap Start.
+2. Create a profile; the app shows a QR Code. Each profile has its own PIN and its own folders.
+3. On another phone, scan the QR Code with a DogNAS client app (DogNAS Client Lite today) and type the PIN. Then browse, upload and download files over the home Wi-Fi.
+4. PCs, Macs and scripts connect with any SFTP client (FileZilla, WinSCP, Cyberduck, rclone, OpenSSH) using the credentials of a paired device.
+
+## Security and privacy
+Connections use SFTP over SSH-2 (AES-GCM or ChaCha20); the server key is pinned when a device is paired and each device has its own revocable credential. The apps do not collect, send or sell personal data and contain no ads or third-party analytics. The website uses Google Analytics only after the visitor accepts the cookie notice. See https://dognas.app/privacy/.
+
+## Plans
+- Free: DogNAS manages up to 64 GB, the Home profile plus 2 more, 3 paired devices; transfers pause when the app is closed.
+- Pro: one-time purchase, no subscription: the whole storage, unlimited profiles and devices, transfers keep going with the app closed, the server can start by itself after a reboot, and maximum optimized performance.
+- DogNAS Client Lite is always free. (Prices are shown in the store, not on this site.)
+
+## Requirements and limits
+- Android 7.0 or newer on the server and on the client phones, all on the same network.
+- Background behavior depends on the phone maker and Android power settings; do not assume the server runs forever without checking battery and permission settings.
+- USB drives need USB OTG; spinning hard drives may need a powered USB hub.
+- Each disk or DogNAS is an independent storage: DogNAS does not combine several drives into one volume.
+- DogNAS is not a backup. A single disk can fail: keep an independent copy of important files.
+
+## Apps
+- DogNAS (server): https://play.google.com/store/apps/details?id=com.dognas.server
+- DogNAS Client Lite (free, Android): https://play.google.com/store/apps/details?id=com.dognas.client.lite
+- DogNAS Client (Android and iPhone): coming soon — https://dognas.app/client/
