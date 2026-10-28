@@ -31,3 +31,4 @@
 .post-cta p { margin:0 0 12px; }
 .related ul { padding-left:20px; }
 .draft-flag { background:#3a2a00; color:#ffd27a; border-radius:8px; padding:8px 12px; font-size:14px; }
+.post-cta .more { margin-left:12px; color:var(--muted); display:inline-block; padding:12px 0; }

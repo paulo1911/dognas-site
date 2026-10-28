@@ -12,6 +12,13 @@ PINs, credentials or personal data are ever sent.
 | `client_store_click` / `client_page_click` | DogNAS Client (Play when published / the `/client/` page) |
 | `support_click` | contact / privacy buttons in the support block |
 | `requirements_click`, `faq_open`, `pro_view`, `lang_switch` | engagement signals |
+| `blog_article_view` | an article page was opened (params: `article` = group id, `category`, `cta`, `lang`); sent only when consent was already granted at load |
+| `blog_server_download_click` / `blog_client_download_click` | the article's Play CTA (`cta: server` → server app, `cta: client` → Client Lite); `cta_id` = `blog_<group>_<cta>`, Play `utm_campaign` = `blog_<group>` |
+| `blog_product_cta_click` | "About DogNAS" link in the article CTA box (to the home page); `cta_id` = `blog_<group>_product` |
+| `blog_related_article_click` | link in the article's "Keep reading" list; `cta_id` = `blog_<group>_related_<other group>` |
+| `blog_list_article_click` | article card on the blog list |
+
+Blog funnel: article → download click is measured here; `server_started`, `client_paired`, `first_transfer_success` happen inside the apps (no telemetry by design) — read them from Play Console acquisition and from tester reports. Mark `blog_server_download_click` / `blog_client_download_click` as key events once the first article is live.
 
 Parameters: `cta_id`, `cta_text` (≤ 60 chars), `cta_target` (server / lite / client / client_page / support), `lang`, `page_depth` (% of the page scrolled at the time).
 
