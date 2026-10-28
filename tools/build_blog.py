@@ -28,7 +28,7 @@ def write(path, text):
     full = os.path.join(OUT, path, 'index.html'); os.makedirs(os.path.dirname(full), exist_ok=True); open(full, 'w').write(text)
 
 
-def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False):
+def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None):
     t = UI[L]
     home = base if L == 'pt' else f'{base}{LANGS[L][1]}'
     return f'''<!doctype html>
@@ -38,7 +38,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW)}{jsonld}<link rel="icon" href="{base}assets/icon-192.png">
+{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="icon" href="{base}assets/icon-192.png">
 <link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
 <link rel="stylesheet" href="{base}assets/blog.css">
 </head>
@@ -115,7 +115,7 @@ def main():
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
                             'datePublished': a.get('published') or a['created'], 'dateModified': upd, 'mainEntityOfPage': seo.SITE + path,
                             'author': {'@id': seo.SITE + '#org'}, 'publisher': {'@id': seo.SITE + '#org'}, **({'image': seo.SITE + image} if image else {})}])
-            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article'))
+            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image))
             n += 1
     print(f'ok: {n} pages ({len(arts)} articles){" [preview -> _preview/]" if PREVIEW else ""}')
 

@@ -33,10 +33,26 @@ for paths, src, prio in groups:
         alts = ''.join(f'<xhtml:link rel="alternate" hreflang="{HREF[a]}" href="{SITE}{ap}"/>' for a, ap in zip(['pt', 'en', 'es'], paths))
         alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{paths[0]}"/>'
         urls.append(f'<url><loc>{SITE}{pth}</loc><lastmod>{lastmod(src)}</lastmod><priority>{prio}</priority>{alts}</url>')
+import blog_content as bc
+barts, _ = bc.load()
+def alt_links(items):
+    items = dict(items)
+    if len(items) < 2: return ''
+    out = ''.join(f'<xhtml:link rel="alternate" hreflang="{HREF[l]}" href="{SITE}{p}"/>' for l, p in items.items())
+    return out + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{items.get("pt", next(iter(items.values())))}"/>'
+blive = [l for l in ['pt', 'en', 'es'] if any(a['lang'] == l for a in barts)]
+bdate = max((a.get('updated') or a['created'] for a in barts), default='')
+for l in blive:
+    urls.append(f'<url><loc>{SITE}{bc.list_path(l)}</loc><lastmod>{max(a.get("updated") or a["created"] for a in barts if a["lang"] == l)}</lastmod><priority>0.6</priority>{alt_links({x: bc.list_path(x) for x in blive})}</url>')
+for a in barts:
+    sib = {x['lang']: bc.article_path(x) for x in barts if x['group'] == a['group']}
+    urls.append(f'<url><loc>{SITE}{bc.article_path(a)}</loc><lastmod>{a.get("updated") or a["created"]}</lastmod><priority>0.6</priority>{alt_links(sib)}</url>')
 urls.append(f'<url><loc>{SITE}privacy/</loc><lastmod>{lastmod("build_privacy.py")}</lastmod><priority>0.3</priority></url>')
 w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + '\n'.join(urls) + '\n</urlset>\n')
 
 # ---- llms.txt (llmstxt.org format) and llms-full.txt --------------------------------------------------------------
+NAME = {'pt': 'Português', 'en': 'English', 'es': 'Español'}
+blog_llms = ('## Blog\n' + ''.join(f'- [{a["title"]}]({SITE}{bc.article_path(a)}) ({NAME[a["lang"]]}): {a["summary"]}\n' for a in sorted(barts, key=lambda a: (a['lang'], a['slug']))) + '\n') if barts else ''
 llms = f'''# DogNAS
 
 > DogNAS turns a compatible Android phone or tablet into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
@@ -54,7 +70,7 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Home (Español)]({SITE}es/): same content in Spanish.
 - [Privacy policy]({SITE}privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
-## Optional
+{blog_llms}## Optional
 - [Full text for LLMs]({SITE}llms-full.txt): longer plain-text description of the product.
 - [Sitemap]({SITE}sitemap.xml)
 - [Agent access notes]({SITE}agents.txt)
