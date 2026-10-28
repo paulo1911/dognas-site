@@ -3,7 +3,7 @@ import os, html, hashlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 import seo
-from build_home import GA_TAG  # shared: consent banner + GA4 loaded only after acceptance
+from build_home import GA_TAG, blog_link  # shared: consent banner + GA4 loaded only after acceptance
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
@@ -25,7 +25,7 @@ def page(lang, title, desc, body, base):
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{base}{LANGS[lang][1].lstrip("/")}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 {body}
-<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{lang}">{priv}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span>{blog_link(lang, base)}<a href="{base}privacy/#{lang}">{priv}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
 

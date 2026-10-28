@@ -88,6 +88,8 @@ PLAY = {'server': 'https://play.google.com/store/apps/details?id=com.dognas.serv
         'lite': 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'}
 # DogNAS Client (Flutter) Play URL: fill when it is published — the secondary CTA then points to it and the Lite becomes the "lightweight alternative".
 CLIENT_PLAY = ''
+from blog_content import has_blog, blog_dir
+def blog_link(L, base): return f'<a href="{base}{blog_dir(L)}">Blog</a> · ' if has_blog(L) else ''
 def play(app, loc):
     # `referrer` lets Play Console attribute store visits to this site (the apps themselves collect nothing).
     return f"{PLAY[app]}&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D{loc}"
@@ -366,7 +368,7 @@ for L, t in T.items():
 <section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
-<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div>
 <div class="float-cta" hidden><a class="btn primary" data-ev="server_store_click" data-loc="float" href="{play('server', 'float_cta')}" rel="noopener">{t['cta']}</a></div>
 <script>
