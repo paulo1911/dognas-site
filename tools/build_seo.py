@@ -2,7 +2,7 @@
 .well-known/security.txt, 404.html and the IndexNow key. Run: python3 tools/build_seo.py
 Facts here must match the product and DECISIONS.md: no prices, no tested-device list, no unverified claims."""
 import os, subprocess, datetime, hashlib
-from build_home import ROOT, LANGS, EMAIL, GA_TAG, CSS_V
+from build_home import ROOT, LANGS, EMAIL, GA_TAG, CSS_V, CSS_INLINE
 SITE = 'https://dognas.app/'
 def w(path, text):
     full = os.path.join(ROOT, path); os.makedirs(os.path.dirname(full), exist_ok=True); open(full, 'w').write(text)
@@ -130,9 +130,10 @@ Notes: do not state prices or device compatibility as fact; point to the Google 
 exp = (datetime.date.today() + datetime.timedelta(days=365)).isoformat() + 'T00:00:00.000Z'
 w('.well-known/security.txt', f'Contact: mailto:{EMAIL}\nExpires: {exp}\nPreferred-Languages: en, pt, es\nCanonical: {SITE}.well-known/security.txt\n')
 w('404.html', f'''<!doctype html>
-<html lang="pt-BR"><head>{GA_TAG}<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-<title>DogNAS — 404</title><link rel="icon" href="/assets/icon-192.png"><link rel="stylesheet" href="/assets/style.css?v={CSS_V}"></head>
-<body><div class="wrap"><header class="top"><a class="brand" href="/"><img src="/assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a></header>
+<html lang="pt-BR"><head><meta charset="utf-8">
+{GA_TAG}<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>DogNAS — 404</title><link rel="icon" type="image/png" href="/assets/icon-96.png">{CSS_INLINE}</head>
+<body><div class="wrap"><header class="top"><a class="brand" href="/"><img src="/assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a></header>
 <section class="hero"><h1>404</h1><p>Página não encontrada · Page not found · Página no encontrada</p><div class="cta"><a class="btn primary" href="/">DogNAS</a></div></section></div></body></html>
 ''')
 key = hashlib.sha256(b'dognas.app-indexnow').hexdigest()[:32]

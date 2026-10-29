@@ -1,6 +1,6 @@
 """Landing pages (pt at /, en at /en/, es at /es/) for two audiences: home users and tech /
 smart-home users. Run: python3 tools/build_home.py (screenshots live in assets/shots/<lang>/)."""
-import os, html, hashlib, sys
+import os, re, html, hashlib, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import seo
 from home_copy import NEW
@@ -15,9 +15,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 (function () {
   var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
   var TXT = {
-    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
-    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
-    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Política de privacidade', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Privacy policy', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Política de privacidad', 'Preferencias de cookies']
   }[L] || [];
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
@@ -63,6 +63,12 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 # Pages caches files for 10 min: the CSS URL changes whenever its content does, so a new page
 # never renders with a cached old stylesheet.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
+def inline_css(*files):
+    """The stylesheet goes inline (<= ~15 KB): no render-blocking request, and GitHub Pages' 10-min cache can never serve a stale one."""
+    css = ''.join(open(os.path.join(ROOT, 'assets', f)).read() for f in files)
+    css = re.sub(r'\s+', ' ', re.sub(r'/\*.*?\*/', '', css, flags=re.S))
+    return '<style>' + re.sub(r'\s*([{};:,>])\s*', r'\1', css).strip() + '</style>'
+CSS_INLINE = inline_css('style.css')
 # English is the default language (root); pt lives at /pt/ and es at /es/. Dict order = order in the language switcher.
 LANGS = {'en': ('en', ''), 'pt': ('pt-BR', 'pt/'), 'es': ('es', 'es/')}
 NAMES = {'en': 'English', 'pt': 'Português', 'es': 'Español'}
@@ -257,11 +263,14 @@ T = {
 }
 # Real photos from tools/build_photos.py (900 px wide WebP); sizes keep the layout from jumping.
 PHOTO_H = {'always-on': 1129, 'usb-drive': 1347}
-def photo(base, name, cap): return f'<figure class="real"><img src="{base}assets/photos/{name}.webp" alt="{html.escape(cap)}" width="900" height="{PHOTO_H[name]}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
+def photo(base, name, cap): return f'<figure class="real"><img src="{base}assets/photos/{name}.webp" srcset="{base}assets/photos/{name}-450.webp 450w, {base}assets/photos/{name}.webp 900w" sizes="(max-width: 700px) calc(100vw - 32px), 400px" alt="{html.escape(cap)}" width="900" height="{PHOTO_H[name]}" loading="lazy"><figcaption>{cap}</figcaption></figure>'
 def benefits(groups): return '<div class="benefits">' + ''.join(
     f'<div class="bcard">{icon(k)}<h3>{h}</h3><ul>' + ''.join(f'<li><span class="pain">{a}</span><span class="fix">{b}</span></li>' for a, b in items) + '</ul></div>'
     for k, h, items in groups) + '</div>'
-def phone(src, alt, eager=False): return f'<div class="phone"><img src="{src}" alt="{html.escape(alt)}" width="540" height="1080" {"fetchpriority=high" if eager else "loading=lazy"}></div>'
+def phone(src, alt, eager=False):
+    # width variants from tools/optimize_images.py: the phone frame is <= ~230 css px wide
+    stem = src[:-5]
+    return f'<div class="phone"><img src="{src}" srcset="{stem}-300.webp 300w, {stem}-460.webp 460w, {src} 540w" sizes="230px" alt="{html.escape(alt)}" width="540" height="1080" {"fetchpriority=high" if eager else "loading=lazy"}></div>'
 PRIV_ICONS = ['no-cloud', 'shield', 'people', 'qr']
 HOME_ICONS = ['phone-free', 'people', 'qr', 'no-cloud']
 MORE_ICONS = ['ssd', 'hdd', 'sd', 'devices']
@@ -291,22 +300,23 @@ for L, t in T.items():
     trust = ''.join(f'<a class="btn{" primary" if i == 0 else ""}" data-ev="support_click" data-loc="support_{i}" href="{u.format(EMAIL=EMAIL, base=base)}">{n}</a>' for i, (n, u) in enumerate(t['trust_links']))
     steps = ''.join(f'<div class="step"><div class="num">{i}</div><h3>{h}</h3><p>{p}</p>{phone(sh + img + ".webp", h)}</div>' for i, (h, p, img) in enumerate(t['steps'], 1))
     specs = ''.join(f'<tr><th>{a}</th><td>{b}</td></tr>' for a, b in t['specs'])
-    rows = ''.join(f'<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>' for a, b, c in t['rows'])
-    head = ''.join(f'<th>{h}</th>' for h in t['planhead'])
+    rows = ''.join(f'<tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>' for a, b, c in t['rows'])
+    head = ''.join(f'<th scope="col">{h}</th>' if h else '<td></td>' for h in t['planhead'])
     page = f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
 <head>
-{GA_TAG}<meta charset="utf-8">
+<meta charset="utf-8">
+{GA_TAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}{faq_ld}<link rel="icon" href="{base}assets/icon-192.png">
-<link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
+{seo.meta(L, LANGS[L][1], t['title'], t['desc'], {l: LANGS[l][1] for l in LANGS})}{jsonld}{faq_ld}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{CSS_INLINE}
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{base}{LANGS[L][1]}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<header class="top"><a class="brand" href="{base}{LANGS[L][1]}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 <div class="hero-grid">
-<section class="hero"><img class="logo" src="{base}assets/icon-192.png" alt="DogNAS" width="120" height="120"><h1>{t['h1']}</h1><p>{t['lead']}</p>
+<section class="hero"><img class="logo" src="{base}assets/icon-240.webp" alt="DogNAS" width="120" height="120"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <ul class="points">{points}</ul>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero_primary" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p>
@@ -365,7 +375,7 @@ for L, t in T.items():
 <div class="cta">{trust}</div>
 </section>
 <h2>{t['apps']}</h2>
-<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite.png" alt=""><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps_client" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon.png" alt=""><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
+<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps_client" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
 <section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
