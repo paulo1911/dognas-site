@@ -11,9 +11,11 @@ cover_alt: Archivos de DogNAS Client Lite en un Android, junto a la mascota de D
 social_image: assets/blog/sell-or-reuse/social-es.jpg
 cta: server
 related: [old-phone-ideas, old-android-server, cloud-subscription-savings]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 El celular viejo está en un cajón y todavía no decidiste qué hacer: venderlo, donarlo, reciclarlo o reutilizarlo en casa. Cada camino tiene sentido en una situación distinta. Esta guía te ayuda a elegir y muestra cómo proteger tus datos en cualquiera de ellos.
 

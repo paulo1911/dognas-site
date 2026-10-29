@@ -11,9 +11,11 @@ cover_alt: DogNAS Client Lite files on an Android, next to the DogNAS mascot
 social_image: assets/blog/sell-or-reuse/social-en.jpg
 cta: server
 related: [old-phone-ideas, old-android-server, cloud-subscription-savings]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 The old phone is in a drawer and you haven't decided what to do: sell it, donate it, recycle it or reuse it at home. Each path makes sense in a different situation. This guide helps you choose and shows how to protect your data in any of them.
 

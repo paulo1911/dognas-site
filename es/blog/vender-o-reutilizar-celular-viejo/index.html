@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vender o reutilizar el celular viejo: cómo decidir | DogNAS</title>
+<meta name="description" content="Vender, donar, reciclar o reutilizar un celular Android viejo: cómo decidir y cómo borrar los datos con seguridad antes de deshacerte de él.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/blog/sell-or-reuse-your-old-phone/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/pt/blog/vender-ou-reaproveitar-celular-antigo/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/sell-or-reuse-your-old-phone/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:title" content="Vender o reutilizar el celular viejo: cómo decidir | DogNAS">
+<meta property="og:description" content="Vender, donar, reciclar o reutilizar un celular Android viejo: cómo decidir y cómo borrar los datos con seguridad antes de deshacerte de él.">
+<meta property="og:url" content="https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/">
+<meta property="og:image" content="https://dognas.app/assets/blog/sell-or-reuse/social-es.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vender o reutilizar el celular viejo: cómo decidir | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vender o reutilizar el celular viejo: cómo decidir | DogNAS">
+<meta name="twitter:description" content="Vender, donar, reciclar o reutilizar un celular Android viejo: cómo decidir y cómo borrar los datos con seguridad antes de deshacerte de él.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/sell-or-reuse/social-es.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"es","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/#page","url":"https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/","name":"Vender o reutilizar el celular viejo: cómo decidir | DogNAS","description":"Vender, donar, reciclar o reutilizar un celular Android viejo: cómo decidir y cómo borrar los datos con seguridad antes de deshacerte de él.","inLanguage":"es","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/es/blog/"},{"@type":"ListItem","position":3,"name":"Vender, donar o reutilizar el celular viejo: cómo decidir","item":"https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/#post","headline":"Vender, donar o reutilizar el celular viejo: cómo decidir","description":"Vender, donar, reciclar o reutilizar un celular Android viejo: cómo decidir y cómo borrar los datos con seguridad antes de deshacerte de él.","inLanguage":"es","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/es/blog/vender-o-reutilizar-celular-viejo/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/sell-or-reuse/social-es.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../es/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/sell-or-reuse-your-old-phone/">English</a><a href="../../../pt/blog/vender-ou-reaproveitar-celular-antigo/">Português</a><a href="../../../es/blog/vender-o-reutilizar-celular-viejo/" class=on>Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../es/">Inicio</a> › <a href="../../../es/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guías</span><h1>Vender, donar o reutilizar el celular viejo: cómo decidir</h1>
+<p class="meta">Actualizado el 28 oct 2026 · 2 min de lectura</p></header><figure class="cover"><img src="../../../assets/blog/sell-or-reuse/cover-es.webp" alt="Archivos de DogNAS Client Lite en un Android, junto a la mascota de DogNAS" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="En este artículo"><strong>En este artículo</strong><ul><li class="l2"><a href="#las-cuatro-opciones">Las cuatro opciones</a></li><li class="l2"><a href="#como-decidir">Cómo decidir</a></li><li class="l2"><a href="#antes-de-deshacerte-de-el-protege-tus-datos">Antes de deshacerte de él: protege tus datos</a></li><li class="l2"><a href="#si-eliges-reutilizarlo-como-servidor-de-archivos">Si eliges reutilizarlo como servidor de archivos</a></li><li class="l2"><a href="#resumen">Resumen</a></li></ul></nav><div class="prose"><p>El celular viejo está en un cajón y todavía no decidiste qué hacer: venderlo, donarlo, reciclarlo o reutilizarlo en casa. Cada camino tiene sentido en una situación distinta. Esta guía te ayuda a elegir y muestra cómo proteger tus datos en cualquiera de ellos.</p>
+<h2 id="las-cuatro-opciones">Las cuatro opciones</h2>
+<ul><li><strong>Vender.</strong> Tiene sentido si el dispositivo aún tiene demanda y está en buen estado. Considera el tiempo y el trabajo de publicar y negociar, porque el valor suele ser bajo en modelos antiguos.</li><li><strong>Donar.</strong> Una buena salida si funciona bien y alguien lo aprovechará, como un familiar, una escuela o una institución.</li><li><strong>Reciclar.</strong> Si está roto o ya no sirve, llévalo a un punto de recolección de electrónicos. No lo tires a la basura común, por la batería y los materiales.</li><li><strong>Reutilizar en casa.</strong> Tiene sentido si enciende, se conecta al Wi-Fi y tienes una necesidad real. Un uso que sigue siendo útil es convertirlo en el servidor de archivos de la casa.</li></ul>
+<h2 id="como-decidir">Cómo decidir</h2>
+<p>Pregúntate:</p>
+<ol><li><strong>¿Funciona bien?</strong> Si la batería, la pantalla o el Wi-Fi están mal, reciclar o reparar puede ser mejor.</li><li><strong>¿Necesito algo que él pueda hacer?</strong> Si quieres guardar fotos y documentos en casa sin pagar nube, puede ser el servidor. Mira <a href="/es/blog/que-hacer-con-un-celular-android-viejo/">qué hacer con un celular viejo</a>.</li><li><strong>¿Vale el dinero y el trabajo de venderlo?</strong> Si el valor es bajo, donar o reutilizar suele compensar más.</li></ol>
+<h2 id="antes-de-deshacerte-de-el-protege-tus-datos">Antes de deshacerte de él: protege tus datos</h2>
+<p>Si el celular va a otra persona, sigue estos pasos:</p>
+<ol><li><strong>Haz una copia de seguridad</strong> de lo importante en otro lugar y comprueba que está ahí.</li><li><strong>Cierra sesión en tus cuentas,</strong> como la de Google, y quita el dispositivo de tu cuenta.</li><li><strong>Retira la SIM y la tarjeta de memoria.</strong></li><li><strong>Restaura a los valores de fábrica,</strong> en los ajustes de Android.</li></ol>
+<p>Entrega el dispositivo solo después de eso.</p>
+<h2 id="si-eliges-reutilizarlo-como-servidor-de-archivos">Si eliges reutilizarlo como servidor de archivos</h2>
+<p>Con DogNAS, un Android 7.0 o más reciente se convierte en un servidor de archivos en el Wi-Fi de tu casa. Instala la app, elige dónde guardar (memoria, tarjeta SD o disco/pendrive USB), toca Iniciar y conecta los demás dispositivos con código QR y PIN. El plan Gratis administra hasta 64 GB, y Pro, una compra única y sin suscripción, usa todo el almacenamiento.</p>
+<p>Antes, <strong>quita tus datos personales del dispositivo</strong> si solo va a ser servidor, y mantén una copia independiente de lo importante, porque DogNAS no hace copias por sí solo. Un dispositivo muy antiguo puede no recibir más actualizaciones de seguridad: úsalo solo en la red de tu casa, que es como funciona DogNAS.</p>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/shots/es/lite-files.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/lite-files.webp" alt="Archivos de DogNAS en Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>Archivos de DogNAS en Client Lite</figcaption></figure><figure><a href="../../../assets/shots/es/server-status.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-status.webp" alt="Servidor DogNAS en línea" width="540" height="1080" loading="lazy"></a><figcaption>Servidor DogNAS en línea</figcaption></figure></div></div>
+<h2 id="resumen">Resumen</h2>
+<p>Si el celular no funciona bien, recíclalo. Si funciona y no lo necesitas, dónalo o véndelo, después de borrar tus datos. Si funciona y necesitas un lugar para guardar los archivos de la casa, <a href="/es/blog/convertir-android-viejo-en-servidor-de-archivos/">conviértelo en servidor de archivos</a>.</p></div><aside class="post-cta"><p>Instala DogNAS en el Android que guardará tus archivos. Gratis.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_sell-or-reuse" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_sell-or-reuse_server">Quiero instalarlo en mi Android ahora</a> <a class="more" href="../../../es/" data-ev="blog_product_cta_click" data-loc="blog_sell-or-reuse_product">Conocer DogNAS</a></aside></article><section class="related"><h2>Sigue leyendo</h2><ul><li><a href="../../../es/blog/que-hacer-con-un-celular-android-viejo/" data-ev="blog_related_article_click" data-loc="blog_sell-or-reuse_related_old-phone-ideas">Qué hacer con un celular Android viejo: 10 ideas que sí sirven</a></li><li><a href="../../../es/blog/convertir-android-viejo-en-servidor-de-archivos/" data-ev="blog_related_article_click" data-loc="blog_sell-or-reuse_related_old-android-server">Cómo convertir un Android viejo en un servidor de archivos</a></li><li><a href="../../../es/blog/como-ahorrar-en-suscripciones-de-almacenamiento-en-la-nube/" data-ev="blog_related_article_click" data-loc="blog_sell-or-reuse_related_cloud-subscription-savings">Cómo ahorrar en las suscripciones de almacenamiento en la nube</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'sell-or-reuse',category:'Guías',cta:'server',lang:'es'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../es/blog/">Blog</a> · <a href="../../../privacy/#es">Privacidad</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

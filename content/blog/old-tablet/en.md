@@ -11,9 +11,11 @@ cover_alt: DogNAS server monitor on an Android, next to the DogNAS mascot
 social_image: assets/blog/old-tablet/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, old-phone-ideas]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Everyone has a tablet in a drawer: the kids' one, the one that got slow, the one replaced by a newer model. It usually has more storage than an old phone, a big screen and a larger battery. All of that makes it a good candidate for your home file server.
 
