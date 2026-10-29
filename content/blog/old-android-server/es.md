@@ -10,7 +10,7 @@ cover: assets/blog/old-android-server/cover-es.webp
 cover_alt: App DogNAS Server mostrando el servidor en línea en un Android, junto a la mascota de DogNAS
 social_image: assets/blog/old-android-server/social-es.jpg
 cta: server
-related: []
+related: [home-nas, old-phone-ideas]
 status: published
 translation_review: reviewed
 created: 2026-10-28
