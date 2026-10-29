@@ -102,6 +102,16 @@ def _url(u, base, lang=None):
 
 
 PHOTO_DIMS = {'always-on': (900, 1129), 'usb-drive': (900, 1347)}  # assets/photos/<name>.webp
+def _srcset(u, base):
+    """srcset from the variants made by tools/optimize_images.py (assets/shots: 300/460, assets/photos: 450)."""
+    stem = u[:-5]
+    if '/shots/' in u: return f' srcset="{base}{stem}-300.webp 300w, {base}{stem}-460.webp 460w, {base}{u} 540w" sizes="190px"'
+    if '/photos/' in u:
+        w = PHOTO_DIMS.get(os.path.splitext(os.path.basename(u))[0], (900, 1))[0]
+        return f' srcset="{base}{stem}-450.webp 450w, {base}{u} {w}w" sizes="300px"'
+    return ''
+
+
 def _dims(u):
     w, h = PHOTO_DIMS.get(os.path.splitext(os.path.basename(u))[0], (540, 1080)) if '/photos/' in u else (540, 1080)
     return f'width="{w}" height="{h}"'
@@ -136,7 +146,7 @@ def render(body, base='', lang=None):
         elif all(l.startswith('>') for l in lines):
             out.append('<blockquote><p>' + _inline(' '.join(l.lstrip('> ') for l in lines), base, lang) + '</p></blockquote>')
         elif all(re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', l) for l in lines):
-            figs = ''.join(f'<figure><a href="{_url(m.group(2), base)}" target="_blank" rel="noopener"><img src="{_url(m.group(2), base)}" alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"></a><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
+            figs = ''.join(f'<figure><a href="{_url(m.group(2), base)}" target="_blank" rel="noopener"><img src="{_url(m.group(2), base)}"{_srcset(m.group(2), base)} alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"></a><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
                            for m in (re.match(r'!\[([^\]]*)\]\(([^)\s]+)\)', l) for l in lines))
             out.append(f'<div class="carousel"><div class="track">{figs}</div></div>')
         else:

@@ -3,7 +3,7 @@ Run: python3 tools/build_client.py. Reuses the shell of build_home.py. Store lin
 "Coming soon" until the app is published (BACKLOG REL-7 / FC-74): then fill STORE below."""
 import os, html
 import seo
-from build_home import blog_link, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
+from build_home import CSS_INLINE, blog_link, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
 # Fill with the real URLs when published; empty = shows "Coming soon".
 STORE = {'play': '', 'apple': ''}
 T = {
@@ -63,16 +63,17 @@ for L, t in T.items():
     page = f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
 <head>
-{GA_TAG}<meta charset="utf-8">
+<meta charset="utf-8">
+{GA_TAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], '', L, os_='Android, iOS')])}<link rel="icon" href="{base}assets/icon-192.png">
-<link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
+{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], '', L, os_='Android, iOS')])}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{CSS_INLINE}
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
-<section class="hero"><img class="logo" src="{base}assets/icon.png" alt="DogNAS Client"><h1>{t['h1']}</h1><p>{t['lead']}</p>
+<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<section class="hero"><img class="logo" src="{base}assets/icon-240.webp" alt="DogNAS Client" width="120" height="120"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <div class="cta" style="justify-content:center">{ctas}</div>{soon_note}</section>
 <h2>{t['feats_h']}</h2>
 {cards(t['feats'], t['icons'])}

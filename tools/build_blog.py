@@ -4,8 +4,9 @@ Run: python3 tools/build_blog.py            (published articles only; fails on a
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
 import os, sys, html, shutil
 import seo, blog_content as bc
-from build_home import ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, play
+from build_home import inline_css, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, play
 
+BLOG_CSS = inline_css('style.css', 'blog.css')
 PREVIEW = '--preview' in sys.argv
 OUT = os.path.join(ROOT, '_preview') if PREVIEW else ROOT
 UI = {
@@ -34,16 +35,16 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
     return f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
 <head>
-{GA_TAG}<meta charset="utf-8">
+<meta charset="utf-8">
+{GA_TAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="icon" href="{base}assets/icon-192.png">
-<link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
-<link rel="stylesheet" href="{base}assets/blog.css">
+{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{BLOG_CSS}
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 {main}
 <footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
@@ -104,7 +105,7 @@ def main():
             rel = [by_group[(r, L)] for r in (a.get('related') or []) if (r, L) in by_group]
             rel_html = (f'<section class="related"><h2>{t["related"]}</h2><ul>' + ''.join(f'<li><a href="{b}{bc.article_path(r)}" data-ev="blog_related_article_click" data-loc="blog_{a["group"]}_related_{r["group"]}">{html.escape(r["title"])}</a></li>' for r in rel) + '</ul></section>') if rel else ''
             crumbs = f'<nav class="crumbs" aria-label="breadcrumb"><a href="{b}{LANGS[L][1]}">{t["home"]}</a> › <a href="{b}{bc.list_path(L)}">{t["blog"]}</a></nav>'
-            cover = f'<figure class="cover"><img src="{b}{a["cover"]}" alt="{html.escape(a["cover_alt"])}" width="1200" height="630" fetchpriority="high"></figure>' if a.get('cover') else ''
+            cover = f'<figure class="cover"><img src="{b}{a["cover"]}" srcset="{b}{a["cover"][:-5]}-600.webp 600w, {b}{a["cover"][:-5]}-900.webp 900w, {b}{a["cover"]} 1200w" sizes="(max-width: 912px) calc(100vw - 32px), 880px" alt="{html.escape(a["cover_alt"])}" width="1200" height="630" fetchpriority="high"></figure>' if a.get('cover') else ''
             draft = f'<p class="draft-flag">{t["draft"]} ({a["status"]})</p>' if a['status'] != 'published' else ''
             upd = a.get('updated') or a['created']
             words = len(a['body'].split())

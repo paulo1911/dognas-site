@@ -1,4 +1,4 @@
-:root { --bg:#0a0a0a; --card:#161616; --line:#2a2a2a; --text:#ececec; --muted:#a8a8a8; --red:#f44336; --green:#22c55e; }
+:root { --btn:#d93a2e; --bg:#0a0a0a; --card:#161616; --line:#2a2a2a; --text:#ececec; --muted:#a8a8a8; --red:#f44336; --green:#22c55e; }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
@@ -34,11 +34,11 @@ footer { border-top:1px solid var(--line); margin-top:48px; padding-top:18px; co
 .phone img { display:block; width:100%; height:auto; border-radius:16px; }
 .cta { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
 .btn { display:inline-block; padding:12px 18px; border-radius:12px; font-weight:600; text-decoration:none; border:1px solid var(--line); color:var(--text); }
-.btn.primary { background:var(--red); border-color:var(--red); color:#fff; }
+.btn.primary { background:var(--btn); border-color:var(--btn); color:#fff; }  /* --btn: 4.5:1 with white text (--red is for text on dark) */
 .btn.soon { opacity:.85; cursor:default; }
 .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:18px; }
 .step { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:16px; display:flex; flex-direction:column; gap:12px; }
-.step .num { width:30px; height:30px; border-radius:50%; background:var(--red); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.step .num { width:30px; height:30px; border-radius:50%; background:var(--btn); color:#fff; font-weight:700; display:flex; align-items:center; justify-content:center; }
 .step h3 { margin:0; font-size:17px; } .step p { margin:0; color:var(--muted); font-size:15px; }
 .step .phone { width:100%; max-width:240px; align-self:center; box-shadow:none; }
 .twoup { display:flex; gap:16px; justify-content:center; margin-top:18px; }
@@ -48,7 +48,8 @@ table.plans { width:100%; border-collapse:collapse; margin-top:16px; background:
 table.plans th, table.plans td { padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); font-size:15px; }
 table.plans th:last-child, table.plans td:last-child { color:var(--text); font-weight:600; }
 table.plans thead th { color:var(--muted); font-weight:600; } table.plans thead th:last-child { color:var(--red); }
-table.plans tr:last-child td { border-bottom:0; }
+table.plans tr:last-child td, table.plans tr:last-child th { border-bottom:0; }
+table.plans:not(.specs) tbody th { font-weight:400; }
 .note { color:var(--muted); font-size:14px; margin-top:10px; }
 .apps .card { display:flex; gap:14px; align-items:center; } .apps .card img { width:64px; height:64px; border-radius:16px; flex:none; }
 @media (max-width:760px) {
@@ -130,12 +131,12 @@ figure.real figcaption { margin-top:8px; }
 #dn-consent p { margin:0; flex:1 1 280px; color:var(--text); }
 #dn-consent a { color:var(--muted); text-decoration:underline; }
 #dn-consent button { font:inherit; font-weight:600; padding:8px 14px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--text); cursor:pointer; margin-left:6px; }
-#dn-consent button[data-v=granted] { background:var(--red); border-color:var(--red); color:#fff; }
+#dn-consent button[data-v=granted] { background:var(--btn); border-color:var(--btn); color:#fff; }
 /* Landing structure: plans by goal, FAQ, final CTA */
 .goals { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0; }
 .goal { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px; }
 .goal .tag { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:99px; border:1px solid var(--line); color:var(--muted); }
-.goal-1 { border-color:var(--red); } .goal-1 .tag { background:var(--red); border-color:var(--red); color:#fff; }
+.goal-1 { border-color:var(--red); } .goal-1 .tag { background:var(--btn); border-color:var(--btn); color:#fff; }
 .goal h3 { margin:12px 0 6px; } .goal p { margin:0; color:var(--muted); }
 .faq { display:grid; gap:10px; margin-top:14px; }
 .faq details { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:2px 16px; }

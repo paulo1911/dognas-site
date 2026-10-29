@@ -3,7 +3,7 @@ import os, html, hashlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 import seo
-from build_home import GA_TAG, blog_link  # shared: consent banner + GA4 loaded only after acceptance
+from build_home import GA_TAG, CSS_INLINE, blog_link  # shared: consent banner + GA4 loaded only after acceptance
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
@@ -15,15 +15,16 @@ def page(lang, title, desc, body, base):
     return f'''<!doctype html>
 <html lang="{LANGS[lang][0]}">
 <head>
-{GA_TAG}<meta charset="utf-8">
+<meta charset="utf-8">
+{GA_TAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-{seo.meta(lang, 'privacy/', title, desc, None)}<link rel="icon" href="{base}assets/icon-192.png">
-<link rel="stylesheet" href="{base}assets/style.css?v={CSS_V}">
+{seo.meta(lang, 'privacy/', title, desc, None)}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{CSS_INLINE}
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{base}{LANGS[lang][1].lstrip("/")}"><img src="{base}assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<header class="top"><a class="brand" href="{base}{LANGS[lang][1].lstrip("/")}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 {body}
 <footer><span>© 2026 DogNAS</span><span>{blog_link(lang, base)}<a href="{base}privacy/#{lang}">{priv}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
