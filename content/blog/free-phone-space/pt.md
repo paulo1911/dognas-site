@@ -11,9 +11,11 @@ cover_alt: Tela inicial do DogNAS Client Lite em um Android, ao lado do mascote 
 social_image: assets/blog/free-phone-space/social-pt.jpg
 cta: client
 related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 "Armazenamento quase cheio" aparece sempre na hora errada: na festa, na viagem, quando você ia gravar um vídeo. A boa notícia é que dá para recuperar bastante espaço em poucos minutos, e para tirar do celular o que pesa mais sem perder nada.
 

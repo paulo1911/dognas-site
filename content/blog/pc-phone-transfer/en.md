@@ -11,9 +11,11 @@ cover_alt: DogNAS Client Lite transfer queue on an Android, next to the DogNAS m
 social_image: assets/blog/pc-phone-transfer/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Moving a file from your computer to your phone, or from your phone to your computer, sounds simple until you have to do it every week. A cable that is never at hand, emailing yourself, a full cloud. There is a way to do it over your home Wi-Fi, directly, with no cable and no account.
 

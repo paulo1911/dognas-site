@@ -11,9 +11,11 @@ cover_alt: Fila de transferências do DogNAS Client Lite em um Android, ao lado 
 social_image: assets/blog/pc-phone-transfer/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Passar um arquivo do computador para o celular, ou do celular para o computador, parece simples até você precisar fazer isso toda semana. Cabo que nunca está à mão, e-mail para si mesmo, nuvem cheia. Existe um jeito de fazer pelo Wi-Fi de casa, direto, sem cabo e sem depender de uma conta.
 

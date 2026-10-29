@@ -11,9 +11,11 @@ cover_alt: Pantalla de inicio de DogNAS Client Lite en un Android, junto a la ma
 social_image: assets/blog/free-phone-space/social-es.jpg
 cta: client
 related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 "Almacenamiento casi lleno" aparece siempre en el peor momento: en una fiesta, en un viaje, justo cuando ibas a grabar un video. La buena noticia es que puedes recuperar bastante espacio en pocos minutos, y sacar del celular lo que más pesa sin perder nada.
 

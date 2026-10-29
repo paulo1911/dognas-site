@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Save money on cloud storage subscriptions | DogNAS</title>
+<meta name="description" content="How to cut the cost of Google One, iCloud and other clouds: review your usage, clean up, pick the right plan and keep photos and videos on a server at home.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/blog/como-economizar-assinaturas-de-armazenamento-em-nuvem/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/como-ahorrar-en-suscripciones-de-almacenamiento-en-la-nube/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/como-economizar-assinaturas-de-armazenamento-em-nuvem/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:title" content="Save money on cloud storage subscriptions | DogNAS">
+<meta property="og:description" content="How to cut the cost of Google One, iCloud and other clouds: review your usage, clean up, pick the right plan and keep photos and videos on a server at home.">
+<meta property="og:url" content="https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/">
+<meta property="og:image" content="https://dognas.app/assets/blog/cloud-subscription-savings/social-en.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Save money on cloud storage subscriptions | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Save money on cloud storage subscriptions | DogNAS">
+<meta name="twitter:description" content="How to cut the cost of Google One, iCloud and other clouds: review your usage, clean up, pick the right plan and keep photos and videos on a server at home.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/cloud-subscription-savings/social-en.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/#page","url":"https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/","name":"Save money on cloud storage subscriptions | DogNAS","description":"How to cut the cost of Google One, iCloud and other clouds: review your usage, clean up, pick the right plan and keep photos and videos on a server at home.","inLanguage":"en","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/en/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/en/blog/"},{"@type":"ListItem","position":3,"name":"How to save money on cloud storage subscriptions","item":"https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/#post","headline":"How to save money on cloud storage subscriptions","description":"How to cut the cost of Google One, iCloud and other clouds: review your usage, clean up, pick the right plan and keep photos and videos on a server at home.","inLanguage":"en","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/en/blog/save-money-on-cloud-storage-subscriptions/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/cloud-subscription-savings/social-en.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../en/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/como-economizar-assinaturas-de-armazenamento-em-nuvem/">Português</a><a href="../../../en/blog/save-money-on-cloud-storage-subscriptions/" class=on>English</a><a href="../../../es/blog/como-ahorrar-en-suscripciones-de-almacenamiento-en-la-nube/">Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../en/">Home</a> › <a href="../../../en/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guides</span><h1>How to save money on cloud storage subscriptions</h1>
+<p class="meta">Updated 28 Oct 2026 · 3 min read</p></header><figure class="cover"><img src="../../../assets/blog/cloud-subscription-savings/cover-en.webp" alt="DogNAS Client Lite files on an Android, next to the DogNAS mascot" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="In this article"><strong>In this article</strong><ul><li class="l2"><a href="#1-find-out-what-you-pay-and-for-what">1. Find out what you pay and for what</a></li><li class="l2"><a href="#2-use-the-free-space">2. Use the free space</a></li><li class="l2"><a href="#3-clean-up-before-paying-more">3. Clean up before paying more</a></li><li class="l2"><a href="#4-pick-the-right-plan">4. Pick the right plan</a></li><li class="l2"><a href="#5-keep-the-heavy-stuff-at-home">5. Keep the heavy stuff at home</a></li><li class="l2"><a href="#what-the-cloud-does-better">What the cloud does better</a></li><li class="l2"><a href="#precautions-before-you-cancel">Precautions before you cancel</a></li><li class="l2"><a href="#next-step">Next step</a></li></ul></nav><div class="prose"><p>You started with the free space, filled it, and the cloud offered a "cheap" monthly plan. Then came the bigger plan, the family plan and another service for the other phone. Added up, those fees weigh, and almost nobody stops to review them. This guide helps you pay only for what makes sense.</p>
+<h2 id="1-find-out-what-you-pay-and-for-what">1. Find out what you pay and for what</h2>
+<p>List every storage subscription in the house: Google One, iCloud, OneDrive, Dropbox and others. Note the price, the space you bought and how much you actually use. It is common to pay for a 200 GB plan while using 40 GB.</p>
+<h2 id="2-use-the-free-space">2. Use the free space</h2>
+<p>Services offer some free space (today, for example, 15 GB at Google and 5 GB at iCloud, figures that may change). If what you keep fits in it, you may not need a plan at all.</p>
+<h2 id="3-clean-up-before-paying-more">3. Clean up before paying more</h2>
+<p>What takes space is not always worth keeping: duplicate photos, long videos you never watch, old email attachments, files in the trash. Cleaning up can keep you on a smaller plan or the free one.</p>
+<h2 id="4-pick-the-right-plan">4. Pick the right plan</h2>
+<ul><li>Compare the <strong>annual</strong> plan with the monthly one; it is usually cheaper per month.</li><li>See whether a <strong>family plan</strong> can share the space among people in the house.</li><li>Downgrade if your usage has dropped.</li></ul>
+<h2 id="5-keep-the-heavy-stuff-at-home">5. Keep the heavy stuff at home</h2>
+<p>Photos and videos are often 90% of the space. Instead of paying to keep them in the cloud, you can keep them on a server of your own, inside your home. An Android sitting in a drawer will do: with <strong>DogNAS</strong>, it becomes a file server on your home Wi-Fi, with no monthly fee. The Free plan manages up to 64 GB; Pro, a one-time purchase with no subscription, uses the whole device storage, including an SD card or USB drive.</p>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/shots/en/lite-files.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/en/lite-files.webp" alt="DogNAS files in Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>DogNAS files in Client Lite</figcaption></figure><figure><a href="../../../assets/shots/en/server-status.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/en/server-status.webp" alt="DogNAS server online" width="540" height="1080" loading="lazy"></a><figcaption>DogNAS server online</figcaption></figure></div></div>
+<h2 id="what-the-cloud-does-better">What the cloud does better</h2>
+<p>Be fair to both options. The cloud is good for reaching files from anywhere, sharing a link and having a copy outside your home. A home server is good for keeping a lot, privately and with no monthly fee, but it is reached only over your home Wi-Fi and depends on the device being on. Many people keep both: the essentials in the cloud and the bulk on the server.</p>
+<h2 id="precautions-before-you-cancel">Precautions before you cancel</h2>
+<ul><li><strong>Check that everything arrived</strong> at the new place before deleting from the cloud.</li><li><strong>Keep an independent copy</strong> of what is irreplaceable. A home server keeps files in the chosen storage and does not back up on its own; a disk can fail.</li><li><strong>Cancel last,</strong> after testing for a few weeks.</li></ul>
+<h2 id="next-step">Next step</h2>
+<p>Make a list of your subscriptions, clean out what is left over and move photos and videos to a place of your own. To start, see <a href="/en/blog/turn-old-android-into-file-server/">how to turn an old Android into a file server</a>.</p></div><aside class="post-cta"><p>Install DogNAS on the Android that will keep your files. Free.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_cloud-subscription-savings" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_cloud-subscription-savings_server">Install on my Android now</a> <a class="more" href="../../../en/" data-ev="blog_product_cta_click" data-loc="blog_cloud-subscription-savings_product">About DogNAS</a></aside></article><section class="related"><h2>Keep reading</h2><ul><li><a href="../../../en/blog/turn-old-android-into-file-server/" data-ev="blog_related_article_click" data-loc="blog_cloud-subscription-savings_related_old-android-server">How to turn an old Android into a file server</a></li><li><a href="../../../en/blog/home-nas-without-buying-a-nas/" data-ev="blog_related_article_click" data-loc="blog_cloud-subscription-savings_related_home-nas">A home NAS without buying a NAS: use the Android you already own</a></li><li><a href="../../../en/blog/how-to-free-up-space-on-android/" data-ev="blog_related_article_click" data-loc="blog_cloud-subscription-savings_related_free-phone-space">How to free up space on your Android phone without losing your photos</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'cloud-subscription-savings',category:'Guides',cta:'server',lang:'en'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../en/blog/">Blog</a> · <a href="../../../privacy/#en">Privacy</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

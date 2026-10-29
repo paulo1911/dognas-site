@@ -11,9 +11,11 @@ cover_alt: DogNAS Client Lite files on an Android, next to the DogNAS mascot
 social_image: assets/blog/cloud-subscription-savings/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 You started with the free space, filled it, and the cloud offered a "cheap" monthly plan. Then came the bigger plan, the family plan and another service for the other phone. Added up, those fees weigh, and almost nobody stops to review them. This guide helps you pay only for what makes sense.
 

@@ -11,9 +11,11 @@ cover_alt: DogNAS Client Lite home screen on an Android, next to the DogNAS masc
 social_image: assets/blog/free-phone-space/social-en.jpg
 cta: client
 related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 "Storage almost full" always shows up at the wrong time: at a party, on a trip, just as you were about to record a video. The good news is that you can recover a lot of space in a few minutes, and move the heaviest stuff off the phone without losing anything.
 
