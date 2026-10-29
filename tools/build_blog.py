@@ -1,4 +1,4 @@
-"""Blog pages: list (paginated) and articles at /blog/, /en/blog/, /es/blog/ from content/blog (see blog_content.py).
+"""Blog pages: list (paginated) and articles at /blog/ (en, default), /pt/blog/, /es/blog/ from content/blog (see blog_content.py).
 Run: python3 tools/build_blog.py            (published articles only; fails on any content error)
      python3 tools/build_blog.py --preview  (also drafts/review, written under _preview/, git-ignored)
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
@@ -30,7 +30,7 @@ def write(path, text):
 
 def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None):
     t = UI[L]
-    home = base if L == 'pt' else f'{base}{LANGS[L][1]}'
+    home = f'{base}{LANGS[L][1]}'
     return f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
 <head>
@@ -93,7 +93,7 @@ def main():
         for a in by_lang[L]:
             path = bc.article_path(a)
             b = '../' * path.count('/')
-            html_body, toc = bc.render(a['body'], b)
+            html_body, toc = bc.render(a['body'], b, L)
             alts = {l: bc.article_path(by_group[(a['group'], l)]) for l in live if (a['group'], l) in by_group and by_group[(a['group'], l)].get('status') == 'published'}
             nav = ''.join(f'<a href="{b}{alts[l]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in alts else
                           f'<a href="{b}{bc.list_path(l) if l in live else LANGS[l][1]}">{NAMES[l]}</a>' for l in LANGS)

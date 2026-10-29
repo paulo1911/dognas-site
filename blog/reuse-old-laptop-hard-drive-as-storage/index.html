@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reuse an old laptop hard drive as storage | DogNAS</title>
+<meta name="description" content="How to use an old laptop&#x27;s hard drive or SSD, in a USB enclosure, as storage for an Android file server, with power and backup precautions.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/pt/blog/reaproveitar-hd-de-notebook-como-armazenamento/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/reutilizar-disco-de-laptop-como-almacenamiento/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:title" content="Reuse an old laptop hard drive as storage | DogNAS">
+<meta property="og:description" content="How to use an old laptop&#x27;s hard drive or SSD, in a USB enclosure, as storage for an Android file server, with power and backup precautions.">
+<meta property="og:url" content="https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/">
+<meta property="og:image" content="https://dognas.app/assets/blog/old-laptop-hdd/social-en.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Reuse an old laptop hard drive as storage | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reuse an old laptop hard drive as storage | DogNAS">
+<meta name="twitter:description" content="How to use an old laptop&#x27;s hard drive or SSD, in a USB enclosure, as storage for an Android file server, with power and backup precautions.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/old-laptop-hdd/social-en.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"en","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/#page","url":"https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/","name":"Reuse an old laptop hard drive as storage | DogNAS","description":"How to use an old laptop's hard drive or SSD, in a USB enclosure, as storage for an Android file server, with power and backup precautions.","inLanguage":"en","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/blog/"},{"@type":"ListItem","position":3,"name":"How to reuse an old laptop's hard drive as home storage","item":"https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/#post","headline":"How to reuse an old laptop's hard drive as home storage","description":"How to use an old laptop's hard drive or SSD, in a USB enclosure, as storage for an Android file server, with power and backup precautions.","inLanguage":"en","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/blog/reuse-old-laptop-hard-drive-as-storage/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/old-laptop-hdd/social-en.jpg"}]}</script>
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../"><img src="../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../blog/reuse-old-laptop-hard-drive-as-storage/" class=on>English</a><a href="../../pt/blog/reaproveitar-hd-de-notebook-como-armazenamento/">Português</a><a href="../../es/blog/reutilizar-disco-de-laptop-como-almacenamiento/">Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../">Home</a> › <a href="../../blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guides</span><h1>How to reuse an old laptop&#x27;s hard drive as home storage</h1>
+<p class="meta">Updated 28 Oct 2026 · 2 min read</p></header><figure class="cover"><img src="../../assets/blog/old-laptop-hdd/cover-en.webp" alt="DogNAS server monitor on an Android, next to the DogNAS mascot" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="In this article"><strong>In this article</strong><ul><li class="l2"><a href="#what-you-need">What you need</a></li><li class="l2"><a href="#step-by-step">Step by step</a></li><li class="l2"><a href="#important-precautions">Important precautions</a></li><li class="l2"><a href="#is-it-worth-it">Is it worth it?</a></li></ul></nav><div class="prose"><p>When you swap a laptop's hard drive for an SSD, the old disk usually goes into a drawer. It still works and may hold hundreds of gigabytes. With a USB enclosure and an Android that can act as a server, that disk gets a new job: extra space for your home's photos, videos and documents.</p>
+<div class="carousel"><div class="track"><figure><a href="../../assets/photos/usb-drive.webp" target="_blank" rel="noopener"><img src="../../assets/photos/usb-drive.webp" alt="DogNAS server with an external hard drive in a USB dock, accessed from the phone." width="900" height="1347" loading="lazy"></a><figcaption>DogNAS server with an external hard drive in a USB dock, accessed from the phone.</figcaption></figure></div></div>
+<h2 id="what-you-need">What you need</h2>
+<ul><li>A <strong>laptop hard drive or SSD</strong> that still works. Before using it, copy anything still on it somewhere else.</li><li>A <strong>USB enclosure or dock</strong> that fits the disk's format.</li><li>An <strong>Android phone or tablet with USB OTG</strong>, which is what lets you plug USB disks into the device, and the right cable or adapter.</li><li><strong>DogNAS</strong> installed on that Android, which will be the server.</li></ul>
+<h2 id="step-by-step">Step by step</h2>
+<ol><li>Put the disk in the USB enclosure and confirm it shows up normally.</li><li>Connect the enclosure to the Android with the OTG cable.</li><li>In DogNAS, choose the USB disk as the place where files will be kept and tap Start.</li><li>Create the profiles and connect other devices with a QR Code and a PIN.</li></ol>
+<p>From then on, the disk is your server's storage, reached over your home Wi-Fi.</p>
+<h2 id="important-precautions">Important precautions</h2>
+<ul><li><strong>Power.</strong> Mechanical hard drives may ask for more power than a phone provides. If the disk won't spin up or disconnects, use a USB hub with its own power supply. SSDs usually draw less.</li><li><strong>Compatibility.</strong> The result depends on the device, the enclosure and the disk. Test before you rely on it.</li><li><strong>One disk, no redundancy.</strong> DogNAS does not combine several disks into one volume and does not back up on its own. A disk can fail, and an old disk even more so. Keep an independent copy of what matters.</li><li><strong>Space.</strong> On the Free plan, DogNAS manages up to 64 GB, even if the disk is bigger. Pro, a one-time purchase with no subscription, uses the whole disk.</li></ul>
+<h2 id="is-it-worth-it">Is it worth it?</h2>
+<p>If you already have the disk and the enclosure, the cost is almost zero, and the result is a server with plenty of room for the family. If you would buy everything from scratch, compare with a NAS or an external SSD, and see <a href="/blog/traditional-nas-vs-android-server/">traditional NAS or Android server</a> to decide.</p>
+<p>To set up the server, start with <a href="/blog/turn-old-android-into-file-server/">how to turn an old Android into a file server</a>.</p></div><aside class="post-cta"><p>Install DogNAS on the Android that will keep your files. Free.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_old-laptop-hdd" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_old-laptop-hdd_server">Install on my Android now</a> <a class="more" href="../../" data-ev="blog_product_cta_click" data-loc="blog_old-laptop-hdd_product">About DogNAS</a></aside></article><section class="related"><h2>Keep reading</h2><ul><li><a href="../../blog/turn-old-android-into-file-server/" data-ev="blog_related_article_click" data-loc="blog_old-laptop-hdd_related_old-android-server">How to turn an old Android into a file server</a></li><li><a href="../../blog/traditional-nas-vs-android-server/" data-ev="blog_related_article_click" data-loc="blog_old-laptop-hdd_related_nas-vs-android">Traditional NAS or Android server: which to choose for your home</a></li><li><a href="../../blog/home-nas-without-buying-a-nas/" data-ev="blog_related_article_click" data-loc="blog_old-laptop-hdd_related_home-nas">A home NAS without buying a NAS: use the Android you already own</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'old-laptop-hdd',category:'Guides',cta:'server',lang:'en'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../blog/">Blog</a> · <a href="../../privacy/#en">Privacy</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

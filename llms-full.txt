@@ -1,6 +1,6 @@
 # DogNAS — full description for language models
 
-Canonical site: https://dognas.app/ · Contact: me.pauloleite.dev@gmail.com · Languages: pt-BR (default), en, es.
+Canonical site: https://dognas.app/ · Contact: me.pauloleite.dev@gmail.com · Languages: en (default), pt-BR, es.
 
 ## What it is
 DogNAS is a file server for Android. It turns a compatible Android phone or tablet (for example one that is no longer used every day) into private storage on the home Wi-Fi network. It is not a cloud service: files are kept on the server device, in the storage the user chooses (internal memory, SD card, or a USB drive with a phone that supports USB OTG).
