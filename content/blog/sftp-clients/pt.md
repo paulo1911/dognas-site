@@ -11,9 +11,11 @@ cover_alt: Tela inicial do DogNAS Client Lite em um Android, ao lado do mascote 
 social_image: assets/blog/sftp-clients/social-pt.jpg
 cta: server
 related: [sftp-explained, pc-phone-transfer, old-android-server]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 O DogNAS fala SFTP, então qualquer programa que entenda esse protocolo consegue acessar os arquivos do seu servidor. Este guia mostra como conectar quatro dos mais usados e ajuda a escolher. Se você ainda não sabe o que é SFTP, comece por [o que é SFTP](/blog/o-que-e-sftp-como-acessar-servidor-android/).
 

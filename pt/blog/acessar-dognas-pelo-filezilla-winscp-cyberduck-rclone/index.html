@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck | DogNAS</title>
+<meta name="description" content="Como conectar o servidor DogNAS ao FileZilla, WinSCP, Cyberduck e rclone por SFTP, com o que preencher em cada um e qual escolher.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/blog/access-dognas-with-filezilla-winscp-cyberduck-rclone/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/acceder-a-dognas-con-filezilla-winscp-cyberduck-rclone/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/access-dognas-with-filezilla-winscp-cyberduck-rclone/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:title" content="Acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck | DogNAS">
+<meta property="og:description" content="Como conectar o servidor DogNAS ao FileZilla, WinSCP, Cyberduck e rclone por SFTP, com o que preencher em cada um e qual escolher.">
+<meta property="og:url" content="https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/">
+<meta property="og:image" content="https://dognas.app/assets/blog/sftp-clients/social-pt.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck | DogNAS">
+<meta name="twitter:description" content="Como conectar o servidor DogNAS ao FileZilla, WinSCP, Cyberduck e rclone por SFTP, com o que preencher em cada um e qual escolher.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/sftp-clients/social-pt.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"pt-BR","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/#page","url":"https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/","name":"Acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck | DogNAS","description":"Como conectar o servidor DogNAS ao FileZilla, WinSCP, Cyberduck e rclone por SFTP, com o que preencher em cada um e qual escolher.","inLanguage":"pt-BR","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/pt/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/pt/blog/"},{"@type":"ListItem","position":3,"name":"Como acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck e rclone","item":"https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/#post","headline":"Como acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck e rclone","description":"Como conectar o servidor DogNAS ao FileZilla, WinSCP, Cyberduck e rclone por SFTP, com o que preencher em cada um e qual escolher.","inLanguage":"pt-BR","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/sftp-clients/social-pt.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../pt/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/access-dognas-with-filezilla-winscp-cyberduck-rclone/">English</a><a href="../../../pt/blog/acessar-dognas-pelo-filezilla-winscp-cyberduck-rclone/" class=on>Português</a><a href="../../../es/blog/acceder-a-dognas-con-filezilla-winscp-cyberduck-rclone/">Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../pt/">Início</a> › <a href="../../../pt/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guias</span><h1>Como acessar o DogNAS pelo FileZilla, WinSCP, Cyberduck e rclone</h1>
+<p class="meta">Atualizado em 28 out 2026 · 2 min de leitura</p></header><figure class="cover"><img src="../../../assets/blog/sftp-clients/cover-pt.webp" alt="Tela inicial do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="Neste artigo"><strong>Neste artigo</strong><ul><li class="l2"><a href="#antes-de-tudo-os-dados-de-conexao">Antes de tudo: os dados de conexão</a></li><li class="l2"><a href="#filezilla-windows-mac-e-linux">FileZilla (Windows, Mac e Linux)</a></li><li class="l2"><a href="#winscp-windows">WinSCP (Windows)</a></li><li class="l2"><a href="#cyberduck-windows-e-mac">Cyberduck (Windows e Mac)</a></li><li class="l2"><a href="#rclone-linha-de-comando">rclone (linha de comando)</a></li><li class="l2"><a href="#qual-escolher">Qual escolher</a></li><li class="l2"><a href="#cuidados">Cuidados</a></li></ul></nav><div class="prose"><p>O DogNAS fala SFTP, então qualquer programa que entenda esse protocolo consegue acessar os arquivos do seu servidor. Este guia mostra como conectar quatro dos mais usados e ajuda a escolher. Se você ainda não sabe o que é SFTP, comece por <a href="/pt/blog/o-que-e-sftp-como-acessar-servidor-android/">o que é SFTP</a>.</p>
+<h2 id="antes-de-tudo-os-dados-de-conexao">Antes de tudo: os dados de conexão</h2>
+<p>Em qualquer programa, você vai precisar do mesmo conjunto de informações: <strong>endereço do servidor (host), porta, usuário e senha</strong>. O servidor DogNAS mostra esses dados na tela "Como conectar seu PC ou iPhone". O computador precisa estar na mesma rede Wi-Fi do servidor, e o servidor precisa estar ligado.</p>
+<p>Na primeira conexão, o programa mostra a <strong>impressão digital (fingerprint)</strong> da chave do servidor e pede para você confiar nela. Aceite quando o aparelho for o seu. Se ela mudar depois sem motivo, desconfie.</p>
+<h2 id="filezilla-windows-mac-e-linux">FileZilla (Windows, Mac e Linux)</h2>
+<p>É o mais conhecido e funciona nos três sistemas.</p>
+<ol><li>Abra o Gerenciador de Sites e crie um novo site.</li><li>Em Protocolo, escolha <strong>SFTP</strong>.</li><li>Preencha host, porta, usuário e senha com os dados do servidor.</li><li>Conecte e arraste os arquivos entre o lado do computador e o lado do servidor.</li></ol>
+<h2 id="winscp-windows">WinSCP (Windows)</h2>
+<p>Tem uma interface parecida com a do Explorador de Arquivos e é bom para quem usa só Windows.</p>
+<ol><li>Na tela de login, escolha <strong>SFTP</strong> como protocolo de arquivo.</li><li>Preencha nome do host, porta, usuário e senha.</li><li>Salve a sessão e conecte.</li></ol>
+<h2 id="cyberduck-windows-e-mac">Cyberduck (Windows e Mac)</h2>
+<p>Simples e visual, popular entre quem usa Mac.</p>
+<ol><li>Clique em Abrir conexão e escolha <strong>SFTP</strong> na lista.</li><li>Preencha servidor, porta, usuário e senha.</li><li>Conecte e navegue pelas pastas como em um navegador de arquivos.</li></ol>
+<h2 id="rclone-linha-de-comando">rclone (linha de comando)</h2>
+<p>Para quem gosta de automação e scripts.</p>
+<ol><li>Rode <code>rclone config</code>, crie um novo remoto e escolha o tipo <strong>sftp</strong>.</li><li>Informe host, porta, usuário e senha.</li><li>Use comandos como <code>rclone ls</code> e <code>rclone copy</code> para listar e copiar arquivos entre o computador e o servidor.</li></ol>
+<h2 id="qual-escolher">Qual escolher</h2>
+<ul><li><strong>Quer o mais simples no Mac:</strong> Cyberduck.</li><li><strong>Usa Windows e quer algo parecido com o Explorador:</strong> WinSCP.</li><li><strong>Usa mais de um sistema:</strong> FileZilla.</li><li><strong>Quer automatizar cópias:</strong> rclone.</li></ul>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/shots/pt/lite-home.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/pt/lite-home.webp" alt="Tela inicial do DogNAS Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>Tela inicial do DogNAS Client Lite</figcaption></figure><figure><a href="../../../assets/shots/pt/lite-files.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/pt/lite-files.webp" alt="Arquivos do DogNAS no Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>Arquivos do DogNAS no Client Lite</figcaption></figure><figure><a href="../../../assets/shots/pt/lite-transfers.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/pt/lite-transfers.webp" alt="Fila de transferências no celular" width="540" height="1080" loading="lazy"></a><figcaption>Fila de transferências no celular</figcaption></figure></div></div>
+<h2 id="cuidados">Cuidados</h2>
+<ul><li><strong>Senha e PIN.</strong> Não compartilhe os dados de conexão. Você pode revogar a credencial de um aparelho quando quiser.</li><li><strong>Não é backup.</strong> Copiar para o servidor guarda os arquivos em outro lugar, mas o DogNAS não faz backup sozinho. Mantenha uma cópia independente do que é importante.</li><li><strong>No celular,</strong> use o DogNAS Client Lite, com QR Code e PIN, em vez de um cliente SFTP genérico.</li></ul>
+<p>Para montar o servidor, veja <a href="/pt/blog/transformar-android-antigo-em-servidor-de-arquivos/">como transformar um Android antigo em servidor de arquivos</a>.</p></div><aside class="post-cta"><p>Instale o DogNAS no Android que vai guardar seus arquivos. Grátis.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_sftp-clients" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_sftp-clients_server">Quero instalar no meu Android agora</a> <a class="more" href="../../../pt/" data-ev="blog_product_cta_click" data-loc="blog_sftp-clients_product">Conhecer o DogNAS</a></aside></article><section class="related"><h2>Leia também</h2><ul><li><a href="../../../pt/blog/o-que-e-sftp-como-acessar-servidor-android/" data-ev="blog_related_article_click" data-loc="blog_sftp-clients_related_sftp-explained">O que é SFTP e como acessar um servidor de arquivos no Android</a></li><li><a href="../../../pt/blog/transferir-arquivos-entre-pc-e-celular-pelo-wifi/" data-ev="blog_related_article_click" data-loc="blog_sftp-clients_related_pc-phone-transfer">Como transferir arquivos entre o PC e o celular pelo Wi-Fi, sem cabo</a></li><li><a href="../../../pt/blog/transformar-android-antigo-em-servidor-de-arquivos/" data-ev="blog_related_article_click" data-loc="blog_sftp-clients_related_old-android-server">Como transformar um Android antigo em servidor de arquivos</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'sftp-clients',category:'Guias',cta:'server',lang:'pt'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../pt/blog/">Blog</a> · <a href="../../../privacy/#pt">Privacidade</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

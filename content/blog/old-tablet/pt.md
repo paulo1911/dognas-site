@@ -11,9 +11,11 @@ cover_alt: Monitor do servidor DogNAS em um Android, ao lado do mascote do DogNA
 social_image: assets/blog/old-tablet/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas, old-phone-ideas]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Todo mundo tem um tablet na gaveta: o das crianças, o que ficou lento, o que foi trocado por um modelo novo. Ele costuma ter mais armazenamento que um celular antigo, uma tela grande e uma bateria maior. Tudo isso o torna um bom candidato a servidor de arquivos da casa.
 
