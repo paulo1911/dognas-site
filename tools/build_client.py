@@ -3,7 +3,7 @@ Run: python3 tools/build_client.py. Reuses the shell of build_home.py. Store lin
 "Coming soon" until the app is published (BACKLOG REL-7 / FC-74): then fill STORE below."""
 import os, html
 import seo
-from build_home import ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
+from build_home import blog_link, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
 # Fill with the real URLs when published; empty = shows "Coming soon".
 STORE = {'play': '', 'apple': ''}
 T = {
@@ -80,7 +80,7 @@ for L, t in T.items():
 <h2>{t['req_h']}</h2><p>{t['req']}</p>
 <h2>{t['lite_h']}</h2><p>{t['lite']}</p>
 <p><a href="{home}">← {t['back']}</a></p>
-<footer><span>© 2026 DogNAS</span><span><a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
     out = os.path.join(ROOT, path, 'index.html')
