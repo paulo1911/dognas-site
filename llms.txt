@@ -15,6 +15,11 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Home (Español)](https://dognas.app/es/): same content in Spanish.
 - [Privacy policy](https://dognas.app/privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
+## Blog
+- [How to turn an old Android into a file server](https://dognas.app/en/blog/turn-old-android-into-file-server/) (English): That phone or tablet sitting in a drawer can keep your home's photos, videos and documents over Wi-Fi, with no cloud and no monthly fee.
+- [Cómo convertir un Android viejo en un servidor de archivos](https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/) (Español): Ese celular o tablet guardado en un cajón puede almacenar las fotos, los videos y los documentos de la casa por Wi-Fi, sin nube y sin mensualidad.
+- [Como transformar um Android antigo em servidor de arquivos](https://dognas.app/blog/transformar-android-antigo-em-servidor-de-arquivos/) (Português): Aquele celular ou tablet parado na gaveta pode guardar as fotos, os vídeos e os documentos da casa pelo Wi-Fi, sem nuvem e sem mensalidade.
+
 ## Optional
 - [Full text for LLMs](https://dognas.app/llms-full.txt): longer plain-text description of the product.
 - [Sitemap](https://dognas.app/sitemap.xml)

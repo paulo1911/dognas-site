@@ -93,7 +93,7 @@ def main():
         for a in by_lang[L]:
             path = bc.article_path(a)
             b = '../' * path.count('/')
-            html_body, toc = bc.render(a['body'])
+            html_body, toc = bc.render(a['body'], b)
             alts = {l: bc.article_path(by_group[(a['group'], l)]) for l in live if (a['group'], l) in by_group and by_group[(a['group'], l)].get('status') == 'published'}
             nav = ''.join(f'<a href="{b}{alts[l]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in alts else
                           f'<a href="{b}{bc.list_path(l) if l in live else LANGS[l][1]}">{NAMES[l]}</a>' for l in LANGS)
@@ -109,7 +109,7 @@ def main():
             upd = a.get('updated') or a['created']
             words = len(a['body'].split())
             main_html = f'''{crumbs}{draft}<article class="post-full"><header><span class="cat">{html.escape(a["category"])}</span><h1>{html.escape(a["title"])}</h1>
-<p class="meta">{t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p></header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}<script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["category"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
+<p class="meta">{t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p></header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["category"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
             image = a.get('social_image') or a.get('cover')
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],

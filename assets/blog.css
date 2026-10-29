@@ -32,3 +32,10 @@
 .related ul { padding-left:20px; }
 .draft-flag { background:#3a2a00; color:#ffd27a; border-radius:8px; padding:8px 12px; font-size:14px; }
 .post-cta .more { margin-left:12px; color:var(--muted); display:inline-block; padding:12px 0; }
+.carousel { position:relative; margin:22px 0; }
+.carousel .track { display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; scrollbar-width:thin; }
+.carousel figure { margin:0; flex:0 0 auto; scroll-snap-align:center; }
+.carousel img { height:380px; width:auto; max-width:none; display:block; border:1px solid var(--line); border-radius:14px; }
+.carousel figcaption { max-width:230px; text-align:center; margin:6px auto 0; font-size:13px; color:var(--muted); }
+.carousel .nav { position:absolute; top:150px; width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:rgba(10,10,10,.85); color:var(--text); font-size:24px; line-height:1; cursor:pointer; }
+.carousel .prev { left:4px; } .carousel .next { right:4px; }

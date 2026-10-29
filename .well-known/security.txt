@@ -1,4 +1,4 @@
 Contact: mailto:me.pauloleite.dev@gmail.com
-Expires: 2027-10-27T00:00:00.000Z
+Expires: 2027-10-28T00:00:00.000Z
 Preferred-Languages: pt, en, es
 Canonical: https://dognas.app/.well-known/security.txt
