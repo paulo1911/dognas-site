@@ -19,6 +19,9 @@ Almost everyone has an old Android phone or tablet in a drawer. It still turns o
 
 This guide walks through the whole process with **DogNAS**, a free app that makes the device work as a file server on your local Wi-Fi network.
 
+![An old Android, plugged in, running as a DogNAS server at home.](assets/photos/always-on.webp)
+![A DogNAS server with an external hard drive in a USB dock, accessed from the phone.](assets/photos/usb-drive.webp)
+
 ## What you need
 
 - A phone or tablet running **Android 7.0 or newer**, which will stay at home as the server.
@@ -36,18 +39,6 @@ This guide walks through the whole process with **DogNAS**, a free app that make
 
 To reach it from a computer you don't need a special app: DogNAS speaks SFTP, so programs such as FileZilla, WinSCP, Cyberduck and OpenSSH's `sftp` work.
 
-## See how simple it is
-
-Real screenshots of the app: the server running, the profile's QR Code and the files on the phone.
-
-![DogNAS server online, with a transfer in progress](assets/shots/en/server-status.webp)
-![Profile QR Code to connect the phone](assets/shots/en/server-qr.webp)
-![DogNAS files in Client Lite](assets/shots/en/lite-files.webp)
-![Server monitor: clients and speed in real time](assets/shots/en/server-monitor.webp)
-![Transfer queue on the phone](assets/shots/en/lite-transfers.webp)
-![An old Android, plugged in, running as a DogNAS server at home.](assets/photos/always-on.webp)
-![A DogNAS server with an external hard drive in a USB dock, accessed from the phone.](assets/photos/usb-drive.webp)
-
 ## Follow everything, no hassle
 
 The server shows connected clients and transfer speed in real time. On the phone, Client Lite keeps the queue of uploads and downloads, and you reuse the old device in just a few minutes.
@@ -62,6 +53,16 @@ On the Free plan, DogNAS manages up to 64 GB, with the Home profile plus 2 more 
 - **A disk can fail.** DogNAS keeps files in the storage you chose and does not make backups on its own. For important files, keep an independent copy.
 - **Several disks don't become one.** Each disk is a separate storage; DogNAS does not combine several disks into a single volume.
 - **Local network.** Access depends on your network setup and your DogNAS credentials. Files travel encrypted (SSH/SFTP) across your network, without going through a cloud.
+
+## See how simple it is
+
+Real screenshots of the app: the server running, the profile's QR Code and the files on the phone.
+
+![DogNAS server online, with a transfer in progress](assets/shots/en/server-status.webp)
+![Profile QR Code to connect the phone](assets/shots/en/server-qr.webp)
+![DogNAS files in Client Lite](assets/shots/en/lite-files.webp)
+![Server monitor: clients and speed in real time](assets/shots/en/server-monitor.webp)
+![Transfer queue on the phone](assets/shots/en/lite-transfers.webp)
 
 ## Next step
 

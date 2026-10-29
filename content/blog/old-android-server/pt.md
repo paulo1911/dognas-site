@@ -19,6 +19,9 @@ Quase todo mundo tem um celular ou tablet Android guardado na gaveta. Ele ainda 
 
 Este guia mostra o caminho completo com o **DogNAS**, um app gratuito que faz o aparelho funcionar como servidor de arquivos na rede Wi-Fi local.
 
+![Um Android antigo, ligado na tomada, funcionando como servidor DogNAS em casa.](assets/photos/always-on.webp)
+![Um servidor DogNAS com um HD externo em um dock USB, acessado pelo celular.](assets/photos/usb-drive.webp)
+
 ## O que você precisa
 
 - Um celular ou tablet com **Android 7.0 ou mais recente**, que vai ficar em casa como servidor.
@@ -36,18 +39,6 @@ Este guia mostra o caminho completo com o **DogNAS**, um app gratuito que faz o 
 
 Para acessar do computador, você não precisa de um app especial: o DogNAS fala SFTP, então programas como FileZilla, WinSCP, Cyberduck e o `sftp` do OpenSSH funcionam.
 
-## Veja como é simples
-
-Capturas de tela reais do app: o servidor ligado, o QR Code do perfil e os arquivos no celular.
-
-![Servidor DogNAS online, com a transferência em andamento](assets/shots/pt/server-status.webp)
-![QR Code do perfil para conectar o celular](assets/shots/pt/server-qr.webp)
-![Arquivos do DogNAS no Client Lite](assets/shots/pt/lite-files.webp)
-![Monitor do servidor: clientes e velocidade em tempo real](assets/shots/pt/server-monitor.webp)
-![Fila de transferências no celular](assets/shots/pt/lite-transfers.webp)
-![Um Android antigo, ligado na tomada, funcionando como servidor DogNAS em casa.](assets/photos/always-on.webp)
-![Um servidor DogNAS com um HD externo em um dock USB, acessado pelo celular.](assets/photos/usb-drive.webp)
-
 ## Acompanhe tudo, sem complicação
 
 O servidor mostra, em tempo real, os clientes conectados e a velocidade das transferências. No celular, o Client Lite mantém a fila de envios e downloads, e você reaproveita o aparelho antigo em poucos minutos.
@@ -62,6 +53,16 @@ No plano Grátis, o DogNAS gerencia até 64 GB, com o perfil Casa e mais 2 perfi
 - **Um disco pode falhar.** O DogNAS guarda os arquivos no armazenamento que você escolheu e não cria cópias de segurança por conta própria. Para arquivos importantes, mantenha uma cópia independente.
 - **Vários discos não viram um só.** Cada disco é um armazenamento separado; o DogNAS não junta vários discos num único volume.
 - **Rede local.** O acesso depende da configuração da sua rede e das credenciais do DogNAS. Os arquivos trafegam cifrados (SSH/SFTP) pela sua rede, sem passar por nuvem.
+
+## Veja como é simples
+
+Capturas de tela reais do app: o servidor ligado, o QR Code do perfil e os arquivos no celular.
+
+![Servidor DogNAS online, com a transferência em andamento](assets/shots/pt/server-status.webp)
+![QR Code do perfil para conectar o celular](assets/shots/pt/server-qr.webp)
+![Arquivos do DogNAS no Client Lite](assets/shots/pt/lite-files.webp)
+![Monitor do servidor: clientes e velocidade em tempo real](assets/shots/pt/server-monitor.webp)
+![Fila de transferências no celular](assets/shots/pt/lite-transfers.webp)
 
 ## Próximo passo
 
