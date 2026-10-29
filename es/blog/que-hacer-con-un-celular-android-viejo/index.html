@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qué hacer con un celular Android viejo: 10 ideas | DogNAS</title>
+<meta name="description" content="10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/blog/o-que-fazer-com-celular-antigo/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/en/blog/what-to-do-with-an-old-android-phone/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/o-que-fazer-com-celular-antigo/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Qué hacer con un celular Android viejo: 10 ideas | DogNAS">
+<meta property="og:description" content="10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.">
+<meta property="og:url" content="https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/">
+<meta property="og:image" content="https://dognas.app/assets/blog/old-phone-ideas/social-es.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Qué hacer con un celular Android viejo: 10 ideas | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Qué hacer con un celular Android viejo: 10 ideas | DogNAS">
+<meta name="twitter:description" content="10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/old-phone-ideas/social-es.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"es","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/#page","url":"https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/","name":"Qué hacer con un celular Android viejo: 10 ideas | DogNAS","description":"10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.","inLanguage":"es","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/es/blog/"},{"@type":"ListItem","position":3,"name":"Qué hacer con un celular Android viejo: 10 ideas que sí sirven","item":"https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/#post","headline":"Qué hacer con un celular Android viejo: 10 ideas que sí sirven","description":"10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.","inLanguage":"es","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/old-phone-ideas/social-es.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../es/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/o-que-fazer-com-celular-antigo/">Português</a><a href="../../../en/blog/what-to-do-with-an-old-android-phone/">English</a><a href="../../../es/blog/que-hacer-con-un-celular-android-viejo/" class=on>Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../es/">Inicio</a> › <a href="../../../es/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guías</span><h1>Qué hacer con un celular Android viejo: 10 ideas que sí sirven</h1>
+<p class="meta">Actualizado el 28 oct 2026 · 3 min de lectura</p></header><figure class="cover"><img src="../../../assets/blog/old-phone-ideas/cover-es.webp" alt="Código QR de un perfil del servidor DogNAS en un Android, junto a la mascota de DogNAS" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="En este artículo"><strong>En este artículo</strong><ul><li class="l2"><a href="#antes-de-empezar">Antes de empezar</a></li><li class="l2"><a href="#1-servidor-de-archivos-de-la-casa">1. Servidor de archivos de la casa</a></li><li class="l2"><a href="#2-camara-de-seguridad-o-vigilabebes">2. Cámara de seguridad o vigilabebés</a></li><li class="l2"><a href="#3-webcam-para-la-computadora">3. Webcam para la computadora</a></li><li class="l2"><a href="#4-centro-multimedia-con-parlante">4. Centro multimedia con parlante</a></li><li class="l2"><a href="#5-control-del-hogar-inteligente">5. Control del hogar inteligente</a></li><li class="l2"><a href="#6-router-punto-de-acceso-o-repetidor">6. Router, punto de acceso o repetidor</a></li><li class="l2"><a href="#7-videojuegos-retro">7. Videojuegos retro</a></li><li class="l2"><a href="#8-gps-dedicado-en-el-auto-o-la-bicicleta">8. GPS dedicado en el auto o la bicicleta</a></li><li class="l2"><a href="#9-despertador-reloj-de-mesa-o-portarretrato-digital">9. Despertador, reloj de mesa o portarretrato digital</a></li><li class="l2"><a href="#10-escaner-de-documentos">10. Escáner de documentos</a></li><li class="l2"><a href="#como-elegir">Cómo elegir</a></li></ul></nav><div class="prose"><p>Casi todos tenemos un celular viejo guardado. Tirarlo es un desperdicio y venderlo deja poco. La buena noticia es que un Android que todavía enciende y se conecta al Wi-Fi sirve para muchas cosas. Aquí van 10 ideas, con lo que cada una te pide.</p>
+<h2 id="antes-de-empezar">Antes de empezar</h2>
+<p>Haz una copia de seguridad de lo importante y, si el dispositivo va a pasar a otra persona, restáuralo a los valores de fábrica. Mantén la batería en buen estado y, para los usos que quedan encendidos todo el tiempo, déjalo en el cargador. Recuerda que el resultado depende del dispositivo y del fabricante.</p>
+<h2 id="1-servidor-de-archivos-de-la-casa">1. Servidor de archivos de la casa</h2>
+<p>Convierte el dispositivo en un lugar para guardar y acceder a fotos, videos y documentos por Wi-Fi, sin nube y sin mensualidad. Con <strong>DogNAS</strong> instalas la app, eliges dónde guardar (memoria, tarjeta SD o disco/pendrive USB) y conectas los demás celulares con un código QR y un PIN. Es la idea que sigue siendo útil todos los días, porque guarda lo tuyo. Mira el paso a paso en <a href="/es/blog/convertir-android-viejo-en-servidor-de-archivos/">cómo convertir un Android viejo en un servidor de archivos</a>.</p>
+<h2 id="2-camara-de-seguridad-o-vigilabebes">2. Cámara de seguridad o vigilabebés</h2>
+<p>Con una app de cámara IP, el celular se vuelve una cámara que ves desde otro dispositivo. Funciona mejor con buena cámara, Wi-Fi fuerte y cargador. Combínalo con el servidor de archivos para guardar las grabaciones en casa, siempre que la app de cámara pueda enviarlas por un protocolo compatible.</p>
+<h2 id="3-webcam-para-la-computadora">3. Webcam para la computadora</h2>
+<p>Apps como DroidCam e Iriun Webcam usan la cámara del celular como webcam para reuniones y transmisiones, a menudo con mejor calidad que la de una laptop.</p>
+<h2 id="4-centro-multimedia-con-parlante">4. Centro multimedia con parlante</h2>
+<p>Conecta el dispositivo a un parlante por Bluetooth o cable y úsalo como reproductor de música, radio en línea o podcasts.</p>
+<h2 id="5-control-del-hogar-inteligente">5. Control del hogar inteligente</h2>
+<p>Fíjalo a la pared como panel para controlar luces y dispositivos desde la app de tu automatización. Queda siempre encendido, así que necesita cargador.</p>
+<h2 id="6-router-punto-de-acceso-o-repetidor">6. Router, punto de acceso o repetidor</h2>
+<p>Android puede compartir su conexión como punto de acceso. No reemplaza a un buen router, pero sirve en un apuro.</p>
+<h2 id="7-videojuegos-retro">7. Videojuegos retro</h2>
+<p>Emuladores como RetroArch permiten ejecutar juegos clásicos, con un mando Bluetooth. Usa solo juegos que tengas derecho a usar.</p>
+<h2 id="8-gps-dedicado-en-el-auto-o-la-bicicleta">8. GPS dedicado en el auto o la bicicleta</h2>
+<p>Con mapas descargados y un soporte, navega sin gastar la batería de tu celular principal.</p>
+<h2 id="9-despertador-reloj-de-mesa-o-portarretrato-digital">9. Despertador, reloj de mesa o portarretrato digital</h2>
+<p>Simple y útil: déjalo en la mesita de noche o en el estante, conectado al cargador.</p>
+<h2 id="10-escaner-de-documentos">10. Escáner de documentos</h2>
+<p>Con una app de escaneo, el celular se vuelve un escáner portátil para recibos, contratos y papeles.</p>
+<h2 id="como-elegir">Cómo elegir</h2>
+<p>Elige lo que sigue siendo útil sin que tengas que vigilarlo. Una cámara, un panel y un reloj necesitan energía y ocupan lugar. Un servidor de archivos trabaja en silencio en un cajón o un estante y resuelve un problema real: dónde guardar las fotos, los videos y los documentos de la casa sin pagar mensualidad. Para ver si sirve en tu casa, lee también <a href="/es/blog/nas-casero-sin-comprar-un-nas/">un NAS casero sin comprar un NAS</a>.</p>
+<p>Si el dispositivo tiene Android 7.0 o más reciente, instala DogNAS y empieza gratis.</p></div><aside class="post-cta"><p>Instala DogNAS en el Android que guardará tus archivos. Gratis.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_old-phone-ideas" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_old-phone-ideas_server">Quiero instalarlo en mi Android ahora</a> <a class="more" href="../../../es/" data-ev="blog_product_cta_click" data-loc="blog_old-phone-ideas_product">Conocer DogNAS</a></aside></article><section class="related"><h2>Sigue leyendo</h2><ul><li><a href="../../../es/blog/convertir-android-viejo-en-servidor-de-archivos/" data-ev="blog_related_article_click" data-loc="blog_old-phone-ideas_related_old-android-server">Cómo convertir un Android viejo en un servidor de archivos</a></li><li><a href="../../../es/blog/nas-casero-sin-comprar-un-nas/" data-ev="blog_related_article_click" data-loc="blog_old-phone-ideas_related_home-nas">Un NAS casero sin comprar un NAS: usa el Android que ya tienes</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'old-phone-ideas',category:'Guías',cta:'server',lang:'es'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../es/blog/">Blog</a> · <a href="../../../privacy/#es">Privacidad</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

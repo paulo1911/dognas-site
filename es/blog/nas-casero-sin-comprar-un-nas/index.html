@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAS casero sin comprar un NAS: usa un Android | DogNAS</title>
+<meta name="description" content="Arma un NAS casero con un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/blog/nas-caseiro-sem-comprar-nas/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/en/blog/home-nas-without-buying-a-nas/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/nas-caseiro-sem-comprar-nas/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="NAS casero sin comprar un NAS: usa un Android | DogNAS">
+<meta property="og:description" content="Arma un NAS casero con un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.">
+<meta property="og:url" content="https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/">
+<meta property="og:image" content="https://dognas.app/assets/blog/home-nas/social-es.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NAS casero sin comprar un NAS: usa un Android | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NAS casero sin comprar un NAS: usa un Android | DogNAS">
+<meta name="twitter:description" content="Arma un NAS casero con un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/home-nas/social-es.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"es","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/#page","url":"https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/","name":"NAS casero sin comprar un NAS: usa un Android | DogNAS","description":"Arma un NAS casero con un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.","inLanguage":"es","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/es/blog/"},{"@type":"ListItem","position":3,"name":"Un NAS casero sin comprar un NAS: usa el Android que ya tienes","item":"https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/#post","headline":"Un NAS casero sin comprar un NAS: usa el Android que ya tienes","description":"Arma un NAS casero con un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.","inLanguage":"es","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/home-nas/social-es.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../es/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/nas-caseiro-sem-comprar-nas/">Português</a><a href="../../../en/blog/home-nas-without-buying-a-nas/">English</a><a href="../../../es/blog/nas-casero-sin-comprar-un-nas/" class=on>Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../es/">Inicio</a> › <a href="../../../es/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guías</span><h1>Un NAS casero sin comprar un NAS: usa el Android que ya tienes</h1>
+<p class="meta">Actualizado el 28 oct 2026 · 3 min de lectura</p></header><figure class="cover"><img src="../../../assets/blog/home-nas/cover-es.webp" alt="Pantalla del monitor del servidor DogNAS en un Android, junto a la mascota de DogNAS" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="En este artículo"><strong>En este artículo</strong><ul><li class="l2"><a href="#que-hace-un-nas-en-casa">Qué hace un NAS en casa</a></li><li class="l2"><a href="#tres-formas-de-tener-un-nas-casero">Tres formas de tener un NAS casero</a></li><li class="l2"><a href="#como-queda-con-dognas">Cómo queda con DogNAS</a></li><li class="l2"><a href="#lo-que-un-android-no-hace-y-cuando-comprar-un-nas">Lo que un Android no hace (y cuándo comprar un NAS)</a></li><li class="l2"><a href="#para-quien-basta-un-android-viejo">Para quién basta un Android viejo</a></li></ul></nav><div class="prose"><p>Un NAS (almacenamiento conectado a la red) es un pequeño servidor que guarda tus archivos y se los entrega a cualquier dispositivo de la casa por Wi-Fi. Es la idea correcta para quien se cansó de los pendrives, del celular sin espacio y de las mensualidades de la nube. El problema es que un NAS comercial con disco cuesta dinero y requiere algo de configuración.</p>
+<p>Si lo que necesitas es guardar y acceder a las fotos, los videos y los documentos de la familia, hay un camino más simple: usar un celular o tablet Android que ya te sobra.</p>
+<h2 id="que-hace-un-nas-en-casa">Qué hace un NAS en casa</h2>
+<p>En la práctica, la mayoría de las personas usa un NAS para cuatro cosas:</p>
+<ul><li>guardar fotos y videos en un solo lugar, dentro de casa;</li><li>abrir los mismos archivos en el celular, en la tablet y en la computadora;</li><li>pasar archivos entre dispositivos sin cables y sin enviarte correos a ti mismo;</li><li>liberar espacio en el celular sin depender de una nube de pago.</li></ul>
+<p>Para esas tareas, un servidor de archivos simple es suficiente. No necesitas RAID, contenedores ni un equipo dedicado.</p>
+<h2 id="tres-formas-de-tener-un-nas-casero">Tres formas de tener un NAS casero</h2>
+<ul><li><strong>Comprar un NAS ya armado.</strong> Es la opción más completa: varios discos, más funciones y soporte del fabricante. También es la más cara y la que más configuración pide.</li><li><strong>Armarlo con una computadora vieja o una placa como Raspberry Pi.</strong> Da más control, pero hay que instalar y mantener un sistema.</li><li><strong>Usar un Android viejo con DogNAS.</strong> Instalas una app, eliges dónde guardar los archivos, tocas Iniciar y conectas los demás dispositivos con un código QR y un PIN. Sin tocar el router.</li></ul>
+<h2 id="como-queda-con-dognas">Cómo queda con DogNAS</h2>
+<p>DogNAS convierte un celular o tablet con Android 7.0 o más reciente en un servidor de archivos en tu red Wi-Fi. Cada persona de la casa tiene un perfil con PIN y carpetas propias. Los archivos quedan en la memoria del dispositivo, en una tarjeta SD o en un disco/pendrive USB, y viajan cifrados (SSH/SFTP) por tu red, sin pasar por una nube.</p>
+<p>En la computadora, usa programas comunes como FileZilla, WinSCP y Cyberduck. En el celular, usa DogNAS Client Lite para ver, subir y descargar archivos.</p>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/photos/usb-drive.webp" target="_blank" rel="noopener"><img src="../../../assets/photos/usb-drive.webp" alt="Servidor DogNAS con un disco duro externo en un dock USB, al que se accede desde el celular." width="900" height="1347" loading="lazy"></a><figcaption>Servidor DogNAS con un disco duro externo en un dock USB, al que se accede desde el celular.</figcaption></figure><figure><a href="../../../assets/shots/es/server-monitor.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-monitor.webp" alt="Monitor del servidor: clientes y velocidad en tiempo real" width="540" height="1080" loading="lazy"></a><figcaption>Monitor del servidor: clientes y velocidad en tiempo real</figcaption></figure><figure><a href="../../../assets/shots/es/lite-files.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/lite-files.webp" alt="Archivos de DogNAS en Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>Archivos de DogNAS en Client Lite</figcaption></figure></div></div>
+<h2 id="lo-que-un-android-no-hace-y-cuando-comprar-un-nas">Lo que un Android no hace (y cuándo comprar un NAS)</h2>
+<p>Un celular no reemplaza a un NAS completo, y conviene ser honestos al respecto:</p>
+<ul><li><strong>No tiene RAID.</strong> Cada disco es un almacenamiento independiente. DogNAS no junta varios discos en un único volumen, y un disco puede fallar. Mantén una copia independiente de lo importante.</li><li><strong>No ejecuta contenedores ni servicios avanzados.</strong> Es un servidor de archivos, no un mini centro de datos.</li><li><strong>Depende del dispositivo.</strong> Algunos fabricantes limitan las apps en segundo plano para ahorrar batería, y los discos USB requieren USB OTG. Revisa los requisitos antes de empezar.</li><li><strong>Límites de espacio en el plan Gratis:</strong> hasta 64 GB administrados. DogNAS Pro, una compra única y sin suscripción, libera todo el almacenamiento del dispositivo.</li></ul>
+<p>Si en tu casa muchas personas transmiten video a la vez, necesitas redundancia de discos o vas a guardar datos irremplazables en un solo lugar, un NAS dedicado es la elección correcta.</p>
+<h2 id="para-quien-basta-un-android-viejo">Para quién basta un Android viejo</h2>
+<p>Para la mayoría de los hogares, que solo quieren fotos, videos y documentos en un lugar seguro, el Android que ya está en el cajón resuelve, sin costo extra de equipo.</p>
+<p>Saca el dispositivo, instala el servidor y conecta tu celular. En pocos minutos, tienes un NAS casero.</p></div><aside class="post-cta"><p>Instala DogNAS en el Android que guardará tus archivos. Gratis.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_home-nas" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_home-nas_server">Quiero instalarlo en mi Android ahora</a> <a class="more" href="../../../es/" data-ev="blog_product_cta_click" data-loc="blog_home-nas_product">Conocer DogNAS</a></aside></article><section class="related"><h2>Sigue leyendo</h2><ul><li><a href="../../../es/blog/convertir-android-viejo-en-servidor-de-archivos/" data-ev="blog_related_article_click" data-loc="blog_home-nas_related_old-android-server">Cómo convertir un Android viejo en un servidor de archivos</a></li><li><a href="../../../es/blog/que-hacer-con-un-celular-android-viejo/" data-ev="blog_related_article_click" data-loc="blog_home-nas_related_old-phone-ideas">Qué hacer con un celular Android viejo: 10 ideas que sí sirven</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'home-nas',category:'Guías',cta:'server',lang:'es'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../es/blog/">Blog</a> · <a href="../../../privacy/#es">Privacidad</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

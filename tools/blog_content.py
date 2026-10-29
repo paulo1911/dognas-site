@@ -57,7 +57,7 @@ def load(include_drafts=False):
         k = (a['lang'], a.get('slug'))
         if k in seen: errors.append(f'{a["where"]}: slug "{a.get("slug")}" already used by {seen[k]}')
         seen[k] = a['where']
-    groups = {a['group'] for a in arts}
+    groups = {g for g in os.listdir(CONTENT) if os.path.isdir(os.path.join(CONTENT, g)) and not g.startswith('_')}  # a related article may still be a draft: it is just not linked until published
     for a in arts:
         for r in a.get('related', []) if isinstance(a.get('related'), list) else []:
             if r not in groups: errors.append(f'{a["where"]}: related "{r}" is not a known article group')
