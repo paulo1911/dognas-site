@@ -11,9 +11,11 @@ cover_alt: DogNAS server monitor screen on an Android, next to the DogNAS mascot
 social_image: assets/blog/home-nas/social-en.jpg
 cta: server
 related: [old-android-server, old-phone-ideas]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 A NAS (network-attached storage) is a small server that keeps your files and serves them to any device in the house over Wi-Fi. It is the right idea for anyone tired of USB sticks, full phones and cloud subscriptions. The catch is that a store-bought NAS with a disk costs money and takes some setup.
 

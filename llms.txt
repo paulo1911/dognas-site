@@ -16,8 +16,14 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Privacy policy](https://dognas.app/privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
 ## Blog
+- [A home NAS without buying a NAS: use the Android you already own](https://dognas.app/en/blog/home-nas-without-buying-a-nas/) (English): To keep your family's photos, videos and documents at home you don't always need to buy a NAS. See when an old Android is enough and when it isn't.
 - [How to turn an old Android into a file server](https://dognas.app/en/blog/turn-old-android-into-file-server/) (English): That phone or tablet sitting in a drawer can keep your home's photos, videos and documents over Wi-Fi, with no cloud and no monthly fee.
+- [What to do with an old Android phone: 10 ideas that are actually useful](https://dognas.app/en/blog/what-to-do-with-an-old-android-phone/) (English): Camera, webcam, media hub, file server and more: 10 uses for the Android sitting in a drawer, and how to pick the best one for you.
 - [Cómo convertir un Android viejo en un servidor de archivos](https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/) (Español): Ese celular o tablet guardado en un cajón puede almacenar las fotos, los videos y los documentos de la casa por Wi-Fi, sin nube y sin mensualidad.
+- [Un NAS casero sin comprar un NAS: usa el Android que ya tienes](https://dognas.app/es/blog/nas-casero-sin-comprar-un-nas/) (Español): Para guardar en casa las fotos, los videos y los documentos de la familia no siempre hace falta comprar un NAS. Mira cuándo basta un Android viejo y cuándo no.
+- [Qué hacer con un celular Android viejo: 10 ideas que sí sirven](https://dognas.app/es/blog/que-hacer-con-un-celular-android-viejo/) (Español): Cámara, webcam, centro multimedia, servidor de archivos y más: 10 usos para el Android que está parado en el cajón, y cómo elegir el mejor para ti.
+- [NAS caseiro sem comprar um NAS: use o Android que você já tem](https://dognas.app/blog/nas-caseiro-sem-comprar-nas/) (Português): Para guardar fotos, vídeos e documentos da família em casa, nem sempre é preciso comprar um NAS. Veja quando um Android antigo resolve e quando não.
+- [O que fazer com um celular antigo: 10 ideias que realmente servem](https://dognas.app/blog/o-que-fazer-com-celular-antigo/) (Português): Câmera, webcam, central de mídia, servidor de arquivos e mais: 10 usos para o Android que está parado na gaveta, e como escolher o melhor para você.
 - [Como transformar um Android antigo em servidor de arquivos](https://dognas.app/blog/transformar-android-antigo-em-servidor-de-arquivos/) (Português): Aquele celular ou tablet parado na gaveta pode guardar as fotos, os vídeos e os documentos da casa pelo Wi-Fi, sem nuvem e sem mensalidade.
 
 ## Optional

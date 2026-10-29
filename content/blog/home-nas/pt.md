@@ -11,9 +11,11 @@ cover_alt: Tela de monitor do servidor DogNAS em um Android, ao lado do mascote 
 social_image: assets/blog/home-nas/social-pt.jpg
 cta: server
 related: [old-android-server, old-phone-ideas]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Um NAS (armazenamento conectado à rede) é um pequeno servidor que guarda os seus arquivos e os entrega a qualquer aparelho da casa pelo Wi-Fi. É a ideia certa para quem cansou de pendrives, de celular sem espaço e de mensalidade de nuvem. O problema é que um NAS de prateleira, com disco, custa dinheiro e pede alguma configuração.
 

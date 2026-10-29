@@ -11,9 +11,11 @@ cover_alt: Profile QR Code of a DogNAS server on an Android, next to the DogNAS 
 social_image: assets/blog/old-phone-ideas/social-en.jpg
 cta: server
 related: [old-android-server, home-nas]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Almost everyone has an old phone put away. Throwing it out is a waste and selling it brings little. The good news is that an Android that still turns on and joins Wi-Fi is useful for a lot of things. Here are 10 ideas, with what each one asks of you.
 

@@ -11,9 +11,11 @@ cover_alt: QR Code de um perfil do servidor DogNAS em um Android, ao lado do mas
 social_image: assets/blog/old-phone-ideas/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Quase todo mundo tem um celular antigo guardado. Jogar fora é desperdício, e vender rende pouco. A boa notícia é que um Android que ainda liga e conecta no Wi-Fi serve para muita coisa. Aqui estão 10 ideias, com o que cada uma pede de você.
 
