@@ -19,8 +19,6 @@ Almost everyone has an old Android phone or tablet in a drawer. It still turns o
 
 This guide walks through the whole process with **DogNAS**, a free app that makes the device work as a file server on your local Wi-Fi network.
 
-![An old Android, plugged in, running as a DogNAS server at home.](assets/photos/always-on.webp)
-
 ## What you need
 
 - A phone or tablet running **Android 7.0 or newer**, which will stay at home as the server.
@@ -45,19 +43,18 @@ Real screenshots of the app: the server running, the profile's QR Code and the f
 ![DogNAS server online, with a transfer in progress](assets/shots/en/server-status.webp)
 ![Profile QR Code to connect the phone](assets/shots/en/server-qr.webp)
 ![DogNAS files in Client Lite](assets/shots/en/lite-files.webp)
+![Server monitor: clients and speed in real time](assets/shots/en/server-monitor.webp)
+![Transfer queue on the phone](assets/shots/en/lite-transfers.webp)
+![An old Android, plugged in, running as a DogNAS server at home.](assets/photos/always-on.webp)
+![A DogNAS server with an external hard drive in a USB dock, accessed from the phone.](assets/photos/usb-drive.webp)
 
 ## Follow everything, no hassle
 
 The server shows connected clients and transfer speed in real time. On the phone, Client Lite keeps the queue of uploads and downloads, and you reuse the old device in just a few minutes.
 
-![Server monitor: clients and speed in real time](assets/shots/en/server-monitor.webp)
-![Transfer queue on the phone](assets/shots/en/lite-transfers.webp)
-
 ## How much space you get
 
 On the Free plan, DogNAS manages up to 64 GB, with the Home profile plus 2 more profiles, and up to 3 paired devices. DogNAS Pro is a one-time purchase, with no subscription, and unlocks the device's whole storage. If you need more room, plug in an SD card or a USB drive.
-
-![A DogNAS server with an external hard drive in a USB dock, accessed from the phone.](assets/photos/usb-drive.webp)
 
 ## What to consider before you start
 

@@ -19,8 +19,6 @@ Quase todo mundo tem um celular ou tablet Android guardado na gaveta. Ele ainda 
 
 Este guia mostra o caminho completo com o **DogNAS**, um app gratuito que faz o aparelho funcionar como servidor de arquivos na rede Wi-Fi local.
 
-![Um Android antigo, ligado na tomada, funcionando como servidor DogNAS em casa.](assets/photos/always-on.webp)
-
 ## O que você precisa
 
 - Um celular ou tablet com **Android 7.0 ou mais recente**, que vai ficar em casa como servidor.
@@ -45,19 +43,18 @@ Capturas de tela reais do app: o servidor ligado, o QR Code do perfil e os arqui
 ![Servidor DogNAS online, com a transferência em andamento](assets/shots/pt/server-status.webp)
 ![QR Code do perfil para conectar o celular](assets/shots/pt/server-qr.webp)
 ![Arquivos do DogNAS no Client Lite](assets/shots/pt/lite-files.webp)
+![Monitor do servidor: clientes e velocidade em tempo real](assets/shots/pt/server-monitor.webp)
+![Fila de transferências no celular](assets/shots/pt/lite-transfers.webp)
+![Um Android antigo, ligado na tomada, funcionando como servidor DogNAS em casa.](assets/photos/always-on.webp)
+![Um servidor DogNAS com um HD externo em um dock USB, acessado pelo celular.](assets/photos/usb-drive.webp)
 
 ## Acompanhe tudo, sem complicação
 
 O servidor mostra, em tempo real, os clientes conectados e a velocidade das transferências. No celular, o Client Lite mantém a fila de envios e downloads, e você reaproveita o aparelho antigo em poucos minutos.
 
-![Monitor do servidor: clientes e velocidade em tempo real](assets/shots/pt/server-monitor.webp)
-![Fila de transferências no celular](assets/shots/pt/lite-transfers.webp)
-
 ## Quanto espaço você tem
 
 No plano Grátis, o DogNAS gerencia até 64 GB, com o perfil Casa e mais 2 perfis, e até 3 dispositivos pareados. O DogNAS Pro é uma compra única, sem assinatura, e libera todo o armazenamento do aparelho. Se precisar de mais espaço, ligue um cartão SD ou um disco USB.
-
-![Um servidor DogNAS com um HD externo em um dock USB, acessado pelo celular.](assets/photos/usb-drive.webp)
 
 ## O que considerar antes de começar
 

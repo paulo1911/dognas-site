@@ -132,9 +132,9 @@ def render(body, base=''):
         elif all(l.startswith('>') for l in lines):
             out.append('<blockquote><p>' + _inline(' '.join(l.lstrip('> ') for l in lines), base) + '</p></blockquote>')
         elif all(re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', l) for l in lines):
-            figs = ''.join(f'<figure><img src="{_url(m.group(2), base)}" alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
+            figs = ''.join(f'<figure><a href="{_url(m.group(2), base)}" target="_blank" rel="noopener"><img src="{_url(m.group(2), base)}" alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"></a><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
                            for m in (re.match(r'!\[([^\]]*)\]\(([^)\s]+)\)', l) for l in lines))
-            out.append(f'<div class="shots{" photo" if "/photos/" in block else ""}">{figs}</div>')
+            out.append(f'<div class="carousel"><div class="track">{figs}</div></div>')
         else:
             out.append('<p>' + _inline(' '.join(lines), base) + '</p>')
     return '\n'.join(out), toc
