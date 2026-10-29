@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qué es SFTP y cómo acceder a un servidor Android | DogNAS</title>
+<meta name="description" content="Qué es SFTP, por qué es seguro y cómo acceder a un servidor de archivos en Android con FileZilla, WinSCP, Cyberduck y otros clientes.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/blog/o-que-e-sftp-como-acessar-servidor-android/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/en/blog/what-is-sftp-access-android-server/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/o-que-e-sftp-como-acessar-servidor-android/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Qué es SFTP y cómo acceder a un servidor Android | DogNAS">
+<meta property="og:description" content="Qué es SFTP, por qué es seguro y cómo acceder a un servidor de archivos en Android con FileZilla, WinSCP, Cyberduck y otros clientes.">
+<meta property="og:url" content="https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/">
+<meta property="og:image" content="https://dognas.app/assets/blog/sftp-explained/social-es.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Qué es SFTP y cómo acceder a un servidor Android | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Qué es SFTP y cómo acceder a un servidor Android | DogNAS">
+<meta name="twitter:description" content="Qué es SFTP, por qué es seguro y cómo acceder a un servidor de archivos en Android con FileZilla, WinSCP, Cyberduck y otros clientes.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/sftp-explained/social-es.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"es","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/#page","url":"https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/","name":"Qué es SFTP y cómo acceder a un servidor Android | DogNAS","description":"Qué es SFTP, por qué es seguro y cómo acceder a un servidor de archivos en Android con FileZilla, WinSCP, Cyberduck y otros clientes.","inLanguage":"es","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/es/blog/"},{"@type":"ListItem","position":3,"name":"Qué es SFTP y cómo acceder a un servidor de archivos en Android","item":"https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/#post","headline":"Qué es SFTP y cómo acceder a un servidor de archivos en Android","description":"Qué es SFTP, por qué es seguro y cómo acceder a un servidor de archivos en Android con FileZilla, WinSCP, Cyberduck y otros clientes.","inLanguage":"es","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/es/blog/que-es-sftp-acceder-servidor-android/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/sftp-explained/social-es.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../es/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/o-que-e-sftp-como-acessar-servidor-android/">Português</a><a href="../../../en/blog/what-is-sftp-access-android-server/">English</a><a href="../../../es/blog/que-es-sftp-acceder-servidor-android/" class=on>Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../es/">Inicio</a> › <a href="../../../es/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guías</span><h1>Qué es SFTP y cómo acceder a un servidor de archivos en Android</h1>
+<p class="meta">Actualizado el 28 oct 2026 · 3 min de lectura</p></header><figure class="cover"><img src="../../../assets/blog/sftp-explained/cover-es.webp" alt="Código QR de un perfil del servidor DogNAS en un Android, junto a la mascota de DogNAS" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="En este artículo"><strong>En este artículo</strong><ul><li class="l2"><a href="#que-es-sftp">Qué es SFTP</a></li><li class="l2"><a href="#sftp-ftp-y-smb-que-diferencia-hay">SFTP, FTP y SMB: ¿qué diferencia hay?</a></li><li class="l2"><a href="#para-que-sirve-en-casa">Para qué sirve en casa</a></li><li class="l2"><a href="#como-acceder-a-un-servidor-android-con-dognas">Cómo acceder a un servidor Android con DogNAS</a></li><li class="l2"><a href="#lo-que-sftp-no-hace">Lo que SFTP no hace</a></li><li class="l2"><a href="#en-resumen">En resumen</a></li></ul></nav><div class="prose"><p>Si alguna vez viste "SFTP" y seguiste de largo, esta guía es para ti. La sigla asusta, pero la idea es simple: una forma segura de enviar y buscar archivos en otra computadora por la red. Es lo que DogNAS usa para entregar los archivos de tu servidor a los demás dispositivos de la casa.</p>
+<h2 id="que-es-sftp">Qué es SFTP</h2>
+<p>SFTP significa <em>SSH File Transfer Protocol</em>: transferencia de archivos sobre SSH. SSH es el protocolo que crea una conexión <strong>cifrada</strong> entre dos dispositivos. SFTP usa esa conexión para listar carpetas, subir, descargar, renombrar y borrar archivos.</p>
+<p>En la práctica, esto significa que lo que viaja por la red no puede ser leído por otros dispositivos que estén en el mismo Wi-Fi.</p>
+<h2 id="sftp-ftp-y-smb-que-diferencia-hay">SFTP, FTP y SMB: ¿qué diferencia hay?</h2>
+<ul><li><strong>FTP</strong> es antiguo y, por defecto, envía todo sin cifrar, incluida la contraseña. No es la mejor opción en ninguna red.</li><li><strong>SFTP</strong> se parece a FTP para quien lo usa, pero corre sobre SSH y está cifrado. No tiene relación técnica con FTP, a pesar del nombre parecido.</li><li><strong>SMB</strong> es el uso compartido de carpetas de Windows. Es práctico en una red local, pero suele ser más molesto de configurar fuera de Windows.</li></ul>
+<h2 id="para-que-sirve-en-casa">Para qué sirve en casa</h2>
+<ul><li>guardar y acceder a fotos, videos y documentos en un servidor de la casa;</li><li>enviar archivos de la PC al celular y viceversa;</li><li>recibir archivos de cámaras, NVR y automatizaciones que envían por SFTP;</li><li>copiar archivos de otras computadoras con scripts y herramientas como rclone.</li></ul>
+<h2 id="como-acceder-a-un-servidor-android-con-dognas">Cómo acceder a un servidor Android con DogNAS</h2>
+<p>DogNAS convierte un celular o tablet Android (7.0 o más reciente) en un servidor SFTP en tu red Wi-Fi. Cada dispositivo recibe una credencial propia, que puedes revocar en cualquier momento, y la clave del servidor se fija en el emparejamiento, para que sepas que hablas con el servidor correcto.</p>
+<ol><li><strong>Instala e inicia el servidor</strong> en el Android que guardará los archivos.</li><li><strong>En el celular,</strong> usa DogNAS Client Lite: apunta la cámara al código QR del perfil e ingresa el PIN.</li><li><strong>En la computadora,</strong> abre un cliente SFTP como FileZilla, WinSCP o Cyberduck y usa los datos de conexión que el servidor muestra en la pantalla "Cómo conectar tu PC o iPhone".</li><li>Navega, arrastra y suelta archivos. Para automatizaciones, herramientas como rclone y el <code>sftp</code> de OpenSSH también funcionan.</li></ol>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/shots/es/server-qr.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-qr.webp" alt="Código QR del perfil para conectar el celular" width="540" height="1080" loading="lazy"></a><figcaption>Código QR del perfil para conectar el celular</figcaption></figure><figure><a href="../../../assets/shots/es/server-monitor.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-monitor.webp" alt="Monitor del servidor: clientes y velocidad en tiempo real" width="540" height="1080" loading="lazy"></a><figcaption>Monitor del servidor: clientes y velocidad en tiempo real</figcaption></figure><figure><a href="../../../assets/shots/es/lite-files.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/lite-files.webp" alt="Archivos de DogNAS en Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>Archivos de DogNAS en Client Lite</figcaption></figure></div></div>
+<h2 id="lo-que-sftp-no-hace">Lo que SFTP no hace</h2>
+<ul><li><strong>No es una copia de seguridad.</strong> Solo transporta archivos. Mantén una copia independiente de lo importante.</li><li><strong>Solo funciona si la red lo permite.</strong> El servidor y tu dispositivo deben estar en la misma red, y el servidor debe estar encendido.</li><li><strong>Cifrar el camino no protege al servidor.</strong> Usa un PIN y contraseñas fuertes, y revoca las credenciales de dispositivos que ya no usas.</li></ul>
+<h2 id="en-resumen">En resumen</h2>
+<p>SFTP es una forma segura y universal de acceder a archivos por la red, y casi todo programa de transferencia lo entiende. Con DogNAS tienes un servidor SFTP en Android sin tocar el router. Para ver el paso a paso completo, lee <a href="/es/blog/convertir-android-viejo-en-servidor-de-archivos/">cómo convertir un Android viejo en un servidor de archivos</a>.</p></div><aside class="post-cta"><p>Instala DogNAS en el Android que guardará tus archivos. Gratis.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_sftp-explained" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_sftp-explained_server">Quiero instalarlo en mi Android ahora</a> <a class="more" href="../../../es/" data-ev="blog_product_cta_click" data-loc="blog_sftp-explained_product">Conocer DogNAS</a></aside></article><section class="related"><h2>Sigue leyendo</h2><ul><li><a href="../../../es/blog/convertir-android-viejo-en-servidor-de-archivos/" data-ev="blog_related_article_click" data-loc="blog_sftp-explained_related_old-android-server">Cómo convertir un Android viejo en un servidor de archivos</a></li><li><a href="../../../es/blog/transferir-archivos-entre-pc-y-celular-por-wifi/" data-ev="blog_related_article_click" data-loc="blog_sftp-explained_related_pc-phone-transfer">Cómo transferir archivos entre la PC y el celular por Wi-Fi, sin cable</a></li><li><a href="../../../es/blog/nas-tradicional-o-servidor-android/" data-ev="blog_related_article_click" data-loc="blog_sftp-explained_related_nas-vs-android">NAS tradicional o servidor Android: cuál elegir para tu casa</a></li></ul></section><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'sftp-explained',category:'Guías',cta:'server',lang:'es'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../es/blog/">Blog</a> · <a href="../../../privacy/#es">Privacidad</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>
