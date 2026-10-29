@@ -63,8 +63,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 # Pages caches files for 10 min: the CSS URL changes whenever its content does, so a new page
 # never renders with a cached old stylesheet.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
-LANGS = {'pt': ('pt-BR', ''), 'en': ('en', 'en/'), 'es': ('es', 'es/')}
-NAMES = {'pt': 'Português', 'en': 'English', 'es': 'Español'}
+# English is the default language (root); pt lives at /pt/ and es at /es/. Dict order = order in the language switcher.
+LANGS = {'en': ('en', ''), 'pt': ('pt-BR', 'pt/'), 'es': ('es', 'es/')}
+NAMES = {'en': 'English', 'pt': 'Português', 'es': 'Español'}
 # Inline SVG icons (24×24, stroke = currentColor), one per feature card and audience.
 ICONS = {
  'phone-free': '<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18.5h4"/><path d="m9 10 2 2 4-4"/>',
@@ -268,7 +269,7 @@ TECH_ICONS = ['server', 'smart-home', 'shield', 'power']
 def cards(items, keys): return '<div class="grid feats">' + ''.join(f'<div class="card">{icon(k)}<h3>{h}</h3><p>{p}</p></div>' for k, (h, p) in zip(keys, items)) + '</div>'
 for L, t in T.items():
     t = {**t, **NEW[L]}
-    base = '' if L == 'pt' else '../'
+    base = '' if L == 'en' else '../'
     sh = f'{base}assets/shots/{L}/'
     nav = ''.join(f'<a data-ev="lang_switch" data-loc="{l}" href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     jsonld = seo.ld([seo.ORG, seo.website(L, LANGS[L][1])] + seo.webpage(L, LANGS[L][1], t['title'], t['desc']) + [
@@ -386,6 +387,7 @@ for L, t in T.items():
 </script>
 </body></html>
 '''
-    out = os.path.join(ROOT, 'index.html' if L == 'pt' else f'{L}/index.html')
+    out = os.path.join(ROOT, 'index.html' if L == 'en' else f'{L}/index.html')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(page)
 print('ok')

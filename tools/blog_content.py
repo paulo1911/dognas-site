@@ -5,7 +5,7 @@ import os, re, html, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content', 'blog')
-LANG_PREFIX = {'pt': '', 'en': 'en/', 'es': 'es/'}
+LANG_PREFIX = {'en': '', 'pt': 'pt/', 'es': 'es/'}  # English is the default language
 STATUSES = ('draft', 'review', 'published', 'archived')
 CTAS = ('server', 'client')
 REVIEWS = ('pending', 'reviewed')
@@ -94,7 +94,11 @@ def slugify(s):
     return s or 'section'
 
 
-def _url(u, base): return base + u if u.startswith('assets/') else u  # site-relative asset paths work at any depth
+def _url(u, base, lang=None):
+    if u.startswith('assets/'): return base + u  # site-relative asset paths work at any depth
+    m = re.match(r'/(?:(?:pt|en|es)/)?blog/(.*)', u)
+    if m and lang: return '/' + LANG_PREFIX[lang] + 'blog/' + m.group(1)  # article links name the blog, not the language
+    return u
 
 
 PHOTO_DIMS = {'always-on': (900, 1129), 'usb-drive': (900, 1347)}  # assets/photos/<name>.webp
@@ -103,16 +107,16 @@ def _dims(u):
     return f'width="{w}" height="{h}"'
 
 
-def _inline(s, base=''):
+def _inline(s, base='', lang=None):
     s = html.escape(s, quote=False)
     s = re.sub(r'`([^`]+)`', r'<code>\1</code>', s)
     s = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)', lambda m: f'<img src="{_url(m.group(2), base)}" alt="{m.group(1)}" loading="lazy">', s)
-    s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', lambda m: f'<a href="{_url(m.group(2), base)}"' + (' rel="noopener"' if m.group(2).startswith('http') else '') + f'>{m.group(1)}</a>', s)
+    s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', lambda m: f'<a href="{_url(m.group(2), base, lang)}"' + (' rel="noopener"' if m.group(2).startswith('http') else '') + f'>{m.group(1)}</a>', s)
     s = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', s)
     return re.sub(r'(?<![*\w])\*([^*]+)\*(?!\w)', r'<em>\1</em>', s)
 
 
-def render(body, base=''):
+def render(body, base='', lang=None):
     """Markdown subset: ## / ### headings, paragraphs, - / 1. lists, > quotes, images, links, bold, italic, code. Returns (html, toc)."""
     out, toc, used = [], [], set()
     for block in re.split(r'\n\s*\n', body):
@@ -124,17 +128,17 @@ def render(body, base=''):
             sid, i = slugify(text), 2
             while sid in used: sid, i = f'{slugify(text)}-{i}', i + 1
             used.add(sid); toc.append((n, sid, text))
-            out.append(f'<h{n} id="{sid}">{_inline(text, base)}</h{n}>')
+            out.append(f'<h{n} id="{sid}">{_inline(text, base, lang)}</h{n}>')
         elif all(re.match(r'[-*] ', l) for l in lines):
-            out.append('<ul>' + ''.join(f'<li>{_inline(l[2:], base)}</li>' for l in lines) + '</ul>')
+            out.append('<ul>' + ''.join(f'<li>{_inline(l[2:], base, lang)}</li>' for l in lines) + '</ul>')
         elif all(re.match(r'\d+\. ', l) for l in lines):
-            out.append('<ol>' + ''.join(f'<li>{_inline(re.sub(r"^\d+\. ", "", l), base)}</li>' for l in lines) + '</ol>')
+            out.append('<ol>' + ''.join(f'<li>{_inline(re.sub(r"^\d+\. ", "", l), base, lang)}</li>' for l in lines) + '</ol>')
         elif all(l.startswith('>') for l in lines):
-            out.append('<blockquote><p>' + _inline(' '.join(l.lstrip('> ') for l in lines), base) + '</p></blockquote>')
+            out.append('<blockquote><p>' + _inline(' '.join(l.lstrip('> ') for l in lines), base, lang) + '</p></blockquote>')
         elif all(re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', l) for l in lines):
             figs = ''.join(f'<figure><a href="{_url(m.group(2), base)}" target="_blank" rel="noopener"><img src="{_url(m.group(2), base)}" alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"></a><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
                            for m in (re.match(r'!\[([^\]]*)\]\(([^)\s]+)\)', l) for l in lines))
             out.append(f'<div class="carousel"><div class="track">{figs}</div></div>')
         else:
-            out.append('<p>' + _inline(' '.join(lines), base) + '</p>')
+            out.append('<p>' + _inline(' '.join(lines), base, lang) + '</p>')
     return '\n'.join(out), toc

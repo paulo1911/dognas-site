@@ -21,7 +21,7 @@ def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=Fa
     for l, pth in (alternates or {}).items():
         out.append(f'<link rel="alternate" hreflang="{HREFLANG[l]}" href="{SITE + pth}">')
     if alternates:
-        out.append(f'<link rel="alternate" hreflang="x-default" href="{SITE + alternates.get("pt", path)}">')
+        out.append(f'<link rel="alternate" hreflang="x-default" href="{SITE + alternates.get("en") or next(iter(alternates.values()))}">')
     out += [
         f'<meta property="og:type" content="{og_type}">', '<meta property="og:site_name" content="DogNAS">',
         f'<meta property="og:locale" content="{LOCALES[lang]}">',

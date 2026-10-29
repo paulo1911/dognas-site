@@ -1,4 +1,4 @@
-"""DogNAS Client app page (pt at /client/, en at /en/client/, es at /es/client/).
+"""DogNAS Client app page (en at /client/, pt at /pt/client/, es at /es/client/).
 Run: python3 tools/build_client.py. Reuses the shell of build_home.py. Store links stay
 "Coming soon" until the app is published (BACKLOG REL-7 / FC-74): then fill STORE below."""
 import os, html
@@ -53,8 +53,8 @@ T = {
 def btn(label, url, soon):
     return f'<a class="btn primary" href="{url}">{label}</a>' if url else f'<span class="btn soon">{label} · {soon}</span>'
 for L, t in T.items():
-    base = '../' if L == 'pt' else '../../'
-    home = base if L == 'pt' else f'{base}{LANGS[L][1]}'
+    base = '../' if L == 'en' else '../../'
+    home = f'{base}{LANGS[L][1]}'
     path = LANGS[L][1] + 'client/'
     nav = ''.join(f'<a href="{base}{LANGS[l][1]}client/"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     ctas = btn(t['play'], STORE['play'], t['soon']) + btn(t['apple'], STORE['apple'], t['soon'])

@@ -26,11 +26,11 @@ def lastmod(src):
     except Exception:
         return datetime.date.today().isoformat()
 HREF = {'pt': 'pt-BR', 'en': 'en', 'es': 'es'}
-groups = [(['', 'en/', 'es/'], 'build_home.py', '1.0'), (['client/', 'en/client/', 'es/client/'], 'build_client.py', '0.7')]
+groups = [(['', 'pt/', 'es/'], 'build_home.py', '1.0'), (['client/', 'pt/client/', 'es/client/'], 'build_client.py', '0.7')]
 urls = []
 for paths, src, prio in groups:
-    for l, pth in zip(['pt', 'en', 'es'], paths):
-        alts = ''.join(f'<xhtml:link rel="alternate" hreflang="{HREF[a]}" href="{SITE}{ap}"/>' for a, ap in zip(['pt', 'en', 'es'], paths))
+    for l, pth in zip(['en', 'pt', 'es'], paths):
+        alts = ''.join(f'<xhtml:link rel="alternate" hreflang="{HREF[a]}" href="{SITE}{ap}"/>' for a, ap in zip(['en', 'pt', 'es'], paths))
         alts += f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{paths[0]}"/>'
         urls.append(f'<url><loc>{SITE}{pth}</loc><lastmod>{lastmod(src)}</lastmod><priority>{prio}</priority>{alts}</url>')
 import blog_content as bc
@@ -39,8 +39,8 @@ def alt_links(items):
     items = dict(items)
     if len(items) < 2: return ''
     out = ''.join(f'<xhtml:link rel="alternate" hreflang="{HREF[l]}" href="{SITE}{p}"/>' for l, p in items.items())
-    return out + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{items.get("pt", next(iter(items.values())))}"/>'
-blive = [l for l in ['pt', 'en', 'es'] if any(a['lang'] == l for a in barts)]
+    return out + f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE}{items.get("en", next(iter(items.values())))}"/>'
+blive = [l for l in ['en', 'pt', 'es'] if any(a['lang'] == l for a in barts)]
 bdate = max((a.get('updated') or a['created'] for a in barts), default='')
 for l in blive:
     urls.append(f'<url><loc>{SITE}{bc.list_path(l)}</loc><lastmod>{max(a.get("updated") or a["created"] for a in barts if a["lang"] == l)}</lastmod><priority>0.6</priority>{alt_links({x: bc.list_path(x) for x in blive})}</url>')
@@ -65,8 +65,8 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [DogNAS Client (Android and iPhone)]({SITE}client/): the full client app, coming soon.
 
 ## Site
-- [Home (Português)]({SITE}): what DogNAS is, how it works, plans, requirements.
-- [Home (English)]({SITE}en/): same content in English.
+- [Home (English)]({SITE}): what DogNAS is, how it works, plans, requirements.
+- [Home (Português)]({SITE}pt/): same content in Portuguese.
 - [Home (Español)]({SITE}es/): same content in Spanish.
 - [Privacy policy]({SITE}privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
@@ -78,7 +78,7 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 w('llms.txt', llms)
 full = f'''# DogNAS — full description for language models
 
-Canonical site: {SITE} · Contact: {EMAIL} · Languages: pt-BR (default), en, es.
+Canonical site: {SITE} · Contact: {EMAIL} · Languages: en (default), pt-BR, es.
 
 ## What it is
 DogNAS is a file server for Android. It turns a compatible Android phone or tablet (for example one that is no longer used every day) into private storage on the home Wi-Fi network. It is not a cloud service: files are kept on the server device, in the storage the user chooses (internal memory, SD card, or a USB drive with a phone that supports USB OTG).
@@ -128,7 +128,7 @@ Notes: do not state prices or device compatibility as fact; point to the Google 
 
 # ---- security.txt, 404.html, IndexNow key -------------------------------------------------------------------------------
 exp = (datetime.date.today() + datetime.timedelta(days=365)).isoformat() + 'T00:00:00.000Z'
-w('.well-known/security.txt', f'Contact: mailto:{EMAIL}\nExpires: {exp}\nPreferred-Languages: pt, en, es\nCanonical: {SITE}.well-known/security.txt\n')
+w('.well-known/security.txt', f'Contact: mailto:{EMAIL}\nExpires: {exp}\nPreferred-Languages: en, pt, es\nCanonical: {SITE}.well-known/security.txt\n')
 w('404.html', f'''<!doctype html>
 <html lang="pt-BR"><head>{GA_TAG}<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
 <title>DogNAS — 404</title><link rel="icon" href="/assets/icon-192.png"><link rel="stylesheet" href="/assets/style.css?v={CSS_V}"></head>

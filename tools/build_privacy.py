@@ -7,7 +7,7 @@ from build_home import GA_TAG, blog_link  # shared: consent banner + GA4 loaded 
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
-LANGS = {'pt': ('pt-BR', '/', 'Português'), 'en': ('en', '/en/', 'English'), 'es': ('es', '/es/', 'Español')}
+LANGS = {'en': ('en', '/', 'English'), 'pt': ('pt-BR', '/pt/', 'Português'), 'es': ('es', '/es/', 'Español')}
 
 def page(lang, title, desc, body, base):
     nav = ''.join(f'<a href="{base}{LANGS[l][1].lstrip("/")}"{" class=on" if l == lang else ""}>{LANGS[l][2]}</a>' for l in LANGS)

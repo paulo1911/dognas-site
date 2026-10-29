@@ -4,9 +4,10 @@ Public static site (GitHub Pages, custom domain `dognas.app` at GoDaddy, HTTPS e
 never put app code, keys or personal data here. Workspace context: `../CLAUDE.md`.
 
 - Pages are **generated** — edit the generators, not the HTML:
-  `python3 tools/build_home.py` (landing `/`, `/en/`, `/es/`) and `python3 tools/build_privacy.py` (`/privacy/`), `python3 tools/build_client.py` (`/client/`, `/en/client/`, `/es/client/`; store links in `STORE`, empty = "Coming soon").
+  `python3 tools/build_home.py` (landing: **English is the default language and lives at `/`**; Portuguese at `/pt/`, Spanish at `/es/`) and `python3 tools/build_privacy.py` (`/privacy/`), `python3 tools/build_client.py` (`/client/`, `/pt/client/`, `/es/client/`; store links in `STORE`, empty = "Coming soon").
   Texts live inside the scripts; screenshots in `assets/shots/<lang>/` (WebP, 540 px wide).
 - SEO / AI-agent files: `python3 tools/build_seo.py` writes `robots.txt` (AI crawlers named), `sitemap.xml` (hreflang), `llms.txt`, `llms-full.txt`, `agents.txt`, `.well-known/security.txt`, `404.html` and the IndexNow key file; `tools/seo.py` holds the shared canonical/hreflang/OG meta and JSON-LD used by every generator. Keep their facts in sync with the product (no prices, no device list). After a deploy, `python3 tools/indexnow.py --send` pings IndexNow (outward-facing, ask first).
+- Blog: `content/blog/<group>/<lang>.md`, `python3 tools/build_blog.py` (`/blog/`, `/pt/blog/`, `/es/blog/`; drafts only with `--preview`). Moved URLs get stub pages from `python3 tools/build_redirects.py`, which **must run last** (order: home, client, privacy, blog, seo, redirects). After a deploy, `python3 tools/indexnow.py --send` (ask first).
 - CTA analytics (events, parameters, GA4 setup, how to rank the CTAs): `docs/analytics.md`. New CTAs need a unique `data-loc` (= `cta_id`).
 - Real photos: `tools/build_photos.py` (needs Pillow) crops/grades the originals in `../store-assets/real-images`
   into `assets/photos/`, blurring the framed family photo and dropping EXIF. Never publish people or EXIF.
