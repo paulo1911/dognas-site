@@ -8,4 +8,7 @@ key = next(f[:-4] for f in os.listdir(ROOT) if re.fullmatch(r'[0-9a-f]{32}\.txt'
 urls = re.findall(r'<loc>([^<]+)</loc>', open(os.path.join(ROOT, 'sitemap.xml')).read())
 body = json.dumps({'host': HOST, 'key': key, 'keyLocation': f'https://{HOST}/{key}.txt', 'urlList': urls}).encode()
 req = urllib.request.Request('https://api.indexnow.org/indexnow', body, {'Content-Type': 'application/json; charset=utf-8'})
+urls = [a for a in sys.argv[1:] if a.startswith('http')] or urls  # pass URLs to ping only what changed
+body = json.dumps({'host': HOST, 'key': key, 'keyLocation': f'https://{HOST}/{key}.txt', 'urlList': urls}).encode()
+req = urllib.request.Request('https://api.indexnow.org/indexnow', body, {'Content-Type': 'application/json; charset=utf-8'})
 print(urls, urllib.request.urlopen(req, timeout=30).status if '--send' in sys.argv else 'dry run (add --send)')

@@ -8,10 +8,11 @@ HREFLANG = {'pt': 'pt-BR', 'en': 'en', 'es': 'es'}
 PLAY_SERVER = 'https://play.google.com/store/apps/details?id=com.dognas.server'
 PLAY_LITE = 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'
 
-def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=False):
+def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=False, image=None):
     """`path`: this page's path from the site root ('' = home); `alternates`: {lang: path} of translations."""
     t, d = html.escape(title), html.escape(desc)
     url = SITE + path
+    img = SITE + (image or f'assets/og-{lang}.jpg')
     out = [
         f'<meta name="robots" content="{"noindex,follow" if noindex else "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"}">',
         '<meta name="theme-color" content="#0a0a0a">',
@@ -26,11 +27,11 @@ def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=Fa
         f'<meta property="og:locale" content="{LOCALES[lang]}">',
     ] + [f'<meta property="og:locale:alternate" content="{LOCALES[l]}">' for l in (alternates or {}) if l != lang] + [
         f'<meta property="og:title" content="{t}">', f'<meta property="og:description" content="{d}">',
-        f'<meta property="og:url" content="{url}">', f'<meta property="og:image" content="{SITE}assets/og-{lang}.jpg">',
+        f'<meta property="og:url" content="{url}">', f'<meta property="og:image" content="{img}">',
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
         f'<meta property="og:image:alt" content="{t}">',
         '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{t}">',
-        f'<meta name="twitter:description" content="{d}">', f'<meta name="twitter:image" content="{SITE}assets/og-{lang}.jpg">',
+        f'<meta name="twitter:description" content="{d}">', f'<meta name="twitter:image" content="{img}">',
     ]
     return '\n'.join(out) + '\n'
 
