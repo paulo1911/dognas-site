@@ -11,9 +11,11 @@ cover_alt: Pantalla de estado del servidor DogNAS en un Android, junto a la masc
 social_image: assets/blog/nas-vs-android/social-es.jpg
 cta: server
 related: [home-nas, old-android-server, old-laptop-hdd]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 "¿Necesito un NAS o me sirve un Android viejo?" Es la duda de quien quiere guardar fotos, videos y documentos en casa sin depender de la nube. La respuesta honesta es: depende de lo que vayas a guardar y de cuánto valga para ti. Esta comparación muestra dónde brilla cada opción y dónde se queda corta.
 

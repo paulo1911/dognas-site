@@ -11,9 +11,11 @@ cover_alt: Código QR de un perfil del servidor DogNAS en un Android, junto a la
 social_image: assets/blog/sftp-explained/social-es.jpg
 cta: server
 related: [old-android-server, pc-phone-transfer, nas-vs-android]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Si alguna vez viste "SFTP" y seguiste de largo, esta guía es para ti. La sigla asusta, pero la idea es simple: una forma segura de enviar y buscar archivos en otra computadora por la red. Es lo que DogNAS usa para entregar los archivos de tu servidor a los demás dispositivos de la casa.
 

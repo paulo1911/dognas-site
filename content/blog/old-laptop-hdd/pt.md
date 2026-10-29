@@ -11,9 +11,11 @@ cover_alt: Monitor do servidor DogNAS em um Android, ao lado do mascote do DogNA
 social_image: assets/blog/old-laptop-hdd/social-pt.jpg
 cta: server
 related: [old-android-server, nas-vs-android, home-nas]
-status: review
+status: published
 translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Quando você troca o HD de um notebook por um SSD, o disco antigo costuma ir para a gaveta. Ele ainda funciona e pode ter centenas de gigabytes. Com uma case USB e um Android que sirva de servidor, esse disco ganha uma nova função: espaço extra para as fotos, os vídeos e os documentos da casa.
 

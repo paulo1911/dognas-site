@@ -11,9 +11,11 @@ cover_alt: Monitor del servidor DogNAS en un Android, junto a la mascota de DogN
 social_image: assets/blog/old-laptop-hdd/social-es.jpg
 cta: server
 related: [old-android-server, nas-vs-android, home-nas]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Cuando cambias el disco duro de una laptop por un SSD, el disco viejo suele ir al cajón. Todavía funciona y puede tener cientos de gigabytes. Con una caja USB y un Android que sirva de servidor, ese disco gana una nueva función: espacio extra para las fotos, los videos y los documentos de la casa.
 

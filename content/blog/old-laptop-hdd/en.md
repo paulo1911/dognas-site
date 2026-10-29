@@ -11,9 +11,11 @@ cover_alt: DogNAS server monitor on an Android, next to the DogNAS mascot
 social_image: assets/blog/old-laptop-hdd/social-en.jpg
 cta: server
 related: [old-android-server, nas-vs-android, home-nas]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 When you swap a laptop's hard drive for an SSD, the old disk usually goes into a drawer. It still works and may hold hundreds of gigabytes. With a USB enclosure and an Android that can act as a server, that disk gets a new job: extra space for your home's photos, videos and documents.
 
