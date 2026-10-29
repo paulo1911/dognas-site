@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<script>
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
+(function () {
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var TXT = {
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Saiba mais', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Learn more', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Más información', 'Preferencias de cookies']
+  }[L] || [];
+  function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
+    gtag('consent', 'update', {analytics_storage: 'granted'});
+    var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
+    gtag('js', new Date()); gtag('config', ID);
+  }
+  // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
+  function ctaParams(a) {
+    var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
+    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+  }
+  window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  function banner() {
+    var old = document.getElementById('dn-consent'); if (old) old.remove();
+    var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
+    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    document.body.appendChild(d);
+  }
+  if (read() === 'granted') load();
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!read()) banner();
+    document.addEventListener('click', function (e) {
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+    });
+    // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
+    if ('IntersectionObserver' in window) {
+      var seen = {}, vio = new IntersectionObserver(function (es) { es.forEach(function (x) { var a = x.target, id = a.getAttribute('data-loc'); if (x.isIntersecting && !seen[id]) { seen[id] = 1; window.dnEvent('cta_view', ctaParams(a)); } }); }, {threshold: .6});
+      document.querySelectorAll('a[data-loc][data-ev$="_click"]:not([data-ev=lang_switch]):not([data-ev=support_click]):not([data-ev=requirements_click])').forEach(function (n) { vio.observe(n); });
+    }
+    var plans = document.getElementById('planos');
+    if (plans && 'IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { window.dnEvent('pro_view', {lang: L}); io.disconnect(); } }, {threshold: .4}); io.observe(plans); }
+    document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) window.dnEvent('faq_open', {question: Array.prototype.indexOf.call(d.parentNode.children, d), lang: L}); }, true);
+    document.querySelectorAll('[data-cookie-prefs]').forEach(function (n) { if (TXT[4]) n.textContent = TXT[4]; });
+  });
+})();
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convierte un Android viejo en servidor de archivos | DogNAS</title>
+<meta name="description" content="Guía paso a paso para usar un celular o tablet Android viejo como servidor de archivos en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="canonical" href="https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/">
+<link rel="alternate" hreflang="pt-BR" href="https://dognas.app/blog/transformar-android-antigo-em-servidor-de-arquivos/">
+<link rel="alternate" hreflang="en" href="https://dognas.app/en/blog/turn-old-android-into-file-server/">
+<link rel="alternate" hreflang="es" href="https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/">
+<link rel="alternate" hreflang="x-default" href="https://dognas.app/blog/transformar-android-antigo-em-servidor-de-arquivos/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DogNAS">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="Convierte un Android viejo en servidor de archivos | DogNAS">
+<meta property="og:description" content="Guía paso a paso para usar un celular o tablet Android viejo como servidor de archivos en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.">
+<meta property="og:url" content="https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/">
+<meta property="og:image" content="https://dognas.app/assets/blog/old-android-server/social-es.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Convierte un Android viejo en servidor de archivos | DogNAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Convierte un Android viejo en servidor de archivos | DogNAS">
+<meta name="twitter:description" content="Guía paso a paso para usar un celular o tablet Android viejo como servidor de archivos en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.">
+<meta name="twitter:image" content="https://dognas.app/assets/blog/old-android-server/social-es.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://dognas.app/#org","name":"DogNAS","url":"https://dognas.app/","logo":"https://dognas.app/assets/icon.png"},{"@type":"WebSite","@id":"https://dognas.app/#site","url":"https://dognas.app/","name":"DogNAS","inLanguage":"es","publisher":{"@id":"https://dognas.app/#org"}},{"@type":"WebPage","@id":"https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/#page","url":"https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/","name":"Convierte un Android viejo en servidor de archivos | DogNAS","description":"Guía paso a paso para usar un celular o tablet Android viejo como servidor de archivos en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.","inLanguage":"es","isPartOf":{"@id":"https://dognas.app/#site"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"DogNAS","item":"https://dognas.app/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dognas.app/es/blog/"},{"@type":"ListItem","position":3,"name":"Cómo convertir un Android viejo en un servidor de archivos","item":"https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/"}]},{"@type":"BlogPosting","@id":"https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/#post","headline":"Cómo convertir un Android viejo en un servidor de archivos","description":"Guía paso a paso para usar un celular o tablet Android viejo como servidor de archivos en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.","inLanguage":"es","datePublished":"2026-10-28","dateModified":"2026-10-28","mainEntityOfPage":"https://dognas.app/es/blog/convertir-android-viejo-en-servidor-de-archivos/","author":{"@id":"https://dognas.app/#org"},"publisher":{"@id":"https://dognas.app/#org"},"image":"https://dognas.app/assets/blog/old-android-server/social-es.jpg"}]}</script>
+<link rel="icon" href="../../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/style.css?v=acfe2ac4">
+<link rel="stylesheet" href="../../../assets/blog.css">
+</head>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../../../es/"><img src="../../../assets/icon-192.png" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a href="../../../blog/transformar-android-antigo-em-servidor-de-arquivos/">Português</a><a href="../../../en/blog/turn-old-android-into-file-server/">English</a><a href="../../../es/blog/convertir-android-viejo-en-servidor-de-archivos/" class=on>Español</a></nav></header>
+<nav class="crumbs" aria-label="breadcrumb"><a href="../../../es/">Inicio</a> › <a href="../../../es/blog/">Blog</a></nav><article class="post-full"><header><span class="cat">Guías</span><h1>Cómo convertir un Android viejo en un servidor de archivos</h1>
+<p class="meta">Actualizado el 28 oct 2026 · 3 min de lectura</p></header><figure class="cover"><img src="../../../assets/blog/old-android-server/cover-es.webp" alt="App DogNAS Server mostrando el servidor en línea en un Android, junto a la mascota de DogNAS" width="1200" height="630" fetchpriority="high"></figure><nav class="toc" aria-label="En este artículo"><strong>En este artículo</strong><ul><li class="l2"><a href="#que-necesitas">Qué necesitas</a></li><li class="l2"><a href="#paso-a-paso">Paso a paso</a></li><li class="l2"><a href="#sigue-todo-sin-complicaciones">Sigue todo sin complicaciones</a></li><li class="l2"><a href="#cuanto-espacio-tienes">Cuánto espacio tienes</a></li><li class="l2"><a href="#que-considerar-antes-de-empezar">Qué considerar antes de empezar</a></li><li class="l2"><a href="#mira-lo-simple-que-es">Mira lo simple que es</a></li><li class="l2"><a href="#proximo-paso">Próximo paso</a></li></ul></nav><div class="prose"><p>Casi todos tenemos un celular o una tablet Android guardado en un cajón. Todavía enciende, se conecta al Wi-Fi y tiene espacio de sobra. En lugar de dejarlo parado, puedes convertirlo en un pequeño servidor de archivos para tu casa: un lugar para guardar y acceder a fotos, videos y documentos por la red, sin nube y sin mensualidad.</p>
+<p>Esta guía muestra el camino completo con <strong>DogNAS</strong>, una app gratuita que hace que el dispositivo funcione como servidor de archivos en tu red Wi-Fi local.</p>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/photos/always-on.webp" target="_blank" rel="noopener"><img src="../../../assets/photos/always-on.webp" alt="Un Android viejo, conectado a la corriente, funcionando como servidor DogNAS en casa." width="900" height="1129" loading="lazy"></a><figcaption>Un Android viejo, conectado a la corriente, funcionando como servidor DogNAS en casa.</figcaption></figure><figure><a href="../../../assets/photos/usb-drive.webp" target="_blank" rel="noopener"><img src="../../../assets/photos/usb-drive.webp" alt="Un servidor DogNAS con un disco duro externo en un dock USB, al que se accede desde el celular." width="900" height="1347" loading="lazy"></a><figcaption>Un servidor DogNAS con un disco duro externo en un dock USB, al que se accede desde el celular.</figcaption></figure></div></div>
+<h2 id="que-necesitas">Qué necesitas</h2>
+<ul><li>Un celular o tablet con <strong>Android 7.0 o más reciente</strong>, que se quedará en casa como servidor.</li><li>El Wi-Fi de tu casa. El servidor y los dispositivos que accederán a los archivos deben estar en la misma red.</li><li>Espacio para los archivos: la memoria interna del dispositivo, una tarjeta SD o un disco/pendrive USB (los discos USB requieren un dispositivo con USB OTG).</li><li>Un cargador, porque el servidor funciona mejor conectado a la corriente.</li></ul>
+<h2 id="paso-a-paso">Paso a paso</h2>
+<ol><li><strong>Instala DogNAS en el Android viejo.</strong> Es el dispositivo que guardará los archivos. La app está en Google Play.</li><li><strong>Elige dónde guardar los archivos</strong> y toca Iniciar. El servidor empieza a funcionar en la red de tu casa.</li><li><strong>Crea un perfil para cada persona.</strong> Cada perfil tiene su PIN y sus carpetas, y nadie ve los archivos de los demás.</li><li><strong>Conecta tu celular.</strong> En el servidor, genera el código QR del perfil. En el celular que usará los archivos, abre DogNAS Client Lite, apunta la cámara al código QR e ingresa el PIN.</li><li><strong>Úsalo día a día.</strong> Navega por las carpetas, sube fotos y videos y descarga lo que necesites por el Wi-Fi de casa.</li></ol>
+<p>Para acceder desde la computadora no necesitas una app especial: DogNAS habla SFTP, así que programas como FileZilla, WinSCP, Cyberduck y el <code>sftp</code> de OpenSSH funcionan.</p>
+<h2 id="sigue-todo-sin-complicaciones">Sigue todo sin complicaciones</h2>
+<p>El servidor muestra en tiempo real los clientes conectados y la velocidad de las transferencias. En el celular, Client Lite mantiene la cola de envíos y descargas, y reutilizas el dispositivo viejo en pocos minutos.</p>
+<h2 id="cuanto-espacio-tienes">Cuánto espacio tienes</h2>
+<p>En el plan Gratis, DogNAS administra hasta 64 GB, con el perfil Casa y 2 perfiles más, y hasta 3 dispositivos vinculados. DogNAS Pro es una compra única, sin suscripción, y libera todo el almacenamiento del dispositivo. Si necesitas más espacio, conecta una tarjeta SD o un disco USB.</p>
+<h2 id="que-considerar-antes-de-empezar">Qué considerar antes de empezar</h2>
+<ul><li><strong>Depende del dispositivo.</strong> Algunos fabricantes limitan las apps en segundo plano para ahorrar batería. Si el servidor se detiene solo, revisa la configuración de batería del dispositivo y los requisitos de compatibilidad.</li><li><strong>Un disco puede fallar.</strong> DogNAS guarda los archivos en el almacenamiento que elegiste y no hace copias de seguridad por su cuenta. Para archivos importantes, mantén una copia independiente.</li><li><strong>Varios discos no se vuelven uno.</strong> Cada disco es un almacenamiento separado; DogNAS no junta varios discos en un único volumen.</li><li><strong>Red local.</strong> El acceso depende de la configuración de tu red y de las credenciales de DogNAS. Los archivos viajan cifrados (SSH/SFTP) por tu red, sin pasar por una nube.</li></ul>
+<h2 id="mira-lo-simple-que-es">Mira lo simple que es</h2>
+<p>Capturas de pantalla reales de la app: el servidor encendido, el código QR del perfil y los archivos en el celular.</p>
+<div class="carousel"><div class="track"><figure><a href="../../../assets/shots/es/server-status.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-status.webp" alt="Servidor DogNAS en línea, con una transferencia en curso" width="540" height="1080" loading="lazy"></a><figcaption>Servidor DogNAS en línea, con una transferencia en curso</figcaption></figure><figure><a href="../../../assets/shots/es/server-qr.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-qr.webp" alt="Código QR del perfil para conectar el celular" width="540" height="1080" loading="lazy"></a><figcaption>Código QR del perfil para conectar el celular</figcaption></figure><figure><a href="../../../assets/shots/es/lite-files.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/lite-files.webp" alt="Archivos de DogNAS en Client Lite" width="540" height="1080" loading="lazy"></a><figcaption>Archivos de DogNAS en Client Lite</figcaption></figure><figure><a href="../../../assets/shots/es/server-monitor.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/server-monitor.webp" alt="Monitor del servidor: clientes y velocidad en tiempo real" width="540" height="1080" loading="lazy"></a><figcaption>Monitor del servidor: clientes y velocidad en tiempo real</figcaption></figure><figure><a href="../../../assets/shots/es/lite-transfers.webp" target="_blank" rel="noopener"><img src="../../../assets/shots/es/lite-transfers.webp" alt="Cola de transferencias en el celular" width="540" height="1080" loading="lazy"></a><figcaption>Cola de transferencias en el celular</figcaption></figure></div></div>
+<h2 id="proximo-paso">Próximo paso</h2>
+<p>Saca el Android viejo, instala el servidor y conecta tu celular. En pocos minutos, ese cajón se convierte en el almacenamiento de la casa.</p></div><aside class="post-cta"><p>Instala DogNAS en el Android que guardará tus archivos. Gratis.</p><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.dognas.server&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3Dblog_old-android-server" rel="noopener" data-ev="blog_server_download_click" data-loc="blog_old-android-server_server">Quiero instalarlo en mi Android ahora</a> <a class="more" href="../../../es/" data-ev="blog_product_cta_click" data-loc="blog_old-android-server_product">Conocer DogNAS</a></aside></article><script>(function(){document.querySelectorAll('.carousel').forEach(function(c){var t=c.querySelector('.track');[['prev','‹',-1],['next','›',1]].forEach(function(b){var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){t.scrollBy({left:b[2]*t.clientWidth*.8,behavior:'smooth'});};c.appendChild(x);});});})();</script><script>document.addEventListener('DOMContentLoaded',function(){if(window.dnEvent)dnEvent('blog_article_view',{article:'old-android-server',category:'Guías',cta:'server',lang:'es'});});</script>
+<footer><span>© 2026 DogNAS</span><span><a href="../../../es/blog/">Blog</a> · <a href="../../../privacy/#es">Privacidad</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
+</div></body></html>

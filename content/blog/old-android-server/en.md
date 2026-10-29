@@ -11,9 +11,11 @@ cover_alt: DogNAS Server app showing the server online on an Android, next to th
 social_image: assets/blog/old-android-server/social-en.jpg
 cta: server
 related: []
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Almost everyone has an old Android phone or tablet in a drawer. It still turns on, joins Wi-Fi and has plenty of storage. Instead of leaving it idle, you can turn it into a small file server for your home: a place to keep and reach photos, videos and documents over your network, with no cloud and no monthly fee.
 

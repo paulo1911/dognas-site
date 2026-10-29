@@ -11,9 +11,11 @@ cover_alt: App DogNAS Server mostrando el servidor en línea en un Android, junt
 social_image: assets/blog/old-android-server/social-es.jpg
 cta: server
 related: []
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-10-28
+published: 2026-10-28
+updated: 2026-10-28
 ---
 Casi todos tenemos un celular o una tablet Android guardado en un cajón. Todavía enciende, se conecta al Wi-Fi y tiene espacio de sobra. En lugar de dejarlo parado, puedes convertirlo en un pequeño servidor de archivos para tu casa: un lugar para guardar y acceder a fotos, videos y documentos por la red, sin nube y sin mensualidad.
 
