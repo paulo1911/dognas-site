@@ -9,15 +9,15 @@ from build_home import ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, play
 PREVIEW = '--preview' in sys.argv
 OUT = os.path.join(ROOT, '_preview') if PREVIEW else ROOT
 UI = {
- 'pt': dict(blog='Blog', h1='Blog DogNAS', lead='Guias práticos para usar seu Android como armazenamento particular, sem nuvem.', home='Início', toc='Neste artigo',
+ 'pt': dict(about='Conhecer o DogNAS', blog='Blog', h1='Blog DogNAS', lead='Guias práticos para usar seu Android como armazenamento particular, sem nuvem.', home='Início', toc='Neste artigo',
    related='Leia também', updated='Atualizado em', min='min de leitura', newer='← Mais recentes', older='Mais antigos →', privacy='Privacidade', cookies='Cookies',
    cta_server=('Quero instalar no meu Android agora', 'Instale o DogNAS no Android que vai guardar seus arquivos. Grátis.'),
    cta_client=('Acessar meus arquivos', 'Instale o DogNAS Client Lite no aparelho que vai acessar o seu DogNAS. Grátis.'), draft='RASCUNHO — não publicado'),
- 'en': dict(blog='Blog', h1='DogNAS Blog', lead='Practical guides to use your Android as private storage, with no cloud.', home='Home', toc='In this article',
+ 'en': dict(about='About DogNAS', blog='Blog', h1='DogNAS Blog', lead='Practical guides to use your Android as private storage, with no cloud.', home='Home', toc='In this article',
    related='Keep reading', updated='Updated', min='min read', newer='← Newer', older='Older →', privacy='Privacy', cookies='Cookies',
    cta_server=('Install on my Android now', 'Install DogNAS on the Android that will keep your files. Free.'),
    cta_client=('Access my files', 'Install DogNAS Client Lite on the device that will reach your DogNAS. Free.'), draft='DRAFT — not published'),
- 'es': dict(blog='Blog', h1='Blog DogNAS', lead='Guías prácticas para usar tu Android como almacenamiento privado, sin nube.', home='Inicio', toc='En este artículo',
+ 'es': dict(about='Conocer DogNAS', blog='Blog', h1='Blog DogNAS', lead='Guías prácticas para usar tu Android como almacenamiento privado, sin nube.', home='Inicio', toc='En este artículo',
    related='Sigue leyendo', updated='Actualizado el', min='min de lectura', newer='← Más recientes', older='Más antiguos →', privacy='Privacidad', cookies='Cookies',
    cta_server=('Quiero instalarlo en mi Android ahora', 'Instala DogNAS en el Android que guardará tus archivos. Gratis.'),
    cta_client=('Acceder a mis archivos', 'Instala DogNAS Client Lite en el dispositivo que accederá a tu DogNAS. Gratis.'), draft='BORRADOR — no publicado'),
@@ -76,7 +76,7 @@ def main():
             b = '../' * path.count('/')
             nav = ''.join(f'<a href="{b}{bc.list_path(l)}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in live else
                           f'<a href="{b}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
-            cards = ''.join(f'<a class="post" href="{b}{bc.article_path(a)}" data-ev="blog_related_article_click" data-loc="blog_list_{a["group"]}"><img src="{b}{a["cover"]}" alt="{html.escape(a.get("cover_alt", ""))}" width="640" height="360" loading="lazy"><span class="cat">{html.escape(a["category"])}</span><h2>{html.escape(a["title"])}</h2><p>{html.escape(a["summary"])}</p></a>'
+            cards = ''.join(f'<a class="post" href="{b}{bc.article_path(a)}" data-ev="blog_list_article_click" data-loc="blog_list_{a["group"]}"><img src="{b}{a["cover"]}" alt="{html.escape(a.get("cover_alt", ""))}" width="640" height="360" loading="lazy"><span class="cat">{html.escape(a["category"])}</span><h2>{html.escape(a["title"])}</h2><p>{html.escape(a["summary"])}</p></a>'
                             if a.get('cover') else f'<a class="post" href="{b}{bc.article_path(a)}"><span class="cat">{html.escape(a["category"])}</span><h2>{html.escape(a["title"])}</h2><p>{html.escape(a["summary"])}</p></a>' for a in chunk)
             pager = ''
             if len(pages) > 1:
@@ -100,7 +100,7 @@ def main():
             toc_html = (f'<nav class="toc" aria-label="{t["toc"]}"><strong>{t["toc"]}</strong><ul>' + ''.join(f'<li class="l{lv}"><a href="#{sid}">{html.escape(tx)}</a></li>' for lv, sid, tx in toc) + '</ul></nav>') if len(toc) >= 3 else ''
             label, sub = t['cta_' + a['cta']]
             target = play('server' if a['cta'] == 'server' else 'lite', 'blog_' + a['group'])
-            cta = f'<aside class="post-cta"><p>{sub}</p><a class="btn primary" href="{target}" rel="noopener" data-ev="blog_{a["cta"] if a["cta"] == "server" else "client"}_download_click" data-loc="blog_{a["group"]}_{a["cta"]}">{label}</a></aside>'
+            cta = f'<aside class="post-cta"><p>{sub}</p><a class="btn primary" href="{target}" rel="noopener" data-ev="blog_{a["cta"] if a["cta"] == "server" else "client"}_download_click" data-loc="blog_{a["group"]}_{a["cta"]}">{label}</a> <a class="more" href="{b}{LANGS[L][1]}" data-ev="blog_product_cta_click" data-loc="blog_{a["group"]}_product">{t["about"]}</a></aside>'
             rel = [by_group[(r, L)] for r in (a.get('related') or []) if (r, L) in by_group]
             rel_html = (f'<section class="related"><h2>{t["related"]}</h2><ul>' + ''.join(f'<li><a href="{b}{bc.article_path(r)}" data-ev="blog_related_article_click" data-loc="blog_{a["group"]}_related_{r["group"]}">{html.escape(r["title"])}</a></li>' for r in rel) + '</ul></section>') if rel else ''
             crumbs = f'<nav class="crumbs" aria-label="breadcrumb"><a href="{b}{LANGS[L][1]}">{t["home"]}</a> › <a href="{b}{bc.list_path(L)}">{t["blog"]}</a></nav>'
@@ -109,7 +109,7 @@ def main():
             upd = a.get('updated') or a['created']
             words = len(a['body'].split())
             main_html = f'''{crumbs}{draft}<article class="post-full"><header><span class="cat">{html.escape(a["category"])}</span><h1>{html.escape(a["title"])}</h1>
-<p class="meta">{t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p></header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}'''
+<p class="meta">{t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p></header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}<script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["category"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
             image = a.get('social_image') or a.get('cover')
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
