@@ -93,7 +93,7 @@ def main():
         for a in by_lang[L]:
             path = bc.article_path(a)
             b = '../' * path.count('/')
-            html_body, toc = bc.render(a['body'])
+            html_body, toc = bc.render(a['body'], b)
             alts = {l: bc.article_path(by_group[(a['group'], l)]) for l in live if (a['group'], l) in by_group and by_group[(a['group'], l)].get('status') == 'published'}
             nav = ''.join(f'<a href="{b}{alts[l]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in alts else
                           f'<a href="{b}{bc.list_path(l) if l in live else LANGS[l][1]}">{NAMES[l]}</a>' for l in LANGS)

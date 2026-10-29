@@ -32,3 +32,8 @@
 .related ul { padding-left:20px; }
 .draft-flag { background:#3a2a00; color:#ffd27a; border-radius:8px; padding:8px 12px; font-size:14px; }
 .post-cta .more { margin-left:12px; color:var(--muted); display:inline-block; padding:12px 0; }
+.shots { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin:22px 0; }
+.shots figure { margin:0; flex:1 1 150px; max-width:230px; }
+.shots img { width:100%; height:auto; border:1px solid var(--line); border-radius:14px; }
+.shots figcaption { text-align:center; margin-top:6px; }
+.shots.photo figure { max-width:420px; }

@@ -94,16 +94,25 @@ def slugify(s):
     return s or 'section'
 
 
-def _inline(s):
+def _url(u, base): return base + u if u.startswith('assets/') else u  # site-relative asset paths work at any depth
+
+
+PHOTO_DIMS = {'always-on': (900, 1129), 'usb-drive': (900, 1347)}  # assets/photos/<name>.webp
+def _dims(u):
+    w, h = PHOTO_DIMS.get(os.path.splitext(os.path.basename(u))[0], (540, 1080)) if '/photos/' in u else (540, 1080)
+    return f'width="{w}" height="{h}"'
+
+
+def _inline(s, base=''):
     s = html.escape(s, quote=False)
     s = re.sub(r'`([^`]+)`', r'<code>\1</code>', s)
-    s = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)', r'<img src="\2" alt="\1" loading="lazy">', s)
-    s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', lambda m: f'<a href="{m.group(2)}"' + (' rel="noopener"' if m.group(2).startswith('http') else '') + f'>{m.group(1)}</a>', s)
+    s = re.sub(r'!\[([^\]]*)\]\(([^)\s]+)\)', lambda m: f'<img src="{_url(m.group(2), base)}" alt="{m.group(1)}" loading="lazy">', s)
+    s = re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', lambda m: f'<a href="{_url(m.group(2), base)}"' + (' rel="noopener"' if m.group(2).startswith('http') else '') + f'>{m.group(1)}</a>', s)
     s = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', s)
     return re.sub(r'(?<![*\w])\*([^*]+)\*(?!\w)', r'<em>\1</em>', s)
 
 
-def render(body):
+def render(body, base=''):
     """Markdown subset: ## / ### headings, paragraphs, - / 1. lists, > quotes, images, links, bold, italic, code. Returns (html, toc)."""
     out, toc, used = [], [], set()
     for block in re.split(r'\n\s*\n', body):
@@ -115,16 +124,17 @@ def render(body):
             sid, i = slugify(text), 2
             while sid in used: sid, i = f'{slugify(text)}-{i}', i + 1
             used.add(sid); toc.append((n, sid, text))
-            out.append(f'<h{n} id="{sid}">{_inline(text)}</h{n}>')
+            out.append(f'<h{n} id="{sid}">{_inline(text, base)}</h{n}>')
         elif all(re.match(r'[-*] ', l) for l in lines):
-            out.append('<ul>' + ''.join(f'<li>{_inline(l[2:])}</li>' for l in lines) + '</ul>')
+            out.append('<ul>' + ''.join(f'<li>{_inline(l[2:], base)}</li>' for l in lines) + '</ul>')
         elif all(re.match(r'\d+\. ', l) for l in lines):
-            out.append('<ol>' + ''.join(f'<li>{_inline(re.sub(r"^\d+\. ", "", l))}</li>' for l in lines) + '</ol>')
+            out.append('<ol>' + ''.join(f'<li>{_inline(re.sub(r"^\d+\. ", "", l), base)}</li>' for l in lines) + '</ol>')
         elif all(l.startswith('>') for l in lines):
-            out.append('<blockquote><p>' + _inline(' '.join(l.lstrip('> ') for l in lines)) + '</p></blockquote>')
-        elif len(lines) == 1 and re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', lines[0]):
-            m = re.match(r'!\[([^\]]*)\]\(([^)\s]+)\)', lines[0])
-            out.append(f'<figure><img src="{m.group(2)}" alt="{html.escape(m.group(1))}" loading="lazy"><figcaption>{html.escape(m.group(1))}</figcaption></figure>')
+            out.append('<blockquote><p>' + _inline(' '.join(l.lstrip('> ') for l in lines), base) + '</p></blockquote>')
+        elif all(re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', l) for l in lines):
+            figs = ''.join(f'<figure><img src="{_url(m.group(2), base)}" alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
+                           for m in (re.match(r'!\[([^\]]*)\]\(([^)\s]+)\)', l) for l in lines))
+            out.append(f'<div class="shots{" photo" if "/photos/" in block else ""}">{figs}</div>')
         else:
-            out.append('<p>' + _inline(' '.join(lines)) + '</p>')
+            out.append('<p>' + _inline(' '.join(lines), base) + '</p>')
     return '\n'.join(out), toc

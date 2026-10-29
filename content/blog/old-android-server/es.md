@@ -19,6 +19,8 @@ Casi todos tenemos un celular o una tablet Android guardado en un cajón. Todav�
 
 Esta guía muestra el camino completo con **DogNAS**, una app gratuita que hace que el dispositivo funcione como servidor de archivos en tu red Wi-Fi local.
 
+![Un Android viejo, conectado a la corriente, funcionando como servidor DogNAS en casa.](assets/photos/always-on.webp)
+
 ## Qué necesitas
 
 - Un celular o tablet con **Android 7.0 o más reciente**, que se quedará en casa como servidor.
@@ -36,9 +38,26 @@ Esta guía muestra el camino completo con **DogNAS**, una app gratuita que hace 
 
 Para acceder desde la computadora no necesitas una app especial: DogNAS habla SFTP, así que programas como FileZilla, WinSCP, Cyberduck y el `sftp` de OpenSSH funcionan.
 
+## Mira lo simple que es
+
+Capturas de pantalla reales de la app: el servidor encendido, el código QR del perfil y los archivos en el celular.
+
+![Servidor DogNAS en línea, con una transferencia en curso](assets/shots/es/server-status.webp)
+![Código QR del perfil para conectar el celular](assets/shots/es/server-qr.webp)
+![Archivos de DogNAS en Client Lite](assets/shots/es/lite-files.webp)
+
+## Sigue todo sin complicaciones
+
+El servidor muestra en tiempo real los clientes conectados y la velocidad de las transferencias. En el celular, Client Lite mantiene la cola de envíos y descargas, y reutilizas el dispositivo viejo en pocos minutos.
+
+![Monitor del servidor: clientes y velocidad en tiempo real](assets/shots/es/server-monitor.webp)
+![Cola de transferencias en el celular](assets/shots/es/lite-transfers.webp)
+
 ## Cuánto espacio tienes
 
 En el plan Gratis, DogNAS administra hasta 64 GB, con el perfil Casa y 2 perfiles más, y hasta 3 dispositivos vinculados. DogNAS Pro es una compra única, sin suscripción, y libera todo el almacenamiento del dispositivo. Si necesitas más espacio, conecta una tarjeta SD o un disco USB.
+
+![Un servidor DogNAS con un disco duro externo en un dock USB, al que se accede desde el celular.](assets/photos/usb-drive.webp)
 
 ## Qué considerar antes de empezar
 
