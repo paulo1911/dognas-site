@@ -57,3 +57,7 @@ A resposta em uma ou duas frases.
 @video(assets/blog/<grupo>/demo.mp4, assets/blog/<grupo>/demo-poster.webp, Legenda)
 ```
 Listas numeradas (`1.`) viram passos em cartões numerados. Teste do renderizador: `python3 tools/test_blog_render.py`.
+
+## Optional: `tested`
+`tested: Moto G100 · Android 12 · 2026-10-20` shows a "Tested on" line under the title. Fill it only with a real test (device, Android version, date);
+leave it out otherwise. Devices and the "How we test" page: `tools/blog_about.py`.

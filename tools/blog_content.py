@@ -16,6 +16,8 @@ PER_PAGE = 12
 
 def blog_dir(lang): return LANG_PREFIX[lang] + 'blog/'
 def article_path(a): return blog_dir(a['lang']) + a['slug'] + '/'
+def about_path(lang):
+    import blog_about; return blog_dir(lang) + blog_about.SLUG[lang] + '/'
 def pillar_path(lang, pid): return blog_dir(lang) + bp.PILLARS[pid][lang]['slug'] + '/'
 def list_path(lang, page=1): return blog_dir(lang) + ('' if page == 1 else f'page/{page}/')
 
