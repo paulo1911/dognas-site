@@ -4,10 +4,10 @@ title: Qué hacer con un celular Android viejo: 10 ideas que sí sirven
 summary: Cámara, webcam, centro multimedia, servidor de archivos y más: 10 usos para el Android que está parado en el cajón, y cómo elegir el mejor para ti.
 meta_title: Qué hacer con un celular Android viejo: 10 ideas | DogNAS
 meta_description: 10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.
-category: Guías
+pillar: reuse
 tags: [celular viejo, reutilizar android, ideas, servidor de archivos]
 cover: assets/blog/old-phone-ideas/cover-es.webp
-cover_alt: Código QR de un perfil del servidor DogNAS en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de un celular con destellos de ideas junto a la pantalla del DogNAS Client Lite
 social_image: assets/blog/old-phone-ideas/social-es.jpg
 cta: server
 related: [old-android-server, home-nas]

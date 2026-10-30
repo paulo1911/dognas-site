@@ -4,10 +4,10 @@ title: A home NAS without buying a NAS: use the Android you already own
 summary: To keep your family's photos, videos and documents at home you don't always need to buy a NAS. See when an old Android is enough and when it isn't.
 meta_title: Home NAS without buying a NAS: use an Android | DogNAS
 meta_description: Build a home NAS with an old Android, with no new hardware and no monthly fee. See what it does well, its limits and when it is worth buying a NAS.
-category: Guides
+pillar: compare
 tags: [home nas, old android, file server, storage]
 cover: assets/blog/home-nas/cover-en.webp
-cover_alt: DogNAS server monitor screen on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a house with a storage box next to the DogNAS Client Lite screen
 social_image: assets/blog/home-nas/social-en.jpg
 cta: server
 related: [old-android-server, old-phone-ideas]

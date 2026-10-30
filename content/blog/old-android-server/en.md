@@ -4,10 +4,10 @@ title: How to turn an old Android into a file server
 summary: That phone or tablet sitting in a drawer can keep your home's photos, videos and documents over Wi-Fi, with no cloud and no monthly fee.
 meta_title: Turn an old Android into a home file server | DogNAS
 meta_description: Step-by-step guide to use an old Android phone or tablet as a file server on your home Wi-Fi, with no cloud and no monthly fee, using DogNAS.
-category: Guides
+pillar: reuse
 tags: [old android, file server, home nas, sftp]
 cover: assets/blog/old-android-server/cover-en.webp
-cover_alt: DogNAS Server app showing the server online on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a phone with Wi-Fi next to the DogNAS server screen
 social_image: assets/blog/old-android-server/social-en.jpg
 cta: server
 related: [home-nas, old-phone-ideas]

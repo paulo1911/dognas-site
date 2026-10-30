@@ -4,10 +4,10 @@ title: NAS caseiro sem comprar um NAS: use o Android que você já tem
 summary: Para guardar fotos, vídeos e documentos da família em casa, nem sempre é preciso comprar um NAS. Veja quando um Android antigo resolve e quando não.
 meta_title: NAS caseiro sem comprar um NAS: use um Android | DogNAS
 meta_description: Monte um NAS caseiro com um Android antigo, sem comprar equipamento e sem mensalidade. Veja o que ele faz bem, os limites e quando vale comprar um NAS.
-category: Guias
+pillar: compare
 tags: [nas caseiro, android antigo, servidor de arquivos, armazenamento]
 cover: assets/blog/home-nas/cover-pt.webp
-cover_alt: Tela de monitor do servidor DogNAS em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de uma casa com uma caixa de armazenamento ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/home-nas/social-pt.jpg
 cta: server
 related: [old-android-server, old-phone-ideas]

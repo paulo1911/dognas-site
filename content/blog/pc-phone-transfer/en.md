@@ -4,10 +4,10 @@ title: How to transfer files between your PC and phone over Wi-Fi, no cable
 summary: Cable, cloud, apps or a server of your own at home: the ways to move files from PC to phone and back, and when each one is worth it.
 meta_title: Transfer files between PC and phone over Wi-Fi | DogNAS
 meta_description: How to move files from PC to phone and from phone to PC over Wi-Fi, with no cable and no cloud: a comparison of the methods and a walkthrough with DogNAS.
-category: Guides
+pillar: storage
 tags: [transfer files, pc and phone, wi-fi, sftp]
 cover: assets/blog/pc-phone-transfer/cover-en.webp
-cover_alt: DogNAS Client Lite transfer queue on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a computer and a phone exchanging files next to the DogNAS Client Lite screen
 social_image: assets/blog/pc-phone-transfer/social-en.jpg
 cta: both
 related: [old-android-server, home-nas, free-phone-space]

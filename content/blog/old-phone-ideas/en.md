@@ -4,10 +4,10 @@ title: What to do with an old Android phone: 10 ideas that are actually useful
 summary: Camera, webcam, media hub, file server and more: 10 uses for the Android sitting in a drawer, and how to pick the best one for you.
 meta_title: What to do with an old Android phone: 10 ideas | DogNAS
 meta_description: 10 ways to reuse an old Android phone: camera, webcam, media hub, file server and more, with the limits of each one.
-category: Guides
+pillar: reuse
 tags: [old phone, reuse android, ideas, file server]
 cover: assets/blog/old-phone-ideas/cover-en.webp
-cover_alt: Profile QR Code of a DogNAS server on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a phone with sparks of ideas next to the DogNAS Client Lite screen
 social_image: assets/blog/old-phone-ideas/social-en.jpg
 cta: server
 related: [old-android-server, home-nas]

@@ -4,10 +4,10 @@ title: Vender, donar o reutilizar el celular viejo: cómo decidir
 summary: Antes de vender o tirar el celular viejo, compara las opciones y mira cómo borrar tus datos con seguridad.
 meta_title: Vender o reutilizar el celular viejo: cómo decidir | DogNAS
 meta_description: Vender, donar, reciclar o reutilizar un celular Android viejo: cómo decidir y cómo borrar los datos con seguridad antes de deshacerte de él.
-category: Guías
+pillar: compare
 tags: [celular viejo, vender celular, reciclar, borrar datos]
 cover: assets/blog/sell-or-reuse/cover-es.webp
-cover_alt: Archivos de DogNAS Client Lite en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de un celular con flechas de reciclaje junto a la pantalla del DogNAS Client Lite
 social_image: assets/blog/sell-or-reuse/social-es.jpg
 cta: server
 related: [old-phone-ideas, old-android-server, cloud-subscription-savings]

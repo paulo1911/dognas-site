@@ -4,10 +4,10 @@ title: NAS tradicional ou servidor Android: qual escolher para sua casa
 summary: Uma comparação honesta entre um NAS de prateleira e um Android antigo com DogNAS: o que cada um faz, o que custa e para quem serve.
 meta_title: NAS tradicional ou servidor Android: qual escolher | DogNAS
 meta_description: Compare um NAS tradicional com um servidor de arquivos em um Android antigo: recursos, limites, custo e quando cada opção faz sentido em casa.
-category: Guias
+pillar: compare
 tags: [nas, servidor android, comparação, armazenamento]
 cover: assets/blog/nas-vs-android/cover-pt.webp
-cover_alt: Tela de status do servidor DogNAS em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de uma caixa de NAS diante de um celular ao lado da tela do servidor DogNAS
 social_image: assets/blog/nas-vs-android/social-pt.jpg
 cta: server
 related: [home-nas, old-android-server, old-laptop-hdd]

@@ -4,10 +4,10 @@ title: Cómo transferir archivos entre la PC y el celular por Wi-Fi, sin cable
 summary: Cable, nube, apps o un servidor propio en casa: las formas de pasar archivos de la PC al celular y viceversa, y cuándo conviene cada una.
 meta_title: Transferir archivos entre PC y celular por Wi-Fi | DogNAS
 meta_description: Cómo pasar archivos de la PC al celular y del celular a la PC por Wi-Fi, sin cable y sin nube: comparación de métodos y paso a paso con DogNAS.
-category: Guías
+pillar: storage
 tags: [transferir archivos, pc y celular, wi-fi, sftp]
 cover: assets/blog/pc-phone-transfer/cover-es.webp
-cover_alt: Cola de transferencias de DogNAS Client Lite en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de una computadora y un celular intercambiando archivos junto a la pantalla del DogNAS Client Lite
 social_image: assets/blog/pc-phone-transfer/social-es.jpg
 cta: both
 related: [old-android-server, home-nas, free-phone-space]

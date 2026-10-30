@@ -4,10 +4,10 @@ title: Como economizar nas assinaturas de armazenamento em nuvem
 summary: Antes de pagar mais espaço na nuvem, veja como revisar o que você usa, limpar o que sobra e guardar o resto em casa, sem mensalidade.
 meta_title: Economize em assinaturas de armazenamento em nuvem | DogNAS
 meta_description: Como reduzir o gasto com Google One, iCloud e outras nuvens: revise o uso, limpe, escolha o plano certo e guarde fotos e vídeos em um servidor em casa.
-category: Guias
+pillar: storage
 tags: [armazenamento em nuvem, economizar, assinatura, servidor em casa]
 cover: assets/blog/cloud-subscription-savings/cover-pt.webp
-cover_alt: Arquivos do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de uma nuvem com uma moeda ao lado da tela do servidor DogNAS
 social_image: assets/blog/cloud-subscription-savings/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]

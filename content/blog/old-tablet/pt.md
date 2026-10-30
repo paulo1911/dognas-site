@@ -4,10 +4,10 @@ title: Tablet antigo parado? Transforme em armazenamento da casa
 summary: O tablet Android que ninguém mais usa tem tela grande, bateria generosa e espaço de sobra: ótimo para virar o servidor de arquivos da família.
 meta_title: Tablet antigo como armazenamento da casa | DogNAS
 meta_description: Como usar um tablet Android antigo como servidor de arquivos no Wi-Fi de casa, sem nuvem e sem mensalidade, com os cuidados de bateria e compatibilidade.
-category: Guias
+pillar: reuse
 tags: [tablet antigo, servidor de arquivos, armazenamento, android]
 cover: assets/blog/old-tablet/cover-pt.webp
-cover_alt: Monitor do servidor DogNAS em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de um tablet com Wi-Fi ao lado da tela do servidor DogNAS
 social_image: assets/blog/old-tablet/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas, old-phone-ideas]

@@ -4,10 +4,10 @@ title: Como liberar espaço no celular Android sem perder suas fotos
 summary: Limpe o que sobra no Android e leve fotos e vídeos para um lugar seguro fora do celular, sem pagar mensalidade de nuvem.
 meta_title: Como liberar espaço no celular Android | DogNAS
 meta_description: Dicas para liberar espaço no Android: cache, apps, duplicados, WhatsApp e como mandar fotos e vídeos para um servidor seu em casa, sem nuvem.
-category: Guias
+pillar: storage
 tags: [liberar espaço, armazenamento, android, fotos e vídeos]
 cover: assets/blog/free-phone-space/cover-pt.webp
-cover_alt: Tela inicial do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de um celular com uma seta tirando arquivos ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/free-phone-space/social-pt.jpg
 cta: client
 related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]

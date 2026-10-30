@@ -2,6 +2,7 @@
 No dependency on the page generators, so build_home/build_client/build_privacy can ask `has_blog(lang)` for the
 nav/footer link without a circular import. Only `published` articles are ever emitted."""
 import os, re, html, datetime
+import blog_pillars as bp
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CONTENT = os.path.join(ROOT, 'content', 'blog')
@@ -9,7 +10,7 @@ LANG_PREFIX = {'en': '', 'pt': 'pt/', 'es': 'es/'}  # English is the default lan
 STATUSES = ('draft', 'review', 'published', 'archived')
 CTAS = ('server', 'client', 'both')
 REVIEWS = ('pending', 'reviewed')
-REQUIRED = ('slug', 'title', 'summary', 'meta_title', 'meta_description', 'category', 'cta', 'status', 'translation_review', 'created')
+REQUIRED = ('slug', 'title', 'summary', 'meta_title', 'meta_description', 'pillar', 'cta', 'status', 'translation_review', 'created')
 PER_PAGE = 12
 
 
@@ -17,6 +18,7 @@ def blog_dir(lang): return LANG_PREFIX[lang] + 'blog/'
 def article_path(a): return blog_dir(a['lang']) + a['slug'] + '/'
 def about_path(lang):
     import blog_about; return blog_dir(lang) + blog_about.SLUG[lang] + '/'
+def pillar_path(lang, pid): return blog_dir(lang) + bp.PILLARS[pid][lang]['slug'] + '/'
 def list_path(lang, page=1): return blog_dir(lang) + ('' if page == 1 else f'page/{page}/')
 
 
@@ -52,6 +54,7 @@ def load(include_drafts=False):
             except ValueError as e: errors.append(f'{where}: {e}'); continue
             if lang not in LANG_PREFIX: errors.append(f'{where}: unknown language'); continue
             a = dict(meta, group=group, lang=lang, body=body, where=where)
+            if a.get('pillar') in bp.PILLARS: a['category'] = bp.PILLARS[a['pillar']][lang]['name']
             errors += [f'{where}: {e}' for e in validate(a)]
             if a.get('status') == 'published' or include_drafts: arts.append(a)
     seen = {}
@@ -68,6 +71,7 @@ def load(include_drafts=False):
 
 def validate(a):
     e = [f'missing "{k}"' for k in REQUIRED if not a.get(k)]
+    if a.get('pillar') and a['pillar'] not in bp.PILLARS: e.append(f'pillar must be one of {tuple(bp.PILLARS)}')
     if a.get('status') not in STATUSES: e.append(f'status must be one of {STATUSES}')
     if a.get('cta') not in CTAS: e.append(f'cta must be one of {CTAS}')
     if a.get('translation_review') not in REVIEWS: e.append(f'translation_review must be one of {REVIEWS}')

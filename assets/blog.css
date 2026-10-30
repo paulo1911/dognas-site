@@ -70,3 +70,10 @@ nav.lang a.hdr-cta { color:#fff; margin-left:0; }
 /* Trust (BLOG-13): byline link and the "Tested on" line. */
 .meta a { color:inherit; text-decoration:underline; text-underline-offset:2px; }
 .tested { margin:6px 0 0; font-size:14px; color:var(--muted); }
+/* Pillars (BLOG-16): chips on the list/hub pages, hub intro, linked category label. */
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
+.chips a { padding:7px 14px; border:1px solid var(--line); border-radius:999px; color:var(--muted); text-decoration:none; font-size:14px; }
+.chips a:hover { color:var(--text); border-color:var(--muted); }
+.chips a[aria-current="page"] { background:var(--btn); border-color:var(--btn); color:#fff; }
+.hub-intro { max-width:720px; } .hub-intro p { margin:0 0 12px; color:var(--muted); line-height:1.65; }
+a.cat { text-decoration:none; } a.cat:hover { text-decoration:underline; }

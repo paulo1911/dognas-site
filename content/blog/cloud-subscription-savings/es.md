@@ -4,10 +4,10 @@ title: Cómo ahorrar en las suscripciones de almacenamiento en la nube
 summary: Antes de pagar más espacio en la nube, mira cómo revisar lo que usas, limpiar lo que sobra y guardar el resto en casa, sin mensualidad.
 meta_title: Ahorra en suscripciones de almacenamiento en la nube | DogNAS
 meta_description: Cómo reducir el gasto en Google One, iCloud y otras nubes: revisa el uso, limpia, elige el plan correcto y guarda fotos y videos en un servidor en casa.
-category: Guías
+pillar: storage
 tags: [almacenamiento en la nube, ahorrar, suscripción, servidor en casa]
 cover: assets/blog/cloud-subscription-savings/cover-es.webp
-cover_alt: Archivos de DogNAS Client Lite en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de una nube con una moneda junto a la pantalla del servidor DogNAS
 social_image: assets/blog/cloud-subscription-savings/social-es.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]

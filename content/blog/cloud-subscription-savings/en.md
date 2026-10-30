@@ -4,10 +4,10 @@ title: How to save money on cloud storage subscriptions
 summary: Before paying for more cloud space, learn how to review what you use, clean out the rest and keep the bulk at home, with no monthly fee.
 meta_title: Save money on cloud storage subscriptions | DogNAS
 meta_description: How to cut the cost of Google One, iCloud and other clouds: review your usage, clean up, pick the right plan and keep photos and videos on a server at home.
-category: Guides
+pillar: storage
 tags: [cloud storage, save money, subscription, home server]
 cover: assets/blog/cloud-subscription-savings/cover-en.webp
-cover_alt: DogNAS Client Lite files on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a cloud with a coin next to the DogNAS server screen
 social_image: assets/blog/cloud-subscription-savings/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]

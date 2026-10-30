@@ -4,10 +4,10 @@ title: Old tablet sitting idle? Turn it into home storage
 summary: The Android tablet nobody uses anymore has a big screen, a generous battery and room to spare: great as your family's file server.
 meta_title: Old tablet as home storage | DogNAS
 meta_description: How to use an old Android tablet as a file server on your home Wi-Fi, with no cloud and no monthly fee, with battery and compatibility precautions.
-category: Guides
+pillar: reuse
 tags: [old tablet, file server, storage, android]
 cover: assets/blog/old-tablet/cover-en.webp
-cover_alt: DogNAS server monitor on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a tablet with Wi-Fi next to the DogNAS server screen
 social_image: assets/blog/old-tablet/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, old-phone-ideas]
