@@ -25,3 +25,35 @@ updated: 2026-10-28
 ---
 Corpo em Markdown (## e ### para seções; sem H1).
 ```
+
+## Componentes (BLOG-12) — tudo vira HTML estático, sem JS
+
+Linhas em branco separam os blocos; cada componente é um bloco.
+
+**Resumo no topo** ("Em resumo"; coloque logo depois da introdução — também serve a snippets e respostas de IA):
+```
+> [!takeaways]
+> - Primeiro ponto.
+> - Segundo ponto.
+```
+**Destaques** (`tip` = dica, `warning` = limites/atenção, `note` = nota; o título é traduzido pelo build):
+```
+> [!warning]
+> Texto do destaque (pode ter vários parágrafos separados por uma linha `>` vazia).
+```
+**Tabela** (a primeira coluna vira o título de cada linha para leitores de tela; role na horizontal no celular):
+```
+| | Opção A | Opção B |
+|---|---|---|
+| Custo | ... | ... |
+```
+**FAQ** (cada pergunta é um bloco; blocos seguidos viram uma lista; a resposta é o resto do bloco):
+```
+?? A pergunta?
+A resposta em uma ou duas frases.
+```
+**Vídeo** (arquivo mp4 no site + imagem de capa; só carrega ao tocar):
+```
+@video(assets/blog/<grupo>/demo.mp4, assets/blog/<grupo>/demo-poster.webp, Legenda)
+```
+Listas numeradas (`1.`) viram passos em cartões numerados. Teste do renderizador: `python3 tools/test_blog_render.py`.
