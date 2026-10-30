@@ -2,13 +2,6 @@
 .blog-head { padding:28px 0 8px; }
 .blog-head h1 { margin:0 0 8px; }
 .blog-head p { color:var(--muted); margin:0; }
-.posts { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px; margin-top:20px; }
-.post { display:block; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; color:var(--text); text-decoration:none; }
-.post img { width:100%; height:auto; border-radius:10px; margin-bottom:10px; }
-.post h2 { font-size:19px; margin:6px 0; line-height:1.3; }
-.post p { color:var(--muted); font-size:15px; margin:0; }
-.post:hover { border-color:var(--red); }
-.cat { color:var(--red); font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
 .pager { display:flex; justify-content:space-between; margin-top:24px; }
 .crumbs { color:var(--muted); font-size:14px; margin:20px 0 8px; }
 .crumbs a { color:var(--muted); }
@@ -39,3 +32,5 @@
 .carousel figcaption { max-width:230px; text-align:center; margin:6px auto 0; font-size:13px; color:var(--muted); }
 .carousel .nav { position:absolute; top:150px; width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:rgba(10,10,10,.85); color:var(--text); font-size:24px; line-height:1; cursor:pointer; }
 .carousel .prev { left:4px; } .carousel .next { right:4px; }
+.hdr-cta { padding:8px 14px; font-size:14px; border-radius:10px; margin-right:8px; color:#fff; }
+nav.lang a.hdr-cta { color:#fff; margin-left:0; }
