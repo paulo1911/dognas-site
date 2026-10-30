@@ -61,3 +61,6 @@ Listas numeradas (`1.`) viram passos em cartões numerados. Teste do renderizado
 ## Optional: `tested`
 `tested: Moto G100 · Android 12 · 2026-10-20` shows a "Tested on" line under the title. Fill it only with a real test (device, Android version, date);
 leave it out otherwise. Devices and the "How we test" page: `tools/blog_about.py`.
+
+## Optional: `reviewed_by`
+`reviewed_by: <name>` records who checked the language version (`check_blog.py` warns when it is missing).
