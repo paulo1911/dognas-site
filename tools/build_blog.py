@@ -40,14 +40,28 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="alternate" type="application/atom+xml" title="{html.escape(t['h1'])}" href="{seo.SITE}{bc.blog_dir(L)}feed.xml"><link rel="icon" type="image/png" href="{base}assets/icon-96.png">
 {BLOG_CSS}
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 {main}
-<footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}{bc.blog_dir(L)}feed.xml">RSS</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
+'''
+
+
+def atom(L, items):
+    """Atom 1.0 feed of the language's published articles (newest first): title, link, dates, summary and category per entry.
+    Summaries only: the feed is for discovery, the article page carries the CTA."""
+    t, url = UI[L], seo.SITE + bc.blog_dir(L)
+    stamp = lambda d: d + 'T00:00:00Z'
+    updated = max((a.get('updated') or a['created'] for a in items))
+    entries = ''.join(f'''<entry><title>{html.escape(a["title"])}</title><link href="{seo.SITE}{bc.article_path(a)}" rel="alternate" type="text/html"/><id>{seo.SITE}{bc.article_path(a)}</id><published>{stamp(a.get("published") or a["created"])}</published><updated>{stamp(a.get("updated") or a["created"])}</updated><summary type="text">{html.escape(a["summary"])}</summary><category term="{html.escape(a["category"])}"/></entry>
+''' for a in items)
+    return f'''<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{LANGS[L][0]}"><title>{html.escape(t["h1"])}</title><subtitle>{html.escape(t["lead"])}</subtitle><link href="{url}feed.xml" rel="self" type="application/atom+xml"/><link href="{url}" rel="alternate" type="text/html"/><id>{url}</id><updated>{stamp(updated)}</updated><author><name>DogNAS</name></author>
+{entries}</feed>
 '''
 
 
@@ -69,6 +83,9 @@ def main():
     by_group = {(a['group'], a['lang']): a for a in arts}
     n = 0
     for L in live:
+        if not PREVIEW:
+            os.makedirs(os.path.join(OUT, bc.blog_dir(L)), exist_ok=True)
+            open(os.path.join(OUT, bc.blog_dir(L), 'feed.xml'), 'w').write(atom(L, by_lang[L]))
         t, base = UI[L], '../' * (bc.blog_dir(L).count('/'))
         # list pages
         pages = [by_lang[L][i:i + bc.PER_PAGE] for i in range(0, len(by_lang[L]), bc.PER_PAGE)]
@@ -86,7 +103,9 @@ def main():
                 pager = f'<nav class="pager">{prev}<span></span>{nxt}</nav>'
             title = t['h1'] + (f' — {p}' if p > 1 else '') + ' | DogNAS'
             alts = {l: bc.list_path(l) for l in live} if p == 1 else None
-            ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, title, t['lead'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L))]))
+            blog_ld = {'@type': 'Blog', '@id': seo.SITE + bc.list_path(L) + '#blog', 'url': seo.SITE + bc.list_path(L), 'name': t['h1'], 'description': t['lead'], 'inLanguage': seo.HREFLANG[L],
+                       'publisher': {'@id': seo.SITE + '#org'}, 'blogPost': [{'@id': seo.SITE + bc.article_path(x) + '#post'} for x in by_lang[L]]}
+            ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, title, t['lead'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L))]) + ([blog_ld] if p == 1 else []))
             main_html = f'<section class="blog-head"><h1>{t["h1"]}</h1><p>{t["lead"]}</p></section><div class="posts">{cards}</div>{pager}'
             write(path, shell(L, path, title, t['lead'], main_html, b, nav, ld, alts, noindex=p > 1))
             n += 1
@@ -115,7 +134,9 @@ def main():
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
                             'datePublished': a.get('published') or a['created'], 'dateModified': upd, 'mainEntityOfPage': seo.SITE + path,
-                            'author': {'@id': seo.SITE + '#org'}, 'publisher': {'@id': seo.SITE + '#org'}, **({'image': seo.SITE + image} if image else {})}])
+                            'author': {'@id': seo.SITE + '#org'}, 'publisher': {'@id': seo.SITE + '#org'}, 'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'},
+                            'wordCount': words, 'articleSection': a['category'], **({'keywords': ', '.join(a['tags'])} if a.get('tags') else {}),
+                            **({'image': [seo.SITE + x for x in dict.fromkeys([a.get('cover'), a.get('social_image')]) if x]} if image else {})}])
             write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image))
             n += 1
     print(f'ok: {n} pages ({len(arts)} articles){" [preview -> _preview/]" if PREVIEW else ""}')

@@ -16,6 +16,9 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Privacy policy](https://dognas.app/privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
 ## Blog
+- [Atom feed, English](https://dognas.app/blog/feed.xml)
+- [Atom feed, Español](https://dognas.app/es/blog/feed.xml)
+- [Atom feed, Português](https://dognas.app/pt/blog/feed.xml)
 - [How to access DogNAS with FileZilla, WinSCP, Cyberduck and rclone](https://dognas.app/blog/access-dognas-with-filezilla-winscp-cyberduck-rclone/) (English): Step-by-step to connect your DogNAS server to four popular SFTP programs and choose the best one for how you work.
 - [A home NAS without buying a NAS: use the Android you already own](https://dognas.app/blog/home-nas-without-buying-a-nas/) (English): To keep your family's photos, videos and documents at home you don't always need to buy a NAS. See when an old Android is enough and when it isn't.
 - [How to free up space on your Android phone without losing your photos](https://dognas.app/blog/how-to-free-up-space-on-android/) (English): Clean out what is left over on Android and move photos and videos to a safe place off the phone, with no cloud subscription.
