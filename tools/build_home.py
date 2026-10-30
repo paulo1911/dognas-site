@@ -95,8 +95,30 @@ PLAY = {'server': 'https://play.google.com/store/apps/details?id=com.dognas.serv
         'lite': 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'}
 # DogNAS Client (Flutter) Play URL: fill when it is published — the secondary CTA then points to it and the Lite becomes the "lightweight alternative".
 CLIENT_PLAY = ''
-from blog_content import has_blog, blog_dir
+from blog_content import has_blog, blog_dir, load as load_blog, article_path
 def blog_link(L, base): return f'<a href="{base}{blog_dir(L)}">Blog</a> · ' if has_blog(L) else ''
+def blog_nav(L, base, page):
+    """Header link to the blog (BLOG-10): only when that language has published articles."""
+    return f'<a class="blog-link" data-ev="blog_nav_click" data-loc="nav_blog_{page}" href="{base}{blog_dir(L)}">Blog</a>' if has_blog(L) else ''
+BLOG_HOME = {
+ 'en': dict(h2='From the blog', lead='Practical guides to get started and get more from your old Android.', all='All guides →', guide='Read the guide:'),
+ 'pt': dict(h2='No blog', lead='Guias práticos para começar e aproveitar melhor o seu Android antigo.', all='Todos os guias →', guide='Leia o guia:'),
+ 'es': dict(h2='En el blog', lead='Guías prácticas para empezar y sacar más provecho de tu Android viejo.', all='Todas las guías →', guide='Lee la guía:'),
+}
+BLOG_FEATURED = ['old-android-server', 'home-nas', 'free-phone-space']  # the three intents: start, compare, free up space
+BLOG_FAQ = {0: 'old-android-server', 1: 'old-tablet', 2: 'pc-phone-transfer', 4: 'old-laptop-hdd', 10: 'home-nas'}  # FAQ index -> guide (same order in every language)
+def blog_articles(L):
+    arts, _ = load_blog()  # content errors are reported by build_blog.py
+    return {a['group']: a for a in arts if a['lang'] == L}
+def blog_teasers(L, base):
+    arts, t = blog_articles(L), BLOG_HOME[L]
+    cards = ''.join(f'<a class="post" href="{base}{article_path(a)}" data-ev="blog_home_teaser_click" data-loc="home_blog_{g}"><img src="{base}{a["cover"][:-5]}-600.webp" alt="{html.escape(a["cover_alt"])}" width="600" height="315" loading="lazy"><span class="cat">{html.escape(a["category"])}</span><h3>{html.escape(a["title"])}</h3><p>{html.escape(a["summary"])}</p></a>'
+                    for g in BLOG_FEATURED for a in [arts.get(g)] if a)
+    if not cards: return ''
+    return f'<section id="blog" class="audience"><h2>{t["h2"]}</h2><p class="lead">{t["lead"]}</p><div class="posts">{cards}</div><p class="note"><a data-ev="blog_home_all_click" data-loc="home_blog_all" href="{base}{blog_dir(L)}">{t["all"]}</a></p></section>'
+def blog_faq_link(L, base, i):
+    a = blog_articles(L).get(BLOG_FAQ.get(i, ''))
+    return f' <a class="faq-guide" data-ev="blog_home_context_click" data-loc="home_faq_{a["group"]}" href="{base}{article_path(a)}">{BLOG_HOME[L]["guide"]} {html.escape(a["title"])}</a>' if a else ''
 def play(app, loc):
     # `referrer` lets Play Console attribute store visits to this site (the apps themselves collect nothing).
     return f"{PLAY[app]}&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D{loc}"
@@ -280,7 +302,7 @@ for L, t in T.items():
     t = {**t, **NEW[L]}
     base = '' if L == 'en' else '../'
     sh = f'{base}assets/shots/{L}/'
-    nav = ''.join(f'<a data-ev="lang_switch" data-loc="{l}" href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
+    nav = blog_nav(L, base, 'home') + ''.join(f'<a data-ev="lang_switch" data-loc="{l}" href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     jsonld = seo.ld([seo.ORG, seo.website(L, LANGS[L][1])] + seo.webpage(L, LANGS[L][1], t['title'], t['desc']) + [
         seo.app('DogNAS', {'pt': 'Servidor de arquivos para Android: transforma um Android compatível em armazenamento particular na rede Wi-Fi, com SFTP.', 'en': 'File server for Android: turns a compatible Android into private storage on your Wi-Fi network, with SFTP.', 'es': 'Servidor de archivos para Android: convierte un Android compatible en almacenamiento privado en tu red Wi-Fi, con SFTP.'}[L], seo.PLAY_SERVER, L, app_id='#app-server'),
         seo.app('DogNAS Client Lite', {'pt': 'App leve e gratuito para Android que acessa os arquivos do seu DogNAS pelo Wi-Fi de casa.', 'en': 'Lightweight, free Android app that reaches your DogNAS files over your home Wi-Fi.', 'es': 'App ligera y gratuita para Android que accede a los archivos de tu DogNAS por el Wi-Fi de casa.'}[L], seo.PLAY_LITE, L, app_id='#app-lite')])
@@ -296,7 +318,7 @@ for L, t in T.items():
         return f'<div class="cta-band"><p>{h}</p><a class="btn primary" data-ev="server_store_click" data-loc="{loc}" href="{play("server", loc)}" rel="noopener">{btn}</a></div>'
     goals = ''.join(f'<div class="goal goal-{i}"><span class="tag">{n}</span><h3>{tag}</h3><p>{txt}</p></div>' for i, (n, tag, txt) in enumerate(t['goals']))
     req = ''.join(f'<div class="card"><h3>{h}</h3><p>{p}</p></div>' for h, p in t['req'])
-    faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in t['faq'])
+    faq = ''.join(f'<details><summary>{q}</summary><p>{a}{blog_faq_link(L, base, i)}</p></details>' for i, (q, a) in enumerate(t['faq']))
     trust = ''.join(f'<a class="btn{" primary" if i == 0 else ""}" data-ev="support_click" data-loc="support_{i}" href="{u.format(EMAIL=EMAIL, base=base)}">{n}</a>' for i, (n, u) in enumerate(t['trust_links']))
     steps = ''.join(f'<div class="step"><div class="num">{i}</div><h3>{h}</h3><p>{p}</p>{phone(sh + img + ".webp", h)}</div>' for i, (h, p, img) in enumerate(t['steps'], 1))
     specs = ''.join(f'<tr><th>{a}</th><td>{b}</td></tr>' for a, b in t['specs'])
@@ -370,6 +392,7 @@ for L, t in T.items():
 <div class="faq">{faq}</div>
 {band(2, 'mid_faq')}
 </section>
+{blog_teasers(L, base)}
 <section id="suporte" class="audience">
 <h2>{t['trust_h2']}</h2><p class="lead">{t['trust_lead']}</p>
 <div class="cta">{trust}</div>
