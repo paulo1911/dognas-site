@@ -7,7 +7,7 @@ meta_description: Vender, donar, reciclar o reutilizar un celular Android viejo:
 pillar: compare
 tags: [celular viejo, vender celular, reciclar, borrar datos]
 cover: assets/blog/sell-or-reuse/cover-es.webp
-cover_alt: Archivos de DogNAS Client Lite en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de un celular con flechas de reciclaje junto a la pantalla del DogNAS Client Lite
 social_image: assets/blog/sell-or-reuse/social-es.jpg
 cta: server
 related: [old-phone-ideas, old-android-server, cloud-subscription-savings]

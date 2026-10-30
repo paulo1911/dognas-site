@@ -7,7 +7,7 @@ meta_description: 10 ways to reuse an old Android phone: camera, webcam, media h
 pillar: reuse
 tags: [old phone, reuse android, ideas, file server]
 cover: assets/blog/old-phone-ideas/cover-en.webp
-cover_alt: Profile QR Code of a DogNAS server on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a phone with sparks of ideas next to the DogNAS Client Lite screen
 social_image: assets/blog/old-phone-ideas/social-en.jpg
 cta: server
 related: [old-android-server, home-nas]

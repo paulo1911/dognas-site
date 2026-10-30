@@ -7,7 +7,7 @@ meta_description: Compare um NAS tradicional com um servidor de arquivos em um A
 pillar: compare
 tags: [nas, servidor android, comparação, armazenamento]
 cover: assets/blog/nas-vs-android/cover-pt.webp
-cover_alt: Tela de status do servidor DogNAS em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de uma caixa de NAS diante de um celular ao lado da tela do servidor DogNAS
 social_image: assets/blog/nas-vs-android/social-pt.jpg
 cta: server
 related: [home-nas, old-android-server, old-laptop-hdd]

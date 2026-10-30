@@ -7,7 +7,7 @@ meta_description: Sell, donate, recycle or reuse an old Android phone: how to de
 pillar: compare
 tags: [old phone, sell phone, recycle, erase data]
 cover: assets/blog/sell-or-reuse/cover-en.webp
-cover_alt: DogNAS Client Lite files on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a phone with recycling arrows next to the DogNAS Client Lite screen
 social_image: assets/blog/sell-or-reuse/social-en.jpg
 cta: server
 related: [old-phone-ideas, old-android-server, cloud-subscription-savings]

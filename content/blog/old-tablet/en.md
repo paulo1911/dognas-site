@@ -7,7 +7,7 @@ meta_description: How to use an old Android tablet as a file server on your home
 pillar: reuse
 tags: [old tablet, file server, storage, android]
 cover: assets/blog/old-tablet/cover-en.webp
-cover_alt: DogNAS server monitor on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a tablet with Wi-Fi next to the DogNAS server screen
 social_image: assets/blog/old-tablet/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, old-phone-ideas]

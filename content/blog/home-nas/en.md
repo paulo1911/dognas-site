@@ -7,7 +7,7 @@ meta_description: Build a home NAS with an old Android, with no new hardware and
 pillar: compare
 tags: [home nas, old android, file server, storage]
 cover: assets/blog/home-nas/cover-en.webp
-cover_alt: DogNAS server monitor screen on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a house with a storage box next to the DogNAS Client Lite screen
 social_image: assets/blog/home-nas/social-en.jpg
 cta: server
 related: [old-android-server, old-phone-ideas]

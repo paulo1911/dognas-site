@@ -7,7 +7,7 @@ meta_description: Dicas para liberar espaço no Android: cache, apps, duplicados
 pillar: storage
 tags: [liberar espaço, armazenamento, android, fotos e vídeos]
 cover: assets/blog/free-phone-space/cover-pt.webp
-cover_alt: Tela inicial do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de um celular com uma seta tirando arquivos ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/free-phone-space/social-pt.jpg
 cta: client
 related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]

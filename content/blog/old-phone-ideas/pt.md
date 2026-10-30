@@ -7,7 +7,7 @@ meta_description: 10 formas de reaproveitar um celular Android antigo: câmera, 
 pillar: reuse
 tags: [celular antigo, reaproveitar android, ideias, servidor de arquivos]
 cover: assets/blog/old-phone-ideas/cover-pt.webp
-cover_alt: QR Code de um perfil do servidor DogNAS em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de um celular com faíscas de ideias ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/old-phone-ideas/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas]

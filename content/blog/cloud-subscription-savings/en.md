@@ -7,7 +7,7 @@ meta_description: How to cut the cost of Google One, iCloud and other clouds: re
 pillar: storage
 tags: [cloud storage, save money, subscription, home server]
 cover: assets/blog/cloud-subscription-savings/cover-en.webp
-cover_alt: DogNAS Client Lite files on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a cloud with a coin next to the DogNAS server screen
 social_image: assets/blog/cloud-subscription-savings/social-en.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]

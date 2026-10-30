@@ -7,7 +7,7 @@ meta_description: Como usar o HD ou SSD de um notebook antigo, numa case USB, co
 pillar: reuse
 tags: [hd de notebook, case usb, usb otg, armazenamento]
 cover: assets/blog/old-laptop-hdd/cover-pt.webp
-cover_alt: Monitor do servidor DogNAS em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de um HD ao lado da tela do servidor DogNAS
 social_image: assets/blog/old-laptop-hdd/social-pt.jpg
 cta: server
 related: [old-android-server, nas-vs-android, home-nas]
