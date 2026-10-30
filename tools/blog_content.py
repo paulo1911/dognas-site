@@ -126,12 +126,66 @@ def _inline(s, base='', lang=None):
     return re.sub(r'(?<![*\w])\*([^*]+)\*(?!\w)', r'<em>\1</em>', s)
 
 
+CALLOUTS = {  # > [!kind] blocks: label per language
+    'en': dict(tip='Tip', warning='Keep in mind', note='Note', takeaways='In short', aspect='Aspect'),
+    'pt': dict(tip='Dica', warning='Atenção', note='Nota', takeaways='Em resumo', aspect='Aspecto'),
+    'es': dict(tip='Consejo', warning='Ten en cuenta', note='Nota', takeaways='En resumen', aspect='Aspecto'),
+}
+_TABLE_SEP = re.compile(r'^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?$')
+
+
+def _cells(line):
+    return [c.strip() for c in line.strip().strip('|').split('|')]
+
+
+def _table(lines, base, lang):
+    head, rows = _cells(lines[0]), [_cells(l) for l in lines[2:]]
+    # An empty corner cell gets a screen-reader-only label (an empty header cell is an a11y error).
+    corner = f'<span class="sr">{CALLOUTS.get(lang or "en", CALLOUTS["en"])["aspect"]}</span>'
+    th = ''.join(f'<th scope="col" role="columnheader">{_inline(c, base, lang) if c else corner}</th>' for c in head)
+    # The first column names the row: a header cell for screen readers, like the plans table on the home. On a phone the CSS
+    # stacks each row as a card (data-label = the column name); the roles keep the table semantics when `display` changes.
+    body = ''.join('<tr role="row">' + (f'<th scope="row" role="rowheader">{_inline(r[0], base, lang)}</th>' if r else '')
+                   + ''.join(f'<td role="cell" data-label="{html.escape(head[i + 1] if i + 1 < len(head) else "", quote=True)}">{_inline(c, base, lang)}</td>' for i, c in enumerate(r[1:])) + '</tr>' for r in rows)
+    return f'<div class="table-wrap"><table class="cmp" role="table"><thead><tr role="row">{th}</tr></thead><tbody>{body}</tbody></table></div>'
+
+
+def _callout(lines, base, lang):
+    """`> [!tip]` / `[!warning]` / `[!note]` / `[!takeaways]`, then the quoted text: paragraphs, or `- ` items."""
+    kind = re.match(r'> \[!(tip|warning|note|takeaways)\]\s*$', lines[0]).group(1)
+    text = [re.sub(r'^>\s?', '', l) for l in lines[1:]]
+    paras, cur = [], []
+    for l in text + ['']:
+        if l.strip(): cur.append(l)
+        elif cur: paras.append(cur); cur = []
+    inner = ''.join('<ul>' + ''.join(f'<li>{_inline(l[2:], base, lang)}</li>' for l in p) + '</ul>' if all(re.match(r'[-*] ', l) for l in p)
+                    else '<p>' + _inline(' '.join(p), base, lang) + '</p>' for p in paras)
+    label = CALLOUTS.get(lang or 'en', CALLOUTS['en'])[kind]
+    return f'<aside class="callout callout-{kind}"><strong class="callout-title">{label}</strong>{inner}</aside>'
+
+
 def render(body, base='', lang=None):
-    """Markdown subset: ## / ### headings, paragraphs, - / 1. lists, > quotes, images, links, bold, italic, code. Returns (html, toc)."""
-    out, toc, used = [], [], set()
+    """Markdown subset: ## / ### headings, paragraphs, - / 1. lists, > quotes, images, links, bold, italic, code, plus (see
+    content/blog/_template/README.md): pipe tables, `> [!tip|warning|note|takeaways]` callouts, `?? question` FAQ blocks
+    (answer = the rest of the block) and `@video(src, poster, caption)`. Everything renders without JS. Returns (html, toc)."""
+    out, toc, used, faq = [], [], set(), []
     for block in re.split(r'\n\s*\n', body):
         lines = block.strip().splitlines()
         if not lines: continue
+        if faq and not lines[0].startswith('?? '):
+            out.append('<div class="faq">' + ''.join(faq) + '</div>'); faq = []
+        if lines[0].startswith('?? '):
+            faq.append(f'<details><summary>{_inline(lines[0][3:], base, lang)}</summary><p>{_inline(" ".join(lines[1:]), base, lang)}</p></details>')
+            continue
+        if len(lines) >= 3 and all(l.startswith('|') for l in lines) and _TABLE_SEP.match(lines[1].strip()):
+            out.append(_table(lines, base, lang)); continue
+        if re.match(r'> \[!(tip|warning|note|takeaways)\]\s*$', lines[0]):
+            out.append(_callout(lines, base, lang)); continue
+        v = re.fullmatch(r'@video\(([^,()]+),\s*([^,()]+)(?:,\s*([^()]*))?\)', lines[0].strip()) if len(lines) == 1 else None
+        if v:
+            src, poster, cap = (x.strip() if x else '' for x in v.groups())
+            out.append(f'<figure class="video"><video controls preload="none" playsinline poster="{_url(poster, base)}"><source src="{_url(src, base)}" type="video/mp4"></video>' + (f'<figcaption>{html.escape(cap)}</figcaption>' if cap else '') + '</figure>')
+            continue
         h = re.match(r'(#{2,3}) (.+)', lines[0])
         if h and len(lines) == 1:
             n, text = len(h.group(1)), h.group(2).strip()
@@ -151,4 +205,5 @@ def render(body, base='', lang=None):
             out.append(f'<div class="carousel"><div class="track">{figs}</div></div>')
         else:
             out.append('<p>' + _inline(' '.join(lines), base, lang) + '</p>')
+    if faq: out.append('<div class="faq">' + ''.join(faq) + '</div>')
     return '\n'.join(out), toc
