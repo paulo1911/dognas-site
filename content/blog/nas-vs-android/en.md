@@ -19,6 +19,12 @@ updated: 2026-10-28
 ---
 "Do I need a NAS, or will an old Android do?" It is the question of anyone who wants to keep photos, videos and documents at home without relying on the cloud. The honest answer is: it depends on what you will store and how much it is worth to you. This comparison shows where each option shines and where it falls short.
 
+
+> [!takeaways]
+> - An old Android with DogNAS is enough for family photos, videos and documents, with no hardware to buy.
+> - A NAS makes sense for several people streaming at once, disk redundancy, advanced services or many terabytes.
+> - Neither replaces a backup: keep an independent copy of what matters.
+
 ## What each one is
 
 - **Traditional NAS:** a dedicated device with one or more drive bays, its own system and, usually, many features beyond keeping files.
@@ -26,19 +32,18 @@ updated: 2026-10-28
 
 ## Comparison
 
-**Upfront cost.** A NAS means buying the device and the disks. You already own the old Android; DogNAS is free to start, and Pro is a one-time purchase with no subscription.
+| | Traditional NAS | Android with DogNAS |
+|---|---|---|
+| Upfront cost | Device and disks to buy | The old Android you already own; DogNAS is free to start and Pro is a one-time purchase, with no subscription |
+| Setup | Usually more configuration | Install the app, tap Start and pair with a QR Code and a PIN; no router settings |
+| Disk failure | Several disks can use RAID, which keeps data available if one fails | No RAID and no single volume across disks: each disk is independent and can fail |
+| Extra features | Can run containers, media servers and other services | A file server, not a mini data center |
+| Many users at once | Built to serve several devices, such as multiple high-resolution videos | Handles simple home use, with limits |
+| Power and space | Varies by model | Uses little power, takes little room and has its own battery, which helps in short power cuts; makers limit background apps differently, so check the requirements |
+| Storage space | Grows with bigger disks | Free plan: up to 64 GB. Pro: the device's whole storage, including an SD card or USB drive (needs USB OTG) |
 
-**Ease.** With DogNAS, you install an app, tap Start and pair devices with a QR Code and a PIN, with no router settings. A NAS usually asks for more setup.
-
-**Protection against disk failure.** A NAS with several disks can use RAID, which keeps data available if one disk fails. DogNAS has no RAID and does not combine several disks into a single volume: each disk is independent, and a disk can fail. Neither replaces a backup.
-
-**Extra features.** A NAS can run containers, media servers and other services. DogNAS is a file server, not a mini data center.
-
-**Performance with many users.** A NAS is built to serve several devices at once, such as multiple high-resolution videos. A phone handles simple home use, but has limits.
-
-**Power and space.** An Android uses little power, takes little room and has its own battery, which helps in short power cuts. Different makers limit background apps in different ways, so check the requirements.
-
-**Storage space.** A NAS grows with bigger disks. With DogNAS, the Free plan manages up to 64 GB and Pro uses the device's whole storage, including an SD card or USB drive (which needs USB OTG).
+> [!warning]
+> Neither option replaces a backup. A disk can fail in either one, so keep an independent copy of what matters.
 
 ## When to choose each
 

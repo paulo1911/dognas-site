@@ -9,7 +9,7 @@ tags: [filezilla, winscp, cyberduck, rclone, sftp]
 cover: assets/blog/sftp-clients/cover-en.webp
 cover_alt: DogNAS Client Lite home screen on an Android, next to the DogNAS mascot
 social_image: assets/blog/sftp-clients/social-en.jpg
-cta: server
+cta: both
 related: [sftp-explained, pc-phone-transfer, old-android-server]
 status: published
 translation_review: reviewed

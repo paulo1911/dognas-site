@@ -3,7 +3,7 @@ Run: python3 tools/build_client.py. Reuses the shell of build_home.py. Store lin
 "Coming soon" until the app is published (BACKLOG REL-7 / FC-74): then fill STORE below."""
 import os, html
 import seo
-from build_home import CSS_INLINE, blog_link, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
+from build_home import CSS_INLINE, blog_link, blog_nav, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
 # Fill with the real URLs when published; empty = shows "Coming soon".
 STORE = {'play': '', 'apple': ''}
 T = {
@@ -56,7 +56,7 @@ for L, t in T.items():
     base = '../' if L == 'en' else '../../'
     home = f'{base}{LANGS[L][1]}'
     path = LANGS[L][1] + 'client/'
-    nav = ''.join(f'<a href="{base}{LANGS[l][1]}client/"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
+    nav = blog_nav(L, base, 'client') + ''.join(f'<a href="{base}{LANGS[l][1]}client/"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     ctas = btn(t['play'], STORE['play'], t['soon']) + btn(t['apple'], STORE['apple'], t['soon'])
     lite_link = '<a href="https://play.google.com/store/apps/details?id=com.dognas.client.lite" rel="noopener">DogNAS Client Lite</a>'
     soon_note = '' if all(STORE.values()) else f'<p class="note">{t["note_soon"].replace("DogNAS Client Lite", lite_link)}</p>'
