@@ -9,7 +9,7 @@ tags: [transferir arquivos, pc e celular, wi-fi, sftp]
 cover: assets/blog/pc-phone-transfer/cover-pt.webp
 cover_alt: Fila de transferências do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
 social_image: assets/blog/pc-phone-transfer/social-pt.jpg
-cta: server
+cta: both
 related: [old-android-server, home-nas, free-phone-space]
 status: published
 translation_review: reviewed
