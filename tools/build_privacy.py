@@ -3,14 +3,14 @@ import os, html, hashlib
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 import seo
-from build_home import GA_TAG, CSS_INLINE, blog_link  # shared: consent banner + GA4 loaded only after acceptance
+from build_home import GA_TAG, CSS_INLINE, blog_link, blog_nav  # shared: consent banner + GA4 loaded only after acceptance
 # Cache busting (2026-10-16): Pages caches files for 10 min; a new page with a cached old
 # stylesheet broke the layout. The CSS URL changes whenever its content does.
 CSS_V = hashlib.sha1(open(os.path.join(ROOT, 'assets/style.css'), 'rb').read()).hexdigest()[:8]
 LANGS = {'en': ('en', '/', 'English'), 'pt': ('pt-BR', '/pt/', 'Português'), 'es': ('es', '/es/', 'Español')}
 
 def page(lang, title, desc, body, base):
-    nav = ''.join(f'<a href="{base}{LANGS[l][1].lstrip("/")}"{" class=on" if l == lang else ""}>{LANGS[l][2]}</a>' for l in LANGS)
+    nav = blog_nav(lang, base, 'privacy') + ''.join(f'<a href="{base}{LANGS[l][1].lstrip("/")}"{" class=on" if l == lang else ""}>{LANGS[l][2]}</a>' for l in LANGS)
     priv = {'pt': 'Política de privacidade', 'en': 'Privacy policy', 'es': 'Política de privacidad'}[lang]
     return f'''<!doctype html>
 <html lang="{LANGS[lang][0]}">

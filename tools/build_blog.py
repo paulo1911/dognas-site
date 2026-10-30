@@ -11,19 +11,19 @@ PREVIEW = '--preview' in sys.argv
 OUT = os.path.join(ROOT, '_preview') if PREVIEW else ROOT
 UI = {
  'pt': dict(about='Conhecer o DogNAS', blog='Blog', h1='Blog DogNAS', lead='Guias práticos para usar seu Android como armazenamento particular, sem nuvem.', home='Início', toc='Neste artigo',
-   related='Leia também', updated='Atualizado em', min='min de leitura', newer='← Mais recentes', older='Mais antigos →', privacy='Privacidade', cookies='Cookies',
+   related='Leia também', get='Baixar o DogNAS', updated='Atualizado em', min='min de leitura', newer='← Mais recentes', older='Mais antigos →', privacy='Privacidade', cookies='Cookies',
    cta_server=('Quero instalar no meu Android agora', 'Instale o DogNAS no Android que vai guardar seus arquivos. Grátis.'),
    cta_client=('Acessar meus arquivos', 'Instale o DogNAS Client Lite no aparelho que vai acessar o seu DogNAS. Grátis.'), draft='RASCUNHO — não publicado',
    cta_both='Instale o DogNAS no Android que vai guardar seus arquivos e o app de acesso nos aparelhos que vão usá-los. Os dois são grátis.',
    mid=dict(server='Tem um Android parado? Transforme-o no seu armazenamento particular em poucos minutos.', client='Precisa acessar seus arquivos de outro celular? Instale o app de acesso, é grátis.', both='Um Android guarda os arquivos e os outros aparelhos acessam. Comece grátis em poucos minutos.')),
  'en': dict(about='About DogNAS', blog='Blog', h1='DogNAS Blog', lead='Practical guides to use your Android as private storage, with no cloud.', home='Home', toc='In this article',
-   related='Keep reading', updated='Updated', min='min read', newer='← Newer', older='Older →', privacy='Privacy', cookies='Cookies',
+   related='Keep reading', get='Get DogNAS', updated='Updated', min='min read', newer='← Newer', older='Older →', privacy='Privacy', cookies='Cookies',
    cta_server=('Install on my Android now', 'Install DogNAS on the Android that will keep your files. Free.'),
    cta_client=('Access my files', 'Install DogNAS Client Lite on the device that will reach your DogNAS. Free.'), draft='DRAFT — not published',
    cta_both='Install DogNAS on the Android that will keep your files and the access app on the devices that will reach them. Both are free.',
    mid=dict(server='Have an old Android sitting idle? Turn it into your private storage in a few minutes.', client='Need to reach your files from another phone? Install the access app, it is free.', both='One Android keeps the files and your other devices reach them. Start free in a few minutes.')),
  'es': dict(about='Conocer DogNAS', blog='Blog', h1='Blog DogNAS', lead='Guías prácticas para usar tu Android como almacenamiento privado, sin nube.', home='Inicio', toc='En este artículo',
-   related='Sigue leyendo', updated='Actualizado el', min='min de lectura', newer='← Más recientes', older='Más antiguos →', privacy='Privacidad', cookies='Cookies',
+   related='Sigue leyendo', get='Descargar DogNAS', updated='Actualizado el', min='min de lectura', newer='← Más recientes', older='Más antiguos →', privacy='Privacidad', cookies='Cookies',
    cta_server=('Quiero instalarlo en mi Android ahora', 'Instala DogNAS en el Android que guardará tus archivos. Gratis.'),
    cta_client=('Acceder a mis archivos', 'Instala DogNAS Client Lite en el dispositivo que accederá a tu DogNAS. Gratis.'), draft='BORRADOR — no publicado',
    cta_both='Instala DogNAS en el Android que guardará tus archivos y la app de acceso en los dispositivos que los usarán. Las dos son gratis.',
@@ -74,7 +74,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 {BLOG_CSS}
 </head>
 <body><div class="wrap">
-<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a class="btn primary hdr-cta" data-ev="blog_server_download_click" data-loc="blog_header" href="{play('server', 'blog_header')}" rel="noopener">{t['get']}</a>{nav}</nav></header>
 {main}
 <footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
