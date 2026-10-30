@@ -44,6 +44,11 @@ blive = [l for l in ['en', 'pt', 'es'] if any(a['lang'] == l for a in barts)]
 bdate = max((a.get('updated') or a['created'] for a in barts), default='')
 for l in blive:
     urls.append(f'<url><loc>{SITE}{bc.list_path(l)}</loc><lastmod>{max(a.get("updated") or a["created"] for a in barts if a["lang"] == l)}</lastmod><priority>0.6</priority>{alt_links({x: bc.list_path(x) for x in blive})}</url>')
+import blog_pillars as bp
+for pid in bp.ORDER:
+    sib = {l: bc.pillar_path(l, pid) for l in blive if any(a['lang'] == l and a['pillar'] == pid for a in barts)}
+    for l, pth in sib.items():
+        urls.append(f'<url><loc>{SITE}{pth}</loc><lastmod>{max(a.get("updated") or a["created"] for a in barts if a["lang"] == l and a["pillar"] == pid)}</lastmod><priority>0.5</priority>{alt_links(sib)}</url>')
 for a in barts:
     sib = {x['lang']: bc.article_path(x) for x in barts if x['group'] == a['group']}
     urls.append(f'<url><loc>{SITE}{bc.article_path(a)}</loc><lastmod>{a.get("updated") or a["created"]}</lastmod><priority>0.6</priority>{alt_links(sib)}</url>')

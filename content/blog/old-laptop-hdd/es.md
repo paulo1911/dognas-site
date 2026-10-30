@@ -4,7 +4,7 @@ title: Cómo reutilizar el disco de una laptop vieja como almacenamiento de la c
 summary: Ese disco duro o SSD que sobró de una laptop puede ser espacio extra para tu servidor Android. Mira qué necesitas y qué debes vigilar.
 meta_title: Reutilizar el disco de una laptop como almacenamiento | DogNAS
 meta_description: Cómo usar el disco duro o SSD de una laptop vieja, en una caja USB, como almacenamiento de un servidor de archivos Android, con cuidados de energía y respaldo.
-category: Guías
+pillar: reuse
 tags: [disco de laptop, caja usb, usb otg, almacenamiento]
 cover: assets/blog/old-laptop-hdd/cover-es.webp
 cover_alt: Monitor del servidor DogNAS en un Android, junto a la mascota de DogNAS

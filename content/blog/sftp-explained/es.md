@@ -4,7 +4,7 @@ title: Qué es SFTP y cómo acceder a un servidor de archivos en Android
 summary: SFTP es una forma segura de enviar y buscar archivos por la red. Entiende qué es, para qué sirve y cómo acceder a tu servidor DogNAS desde la PC y el celular.
 meta_title: Qué es SFTP y cómo acceder a un servidor Android | DogNAS
 meta_description: Qué es SFTP, por qué es seguro y cómo acceder a un servidor de archivos en Android con FileZilla, WinSCP, Cyberduck y otros clientes.
-category: Guías
+pillar: sftp
 tags: [sftp, ssh, filezilla, winscp, servidor de archivos]
 cover: assets/blog/sftp-explained/cover-es.webp
 cover_alt: Código QR de un perfil del servidor DogNAS en un Android, junto a la mascota de DogNAS

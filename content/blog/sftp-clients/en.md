@@ -4,7 +4,7 @@ title: How to access DogNAS with FileZilla, WinSCP, Cyberduck and rclone
 summary: Step-by-step to connect your DogNAS server to four popular SFTP programs and choose the best one for how you work.
 meta_title: Access DogNAS with FileZilla, WinSCP, Cyberduck | DogNAS
 meta_description: How to connect the DogNAS server to FileZilla, WinSCP, Cyberduck and rclone over SFTP, what to fill in on each one and which to choose.
-category: Guides
+pillar: sftp
 tags: [filezilla, winscp, cyberduck, rclone, sftp]
 cover: assets/blog/sftp-clients/cover-en.webp
 cover_alt: DogNAS Client Lite home screen on an Android, next to the DogNAS mascot

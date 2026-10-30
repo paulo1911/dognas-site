@@ -10,7 +10,7 @@ title: Título (H1)
 summary: Uma frase para a lista.
 meta_title: Título para o Google (até ~60 caracteres)
 meta_description: Descrição para o Google (até 170 caracteres)
-category: Guias
+pillar: reuse   # reuse | storage | sftp | compare (names and hub pages: tools/blog_pillars.py)
 tags: [android, nas]
 cover: assets/blog/<grupo>/cover.webp
 cover_alt: Descrição da imagem

@@ -4,7 +4,7 @@ title: Vender, doar ou reaproveitar o celular antigo: como decidir
 summary: Antes de vender ou jogar fora o celular antigo, compare as opções e veja como apagar seus dados com segurança.
 meta_title: Vender ou reaproveitar o celular antigo: como decidir | DogNAS
 meta_description: Vender, doar, reciclar ou reaproveitar um celular Android antigo: como decidir e como apagar os dados com segurança antes de se desfazer dele.
-category: Guias
+pillar: compare
 tags: [celular antigo, vender celular, reciclar, apagar dados]
 cover: assets/blog/sell-or-reuse/cover-pt.webp
 cover_alt: Arquivos do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
