@@ -170,6 +170,9 @@ def _callout(lines, base, lang):
     return f'<aside class="callout callout-{kind}"><strong class="callout-title">{label}</strong>{inner}</aside>'
 
 
+CAROUSEL_UI = {'en': ('Screenshots', 'Previous screenshot', 'Next screenshot', '← swipe →'), 'pt': ('Capturas de tela', 'Captura anterior', 'Próxima captura', '← deslize →'), 'es': ('Capturas de pantalla', 'Captura anterior', 'Captura siguiente', '← desliza →')}
+
+
 def render(body, base='', lang=None):
     """Markdown subset: ## / ### headings, paragraphs, - / 1. lists, > quotes, images, links, bold, italic, code, plus (see
     content/blog/_template/README.md): pipe tables, `> [!tip|warning|note|takeaways]` callouts, `?? question` FAQ blocks
@@ -208,7 +211,9 @@ def render(body, base='', lang=None):
         elif all(re.fullmatch(r'!\[[^\]]*\]\([^)\s]+\)', l) for l in lines):
             figs = ''.join(f'<figure><a href="{_url(m.group(2), base)}" target="_blank" rel="noopener"><img src="{_url(m.group(2), base)}"{_srcset(m.group(2), base)} alt="{html.escape(m.group(1))}" {_dims(m.group(2))} loading="lazy"></a><figcaption>{html.escape(m.group(1))}</figcaption></figure>'
                            for m in (re.match(r'!\[([^\]]*)\]\(([^)\s]+)\)', l) for l in lines))
-            out.append(f'<div class="carousel"><div class="track">{figs}</div></div>')
+            L = CAROUSEL_UI.get(lang or 'en', CAROUSEL_UI['en'])
+            if len(lines) <= 2: out.append(f'<div class="shots shots-{len(lines)}">{figs}</div>')  # one or two screenshots: shown side by side, no scrolling
+            else: out.append(f'<div class="carousel" role="region" aria-roledescription="carousel" aria-label="{L[0]}" data-prev="{L[1]}" data-next="{L[2]}"><div class="track">{figs}</div><p class="swipe" aria-hidden="true">{L[3]}</p></div>')
         else:
             out.append('<p>' + _inline(' '.join(lines), base, lang) + '</p>')
     if faq: out.append('<div class="faq">' + ''.join(faq) + '</div>')

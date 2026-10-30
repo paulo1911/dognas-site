@@ -22,6 +22,8 @@ PINs, credentials or personal data are ever sent.
 | `blog_nav_click` | "Blog" link in the header of the home, client and privacy pages; `cta_id` = `nav_blog_<page>` |
 | `blog_home_teaser_click` / `blog_home_all_click` | the three "From the blog" cards on the home / its "All guides" link; `cta_id` = `home_blog_<group>` / `home_blog_all` |
 | `blog_home_context_click` | "Read the guide" link under a FAQ answer on the home; `cta_id` = `home_faq_<group>` |
+| `blog_next_step_click` | the "Next step" card at the end of an article (funnel order in `NEXT`, `build_blog.py`); `cta_id` = `blog_<group>_next_<next group>` |
+| `blog_*_download_click` (side) | the desktop side card; `cta_id` = `blog_<group>_side` (Play campaign the same); the floating bar is hidden on desktop |
 | `blog_server_download_click` (`blog_header`) | the "Get DogNAS" button in the blog header; `cta_id` = `blog_header` |
 
 Blog funnel: article → download click is measured here; `server_started`, `client_paired`, `first_transfer_success` happen inside the apps (no telemetry by design) — read them from Play Console acquisition and from tester reports. Mark `blog_server_download_click` / `blog_client_download_click` as key events once the first article is live.

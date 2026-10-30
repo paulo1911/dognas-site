@@ -59,7 +59,7 @@ def write(path, text):
     full = os.path.join(OUT, path, 'index.html'); os.makedirs(os.path.dirname(full), exist_ok=True); open(full, 'w').write(text)
 
 
-def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None):
+def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None, wide=False):
     t = UI[L]
     home = f'{base}{LANGS[L][1]}'
     return f'''<!doctype html>
@@ -73,7 +73,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 {seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="alternate" type="application/atom+xml" title="{html.escape(t['h1'])}" href="{seo.SITE}{bc.blog_dir(L)}feed.xml"><link rel="icon" type="image/png" href="{base}assets/icon-96.png">
 {BLOG_CSS}
 </head>
-<body><div class="wrap">
+<body{" class=wide" if wide else ""}><div class="wrap">
 <header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a class="btn primary hdr-cta" data-ev="blog_server_download_click" data-loc="blog_header" href="{play('server', 'blog_header')}" rel="noopener">{t['get']}</a>{nav}</nav></header>
 {main}
 <footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}{bc.about_path(L)}">{ab.LABEL[L]['how']}</a> · <a href="{base}{bc.blog_dir(L)}feed.xml">RSS</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
@@ -98,9 +98,14 @@ def atom(L, items):
 CHIPS = {'pt': ('Todos', 'Temas', 'Guias', 'guias'), 'en': ('All', 'Topics', 'Guides', 'guides'), 'es': ('Todos', 'Temas', 'Guías', 'guías')}
 
 
-def cards_html(items, b, loc):
+NEXT = {g: 'old-android-server' for g in ('old-phone-ideas', 'sell-or-reuse', 'home-nas', 'nas-vs-android', 'old-tablet', 'old-laptop-hdd')}  # funnel: decide -> set up -> use -> go further
+NEXT.update({'old-android-server': 'pc-phone-transfer', 'pc-phone-transfer': 'free-phone-space', 'free-phone-space': 'cloud-subscription-savings', 'cloud-subscription-savings': 'sftp-explained', 'sftp-explained': 'sftp-clients'})
+ART_UI = {'pt': dict(next='Próximo passo'), 'en': dict(next='Next step'), 'es': dict(next='Siguiente paso')}
+
+
+def cards_html(items, b, loc, ev='blog_list_article_click'):
     """Article cards (list and hub pages); `loc` is the data-loc prefix, unique per page type."""
-    return ''.join(f'<a class="post" href="{b}{bc.article_path(a)}" data-ev="blog_list_article_click" data-loc="{loc}_{a["group"]}">'
+    return ''.join(f'<a class="post" href="{b}{bc.article_path(a)}" data-ev="{ev}" data-loc="{loc}_{a["group"]}">'
                    + (f'<img src="{b}{a["cover"]}" alt="{html.escape(a.get("cover_alt", ""))}" width="640" height="360" loading="lazy">' if a.get('cover') else '')
                    + f'<span class="cat">{html.escape(a["category"])}</span><h2>{html.escape(a["title"])}</h2><p>{html.escape(a["summary"])}</p></a>' for a in items)
 
@@ -189,7 +194,9 @@ def main():
             alts = {l: bc.article_path(by_group[(a['group'], l)]) for l in live if (a['group'], l) in by_group and by_group[(a['group'], l)].get('status') == 'published'}
             nav = ''.join(f'<a href="{b}{alts[l]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in alts else
                           f'<a href="{b}{bc.list_path(l) if l in live else LANGS[l][1]}">{NAMES[l]}</a>' for l in LANGS)
-            toc_html = (f'<nav class="toc" aria-label="{t["toc"]}"><strong>{t["toc"]}</strong><ul>' + ''.join(f'<li class="l{lv}"><a href="#{sid}">{html.escape(tx)}</a></li>' for lv, sid, tx in toc) + '</ul></nav>') if len(toc) >= 3 else ''
+            toc_items = ''.join(f'<li class="l{lv}"><a href="#{sid}">{html.escape(tx)}</a></li>' for lv, sid, tx in toc)
+            toc_html = f'<details class="toc toc-m"><summary>{t["toc"]}</summary><ul>{toc_items}</ul></details>' if len(toc) >= 3 else ''  # mobile: collapsed
+            side_toc = f'<nav class="toc" aria-label="{t["toc"]}"><strong>{t["toc"]}</strong><ul>{toc_items}</ul></nav>' if len(toc) >= 3 else ''
             kind = a['cta']  # server | client | both
             first = 'client' if kind == 'client' else 'server'
             label, sub = t['cta_' + (kind if kind != 'both' else 'server')]
@@ -204,15 +211,18 @@ def main():
                 html_body = html_body[:heads[len(heads) // 2]] + mid + html_body[heads[len(heads) // 2]:]
             sticky = f'<div class="float-cta" hidden>{cta_btn(a, first, "sticky", label)}</div>'
             rel = [by_group[(r, L)] for r in (a.get('related') or []) if (r, L) in by_group]
-            rel_html = (f'<section class="related"><h2>{t["related"]}</h2><ul>' + ''.join(f'<li><a href="{b}{bc.article_path(r)}" data-ev="blog_related_article_click" data-loc="blog_{a["group"]}_related_{r["group"]}">{html.escape(r["title"])}</a></li>' for r in rel) + '</ul></section>') if rel else ''
+            rel_html = f'<section class="related"><h2>{t["related"]}</h2><div class="posts">{cards_html(rel, b, "blog_" + a["group"] + "_related", ev="blog_related_article_click")}</div></section>' if rel else ''
+            nx = by_group.get((NEXT.get(a['group']), L))
+            next_html = (f'<a class="next-step" href="{b}{bc.article_path(nx)}" data-ev="blog_next_step_click" data-loc="blog_{a["group"]}_next_{nx["group"]}"><span class="cat">{ART_UI[L]["next"]}</span><strong>{html.escape(nx["title"])}</strong><span>{html.escape(nx["summary"])}</span></a>') if nx else ''
+            side_cta = f'<div class="side-cta"><p>{t["mid"][kind]}</p>{cta_btn(a, first, "side", label)}</div>'
             crumbs = f'<nav class="crumbs" aria-label="breadcrumb"><a href="{b}{LANGS[L][1]}">{t["home"]}</a> › <a href="{b}{bc.list_path(L)}">{t["blog"]}</a> › <a href="{b}{bc.pillar_path(L, a["pillar"])}">{html.escape(a["category"])}</a></nav>'
-            cover = f'<figure class="cover"><img src="{b}{a["cover"]}" srcset="{b}{a["cover"][:-5]}-600.webp 600w, {b}{a["cover"][:-5]}-900.webp 900w, {b}{a["cover"]} 1200w" sizes="(max-width: 912px) calc(100vw - 32px), 880px" alt="{html.escape(a["cover_alt"])}" width="1200" height="630" fetchpriority="high"></figure>' if a.get('cover') else ''
+            cover = f'<figure class="cover"><img src="{b}{a["cover"]}" srcset="{b}{a["cover"][:-5]}-600.webp 600w, {b}{a["cover"][:-5]}-900.webp 900w, {b}{a["cover"]} 1200w" sizes="(max-width: 1000px) calc(100vw - 32px), 780px" alt="{html.escape(a["cover_alt"])}" width="1200" height="630" fetchpriority="high"></figure>' if a.get('cover') else ''
             draft = f'<p class="draft-flag">{t["draft"]} ({a["status"]})</p>' if a['status'] != 'published' else ''
             upd = a.get('updated') or a['created']
             words = len(a['body'].split())
             tested = f'<p class="tested"><strong>{ab.LABEL[L]["tested"]}:</strong> {html.escape(a["tested"])}</p>' if a.get('tested') else ''
             main_html = f'''{crumbs}{draft}<article class="post-full"><header><a class="cat" href="{b}{bc.pillar_path(L, a["pillar"])}" data-ev="blog_pillar_click" data-loc="blog_article_{a["group"]}_pillar">{html.escape(a["category"])}</a><h1>{html.escape(a["title"])}</h1>
-<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}</header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["pillar"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
+<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}</header><div class="art-grid"><div class="art-main">{cover}{toc_html}<div class="prose">{html_body}</div>{cta}{next_html}</div><aside class="side">{side_toc}{side_cta}</aside></div></article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',c.getAttribute('data-'+b[0]));x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["pillar"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
             image = a.get('social_image') or a.get('cover')
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['category'], bc.pillar_path(L, a['pillar'])), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
@@ -220,7 +230,7 @@ def main():
                             'author': {'@type': 'Organization', 'name': ab.TEAM[L], 'url': seo.SITE + bc.about_path(L)}, 'publisher': {'@id': seo.SITE + '#org'}, 'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'},
                             'wordCount': words, 'articleSection': a['category'], **({'keywords': ', '.join(a['tags'])} if a.get('tags') else {}),
                             **({'image': [seo.SITE + x for x in dict.fromkeys([a.get('cover'), a.get('social_image')]) if x]} if image else {})}])
-            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image))
+            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image, wide=True))
             n += 1
     print(f'ok: {n} pages ({len(arts)} articles){" [preview -> _preview/]" if PREVIEW else ""}')
 
