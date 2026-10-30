@@ -17,11 +17,12 @@ PINs, credentials or personal data are ever sent.
 | CTA positions in an article | Three placements per article, same events (`blog_server_download_click` / `blog_client_download_click`), told apart by `cta_id` (and by the Play `utm_campaign`, which equals it): **end** = `blog_<group>_<server\|client>` (no suffix, unchanged), **mid** = `blog_<group>_mid` (band before the middle section, articles with ≥4 sections), **sticky** = `blog_<group>_sticky` (floating button after ~40 % of the scroll; hidden while the cookie banner or another in-page CTA is on screen). Impressions of each come from the generic `cta_view` with the same `cta_id`. The article's `cta` front matter is `server`, `client` or `both` (end box with both buttons; the Client link replaces the Lite as soon as `CLIENT_PLAY` is set) |
 | `blog_product_cta_click` | "About DogNAS" link in the article CTA box (to the home page); `cta_id` = `blog_<group>_product` |
 | `blog_related_article_click` | link in the article's "Keep reading" list; `cta_id` = `blog_<group>_related_<other group>` |
-| `blog_list_article_click` | article card on the blog list (`cta_id` = `blog_list_<group>`) or on a pillar hub (`blog_hub_<pillar>_<group>`) |
+| `blog_list_article_click` | article card on the blog list (`cta_id` = `blog_list_<group>`; the featured card `blog_list_featured_<group>`, the "Start here" strip `blog_list_start_<group>`) or on a pillar hub (`blog_hub_<pillar>_<group>`) |
 | `blog_pillar_click` | pillar chip on the list/hub (`cta_id` = `blog_chip_<pillar|all>`) or the pillar label in an article (`blog_article_<group>_pillar`) |
 | `blog_nav_click` | "Blog" link in the header of the home, client and privacy pages; `cta_id` = `nav_blog_<page>` |
 | `blog_home_teaser_click` / `blog_home_all_click` | the three "From the blog" cards on the home / its "All guides" link; `cta_id` = `home_blog_<group>` / `home_blog_all` |
 | `blog_home_context_click` | "Read the guide" link under a FAQ answer on the home; `cta_id` = `home_faq_<group>` |
+| `blog_server_download_click` (`blog_list`) | the CTA band under the blog list; `cta_id` = `blog_list_server` |
 | `blog_server_download_click` (`blog_header`) | the "Get DogNAS" button in the blog header; `cta_id` = `blog_header` |
 
 Blog funnel: article → download click is measured here; `server_started`, `client_paired`, `first_transfer_success` happen inside the apps (no telemetry by design) — read them from Play Console acquisition and from tester reports. Mark `blog_server_download_click` / `blog_client_download_click` as key events once the first article is live.

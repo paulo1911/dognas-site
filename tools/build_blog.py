@@ -98,11 +98,18 @@ def atom(L, items):
 CHIPS = {'pt': ('Todos', 'Temas', 'Guias', 'guias'), 'en': ('All', 'Topics', 'Guides', 'guides'), 'es': ('Todos', 'Temas', 'Guías', 'guías')}
 
 
-def cards_html(items, b, loc):
+FEATURED = 'home-nas'  # the broadest intent piece, shown large at the top of the list
+START_HERE = ['old-android-server', 'pc-phone-transfer', 'free-phone-space']  # funnel order: set up the server, move files, free the phone
+LIST_UI = {'pt': dict(start='Comece por aqui', feat='Em destaque', all='Todos os guias', read='Ler o guia'), 'en': dict(start='Start here', feat='Featured', all='All guides', read='Read the guide'),
+           'es': dict(start='Empieza aquí', feat='Destacado', all='Todas las guías', read='Leer la guía')}
+
+
+def cards_html(items, b, loc, mins=None):
     """Article cards (list and hub pages); `loc` is the data-loc prefix, unique per page type."""
     return ''.join(f'<a class="post" href="{b}{bc.article_path(a)}" data-ev="blog_list_article_click" data-loc="{loc}_{a["group"]}">'
                    + (f'<img src="{b}{a["cover"]}" alt="{html.escape(a.get("cover_alt", ""))}" width="640" height="360" loading="lazy">' if a.get('cover') else '')
-                   + f'<span class="cat">{html.escape(a["category"])}</span><h2>{html.escape(a["title"])}</h2><p>{html.escape(a["summary"])}</p></a>' for a in items)
+                   + f'<span class="cat">{html.escape(a["category"])}</span><h2>{html.escape(a["title"])}</h2><p>{html.escape(a["summary"])}</p>'
+                   + (f'<span class="rt">{max(1, round(len(a["body"].split()) / 200))} {mins}</span>' if mins else '') + '</a>' for a in items)
 
 
 def chips_html(L, b, current, pillars):
@@ -137,13 +144,27 @@ def main():
         t, base = UI[L], '../' * (bc.blog_dir(L).count('/'))
         pillars = [pid for pid in bp.ORDER if by_pillar[(pid, L)]]
         # list pages
-        pages = [by_lang[L][i:i + bc.PER_PAGE] for i in range(0, len(by_lang[L]), bc.PER_PAGE)]
+        grid = [a for a in by_lang[L] if a['group'] != FEATURED]
+        pages = [grid[i:i + bc.PER_PAGE] for i in range(0, len(grid), bc.PER_PAGE)]
         for p, chunk in enumerate(pages, 1):
             path = bc.list_path(L, p)
             b = '../' * path.count('/')
             nav = ''.join(f'<a href="{b}{bc.list_path(l)}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in live else
                           f'<a href="{b}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
-            cards = cards_html(chunk, b, 'blog_list')
+            cards = cards_html(chunk, b, 'blog_list', t['min'])
+            top = ''
+            if p == 1:
+                lu, g = LIST_UI[L], {x['group']: x for x in by_lang[L]}
+                if FEATURED in g:
+                    f = g[FEATURED]
+                    top += (f'<a class="featured" href="{b}{bc.article_path(f)}" data-ev="blog_list_article_click" data-loc="blog_list_featured_{f["group"]}">'
+                            f'<img src="{b}{f["cover"]}" alt="{html.escape(f.get("cover_alt", ""))}" width="1200" height="630" fetchpriority="high"><span class="ftxt"><span class="cat">{lu["feat"]}</span>'
+                            f'<h2>{html.escape(f["title"])}</h2><p>{html.escape(f["summary"])}</p><span class="rt">{max(1, round(len(f["body"].split()) / 200))} {t["min"]}</span></span></a>')
+                steps = [g[x] for x in START_HERE if x in g]
+                if steps:
+                    top += f'<section class="start"><h2>{lu["start"]}</h2><ol>' + ''.join(f'<li><a href="{b}{bc.article_path(x)}" data-ev="blog_list_article_click" data-loc="blog_list_start_{x["group"]}">{html.escape(x["title"])}</a></li>' for x in steps) + '</ol></section>'
+                top += f'<h2 class="all-h">{lu["all"]}</h2>'
+            band = f'<aside class="cta-band"><p>{t["mid"]["server"]}</p>{cta_btn({"group": "list"}, "server", "end", t["cta_server"][0])}</aside>'
             pager = ''
             if len(pages) > 1:
                 prev = f'<a href="{b}{bc.list_path(L, p - 1)}">{t["newer"]}</a>' if p > 1 else ''
@@ -154,7 +175,7 @@ def main():
             blog_ld = {'@type': 'Blog', '@id': seo.SITE + bc.list_path(L) + '#blog', 'url': seo.SITE + bc.list_path(L), 'name': t['h1'], 'description': t['lead'], 'inLanguage': seo.HREFLANG[L],
                        'publisher': {'@id': seo.SITE + '#org'}, 'blogPost': [{'@id': seo.SITE + bc.article_path(x) + '#post'} for x in by_lang[L]]}
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, title, t['lead'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L))]) + ([blog_ld] if p == 1 else []))
-            main_html = f'<section class="blog-head"><h1>{t["h1"]}</h1><p>{t["lead"]}</p></section>{chips_html(L, b, None, pillars)}<div class="posts">{cards}</div>{pager}'
+            main_html = f'<section class="blog-head"><h1>{t["h1"]}</h1><p>{t["lead"]}</p></section>{chips_html(L, b, None, pillars)}{top}<div class="posts">{cards}</div>{pager}{band}'
             write(path, shell(L, path, title, t['lead'], main_html, b, nav, ld, alts, noindex=p > 1))
             n += 1
         # trust page
@@ -178,7 +199,7 @@ def main():
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, P['title'], P['desc'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (P['name'], path)])
                         + [{'@type': 'CollectionPage', '@id': seo.SITE + path + '#collection', 'url': seo.SITE + path, 'name': P['name'], 'description': P['desc'], 'inLanguage': seo.HREFLANG[L],
                             'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'}, 'hasPart': [{'@id': seo.SITE + bc.article_path(x) + '#post'} for x in items]}])
-            main_html = f'{crumbs}<section class="blog-head"><h1>{html.escape(P["name"])}</h1><div class="hub-intro">{intro}</div></section>{chips_html(L, b, pid, pillars)}<div class="posts">{cards_html(items, b, "blog_hub_" + pid)}</div>'
+            main_html = f'{crumbs}<section class="blog-head"><h1>{html.escape(P["name"])}</h1><div class="hub-intro">{intro}</div></section>{chips_html(L, b, pid, pillars)}<div class="posts">{cards_html(items, b, "blog_hub_" + pid, t["min"])}</div>'
             write(path, shell(L, path, P['title'], P['desc'], main_html, b, nav, ld, alts if len(alts) > 1 else None))
             n += 1
         # articles
