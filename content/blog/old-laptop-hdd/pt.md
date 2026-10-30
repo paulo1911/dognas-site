@@ -4,7 +4,7 @@ title: Como reaproveitar o HD de um notebook antigo como armazenamento da casa
 summary: Aquele HD ou SSD que sobrou de um notebook pode virar espaço extra para o seu servidor Android. Veja o que você precisa e o que observar.
 meta_title: Reaproveitar HD de notebook como armazenamento | DogNAS
 meta_description: Como usar o HD ou SSD de um notebook antigo, numa case USB, como armazenamento de um servidor de arquivos Android, com os cuidados de energia e backup.
-category: Guias
+pillar: reuse
 tags: [hd de notebook, case usb, usb otg, armazenamento]
 cover: assets/blog/old-laptop-hdd/cover-pt.webp
 cover_alt: Monitor do servidor DogNAS em um Android, ao lado do mascote do DogNAS

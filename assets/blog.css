@@ -67,3 +67,10 @@ figure.video { margin:22px 0; } figure.video video { width:100%; max-width:560px
 .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 .hdr-cta { padding:8px 14px; font-size:14px; border-radius:10px; margin-right:8px; color:#fff; }
 nav.lang a.hdr-cta { color:#fff; margin-left:0; }
+/* Pillars (BLOG-16): chips on the list/hub pages, hub intro, linked category label. */
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
+.chips a { padding:7px 14px; border:1px solid var(--line); border-radius:999px; color:var(--muted); text-decoration:none; font-size:14px; }
+.chips a:hover { color:var(--text); border-color:var(--muted); }
+.chips a[aria-current="page"] { background:var(--btn); border-color:var(--btn); color:#fff; }
+.hub-intro { max-width:720px; } .hub-intro p { margin:0 0 12px; color:var(--muted); line-height:1.65; }
+a.cat { text-decoration:none; } a.cat:hover { text-decoration:underline; }

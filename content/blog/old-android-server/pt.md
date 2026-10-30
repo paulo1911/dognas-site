@@ -4,7 +4,7 @@ title: Como transformar um Android antigo em servidor de arquivos
 summary: Aquele celular ou tablet parado na gaveta pode guardar as fotos, os vídeos e os documentos da casa pelo Wi-Fi, sem nuvem e sem mensalidade.
 meta_title: Android antigo vira servidor de arquivos em casa | DogNAS
 meta_description: Passo a passo para usar um celular ou tablet Android antigo como servidor de arquivos no Wi-Fi de casa, sem nuvem e sem mensalidade, com o DogNAS.
-category: Guias
+pillar: reuse
 tags: [android antigo, servidor de arquivos, nas caseiro, sftp]
 cover: assets/blog/old-android-server/cover-pt.webp
 cover_alt: App DogNAS Server mostrando o servidor online em um Android, ao lado do mascote do DogNAS

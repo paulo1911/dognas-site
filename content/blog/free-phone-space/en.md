@@ -4,7 +4,7 @@ title: How to free up space on your Android phone without losing your photos
 summary: Clean out what is left over on Android and move photos and videos to a safe place off the phone, with no cloud subscription.
 meta_title: How to free up space on an Android phone | DogNAS
 meta_description: Tips to free up Android storage: cache, apps, duplicates, WhatsApp and how to send photos and videos to a server of your own at home, with no cloud.
-category: Guides
+pillar: storage
 tags: [free up space, storage, android, photos and videos]
 cover: assets/blog/free-phone-space/cover-en.webp
 cover_alt: DogNAS Client Lite home screen on an Android, next to the DogNAS mascot

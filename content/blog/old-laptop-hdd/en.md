@@ -4,7 +4,7 @@ title: How to reuse an old laptop's hard drive as home storage
 summary: That hard drive or SSD left over from a laptop can become extra space for your Android server. See what you need and what to watch for.
 meta_title: Reuse an old laptop hard drive as storage | DogNAS
 meta_description: How to use an old laptop's hard drive or SSD, in a USB enclosure, as storage for an Android file server, with power and backup precautions.
-category: Guides
+pillar: reuse
 tags: [laptop hard drive, usb enclosure, usb otg, storage]
 cover: assets/blog/old-laptop-hdd/cover-en.webp
 cover_alt: DogNAS server monitor on an Android, next to the DogNAS mascot
