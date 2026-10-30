@@ -67,3 +67,6 @@ figure.video { margin:22px 0; } figure.video video { width:100%; max-width:560px
 .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 .hdr-cta { padding:8px 14px; font-size:14px; border-radius:10px; margin-right:8px; color:#fff; }
 nav.lang a.hdr-cta { color:#fff; margin-left:0; }
+/* Trust (BLOG-13): byline link and the "Tested on" line. */
+.meta a { color:inherit; text-decoration:underline; text-underline-offset:2px; }
+.tested { margin:6px 0 0; font-size:14px; color:var(--muted); }

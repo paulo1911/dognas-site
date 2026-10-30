@@ -3,7 +3,7 @@ Run: python3 tools/build_blog.py            (published articles only; fails on a
      python3 tools/build_blog.py --preview  (also drafts/review, written under _preview/, git-ignored)
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
 import os, sys, re, html, shutil
-import seo, blog_content as bc
+import seo, blog_content as bc, blog_about as ab
 from build_home import inline_css, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, play, CLIENT_PLAY
 
 BLOG_CSS = inline_css('style.css', 'blog.css')
@@ -76,7 +76,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a class="btn primary hdr-cta" data-ev="blog_server_download_click" data-loc="blog_header" href="{play('server', 'blog_header')}" rel="noopener">{t['get']}</a>{nav}</nav></header>
 {main}
-<footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}{bc.blog_dir(L)}feed.xml">RSS</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}{bc.about_path(L)}">{ab.LABEL[L]['how']}</a> · <a href="{base}{bc.blog_dir(L)}feed.xml">RSS</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
 
@@ -139,6 +139,15 @@ def main():
             main_html = f'<section class="blog-head"><h1>{t["h1"]}</h1><p>{t["lead"]}</p></section><div class="posts">{cards}</div>{pager}'
             write(path, shell(L, path, title, t['lead'], main_html, b, nav, ld, alts, noindex=p > 1))
             n += 1
+        # trust page
+        A, path = ab.PAGE[L], bc.about_path(L)
+        b = '../' * path.count('/')
+        body_html, _ = bc.render(A['body'], b, L)
+        nav = ''.join(f'<a href="{b}{bc.about_path(l)}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' if l in live else f'<a href="{b}{LANGS[l][1]}">{NAMES[l]}</a>' for l in LANGS)
+        crumbs = f'<nav class="crumbs" aria-label="breadcrumb"><a href="{b}{LANGS[L][1]}">{t["home"]}</a> › <a href="{b}{bc.list_path(L)}">{t["blog"]}</a> › {ab.LABEL[L]["how"]}</nav>'
+        ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, A['title'] + ' | DogNAS', A['desc'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (ab.LABEL[L]['how'], path)]))
+        write(path, shell(L, path, A['title'] + ' | DogNAS', A['desc'], f'{crumbs}<article class="post-full"><header><h1>{html.escape(A["title"])}</h1></header><div class="prose">{body_html}</div></article>', b, nav, ld, {l: bc.about_path(l) for l in live}))
+        n += 1
         # articles
         for a in by_lang[L]:
             path = bc.article_path(a)
@@ -168,13 +177,14 @@ def main():
             draft = f'<p class="draft-flag">{t["draft"]} ({a["status"]})</p>' if a['status'] != 'published' else ''
             upd = a.get('updated') or a['created']
             words = len(a['body'].split())
+            tested = f'<p class="tested"><strong>{ab.LABEL[L]["tested"]}:</strong> {html.escape(a["tested"])}</p>' if a.get('tested') else ''
             main_html = f'''{crumbs}{draft}<article class="post-full"><header><span class="cat">{html.escape(a["category"])}</span><h1>{html.escape(a["title"])}</h1>
-<p class="meta">{t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p></header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["category"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
+<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}</header>{cover}{toc_html}<div class="prose">{html_body}</div>{cta}</article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',b[0]);x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["category"]}',cta:'{a["cta"]}',lang:'{L}'}});}});</script>'''
             image = a.get('social_image') or a.get('cover')
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
                             'datePublished': a.get('published') or a['created'], 'dateModified': upd, 'mainEntityOfPage': seo.SITE + path,
-                            'author': {'@id': seo.SITE + '#org'}, 'publisher': {'@id': seo.SITE + '#org'}, 'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'},
+                            'author': {'@type': 'Organization', 'name': ab.TEAM[L], 'url': seo.SITE + bc.about_path(L)}, 'publisher': {'@id': seo.SITE + '#org'}, 'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'},
                             'wordCount': words, 'articleSection': a['category'], **({'keywords': ', '.join(a['tags'])} if a.get('tags') else {}),
                             **({'image': [seo.SITE + x for x in dict.fromkeys([a.get('cover'), a.get('social_image')]) if x]} if image else {})}])
             write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image))
