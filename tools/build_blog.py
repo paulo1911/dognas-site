@@ -3,7 +3,7 @@ Run: python3 tools/build_blog.py            (published articles only; fails on a
      python3 tools/build_blog.py --preview  (also drafts/review, written under _preview/, git-ignored)
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
 import os, sys, re, html, shutil
-import seo, blog_content as bc, blog_about as ab, blog_pillars as bp
+import check_blog, seo, blog_content as bc, blog_about as ab, blog_pillars as bp
 from build_home import inline_css, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, play, CLIENT_PLAY
 
 BLOG_CSS = inline_css('style.css', 'blog.css')
@@ -135,6 +135,10 @@ def main():
     arts, errors = bc.load(include_drafts=PREVIEW)
     if errors:
         print('\n'.join('ERROR ' + e for e in errors)); sys.exit(1)
+    cerr, cwarn = check_blog.check([a for a in arts if a.get('status') == 'published'])
+    if cerr:
+        print('\n'.join('ERROR ' + e for e in cerr)); sys.exit(1)
+    if cwarn: print(f'{len(cwarn)} editorial warning(s): python3 tools/check_blog.py')
     if PREVIEW:
         shutil.rmtree(OUT, ignore_errors=True); os.makedirs(OUT); os.symlink(os.path.join(ROOT, 'assets'), os.path.join(OUT, 'assets'))
     by_lang = {l: sorted([a for a in arts if a['lang'] == l], key=lambda a: a.get('published') or a['created'], reverse=True) for l in LANGS}
