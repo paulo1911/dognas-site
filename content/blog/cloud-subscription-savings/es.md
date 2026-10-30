@@ -7,7 +7,7 @@ meta_description: Cómo reducir el gasto en Google One, iCloud y otras nubes: re
 pillar: storage
 tags: [almacenamiento en la nube, ahorrar, suscripción, servidor en casa]
 cover: assets/blog/cloud-subscription-savings/cover-es.webp
-cover_alt: Archivos de DogNAS Client Lite en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de una nube con una moneda junto a la pantalla del servidor DogNAS
 social_image: assets/blog/cloud-subscription-savings/social-es.jpg
 cta: server
 related: [old-android-server, home-nas, free-phone-space]

@@ -7,7 +7,7 @@ meta_description: How to use an old laptop's hard drive or SSD, in a USB enclosu
 pillar: reuse
 tags: [laptop hard drive, usb enclosure, usb otg, storage]
 cover: assets/blog/old-laptop-hdd/cover-en.webp
-cover_alt: DogNAS server monitor on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a hard drive next to the DogNAS server screen
 social_image: assets/blog/old-laptop-hdd/social-en.jpg
 cta: server
 related: [old-android-server, nas-vs-android, home-nas]

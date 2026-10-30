@@ -7,7 +7,7 @@ meta_description: Step-by-step guide to use an old Android phone or tablet as a 
 pillar: reuse
 tags: [old android, file server, home nas, sftp]
 cover: assets/blog/old-android-server/cover-en.webp
-cover_alt: DogNAS Server app showing the server online on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a phone with Wi-Fi next to the DogNAS server screen
 social_image: assets/blog/old-android-server/social-en.jpg
 cta: server
 related: [home-nas, old-phone-ideas]

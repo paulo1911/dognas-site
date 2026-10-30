@@ -7,7 +7,7 @@ meta_description: Guía paso a paso para usar un celular o tablet Android viejo 
 pillar: reuse
 tags: [android viejo, servidor de archivos, nas casero, sftp]
 cover: assets/blog/old-android-server/cover-es.webp
-cover_alt: App DogNAS Server mostrando el servidor en línea en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de un celular con Wi-Fi junto a la pantalla del servidor DogNAS
 social_image: assets/blog/old-android-server/social-es.jpg
 cta: server
 related: [home-nas, old-phone-ideas]

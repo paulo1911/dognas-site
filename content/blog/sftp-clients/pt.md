@@ -7,7 +7,7 @@ meta_description: Como conectar o servidor DogNAS ao FileZilla, WinSCP, Cyberduc
 pillar: sftp
 tags: [filezilla, winscp, cyberduck, rclone, sftp]
 cover: assets/blog/sftp-clients/cover-pt.webp
-cover_alt: Tela inicial do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de uma janela de terminal ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/sftp-clients/social-pt.jpg
 cta: both
 related: [sftp-explained, pc-phone-transfer, old-android-server]

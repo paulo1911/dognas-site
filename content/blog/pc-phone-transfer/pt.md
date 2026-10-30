@@ -7,7 +7,7 @@ meta_description: Como passar arquivos do PC para o celular e do celular para o 
 pillar: storage
 tags: [transferir arquivos, pc e celular, wi-fi, sftp]
 cover: assets/blog/pc-phone-transfer/cover-pt.webp
-cover_alt: Fila de transferências do DogNAS Client Lite em um Android, ao lado do mascote do DogNAS
+cover_alt: Ilustração de um computador e um celular trocando arquivos ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/pc-phone-transfer/social-pt.jpg
 cta: both
 related: [old-android-server, home-nas, free-phone-space]

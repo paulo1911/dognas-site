@@ -7,7 +7,7 @@ meta_description: Arma un NAS casero con un Android viejo, sin comprar equipo y 
 pillar: compare
 tags: [nas casero, android viejo, servidor de archivos, almacenamiento]
 cover: assets/blog/home-nas/cover-es.webp
-cover_alt: Pantalla del monitor del servidor DogNAS en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de una casa con una caja de almacenamiento junto a la pantalla del DogNAS Client Lite
 social_image: assets/blog/home-nas/social-es.jpg
 cta: server
 related: [old-android-server, old-phone-ideas]

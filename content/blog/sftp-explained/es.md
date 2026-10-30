@@ -7,7 +7,7 @@ meta_description: Qué es SFTP, por qué es seguro y cómo acceder a un servidor
 pillar: sftp
 tags: [sftp, ssh, filezilla, winscp, servidor de archivos]
 cover: assets/blog/sftp-explained/cover-es.webp
-cover_alt: Código QR de un perfil del servidor DogNAS en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de un candado junto a la pantalla del servidor DogNAS
 social_image: assets/blog/sftp-explained/social-es.jpg
 cta: server
 related: [old-android-server, pc-phone-transfer, nas-vs-android]

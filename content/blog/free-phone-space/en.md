@@ -7,7 +7,7 @@ meta_description: Tips to free up Android storage: cache, apps, duplicates, What
 pillar: storage
 tags: [free up space, storage, android, photos and videos]
 cover: assets/blog/free-phone-space/cover-en.webp
-cover_alt: DogNAS Client Lite home screen on an Android, next to the DogNAS mascot
+cover_alt: Illustration of a phone with an arrow moving files out next to the DogNAS Client Lite screen
 social_image: assets/blog/free-phone-space/social-en.jpg
 cta: client
 related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]

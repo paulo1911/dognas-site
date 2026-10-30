@@ -7,7 +7,7 @@ meta_description: Cómo usar una tablet Android vieja como servidor de archivos 
 pillar: reuse
 tags: [tablet vieja, servidor de archivos, almacenamiento, android]
 cover: assets/blog/old-tablet/cover-es.webp
-cover_alt: Monitor del servidor DogNAS en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de una tablet con Wi-Fi junto a la pantalla del servidor DogNAS
 social_image: assets/blog/old-tablet/social-es.jpg
 cta: server
 related: [old-android-server, home-nas, old-phone-ideas]

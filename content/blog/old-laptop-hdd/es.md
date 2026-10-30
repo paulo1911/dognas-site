@@ -7,7 +7,7 @@ meta_description: Cómo usar el disco duro o SSD de una laptop vieja, en una caj
 pillar: reuse
 tags: [disco de laptop, caja usb, usb otg, almacenamiento]
 cover: assets/blog/old-laptop-hdd/cover-es.webp
-cover_alt: Monitor del servidor DogNAS en un Android, junto a la mascota de DogNAS
+cover_alt: Ilustración de un disco duro junto a la pantalla del servidor DogNAS
 social_image: assets/blog/old-laptop-hdd/social-es.jpg
 cta: server
 related: [old-android-server, nas-vs-android, home-nas]
