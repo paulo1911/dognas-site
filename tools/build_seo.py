@@ -52,7 +52,7 @@ w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://
 
 # ---- llms.txt (llmstxt.org format) and llms-full.txt --------------------------------------------------------------
 NAME = {'pt': 'Português', 'en': 'English', 'es': 'Español'}
-blog_llms = ('## Blog\n' + ''.join(f'- [{a["title"]}]({SITE}{bc.article_path(a)}) ({NAME[a["lang"]]}): {a["summary"]}\n' for a in sorted(barts, key=lambda a: (a['lang'], a['slug']))) + '\n') if barts else ''
+blog_llms = ('## Blog\n' + ''.join(f'- [Atom feed, {NAME[l]}]({SITE}{bc.blog_dir(l)}feed.xml)\n' for l in sorted({a['lang'] for a in barts})) + ''.join(f'- [{a["title"]}]({SITE}{bc.article_path(a)}) ({NAME[a["lang"]]}): {a["summary"]}\n' for a in sorted(barts, key=lambda a: (a['lang'], a['slug']))) + '\n') if barts else ''
 llms = f'''# DogNAS
 
 > DogNAS turns a compatible Android phone or tablet into a private file server (a small NAS) on your home Wi-Fi: keep and reach photos, videos and documents without the cloud and without a monthly fee. Other phones pair with a QR Code and a PIN; PCs and Macs connect over SFTP. Available in Portuguese (default), English and Spanish.
