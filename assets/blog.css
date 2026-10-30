@@ -77,3 +77,19 @@ nav.lang a.hdr-cta { color:#fff; margin-left:0; }
 .chips a[aria-current="page"] { background:var(--btn); border-color:var(--btn); color:#fff; }
 .hub-intro { max-width:720px; } .hub-intro p { margin:0 0 12px; color:var(--muted); line-height:1.65; }
 a.cat { text-decoration:none; } a.cat:hover { text-decoration:underline; }
+/* List v2 (BLOG-18): featured article, "start here" strip, reading time on cards. */
+.featured { display:grid; grid-template-columns:1.1fr 1fr; gap:22px; align-items:center; margin:0 0 22px; padding:16px; background:var(--card); border:1px solid var(--line); border-radius:16px; color:var(--text); text-decoration:none; }
+.featured:hover { border-color:var(--red); }
+.featured img { width:100%; height:auto; border-radius:12px; }
+.featured h2 { font-size:clamp(22px, 3.4vw, 30px); line-height:1.25; margin:6px 0 10px; }
+.featured p { color:var(--muted); margin:0 0 10px; }
+.rt { display:block; margin-top:10px; font-size:13px; color:var(--muted); }
+.start { margin:0 0 26px; padding:16px 18px; border:1px solid var(--line); border-radius:14px; }
+.start h2, .all-h { font-size:18px; margin:0 0 10px; }
+.all-h { margin:26px 0 0; }
+.start ol { margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; counter-reset:s; }
+.start li { counter-increment:s; display:flex; gap:10px; align-items:flex-start; }
+.start li::before { content:counter(s); flex:0 0 26px; height:26px; border-radius:50%; background:var(--btn); color:#fff; font-weight:700; font-size:14px; line-height:26px; text-align:center; }
+.start a { color:var(--text); text-decoration:none; font-weight:600; line-height:1.35; } .start a:hover { text-decoration:underline; }
+.posts + .cta-band { margin-top:32px; }
+@media (max-width:760px) { .featured { grid-template-columns:1fr; } .start ol { grid-template-columns:1fr; } }
