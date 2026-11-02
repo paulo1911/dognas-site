@@ -3,7 +3,7 @@ slug: whatsapp-filling-your-phone-free-up-space
 title: WhatsApp filling your phone: how to move photos and videos out without losing your chats
 summary: WhatsApp is often the biggest space hog on Android. Where its media lives, how to copy it to a server of your own at home, and only then delete it from the phone.
 meta_title: WhatsApp filling your phone: free up space | DogNAS
-meta_description: WhatsApp filled your Android? See where its media lives, how to copy it to your own home server with DogNAS and free up space without deleting your chats.
+meta_description: Storage full because of WhatsApp? See where its media lives, how to copy it to your own home server with DogNAS and free up space without deleting your chats.
 pillar: storage
 tags: [whatsapp, free up space, storage, android, photos and videos]
 tested: Moto G100 · Android 12 · DogNAS Client 1.0.1 uploading to a DogNAS server (E13) · 2026-11-02
@@ -17,7 +17,7 @@ translation_review: pending
 created: 2026-11-01
 updated: 2026-11-01
 ---
-**WhatsApp fills your phone because it keeps every photo, video, voice note and document that passes through your groups on the device**, even the ones you never opened. The way out that keeps what matters is to copy that media to a place of your own, check it, and only then delete it from the phone. Your text conversations stay in the app.
+**WhatsApp fills your phone because, by default, it downloads and keeps the photos, videos, voice notes and documents that pass through your groups on the device**, even the ones you never opened. The way out that keeps what matters is to copy that media to a place of your own, check it, and only then delete it from the phone. Your text conversations stay in the app.
 
 > [!takeaways]
 > - The media sits in ordinary folders on the phone that you can copy. Android 11 or newer: `Android/media/com.whatsapp/WhatsApp/Media`. Android 10 or older: `WhatsApp/Media`.
@@ -58,10 +58,11 @@ You need a DogNAS server at home. An [old Android works as a file server](/en/bl
 ## Things to keep in mind
 
 - **Check before you delete.** This is the step that prevents regret.
-- **Deleting media keeps the text**, and the chat shows the file as unavailable. If it is still on the sender's WhatsApp you can sometimes download it again; if not, your copy is the only one.
+- **Deleting media keeps the text**, and the chat shows the file as unavailable. Sometimes you can download it again and sometimes you cannot, depending on whether the file is still available to you. Assume your copy may be the only one.
 - **This is not a WhatsApp backup.** The chat history backup is WhatsApp's own (Google Drive). DogNAS stores the media files you copy and does not restore chats.
 - **One copy is not safety.** DogNAS stores on the disk you choose. For irreplaceable photos, keep a second copy somewhere else.
 - **Your network only.** Sending happens over home Wi-Fi, with the server on and connected.
+- **Space on the server.** The Free plan manages up to 64 GB; group videos can add up fast, so check how much you need.
 
 ## Keep it from filling up again
 

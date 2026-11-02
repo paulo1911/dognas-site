@@ -3,7 +3,7 @@ slug: whatsapp-llenando-el-celular-liberar-espacio
 title: WhatsApp llenando el celular: cómo sacar fotos y vídeos sin perder tus chats
 summary: WhatsApp suele ser lo que más espacio ocupa en Android. Dónde están sus archivos, cómo copiarlos a un servidor tuyo en casa y solo entonces borrarlos del celular.
 meta_title: WhatsApp llenando el celular: liberar espacio | DogNAS
-meta_description: ¿WhatsApp llenó tu Android? Mira dónde están sus archivos, cómo copiarlos a tu servidor en casa con DogNAS y liberar espacio sin borrar tus chats.
+meta_description: ¿Memoria llena por WhatsApp? Mira dónde están sus archivos, cómo copiarlos a tu servidor en casa con DogNAS y liberar espacio sin borrar tus chats.
 pillar: storage
 tags: [whatsapp, liberar espacio, almacenamiento, android, fotos y vídeos]
 tested: Moto G100 · Android 12 · DogNAS Client 1.0.1 enviando a un servidor DogNAS (E13) · 2026-11-02
@@ -17,7 +17,7 @@ translation_review: pending
 created: 2026-11-01
 updated: 2026-11-01
 ---
-**WhatsApp llena el celular porque guarda en el aparato cada foto, vídeo, audio y documento que pasa por tus grupos**, incluso los que nunca abriste. La salida que conserva lo importante es copiar esos archivos a un lugar tuyo, comprobarlos y solo entonces borrarlos del celular. Las conversaciones de texto siguen en la app.
+**WhatsApp llena el celular porque, por defecto, descarga y guarda en el aparato las fotos, vídeos, audios y documentos que pasan por tus grupos**, incluso los que nunca abriste. La salida que conserva lo importante es copiar esos archivos a un lugar tuyo, comprobarlos y solo entonces borrarlos del celular. Las conversaciones de texto siguen en la app.
 
 > [!takeaways]
 > - Los archivos están en carpetas normales del celular que puedes copiar. Android 11 o más nuevo: `Android/media/com.whatsapp/WhatsApp/Media`. Android 10 o más antiguo: `WhatsApp/Media`.
@@ -58,10 +58,11 @@ Necesitas un servidor DogNAS en casa. Un [Android viejo sirve de servidor de arc
 ## Cuidados importantes
 
 - **Comprueba antes de borrar.** Es el paso que evita arrepentirse.
-- **Borrar los archivos conserva el texto**, y el chat muestra el archivo como no disponible. Si aún está en el WhatsApp de quien lo envió, a veces puedes descargarlo otra vez; si no, solo existirá tu copia.
+- **Borrar los archivos conserva el texto**, y el chat muestra el archivo como no disponible. A veces puedes descargarlo otra vez y a veces no, según si el archivo sigue disponible para ti. Supón que tu copia puede ser la única.
 - **No es una copia de seguridad de WhatsApp.** La copia del historial de chats es la de la propia app (Google Drive). DogNAS guarda los archivos multimedia que copies y no restaura conversaciones.
 - **Una sola copia no es seguridad.** DogNAS guarda en el disco que elijas. Para fotos irreemplazables, ten una segunda copia en otro lugar.
 - **Solo en tu red.** El envío es por el Wi-Fi de casa, con el servidor encendido y conectado.
+- **Espacio en el servidor.** El plan Gratis gestiona hasta 64 GB; los vídeos de grupos suman rápido, así que calcula cuánto necesitas.
 
 ## Evita que se vuelva a llenar
 

@@ -3,7 +3,7 @@ slug: whatsapp-lotando-o-celular-como-liberar-espaco
 title: WhatsApp lotando o celular: como tirar fotos e vídeos sem perder as conversas
 summary: O WhatsApp costuma ser o maior consumidor de espaço do Android. Veja onde ficam as mídias, como copiá-las para um servidor seu em casa e só então apagar do celular.
 meta_title: WhatsApp lotando o celular: como liberar espaço | DogNAS
-meta_description: O WhatsApp encheu o seu Android? Veja onde ficam as mídias, como copiá-las para um servidor seu em casa com o DogNAS e liberar espaço sem apagar as conversas.
+meta_description: Memória cheia por causa do WhatsApp? Veja onde ficam as mídias, como copiá-las para um servidor seu em casa com o DogNAS e liberar espaço sem apagar as conversas.
 pillar: storage
 tags: [whatsapp, liberar espaço, armazenamento, android, fotos e vídeos]
 tested: Moto G100 · Android 12 · DogNAS Client 1.0.1 enviando para um servidor DogNAS (E13) · 2026-11-02
@@ -17,7 +17,7 @@ translation_review: pending
 created: 2026-11-01
 updated: 2026-11-01
 ---
-**O WhatsApp enche o celular porque guarda no aparelho toda foto, vídeo, áudio e documento que passa pelos seus grupos**, mesmo os que você nunca abriu. A saída que preserva o que importa é copiar essas mídias para um lugar seu, conferir, e só então apagar do celular. As conversas em texto continuam no app.
+**O WhatsApp enche o celular porque, por padrão, baixa e guarda no aparelho as fotos, vídeos, áudios e documentos que passam pelos seus grupos**, mesmo os que você nunca abriu. A saída que preserva o que importa é copiar essas mídias para um lugar seu, conferir, e só então apagar do celular. As conversas em texto continuam no app.
 
 > [!takeaways]
 > - As mídias ficam em pastas do próprio celular, que você pode copiar. No Android 11 ou mais novo: `Android/media/com.whatsapp/WhatsApp/Media`. No Android 10 ou mais antigo: `WhatsApp/Media`.
@@ -58,10 +58,11 @@ Você precisa de um servidor DogNAS em casa. Um [Android antigo serve de servido
 ## Cuidados importantes
 
 - **Confira antes de apagar.** É o passo que evita o arrependimento.
-- **Apagar a mídia mantém o texto**, e a conversa mostra o arquivo como indisponível. Se ele ainda estiver no WhatsApp de quem enviou, às vezes dá para baixar de novo; se não estiver, ele só existirá na sua cópia.
+- **Apagar a mídia mantém o texto**, e a conversa mostra o arquivo como indisponível. Em alguns casos dá para baixar de novo, em outros não: depende de o arquivo ainda estar disponível para você. Conte que a sua cópia pode ser a única.
 - **Não é backup do WhatsApp.** O backup do histórico de conversas é o do próprio app (Google Drive). O DogNAS guarda os arquivos de mídia que você copiar e não restaura conversas.
 - **Uma cópia só não é segurança.** O DogNAS guarda no disco que você escolher. Para fotos insubstituíveis, tenha uma segunda cópia em outro lugar.
 - **Só na sua rede.** O envio é pelo Wi-Fi de casa, com o servidor ligado e conectado.
+- **Espaço no servidor.** O plano Grátis gerencia até 64 GB; vídeos de grupos podem somar muito, então veja quanto você precisa.
 
 ## Evite que lote de novo
 
