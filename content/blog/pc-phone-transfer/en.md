@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Moving a file from your computer to your phone, or from your phone to your computer, sounds simple until you have to do it every week. A cable that is never at hand, emailing yourself, a full cloud. There is a way to do it over your home Wi-Fi, directly, with no cable and no account.
 
@@ -33,7 +33,7 @@ DogNAS turns an Android phone or tablet (7.0 or newer) into a file server on you
 
 1. **Install the server** on the Android that will keep the files and tap Start.
 2. **Create a profile** for yourself, with its own PIN and folders.
-3. **On the phone,** open DogNAS Client Lite, point the camera at the profile's QR Code and type the PIN. Upload and download files from the transfer queue.
+3. **On the phone,** open DogNAS Client (or the lighter DogNAS Client Lite), point the camera at the profile's QR Code and type the PIN. Upload and download files from the transfer queue.
 4. **On the PC,** open an SFTP client such as FileZilla, WinSCP or Cyberduck and use the connection details the server shows on its "how to connect your PC or iPhone" screen. Drag files between the windows.
 
 That's it: what you put on the server from the PC shows up on the phone, and what the phone uploads shows up on the PC. It works both ways, with no cable and no opening an app each time.

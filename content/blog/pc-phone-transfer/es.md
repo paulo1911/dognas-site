@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Pasar un archivo de la computadora al celular, o del celular a la computadora, parece simple hasta que tienes que hacerlo cada semana. Un cable que nunca está a mano, enviarte correos a ti mismo, una nube llena. Hay una forma de hacerlo por el Wi-Fi de casa, directamente, sin cable y sin depender de una cuenta.
 
@@ -33,7 +33,7 @@ DogNAS convierte un celular o tablet Android (7.0 o más reciente) en un servido
 
 1. **Instala el servidor** en el Android que guardará los archivos y toca Iniciar.
 2. **Crea un perfil** para ti, con PIN y carpetas propias.
-3. **En el celular,** abre DogNAS Client Lite, apunta la cámara al código QR del perfil e ingresa el PIN. Sube y descarga archivos desde la cola de transferencias.
+3. **En el celular,** abre DogNAS Client (o el más ligero DogNAS Client Lite), apunta la cámara al código QR del perfil e ingresa el PIN. Sube y descarga archivos desde la cola de transferencias.
 4. **En la PC,** abre un cliente SFTP como FileZilla, WinSCP o Cyberduck y usa los datos de conexión que el servidor muestra en la pantalla "Cómo conectar tu PC o iPhone". Arrastra los archivos entre las ventanas.
 
 Listo: lo que pones en el servidor desde la PC aparece en el celular, y lo que el celular sube aparece en la PC. Funciona en los dos sentidos, sin cable y sin abrir una app cada vez.

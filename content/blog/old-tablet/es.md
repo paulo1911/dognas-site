@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Todo el mundo tiene una tablet en el cajón: la de los niños, la que se puso lenta, la que fue reemplazada por un modelo nuevo. Suele tener más almacenamiento que un celular viejo, una pantalla grande y una batería mayor. Todo eso la hace una buena candidata a servidor de archivos de la casa.
 
@@ -33,7 +33,7 @@ DogNAS funciona en celulares y tablets con Android 7.0 o más reciente.
 1. Instala DogNAS en la tablet y elige dónde quedan los archivos: memoria, tarjeta SD o disco USB.
 2. Toca Iniciar.
 3. Crea un perfil para cada persona de la casa, con PIN y carpetas propias.
-4. En los celulares, abre DogNAS Client Lite, apunta la cámara al código QR del perfil e ingresa el PIN. En la computadora, usa FileZilla, WinSCP o Cyberduck.
+4. En los celulares, abre DogNAS Client (o el más ligero DogNAS Client Lite), apunta la cámara al código QR del perfil e ingresa el PIN. En la computadora, usa FileZilla, WinSCP o Cyberduck.
 
 ![Monitor del servidor: clientes y velocidad en tiempo real](assets/shots/es/server-monitor.webp)
 ![Código QR del perfil para conectar el celular](assets/shots/es/server-qr.webp)
