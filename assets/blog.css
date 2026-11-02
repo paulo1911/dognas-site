@@ -116,3 +116,8 @@ a.cat { text-decoration:none; } a.cat:hover { text-decoration:underline; }
 .start a { color:var(--text); text-decoration:none; font-weight:600; line-height:1.35; } .start a:hover { text-decoration:underline; }
 .posts + .cta-band { margin-top:32px; }
 @media (max-width:760px) { .featured { grid-template-columns:1fr; } .start ol { grid-template-columns:1fr; } }
+
+/* AdSense (blog only): one banner inside the article, one in the desktop sidebar. */
+.post-ad { margin:28px 0; text-align:center; min-height:100px; }
+.post-ad small { display:block; margin-bottom:6px; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted, #8a8f98); }
+.side .post-ad { margin:16px 0 0; }

@@ -4,26 +4,26 @@ Run: python3 tools/build_blog.py            (published articles only; fails on a
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
 import os, sys, re, html, shutil
 import check_blog, seo, blog_content as bc, blog_about as ab, blog_pillars as bp
-from build_home import inline_css, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, play, CLIENT_PLAY
+from build_home import inline_css, ROOT, GA_TAG, ADSENSE_CLIENT, ADSENSE_SLOT_MID, ADSENSE_SLOT_SIDE, CSS_V, LANGS, NAMES, EMAIL, play, CLIENT_PLAY
 
 BLOG_CSS = inline_css('style.css', 'blog.css')
 PREVIEW = '--preview' in sys.argv
 OUT = os.path.join(ROOT, '_preview') if PREVIEW else ROOT
 UI = {
  'pt': dict(about='Conhecer o DogNAS', blog='Blog', h1='Blog DogNAS', lead='Guias práticos para usar seu Android como armazenamento particular, sem nuvem.', home='Início', toc='Neste artigo',
-   related='Leia também', get='Baixar o DogNAS', updated='Atualizado em', min='min de leitura', newer='← Mais recentes', older='Mais antigos →', privacy='Privacidade', cookies='Cookies',
+   related='Leia também', get='Baixar o DogNAS', updated='Atualizado em', min='min de leitura', newer='← Mais recentes', older='Mais antigos →', privacy='Privacidade', cookies='Cookies', ad='Publicidade',
    cta_server=('Quero instalar no meu Android agora', 'Instale o DogNAS no Android que vai guardar seus arquivos. Grátis.'),
    cta_client=('Acessar meus arquivos', 'Instale o DogNAS Client no aparelho que vai acessar o seu DogNAS. Grátis. Prefere algo mais leve? Há também o DogNAS Client Lite.'), draft='RASCUNHO — não publicado',
    cta_both='Instale o DogNAS no Android que vai guardar seus arquivos e o app de acesso nos aparelhos que vão usá-los. Os dois são grátis.',
    mid=dict(server='Tem um Android parado? Transforme-o no seu armazenamento particular em poucos minutos.', client='Precisa acessar seus arquivos de outro celular? Instale o app de acesso, é grátis.', both='Um Android guarda os arquivos e os outros aparelhos acessam. Comece grátis em poucos minutos.')),
  'en': dict(about='About DogNAS', blog='Blog', h1='DogNAS Blog', lead='Practical guides to use your Android as private storage, with no cloud.', home='Home', toc='In this article',
-   related='Keep reading', get='Get DogNAS', updated='Updated', min='min read', newer='← Newer', older='Older →', privacy='Privacy', cookies='Cookies',
+   related='Keep reading', get='Get DogNAS', updated='Updated', min='min read', newer='← Newer', older='Older →', privacy='Privacy', cookies='Cookies', ad='Advertisement',
    cta_server=('Install on my Android now', 'Install DogNAS on the Android that will keep your files. Free.'),
    cta_client=('Access my files', 'Install DogNAS Client on the device that will reach your DogNAS. Free. Prefer something lighter? There is also DogNAS Client Lite.'), draft='DRAFT — not published',
    cta_both='Install DogNAS on the Android that will keep your files and the access app on the devices that will reach them. Both are free.',
    mid=dict(server='Have an old Android sitting idle? Turn it into your private storage in a few minutes.', client='Need to reach your files from another phone? Install the access app, it is free.', both='One Android keeps the files and your other devices reach them. Start free in a few minutes.')),
  'es': dict(about='Conocer DogNAS', blog='Blog', h1='Blog DogNAS', lead='Guías prácticas para usar tu Android como almacenamiento privado, sin nube.', home='Inicio', toc='En este artículo',
-   related='Sigue leyendo', get='Descargar DogNAS', updated='Actualizado el', min='min de lectura', newer='← Más recientes', older='Más antiguos →', privacy='Privacidad', cookies='Cookies',
+   related='Sigue leyendo', get='Descargar DogNAS', updated='Actualizado el', min='min de lectura', newer='← Más recientes', older='Más antiguos →', privacy='Privacidad', cookies='Cookies', ad='Publicidad',
    cta_server=('Quiero instalarlo en mi Android ahora', 'Instala DogNAS en el Android que guardará tus archivos. Gratis.'),
    cta_client=('Acceder a mis archivos', 'Instala DogNAS Client en el dispositivo que accederá a tu DogNAS. Gratis. ¿Prefieres algo más ligero? También existe DogNAS Client Lite.'), draft='BORRADOR — no publicado',
    cta_both='Instala DogNAS en el Android que guardará tus archivos y la app de acceso en los dispositivos que los usarán. Las dos son gratis.',
@@ -228,12 +228,20 @@ def main():
             if kind == 'both': sub = t['cta_both']
             btns = cta_btn(a, first, 'end', label) + (' ' + cta_btn(a, 'client', 'end', t['cta_client'][0], False) if kind == 'both' else '')
             cta = f'<aside class="post-cta"><p>{sub}</p>{btns} <a class="more" href="{b}{LANGS[L][1]}" data-ev="blog_product_cta_click" data-loc="blog_{a["group"]}_product">{t["about"]}</a></aside>'
+            def ad_box(slot, cls):
+                # Hidden (display:none) containers are skipped by the loader, so the sidebar ad never requests on mobile.
+                return (f'<aside class="post-ad {cls}" aria-label="{t["ad"]}"><small>{t["ad"]}</small><ins class="adsbygoogle" style="display:block" data-ad-client="{ADSENSE_CLIENT}" data-ad-slot="{slot}" data-ad-format="auto" data-full-width-responsive="true"></ins></aside>' if slot else '')
+            ad_mid, ad_side = ad_box(ADSENSE_SLOT_MID, 'ad-mid'), ad_box(ADSENSE_SLOT_SIDE, 'ad-side')
             # A short band before the middle section (after the reader has seen what the guide delivers), and a floating
             # button after ~40 % of the scroll (script below); each position has its own cta_id and Play campaign.
             heads = [m.start() for m in re.finditer(r'<h2 id=', html_body)]
             if len(heads) >= 4:
                 mid = f'<aside class="cta-band mid-cta"><p>{t["mid"][kind]}</p>{cta_btn(a, first, "mid", label)}</aside>'
                 html_body = html_body[:heads[len(heads) // 2]] + mid + html_body[heads[len(heads) // 2]:]
+            heads = [m.start() for m in re.finditer(r'<h2 id=', html_body)]
+            if ad_mid:
+                k = min(len(heads) - 1, len(heads) // 2 + 1)
+                html_body = html_body[:heads[k]] + ad_mid + html_body[heads[k]:] if len(heads) >= 3 else html_body + ad_mid
             sticky = f'<div class="float-cta" hidden>{cta_btn(a, first, "sticky", label)}</div>'
             rel = [by_group[(r, L)] for r in (a.get('related') or []) if (r, L) in by_group]
             rel_html = f'<section class="related"><h2>{t["related"]}</h2><div class="posts">{cards_html(rel, b, "blog_" + a["group"] + "_related", t["min"], ev="blog_related_article_click")}</div></section>' if rel else ''
@@ -247,7 +255,7 @@ def main():
             words = len(a['body'].split())
             tested = f'<p class="tested"><strong>{ab.LABEL[L]["tested"]}:</strong> {html.escape(a["tested"])}</p>' if a.get('tested') else ''
             main_html = f'''{crumbs}{draft}<article class="post-full"><header><a class="cat" href="{b}{bc.pillar_path(L, a["pillar"])}" data-ev="blog_pillar_click" data-loc="blog_article_{a["group"]}_pillar">{html.escape(a["category"])}</a><h1>{html.escape(a["title"])}</h1>
-<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}</header><div class="art-grid"><div class="art-main">{cover}{toc_html}<div class="prose">{html_body}</div>{cta}{next_html}</div><aside class="side">{side_toc}{side_cta}</aside></div></article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',c.getAttribute('data-'+b[0]));x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["pillar"]}',cta:'{a["cta"]}',lang:'{L}'}});}});(function(){{var p=document.querySelector('.prose'),done=false,tick=false;if(!p)return;function chk(){{tick=false;if(done||!window.dnEvent)return;var r=p.getBoundingClientRect();if((innerHeight-r.top)/r.height>=.5){{done=true;dnEvent('blog_read_50',{{article:'{a["group"]}',category:'{a["pillar"]}',lang:'{L}'}});}}}}addEventListener('scroll',function(){{if(!tick){{tick=true;requestAnimationFrame(chk);}}}},{{passive:true}});}})();</script>'''
+<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}</header><div class="art-grid"><div class="art-main">{cover}{toc_html}<div class="prose">{html_body}</div>{cta}{next_html}</div><aside class="side">{side_toc}{side_cta}{ad_side}</aside></div></article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',c.getAttribute('data-'+b[0]));x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["pillar"]}',cta:'{a["cta"]}',lang:'{L}'}});}});(function(){{var p=document.querySelector('.prose'),done=false,tick=false;if(!p)return;function chk(){{tick=false;if(done||!window.dnEvent)return;var r=p.getBoundingClientRect();if((innerHeight-r.top)/r.height>=.5){{done=true;dnEvent('blog_read_50',{{article:'{a["group"]}',category:'{a["pillar"]}',lang:'{L}'}});}}}}addEventListener('scroll',function(){{if(!tick){{tick=true;requestAnimationFrame(chk);}}}},{{passive:true}});}})();</script>'''
             image = a.get('social_image') or a.get('cover')
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['category'], bc.pillar_path(L, a['pillar'])), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
