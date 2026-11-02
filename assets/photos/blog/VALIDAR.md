@@ -13,7 +13,7 @@ Nada disso está ligado a nenhum artigo ainda. Todas saem sem EXIF, em 900 px e 
 | `usb-dock-s20fe` | S20 FE ao lado de um dock de discos USB | 2º lote; moldura de família borrada |
 | `tv-box-client` | Moto G100 com o Client Lite conectado à TV box ("My files") | 2º lote; sem pessoas |
 | `tablet-transfers` | tablet servidor + celular recebendo arquivos | 2º lote; moldura borrada; mostra nomes de arquivos de teste |
-| `tablet-server-online` | tablet "Server ONLINE" + celular na frente | 2º lote; moldura borrada; **mostra o nome "Paulo" na tela do celular** |
+| `tablet-server-online` | tablet "Server ONLINE" + celular na frente | 2º lote; moldura borrada; mostra o nome "Paulo" na tela do celular (decisão do dono do projeto, 2026-11-01: manter, dá realismo) |
 | `old-tablet` | tablet de 7" como servidor, ao lado de um roteador | sem pessoas |
 
 ## Segundo lote (10 fotos novas, 2026-11-01)
