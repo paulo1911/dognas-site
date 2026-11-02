@@ -95,6 +95,9 @@ PLAY = {'server': 'https://play.google.com/store/apps/details?id=com.dognas.serv
         'lite': 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'}
 # DogNAS Client (Flutter) Play URL: the secondary CTA points to it and the Lite is the "lightweight alternative" (live since 2026-11-01).
 CLIENT_PLAY = 'https://play.google.com/store/apps/details?id=com.dognas.client'
+def client_play(loc):
+    """Play link of DogNAS Client with the same utm referrer the other store links carry (campaign = placement)."""
+    return CLIENT_PLAY + ('&' if '?' in CLIENT_PLAY else '?') + 'referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D' + loc
 from blog_content import has_blog, blog_dir, load as load_blog, article_path
 def blog_link(L, base): return f'<a href="{base}{blog_dir(L)}">Blog</a> · ' if has_blog(L) else ''
 def blog_nav(L, base, page):
@@ -106,7 +109,7 @@ BLOG_HOME = {
  'es': dict(h2='En el blog', lead='Guías prácticas para empezar y sacar más provecho de tu Android viejo.', all='Todas las guías →', guide='Lee la guía:'),
 }
 BLOG_FEATURED = ['old-android-server', 'home-nas', 'free-phone-space']  # the three intents: start, compare, free up space
-BLOG_FAQ = {0: 'old-android-server', 1: 'old-tablet', 2: 'pc-phone-transfer', 4: 'old-laptop-hdd', 10: 'home-nas'}  # FAQ index -> guide (same order in every language)
+BLOG_FAQ = {0: 'old-android-server', 1: 'tv-box-server', 2: 'old-tablet', 3: 'pc-phone-transfer', 5: 'old-laptop-hdd', 11: 'home-nas'}  # FAQ index -> guide (same order in every language)
 def blog_articles(L):
     arts, _ = load_blog()  # content errors are reported by build_blog.py
     return {a['group']: a for a in arts if a['lang'] == L}
@@ -136,7 +139,7 @@ T = {
           ('Mensalidade de nuvem que só aumenta.', 'Use o Android parado na gaveta: o Grátis guarda até 64 GB e o Pro é compra única, sem assinatura.'),
           ('Fotos da família espalhadas e guardadas em servidores de terceiros.', 'Tudo num lugar só, dentro de casa: um perfil e um PIN para cada pessoa, sem nuvem e sem conta.')]),
         ('briefcase', 'Home office', [
-          ('Arquivos de trabalho presos em pendrives e em e-mails para si mesmo.', 'Abra do PC, do Mac, do tablet ou do celular pela rede: FileZilla, WinSCP, Cyberduck ou DogNAS Client Lite.'),
+          ('Arquivos de trabalho presos em pendrives e em e-mails para si mesmo.', 'Abra do PC, do Mac, do tablet ou do celular pela rede: FileZilla, WinSCP, Cyberduck ou DogNAS Client.'),
           ('NAS tradicional caro e difícil de configurar.', 'Instale um app, toque em Iniciar e pareie com QR Code e PIN. Sem mexer no roteador.'),
           ('Documentos de clientes em nuvem pública.', 'Ficam na sua rede, cifrados no caminho (SSH/SFTP), com uma credencial por aparelho que você revoga quando quiser.')]),
         ('smart-home', 'Smart home', [
@@ -147,13 +150,13 @@ T = {
         ('tech', 'Para quem é de tecnologia', 'Um servidor SFTP sempre ligado: NAS em casa ou no escritório, smart home e IoT.', 'Ver detalhes técnicos')],
    home_kicker='Para sua casa', home_h2='Seu Android antigo como armazenamento da casa, pelo Wi-Fi',
    home_lead='Aquele celular parado na gaveta passa a guardar as fotos, os vídeos e os documentos de todo mundo. Você acessa pelo celular, de qualquer cômodo, sem cabos e sem pagar nuvem.',
-   home_feats=[('Libere espaço no seu celular!', 'Use o DogNAS Client Lite para mandar fotos e vídeos do seu celular para o DogNAS, que guarda tudo no seu perfil. Antes de apagar do celular, confira se os arquivos estão no DogNAS e mantenha uma cópia independente do que é importante.'),
+   home_feats=[('Libere espaço no seu celular!', 'Use o DogNAS Client para mandar fotos e vídeos do seu celular para o DogNAS, que guarda tudo no seu perfil. Antes de apagar do celular, confira se os arquivos estão no DogNAS e mantenha uma cópia independente do que é importante.'),
                ('Um espaço para cada pessoa', 'Cada perfil tem seu PIN e suas pastas. Ninguém vê os arquivos dos outros.'),
-               ('Fácil de conectar', 'Use o DogNAS Client Lite para se conectar ao seu servidor DogNAS: aponte a câmera para o QR Code, digite o PIN e pronto.'),
+               ('Fácil de conectar', 'Use o DogNAS Client para se conectar ao seu servidor DogNAS: aponte a câmera para o QR Code, digite o PIN e pronto.'),
                ('Sem nuvem e sem mensalidade', 'Os arquivos ficam no armazenamento do seu Android DogNAS, acessíveis pelo Wi-Fi da sua casa. Nada de conta, anúncios ou cobrança todo mês. Use todo o espaço do aparelho: 32, 64, 128, 256 GB e até mais (acima de 64 GB com o DogNAS Pro).')],
    how='Como funciona',
    steps=[('Ligue o servidor', 'Instale o DogNAS no Android que vai guardar os arquivos — no aparelho, num cartão SD ou num HD USB — e toque em Iniciar.', 'server-status'),
-          ('Conecte seu celular', 'Gere o QR Code de um perfil e leia com o DogNAS Client Lite. Cada perfil tem seu PIN e seu espaço.', 'server-qr'),
+          ('Conecte seu celular', 'Gere o QR Code de um perfil e leia com o DogNAS Client (ou o mais leve DogNAS Client Lite). Cada perfil tem seu PIN e seu espaço.', 'server-qr'),
           ('Use seus arquivos', 'Navegue, envie e baixe pelo Wi-Fi de casa. PCs e Macs conectam por SFTP.', 'lite-files')],
    tech_kicker='Para tech, smart home e escritório', tech_h2='Um servidor SFTP no Android, sempre ligado',
    tech_lead='Um NAS leve para casa ou escritório: qualquer dispositivo, script ou automação que fale SFTP envia e busca arquivos pela rede Wi-Fi.',
@@ -164,18 +167,18 @@ T = {
    prod=('Produtividade no escritório', 'Ideal para quem trabalha com fotos, vídeos e documentos e precisa organizar tudo: os arquivos ficam acessíveis no PC, no tablet e no smartphone, sem pendrives nem cabos. O DogNAS é toda a facilidade pelo seu Wi-Fi.'),
    specs_h3='Especificações',
    specs=[('Protocolo', 'SFTP sobre SSH-2'), ('Autenticação', 'Usuário e senha — uma credencial por dispositivo, revogável'),
-          ('Armazenamento', 'Memória interna, cartão SD, HD ou pendrive USB'), ('Clientes', 'DogNAS Client Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH e scripts'),
+          ('Armazenamento', 'Memória interna, cartão SD, HD ou pendrive USB'), ('Clientes', 'DogNAS Client, DogNAS Client Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH e scripts'),
           ('Requisitos', 'Android 7.0 ou mais recente, na mesma rede')],
    more_kicker='Para todos', more_h2='Mais espaço para o seu DogNAS', more_lead='Quer mais espaço? Ligue um SSD externo ou até aquele HD que você tirou do notebook antigo. Cada disco é um armazenamento independente: o DogNAS não junta vários discos num único volume.',
-   more_feats=[('SSD externo', 'Ligue um SSD USB e ganhe espaço e velocidade para guardar tudo da casa.'), ('O HD do notebook antigo', 'Coloque o HD trocado do notebook numa case USB e dê uma nova vida a ele como armazenamento da casa.'), ('Cartão SD ou pendrive', 'O jeito mais simples de aumentar o espaço do celular que virou servidor.'), ('Vários DogNAS na casa', 'Tem mais de um Android parado? Cada um pode ser um DogNAS; o DogNAS Client Lite mostra todos em “Meus armazenamentos”.')],
+   more_feats=[('SSD externo', 'Ligue um SSD USB e ganhe espaço e velocidade para guardar tudo da casa.'), ('O HD do notebook antigo', 'Coloque o HD trocado do notebook numa case USB e dê uma nova vida a ele como armazenamento da casa.'), ('Cartão SD ou pendrive', 'O jeito mais simples de aumentar o espaço do celular que virou servidor.'), ('Vários DogNAS na casa', 'Tem mais de um Android parado? Cada um pode ser um DogNAS; o DogNAS Client mostra todos em “Meus armazenamentos”.')],
    more_note='Discos USB precisam de um celular com USB OTG. HDs mecânicos podem pedir mais energia do que o celular fornece: nesse caso, use um hub USB com fonte. No plano Grátis, o DogNAS gerencia até 64 GB; no Pro, o disco inteiro. Um único disco pode falhar: mantenha uma cópia independente dos arquivos importantes.',
    tech_photo='O Monitor do servidor: velocidade, clientes conectados e sessões TCP em tempo real.',
    more_photo='Servidor com um HD externo numa dock USB, acessado pelo celular.',
    watch='Acompanhe tudo', cap1='Transferências e clientes no servidor', cap2='Fila de transferências no celular',
    plans='Grátis para começar', planhead=('', 'Grátis', 'Pro'),
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Transferências no app cliente, com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
-   plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client Lite é sempre gratuito.',
-   apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='O app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='Novo: o app completo para Android e iPhone, em breve.', privacy='Política de privacidade'),
+   plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client e o DogNAS Client Lite são sempre gratuitos.',
+   apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='A versão leve do app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='O app completo para acessar seus arquivos no Android: navegue, envie, baixe e visualize fotos, vídeos e PDFs. iPhone em breve.', privacy='Política de privacidade'),
  'en': dict(title='DogNAS — Your Android! Your private storage.', desc='Turn an Android phone, tablet or TV box into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.',
    h1='Your Android! Your private storage.', lead='Your compatible Android tablet, phone or TV box becomes a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.',
    points=['Use an Android you already own', 'Connect other phones with a QR Code', 'Start free, no subscription'], cta='Download DogNAS free',
@@ -189,7 +192,7 @@ T = {
           ('A cloud subscription that keeps going up.', 'Use the Android sitting in a drawer: Free keeps up to 64 GB and Pro is a one-time purchase, no subscription.'),
           ('Family photos scattered around and kept on someone else’s servers.', 'Everything in one place, inside your home: a profile and a PIN for each person, no cloud and no account.')]),
         ('briefcase', 'Home office', [
-          ('Work files stuck on USB sticks and in emails to yourself.', 'Open them from your PC, Mac, tablet or phone over the network: FileZilla, WinSCP, Cyberduck or DogNAS Client Lite.'),
+          ('Work files stuck on USB sticks and in emails to yourself.', 'Open them from your PC, Mac, tablet or phone over the network: FileZilla, WinSCP, Cyberduck or DogNAS Client.'),
           ('A traditional NAS is expensive and hard to set up.', 'Install an app, tap Start and pair with a QR Code and a PIN. No router settings.'),
           ('Client documents on a public cloud.', 'They stay on your network, encrypted in transit (SSH/SFTP), with one credential per device that you can revoke at any time.')]),
         ('smart-home', 'Smart home', [
@@ -200,13 +203,13 @@ T = {
         ('tech', 'For tech people', 'An always-on SFTP server: a NAS for home or office, smart home and IoT.', 'See the tech details')],
    home_kicker='For your home', home_h2='Your old Android as home storage, over Wi-Fi',
    home_lead='That phone sitting in a drawer starts keeping everyone’s photos, videos and documents. You reach them from your phone, in any room, with no cables and no cloud bill.',
-   home_feats=[('Free up space on your phone!', 'Use DogNAS Client Lite to send photos and videos from your phone to DogNAS, which keeps them in your profile. Before deleting them from your phone, check that they are in DogNAS and keep an independent copy of what matters.'),
+   home_feats=[('Free up space on your phone!', 'Use DogNAS Client to send photos and videos from your phone to DogNAS, which keeps them in your profile. Before deleting them from your phone, check that they are in DogNAS and keep an independent copy of what matters.'),
                ('A space for each person', 'Each profile has its own PIN and folders. Nobody sees anyone else’s files.'),
-               ('Easy to connect', 'Use DogNAS Client Lite to connect to your DogNAS server: point the camera at the QR Code, type the PIN, done.'),
+               ('Easy to connect', 'Use DogNAS Client to connect to your DogNAS server: point the camera at the QR Code, type the PIN, done.'),
                ('No cloud, no monthly fee', 'Your files stay in the storage of your DogNAS Android, reachable over your home Wi-Fi. No account, no ads, no monthly charge. Use all of the device’s space: 32, 64, 128, 256 GB and beyond (over 64 GB with DogNAS Pro).')],
    how='How it works',
    steps=[('Start the server', 'Install DogNAS on the Android that will keep your files — on the device, an SD card or a USB drive — and tap Start.', 'server-status'),
-          ('Connect your phone', "Generate a profile's QR Code and scan it with DogNAS Client Lite. Each profile has its own PIN and space.", 'server-qr'),
+          ('Connect your phone', "Generate a profile's QR Code and scan it with DogNAS Client (or the lighter DogNAS Client Lite). Each profile has its own PIN and space.", 'server-qr'),
           ('Use your files', 'Browse, upload and download over your home Wi-Fi. PCs and Macs connect via SFTP.', 'lite-files')],
    tech_kicker='For tech, smart home and office', tech_h2='An always-on SFTP server on Android',
    tech_lead='A lightweight NAS for home or office: any device, script or automation that speaks SFTP can send and fetch files over Wi-Fi.',
@@ -217,18 +220,18 @@ T = {
    prod=('Productivity at the office', 'Ideal for anyone who works with photos, videos and documents and needs to keep it all organized: your files stay reachable from PC, tablet and smartphone, with no USB sticks or cables. DogNAS makes it easy, over your Wi-Fi.'),
    specs_h3='Specifications',
    specs=[('Protocol', 'SFTP over SSH-2'), ('Authentication', 'Username and password — one credential per device, revocable'),
-          ('Storage', 'Internal memory, SD card, USB drive'), ('Clients', 'DogNAS Client Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH and scripts'),
+          ('Storage', 'Internal memory, SD card, USB drive'), ('Clients', 'DogNAS Client, DogNAS Client Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH and scripts'),
           ('Requirements', 'Android 7.0 or newer, on the same network')],
    more_kicker='For everyone', more_h2='More room for your DogNAS', more_lead='Want more room? Plug in an external SSD, or even the hard drive you took out of your old laptop. Each drive is an independent storage: DogNAS does not combine several drives into one volume.',
-   more_feats=[('External SSD', 'Plug in a USB SSD for room and speed to keep everything at home.'), ('Your old laptop’s hard drive', 'Put the drive you swapped out of your laptop in a USB enclosure and give it a new life as home storage.'), ('SD card or USB stick', 'The simplest way to add space to the phone that became a server.'), ('Several DogNAS at home', 'More than one Android in a drawer? Each can be a DogNAS; DogNAS Client Lite shows them all in “My storages”.')],
+   more_feats=[('External SSD', 'Plug in a USB SSD for room and speed to keep everything at home.'), ('Your old laptop’s hard drive', 'Put the drive you swapped out of your laptop in a USB enclosure and give it a new life as home storage.'), ('SD card or USB stick', 'The simplest way to add space to the phone that became a server.'), ('Several DogNAS at home', 'More than one Android in a drawer? Each can be a DogNAS; DogNAS Client shows them all in “My storages”.')],
    more_note='USB drives need a phone with USB OTG. Spinning hard drives may need more power than the phone provides — use a powered USB hub in that case. On the Free plan DogNAS manages up to 64 GB; with Pro, the whole drive. A single drive can fail: keep an independent copy of your important files.',
    tech_photo='The server Monitor: speed, connected clients and TCP sessions in real time.',
    more_photo='A server with an external drive in a USB dock, reached from the phone.',
    watch='Follow everything', cap1='Transfers and clients on the server', cap2='Transfer queue on your phone',
    plans='Free to start', planhead=('', 'Free', 'Pro'),
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('Client app transfers, with the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
-   plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client Lite is always free.',
-   apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The access app: install it on your phone to browse, upload and download.', app3='New: the full app for Android and iPhone, coming soon.', privacy='Privacy policy'),
+   plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client and DogNAS Client Lite are always free.',
+   apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The lightweight access app: install it on your phone to browse, upload and download.', app3='The full app to reach your files on Android: browse, upload, download and preview photos, videos and PDFs. iPhone coming soon.', privacy='Privacy policy'),
  'es': dict(title='DogNAS — ¡Tu Android! Tu almacenamiento privado.', desc='Convierte un móvil, tableta o TV box Android en almacenamiento privado por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
    h1='¡Tu Android! Tu almacenamiento privado.', lead='Tu tableta, móvil o TV box Android compatible se convierte en un espacio para guardar y acceder a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
    points=['Usa un Android que ya tienes', 'Conecta otros móviles con un código QR', 'Empieza gratis, sin suscripción'], cta='Descargar DogNAS gratis',
@@ -242,7 +245,7 @@ T = {
           ('Una suscripción de nube que no deja de subir.', 'Usa el Android olvidado en un cajón: Gratis guarda hasta 64 GB y Pro es una compra única, sin suscripción.'),
           ('Fotos de la familia dispersas y guardadas en servidores ajenos.', 'Todo en un solo lugar, dentro de casa: un perfil y un PIN para cada persona, sin nube y sin cuenta.')]),
         ('briefcase', 'Oficina en casa', [
-          ('Archivos de trabajo atrapados en memorias USB y en correos a ti mismo.', 'Ábrelos desde el PC, el Mac, la tablet o el teléfono por la red: FileZilla, WinSCP, Cyberduck o DogNAS Client Lite.'),
+          ('Archivos de trabajo atrapados en memorias USB y en correos a ti mismo.', 'Ábrelos desde el PC, el Mac, la tablet o el teléfono por la red: FileZilla, WinSCP, Cyberduck o DogNAS Client.'),
           ('Un NAS tradicional es caro y difícil de configurar.', 'Instala una app, toca Iniciar y vincula con un código QR y un PIN. Sin tocar el router.'),
           ('Documentos de clientes en una nube pública.', 'Se quedan en tu red, cifrados en tránsito (SSH/SFTP), con una credencial por dispositivo que revocas cuando quieras.')]),
         ('smart-home', 'Casa inteligente', [
@@ -253,13 +256,13 @@ T = {
         ('tech', 'Para gente de tecnología', 'Un servidor SFTP siempre encendido: NAS en casa o en la oficina, casa inteligente e IoT.', 'Ver detalles técnicos')],
    home_kicker='Para tu casa', home_h2='Tu Android viejo como almacenamiento de casa, por Wi-Fi',
    home_lead='Ese teléfono olvidado en un cajón empieza a guardar las fotos, los videos y los documentos de todos. Los ves desde tu teléfono, en cualquier habitación, sin cables y sin pagar nube.',
-   home_feats=[('¡Libera espacio en tu teléfono!', 'Usa DogNAS Client Lite para enviar fotos y videos de tu teléfono a DogNAS, que los guarda en tu perfil. Antes de borrarlos del teléfono, comprueba que están en DogNAS y mantén una copia independiente de lo importante.'),
+   home_feats=[('¡Libera espacio en tu teléfono!', 'Usa DogNAS Client para enviar fotos y videos de tu teléfono a DogNAS, que los guarda en tu perfil. Antes de borrarlos del teléfono, comprueba que están en DogNAS y mantén una copia independiente de lo importante.'),
                ('Un espacio para cada persona', 'Cada perfil tiene su PIN y sus carpetas. Nadie ve los archivos de los demás.'),
-               ('Fácil de conectar', 'Usa DogNAS Client Lite para conectarte a tu servidor DogNAS: apunta la cámara al código QR, escribe el PIN y listo.'),
+               ('Fácil de conectar', 'Usa DogNAS Client para conectarte a tu servidor DogNAS: apunta la cámara al código QR, escribe el PIN y listo.'),
                ('Sin nube y sin cuotas', 'Tus archivos se guardan en el almacenamiento de tu Android DogNAS, accesibles por el Wi-Fi de tu casa. Sin cuenta, sin anuncios, sin cobros mensuales. Usa todo el espacio del dispositivo: 32, 64, 128, 256 GB y más (más de 64 GB con DogNAS Pro).')],
    how='Cómo funciona',
    steps=[('Enciende el servidor', 'Instala DogNAS en el Android que guardará los archivos — en el dispositivo, una tarjeta SD o un disco USB — y toca Iniciar.', 'server-status'),
-          ('Conecta tu teléfono', 'Genera el código QR de un perfil y escanéalo con DogNAS Client Lite. Cada perfil tiene su PIN y su espacio.', 'server-qr'),
+          ('Conecta tu teléfono', 'Genera el código QR de un perfil y escanéalo con DogNAS Client (o el más ligero DogNAS Client Lite). Cada perfil tiene su PIN y su espacio.', 'server-qr'),
           ('Usa tus archivos', 'Navega, sube y descarga por el Wi-Fi de casa. PC y Mac se conectan por SFTP.', 'lite-files')],
    tech_kicker='Para tecnología, casa inteligente y oficina', tech_h2='Un servidor SFTP en Android, siempre encendido',
    tech_lead='Un NAS ligero para casa u oficina: cualquier dispositivo, script o automatización que hable SFTP envía y recoge archivos por Wi-Fi.',
@@ -270,18 +273,18 @@ T = {
    prod=('Productividad en la oficina', 'Ideal para quien trabaja con fotos, videos y documentos y necesita organizarlo todo: los archivos quedan accesibles desde el PC, la tableta y el smartphone, sin pendrives ni cables. DogNAS es toda la facilidad por tu Wi-Fi.'),
    specs_h3='Especificaciones',
    specs=[('Protocolo', 'SFTP sobre SSH-2'), ('Autenticación', 'Usuario y contraseña — una credencial por dispositivo, revocable'),
-          ('Almacenamiento', 'Memoria interna, tarjeta SD, disco o pendrive USB'), ('Clientes', 'DogNAS Client Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH y scripts'),
+          ('Almacenamiento', 'Memoria interna, tarjeta SD, disco o pendrive USB'), ('Clientes', 'DogNAS Client, DogNAS Client Lite, FileZilla, WinSCP, Cyberduck, rclone, OpenSSH y scripts'),
           ('Requisitos', 'Android 7.0 o más reciente, en la misma red')],
    more_kicker='Para todos', more_h2='Más espacio para tu DogNAS', more_lead='¿Quieres más espacio? Conecta un SSD externo o incluso el disco duro que sacaste de tu portátil viejo. Cada disco es un almacenamiento independiente: DogNAS no junta varios discos en un solo volumen.',
-   more_feats=[('SSD externo', 'Conecta un SSD USB y gana espacio y velocidad para guardar todo lo de casa.'), ('El disco del portátil viejo', 'Pon el disco que cambiaste del portátil en una carcasa USB y dale una nueva vida como almacenamiento de casa.'), ('Tarjeta SD o pendrive', 'La forma más sencilla de ampliar el espacio del teléfono que se convirtió en servidor.'), ('Varios DogNAS en casa', '¿Tienes más de un Android olvidado? Cada uno puede ser un DogNAS; DogNAS Client Lite los muestra todos en “Mis almacenamientos”.')],
+   more_feats=[('SSD externo', 'Conecta un SSD USB y gana espacio y velocidad para guardar todo lo de casa.'), ('El disco del portátil viejo', 'Pon el disco que cambiaste del portátil en una carcasa USB y dale una nueva vida como almacenamiento de casa.'), ('Tarjeta SD o pendrive', 'La forma más sencilla de ampliar el espacio del teléfono que se convirtió en servidor.'), ('Varios DogNAS en casa', '¿Tienes más de un Android olvidado? Cada uno puede ser un DogNAS; DogNAS Client los muestra todos en “Mis almacenamientos”.')],
    more_note='Los discos USB necesitan un teléfono con USB OTG. Los discos mecánicos pueden pedir más energía de la que da el teléfono: en ese caso, usa un hub USB con alimentación. En el plan Gratis, DogNAS gestiona hasta 64 GB; con Pro, el disco entero. Un solo disco puede fallar: mantén una copia independiente de tus archivos importantes.',
    tech_photo='El Monitor del servidor: velocidad, clientes conectados y sesiones TCP en tiempo real.',
    more_photo='Un servidor con un disco externo en un dock USB, al que se accede desde el teléfono.',
    watch='Sigue todo', cap1='Transferencias y clientes en el servidor', cap2='Cola de transferencias en el teléfono',
    plans='Gratis para empezar', planhead=('', 'Gratis', 'Pro'),
    rows=[('Almacenamiento', '64 GB', 'Todo el dispositivo'), ('Perfiles', 'Casa + 2', 'Ilimitados'), ('Dispositivos vinculados', '3', 'Ilimitados'), ('Rendimiento', 'Bueno', 'Máximo optimizado'), ('Transferencias de la app cliente, con la app cerrada', 'Se pausan', 'Continúan'), ('Tras reiniciar', 'Toca para iniciar', 'Se inicia solo')],
-   plannote='DogNAS Pro: compra única, sin suscripción. DogNAS Client Lite siempre es gratis.',
-   apps='Las apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', app3='Nuevo: la app completa para Android y iPhone, próximamente.', privacy='Política de privacidad'),
+   plannote='DogNAS Pro: compra única, sin suscripción. DogNAS Client y DogNAS Client Lite son siempre gratis.',
+   apps='Las apps', app1='El servidor: instálalo en el Android que guardará los archivos.', app2='La versión ligera de la app de acceso: instálala en tu teléfono para ver, subir y descargar archivos.', app3='La app completa para acceder a tus archivos en Android: navega, sube, descarga y previsualiza fotos, vídeos y PDF. iPhone próximamente.', privacy='Política de privacidad'),
 }
 # Real photos from tools/build_photos.py (900 px wide WebP); sizes keep the layout from jumping.
 PHOTO_H = {'always-on': 1129, 'usb-drive': 1347}
@@ -309,7 +312,7 @@ for L, t in T.items():
     faq_ld = seo.ld([seo.faq(t['faq'])])
     points = ''.join(f'<li>{x}</li>' for x in t['points'])
     if CLIENT_PLAY:
-        sub_cta = f'<a data-ev="client_store_click" data-loc="hero_client" href="{CLIENT_PLAY}" rel="noopener">{t["sub_client"]}</a> · <a data-ev="lite_store_click" data-loc="hero_lite" href="{play("lite", "hero_lite")}" rel="noopener">{t["lite_alt"]}</a>'
+        sub_cta = f'<a data-ev="client_store_click" data-loc="hero_client" href="{client_play('hero_client')}" rel="noopener">{t["sub_client"]}</a> · <a data-ev="lite_store_click" data-loc="hero_lite" href="{play("lite", "hero_lite")}" rel="noopener">{t["lite_alt"]}</a>'
     else:
         sub_cta = f'<a data-ev="lite_store_click" data-loc="hero_secondary" href="{play("lite", "hero_secondary")}" rel="noopener">{t["sub"]}</a>'
     aud = ''.join(f'<a class="aud aud-{k}" href="#{k}">{icon("home" if k == "casa" else "terminal")}<h3>{h}</h3><p>{p}</p><span>{more} →</span></a>' for k, h, p, more in t['aud'])
@@ -398,7 +401,7 @@ for L, t in T.items():
 <div class="cta">{trust}</div>
 </section>
 <h2>{t['apps']}</h2>
-<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a><a class="card" data-ev="client_page_click" data-loc="apps_client" href="{base}{LANGS[L][1]}client/"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a></div>
+<div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="client_store_click" data-loc="apps_client" href="{client_play('apps_card') if CLIENT_PLAY else base + LANGS[L][1] + 'client/'}" rel="noopener"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a></div>
 <section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
 <div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
