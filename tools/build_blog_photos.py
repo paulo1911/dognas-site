@@ -27,6 +27,8 @@ PHOTOS = {
     'tv-box-client': ('0C14E719', (.0, .0, 1, 1), [], 'A Moto G100 showing DogNAS Client Lite connected to an Android TV box, with the "My files" button.'),
     'tablet-transfers': ('7F979992', (.0, .0, 1, 1), [(.76, .12, 1.02, .58)], 'An old tablet running the DogNAS server dashboard, with a phone showing a list of files being sent to it.'),
     'tablet-server-online': ('9D2A0748', (.0, .0, 1, 1), [(.78, .12, 1.02, .60)], 'The DogNAS server on an old tablet showing "Server ONLINE", with a phone connected to it in front.'),
+    'tablet-hdd-dock': ('62E0FA42', (.0, .0, 1, 1), [(.78, .08, 1.02, .58)], 'An old 7-inch tablet running the DogNAS server, with a dock holding a 320 GB laptop hard disk behind it and a phone in front.'),
+    'tablet-hdd-dock-2': ('57D97CBB', (.0, .0, 1, 1), [(.78, .04, 1.02, .58)], 'The same tablet and laptop hard disk dock from another angle, with a phone showing DogNAS Client Lite.'),
     'old-tablet':   ('87EB4681', (.0, .08, 1, .86), [], 'An old white 7-inch Android tablet used as a DogNAS server, next to a Wi-Fi router.'),
 }
 ALT_PT = {}
