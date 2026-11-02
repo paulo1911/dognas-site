@@ -10,7 +10,14 @@ Nada disso está ligado a nenhum artigo ainda. Todas saem sem EXIF, em 900 px e 
 | `s20fe-side` | mesmo, ângulo mais baixo | quase igual à primeira: escolha uma |
 | `tv-box-g100` | TV box + Moto G100 com o Client Lite | o app mostra "Home · STV-3000 Plus" |
 | `tv-launcher` | tela da TV (Aquário) com o DogNAS nos favoritos | sem pessoas |
+| `usb-dock-s20fe` | S20 FE ao lado de um dock de discos USB | 2º lote; moldura de família borrada |
+| `tv-box-client` | Moto G100 com o Client Lite conectado à TV box ("My files") | 2º lote; sem pessoas |
+| `tablet-transfers` | tablet servidor + celular recebendo arquivos | 2º lote; moldura borrada; mostra nomes de arquivos de teste |
+| `tablet-server-online` | tablet "Server ONLINE" + celular na frente | 2º lote; moldura borrada; **mostra o nome "Paulo" na tela do celular** |
 | `old-tablet` | tablet de 7" como servidor, ao lado de um roteador | sem pessoas |
+
+## Segundo lote (10 fotos novas, 2026-11-01)
+Usadas 4 das 10. As outras 6 repetem enquadramentos (tablet + celular + moldura de família) ou são muito escuras (`3FD07428`); `62E0FA42`, `17D7EE1A`, `57D97CBB` e `A90B5F73` são variações do mesmo cenário e podem entrar se você quiser mais (a moldura precisa ser borrada em cada uma). `65054EA3` é quase igual a `065464F3`.
 
 ## Ficaram de fora de propósito
 - **3 fotos de catálogo de terceiros** (Vivensis, Trendoca/Aquário, XSmart): imagens de outras marcas e de loja, com direitos próprios. Se quiser mostrar uma TV box no artigo, use a sua (`tv-box-g100`, `tv-launcher`).
