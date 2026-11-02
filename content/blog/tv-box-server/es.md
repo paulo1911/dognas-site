@@ -44,7 +44,7 @@ Esta guía sale de una prueba real, no de la ficha técnica: ejecutamos DogNAS e
 2. **Elige dónde guardar los archivos.** El asistente del primer uso pregunta dónde debe estar la carpeta "DogNAS". Muchas TV boxes no tienen selector de carpetas del sistema, así que DogNAS muestra uno propio: el almacenamiento interno de la box o, si hay uno conectado, el disco USB.
 3. **Inicia el servidor** y elige un PIN de 4 dígitos para el perfil Home. El teclado en pantalla de la tele sirve para el PIN.
 4. **Empareja un móvil.** La tele muestra un código QR. En el móvil abre DogNAS Client Lite o DogNAS Client, toca "Añadir DogNAS", apunta la cámara a la tele y escribe el mismo PIN.
-5. **Dale una dirección fija a la box** en el router o en los ajustes de Wi-Fi de la propia box, para que la dirección no cambie tras reiniciar. En nuestra prueba la box recibió otra dirección tras reiniciar: una app la encontró sola, la otra necesitó una actualización (corregido en DogNAS Client Lite 1.0.6). Una dirección fija evita el problema.
+5. **Opcional: dale una dirección fija a la box** en el router o en los ajustes de Wi-Fi de la propia box. Es una buena práctica, no un requisito: las apps DogNAS vuelven a encontrar la box solas si cambia su dirección (la buscan en la red por su nombre). En nuestra prueba la box recibió otra dirección tras reiniciar: DogNAS Client la encontró sola y el Lite también, tras la actualización 1.0.6. Una dirección fija sigue ayudando en routers que bloquean este tipo de búsqueda.
 
 ![La pantalla de inicio de la tele con DogNAS entre las apps favoritas.](assets/photos/blog/tv-launcher.webp)
 ![La TV box sobre la mesa con un Moto G100 delante, mostrando DogNAS Client Lite conectado a ella.](assets/photos/blog/tv-box-g100.webp)
