@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Quase todo mundo tem um celular ou tablet Android guardado na gaveta. Ele ainda liga, conecta no Wi-Fi e tem espaço de sobra. Em vez de deixá-lo parado, você pode transformá-lo em um pequeno servidor de arquivos para a sua casa: um lugar para guardar e acessar fotos, vídeos e documentos pela rede, sem nuvem e sem mensalidade.
 
@@ -36,14 +36,14 @@ Este guia mostra o caminho completo com o **DogNAS**, um app gratuito que faz o 
 1. **Instale o DogNAS no Android antigo.** É ele que vai guardar os arquivos. O app está na Google Play.
 2. **Escolha onde guardar os arquivos** e toque em Iniciar. O servidor passa a funcionar na rede da casa.
 3. **Crie um perfil para cada pessoa.** Cada perfil tem seu PIN e suas pastas, e ninguém vê os arquivos dos outros.
-4. **Conecte o seu celular.** No servidor, gere o QR Code do perfil. No celular que vai usar os arquivos, abra o DogNAS Client Lite, aponte a câmera para o QR Code e digite o PIN.
+4. **Conecte o seu celular.** No servidor, gere o QR Code do perfil. No celular que vai usar os arquivos, abra o DogNAS Client (ou o mais leve DogNAS Client Lite), aponte a câmera para o QR Code e digite o PIN.
 5. **Use no dia a dia.** Navegue pelas pastas, envie fotos e vídeos e baixe o que precisar pelo Wi-Fi de casa.
 
 Para acessar do computador, você não precisa de um app especial: o DogNAS fala SFTP, então programas como FileZilla, WinSCP, Cyberduck e o `sftp` do OpenSSH funcionam.
 
 ## Acompanhe tudo, sem complicação
 
-O servidor mostra, em tempo real, os clientes conectados e a velocidade das transferências. No celular, o Client Lite mantém a fila de envios e downloads, e você reaproveita o aparelho antigo em poucos minutos.
+O servidor mostra, em tempo real, os clientes conectados e a velocidade das transferências. No celular, o DogNAS Client mantém a fila de envios e downloads, e você reaproveita o aparelho antigo em poucos minutos.
 
 ## Quanto espaço você tem
 

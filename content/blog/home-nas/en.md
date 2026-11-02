@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 A NAS (network-attached storage) is a small server that keeps your files and serves them to any device in the house over Wi-Fi. It is the right idea for anyone tired of USB sticks, full phones and cloud subscriptions. The catch is that a store-bought NAS with a disk costs money and takes some setup.
 
@@ -42,7 +42,7 @@ For those jobs, a simple file server is enough. You don't need RAID, containers 
 
 DogNAS turns a phone or tablet running Android 7.0 or newer into a file server on your Wi-Fi network. Each person in the house gets a profile with its own PIN and folders. Files live in the device's storage, on an SD card or on a USB drive or hard disk, and travel encrypted (SSH/SFTP) across your network, without going through a cloud.
 
-On a computer, use regular programs such as FileZilla, WinSCP and Cyberduck. On a phone, use DogNAS Client Lite to browse, upload and download files.
+On a computer, use regular programs such as FileZilla, WinSCP and Cyberduck. On a phone, use DogNAS Client (or the lighter DogNAS Client Lite) to browse, upload and download files.
 
 ![DogNAS server with an external hard drive in a USB dock, accessed from the phone.](assets/photos/usb-drive.webp)
 ![Server monitor: clients and speed in real time](assets/shots/en/server-monitor.webp)

@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Um NAS (armazenamento conectado à rede) é um pequeno servidor que guarda os seus arquivos e os entrega a qualquer aparelho da casa pelo Wi-Fi. É a ideia certa para quem cansou de pendrives, de celular sem espaço e de mensalidade de nuvem. O problema é que um NAS de prateleira, com disco, custa dinheiro e pede alguma configuração.
 
@@ -42,7 +42,7 @@ Para essas tarefas, um servidor de arquivos simples já basta. Você não precis
 
 O DogNAS transforma um celular ou tablet com Android 7.0 ou mais recente em um servidor de arquivos na sua rede Wi-Fi. Cada pessoa da casa tem um perfil com PIN e pastas próprias. Os arquivos ficam na memória do aparelho, num cartão SD ou num HD/pendrive USB, e trafegam cifrados (SSH/SFTP) pela sua rede, sem passar por nuvem.
 
-No computador, você acessa com programas comuns como FileZilla, WinSCP e Cyberduck. No celular, use o DogNAS Client Lite para ver, enviar e baixar arquivos.
+No computador, você acessa com programas comuns como FileZilla, WinSCP e Cyberduck. No celular, use o DogNAS Client (ou o mais leve DogNAS Client Lite) para ver, enviar e baixar arquivos.
 
 ![Servidor DogNAS com um HD externo em um dock USB, acessado pelo celular.](assets/photos/usb-drive.webp)
 ![Monitor do servidor: clientes e velocidade em tempo real](assets/shots/pt/server-monitor.webp)

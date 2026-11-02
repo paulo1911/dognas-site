@@ -68,8 +68,8 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 
 ## Apps
 - [DogNAS (server) on Google Play](https://play.google.com/store/apps/details?id=com.dognas.server): installs on the Android that will keep the files; free plan, optional one-time Pro purchase.
-- [DogNAS Client Lite on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client.lite): free, lightweight Android app to browse, upload and download files from a DogNAS.
-- [DogNAS Client (Android and iPhone)]({SITE}client/): the full client app, coming soon.
+- [DogNAS Client on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client): the full client app for Android (an iPhone version is planned; see {SITE}client/). Free.
+- [DogNAS Client Lite on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client.lite): the lightweight alternative for Android, also free.
 
 ## Site
 - [Home (English)]({SITE}): what DogNAS is, how it works, plans, requirements.
@@ -93,7 +93,7 @@ DogNAS is a file server for Android. It turns a compatible Android phone, tablet
 ## How it works
 1. Install the DogNAS server app on the Android that will keep the files, choose where to store them and tap Start.
 2. Create a profile; the app shows a QR Code. Each profile has its own PIN and its own folders.
-3. On another phone, scan the QR Code with a DogNAS client app (DogNAS Client Lite today) and type the PIN. Then browse, upload and download files over the home Wi-Fi.
+3. On another phone, scan the QR Code with a DogNAS client app (DogNAS Client or the lighter DogNAS Client Lite) and type the PIN. Then browse, upload and download files over the home Wi-Fi.
 4. PCs, Macs and scripts connect with any SFTP client (FileZilla, WinSCP, Cyberduck, rclone, OpenSSH) using the credentials of a paired device.
 
 ## Security and privacy
@@ -102,7 +102,7 @@ Connections use SFTP over SSH-2 (AES-GCM or ChaCha20); the server key is pinned 
 ## Plans
 - Free: DogNAS manages up to 64 GB, the Home profile plus 2 more, 3 paired devices. In the client app, transfers pause when you leave the client app (this is a client behavior; the server keeps running).
 - Pro: one-time purchase, no subscription: the whole storage, unlimited profiles and devices, client-app transfers keep going with the app closed, the server can start by itself after a reboot, and maximum optimized performance.
-- DogNAS Client Lite is always free. (Prices are shown in the store, not on this site.)
+- DogNAS Client and DogNAS Client Lite are free. (Prices are shown in the store, not on this site.)
 
 ## Requirements and limits
 - Android 7.0 or newer on the server and on the client phones, all on the same network.
@@ -113,8 +113,8 @@ Connections use SFTP over SSH-2 (AES-GCM or ChaCha20); the server key is pinned 
 
 ## Apps
 - DogNAS (server): https://play.google.com/store/apps/details?id=com.dognas.server
-- DogNAS Client Lite (free, Android): https://play.google.com/store/apps/details?id=com.dognas.client.lite
-- DogNAS Client (Android and iPhone): coming soon — {SITE}client/
+- DogNAS Client (free, Android; iPhone coming): https://play.google.com/store/apps/details?id=com.dognas.client — {SITE}client/
+- DogNAS Client Lite (free, lightweight, Android): https://play.google.com/store/apps/details?id=com.dognas.client.lite
 '''
 w('llms-full.txt', full)
 

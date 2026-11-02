@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Almost everyone has an old Android phone or tablet in a drawer. It still turns on, joins Wi-Fi and has plenty of storage. Instead of leaving it idle, you can turn it into a small file server for your home: a place to keep and reach photos, videos and documents over your network, with no cloud and no monthly fee.
 
@@ -36,14 +36,14 @@ This guide walks through the whole process with **DogNAS**, a free app that make
 1. **Install DogNAS on the old Android.** This is the device that will keep your files. The app is on Google Play.
 2. **Choose where to keep the files** and tap Start. The server is now running on your home network.
 3. **Create a profile for each person.** Each profile has its own PIN and folders, and nobody sees anyone else's files.
-4. **Connect your phone.** On the server, generate the profile's QR Code. On the phone that will use the files, open DogNAS Client Lite, point the camera at the QR Code and type the PIN.
+4. **Connect your phone.** On the server, generate the profile's QR Code. On the phone that will use the files, open DogNAS Client (or the lighter DogNAS Client Lite), point the camera at the QR Code and type the PIN.
 5. **Use it every day.** Browse folders, upload photos and videos and download what you need over your home Wi-Fi.
 
 To reach it from a computer you don't need a special app: DogNAS speaks SFTP, so programs such as FileZilla, WinSCP, Cyberduck and OpenSSH's `sftp` work.
 
 ## Follow everything, no hassle
 
-The server shows connected clients and transfer speed in real time. On the phone, Client Lite keeps the queue of uploads and downloads, and you reuse the old device in just a few minutes.
+The server shows connected clients and transfer speed in real time. On the phone, DogNAS Client keeps the queue of uploads and downloads, and you reuse the old device in just a few minutes.
 
 ## How much space you get
 

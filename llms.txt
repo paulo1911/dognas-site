@@ -6,8 +6,8 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 
 ## Apps
 - [DogNAS (server) on Google Play](https://play.google.com/store/apps/details?id=com.dognas.server): installs on the Android that will keep the files; free plan, optional one-time Pro purchase.
-- [DogNAS Client Lite on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client.lite): free, lightweight Android app to browse, upload and download files from a DogNAS.
-- [DogNAS Client (Android and iPhone)](https://dognas.app/client/): the full client app, coming soon.
+- [DogNAS Client on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client): the full client app for Android (an iPhone version is planned; see https://dognas.app/client/). Free.
+- [DogNAS Client Lite on Google Play](https://play.google.com/store/apps/details?id=com.dognas.client.lite): the lightweight alternative for Android, also free.
 
 ## Site
 - [Home (English)](https://dognas.app/): what DogNAS is, how it works, plans, requirements.

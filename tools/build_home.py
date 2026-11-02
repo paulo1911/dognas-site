@@ -93,8 +93,8 @@ ICONS = {
 def icon(k): return f'<span class="ico"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[k]}</svg></span>'
 PLAY = {'server': 'https://play.google.com/store/apps/details?id=com.dognas.server',
         'lite': 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'}
-# DogNAS Client (Flutter) Play URL: fill when it is published — the secondary CTA then points to it and the Lite becomes the "lightweight alternative".
-CLIENT_PLAY = ''
+# DogNAS Client (Flutter) Play URL: the secondary CTA points to it and the Lite is the "lightweight alternative" (live since 2026-11-01).
+CLIENT_PLAY = 'https://play.google.com/store/apps/details?id=com.dognas.client'
 from blog_content import has_blog, blog_dir, load as load_blog, article_path
 def blog_link(L, base): return f'<a href="{base}{blog_dir(L)}">Blog</a> · ' if has_blog(L) else ''
 def blog_nav(L, base, page):

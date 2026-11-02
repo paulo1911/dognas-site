@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 O DogNAS fala SFTP, então qualquer programa que entenda esse protocolo consegue acessar os arquivos do seu servidor. Este guia mostra como conectar quatro dos mais usados e ajuda a escolher. Se você ainda não sabe o que é SFTP, comece por [o que é SFTP](/blog/o-que-e-sftp-como-acessar-servidor-android/).
 
@@ -73,6 +73,6 @@ Para quem gosta de automação e scripts.
 
 - **Senha e PIN.** Não compartilhe os dados de conexão. Você pode revogar a credencial de um aparelho quando quiser.
 - **Não é backup.** Copiar para o servidor guarda os arquivos em outro lugar, mas o DogNAS não faz backup sozinho. Mantenha uma cópia independente do que é importante.
-- **No celular,** use o DogNAS Client Lite, com QR Code e PIN, em vez de um cliente SFTP genérico.
+- **No celular,** use o DogNAS Client (ou o mais leve DogNAS Client Lite), com QR Code e PIN, em vez de um cliente SFTP genérico.
 
 Para montar o servidor, veja [como transformar um Android antigo em servidor de arquivos](/blog/transformar-android-antigo-em-servidor-de-arquivos/).
