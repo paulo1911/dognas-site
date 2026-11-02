@@ -5,11 +5,11 @@ import os, html
 import seo
 from build_home import CSS_INLINE, blog_link, blog_nav, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
 # Fill with the real URLs when published; empty = shows "Coming soon".
-STORE = {'play': '', 'apple': ''}
+STORE = {'play': 'https://play.google.com/store/apps/details?id=com.dognas.client', 'apple': ''}
 T = {
  'pt': dict(title='DogNAS Client — O app completo para acessar seu DogNAS', desc='DogNAS Client: o app gratuito para Android e iPhone que acessa seus arquivos no DogNAS pelo Wi-Fi de casa. Sem nuvem.',
    h1='DogNAS Client', lead='O app completo para acessar os arquivos do seu DogNAS, no Android e no iPhone, pelo Wi-Fi da sua casa. Sem nuvem e sem conta.',
-   play='Google Play', apple='App Store', soon='Em breve', note_soon='Ainda não está nas lojas. Enquanto isso, o DogNAS Client Lite já acessa o seu DogNAS no Android.',
+   play='Google Play', apple='App Store', soon='Em breve', note_ios='Disponível no Android. A versão para iPhone ainda não está na App Store. Prefere um app mais leve? O DogNAS Client Lite também acessa o seu DogNAS no Android.', note_soon='Ainda não está nas lojas. Enquanto isso, o DogNAS Client Lite já acessa o seu DogNAS no Android.',
    feats_h='O que ele faz',
    feats=[('Pareamento por QR Code', 'Aponte a câmera para o QR Code do perfil no servidor e digite o PIN. Cada perfil tem seu espaço.'),
           ('Navegue e organize', 'Veja as pastas, crie, renomeie e apague arquivos direto no seu DogNAS.'),
@@ -23,7 +23,7 @@ T = {
    back='Voltar ao início', privacy='Política de privacidade'),
  'en': dict(title='DogNAS Client — The full app to reach your DogNAS', desc='DogNAS Client: the free app for Android and iPhone that reaches your files on DogNAS over your home Wi-Fi. No cloud.',
    h1='DogNAS Client', lead='The full app to reach the files on your DogNAS, on Android and iPhone, over your home Wi-Fi. No cloud, no account.',
-   play='Google Play', apple='App Store', soon='Coming soon', note_soon='Not in the stores yet. Meanwhile, DogNAS Client Lite already reaches your DogNAS on Android.',
+   play='Google Play', apple='App Store', soon='Coming soon', note_ios='Available on Android. The iPhone version is not on the App Store yet. Prefer a lighter app? DogNAS Client Lite also reaches your DogNAS on Android.', note_soon='Not in the stores yet. Meanwhile, DogNAS Client Lite already reaches your DogNAS on Android.',
    feats_h='What it does',
    feats=[('Pair with a QR code', 'Point the camera at the profile’s QR code on the server and enter the PIN. Each profile has its own space.'),
           ('Browse and organize', 'See your folders; create, rename and delete files right on your DogNAS.'),
@@ -37,7 +37,7 @@ T = {
    back='Back to home', privacy='Privacy policy'),
  'es': dict(title='DogNAS Client — La app completa para acceder a tu DogNAS', desc='DogNAS Client: la app gratuita para Android y iPhone que accede a tus archivos en DogNAS por el Wi-Fi de casa. Sin nube.',
    h1='DogNAS Client', lead='La app completa para acceder a los archivos de tu DogNAS, en Android y iPhone, por el Wi-Fi de tu casa. Sin nube y sin cuenta.',
-   play='Google Play', apple='App Store', soon='Próximamente', note_soon='Aún no está en las tiendas. Mientras tanto, DogNAS Client Lite ya accede a tu DogNAS en Android.',
+   play='Google Play', apple='App Store', soon='Próximamente', note_ios='Disponible en Android. La versión para iPhone aún no está en la App Store. ¿Prefieres una app más ligera? DogNAS Client Lite también accede a tu DogNAS en Android.', note_soon='Aún no está en las tiendas. Mientras tanto, DogNAS Client Lite ya accede a tu DogNAS en Android.',
    feats_h='Qué hace',
    feats=[('Emparejamiento por código QR', 'Apunta la cámara al código QR del perfil en el servidor e ingresa el PIN. Cada perfil tiene su espacio.'),
           ('Navega y organiza', 'Mira las carpetas; crea, renombra y borra archivos directamente en tu DogNAS.'),
@@ -59,7 +59,8 @@ for L, t in T.items():
     nav = blog_nav(L, base, 'client') + ''.join(f'<a href="{base}{LANGS[l][1]}client/"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     ctas = btn(t['play'], STORE['play'], t['soon']) + btn(t['apple'], STORE['apple'], t['soon'])
     lite_link = '<a href="https://play.google.com/store/apps/details?id=com.dognas.client.lite" rel="noopener">DogNAS Client Lite</a>'
-    soon_note = '' if all(STORE.values()) else f'<p class="note">{t["note_soon"].replace("DogNAS Client Lite", lite_link)}</p>'
+    note_key = 'note_soon' if not STORE['play'] else 'note_ios'
+    soon_note = '' if all(STORE.values()) else f'<p class="note">{t[note_key].replace("DogNAS Client Lite", lite_link)}</p>'
     page = f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
 <head>

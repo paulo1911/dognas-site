@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 "Storage almost full" always shows up at the wrong time: at a party, on a trip, just as you were about to record a video. The good news is that you can recover a lot of space in a few minutes, and move the heaviest stuff off the phone without losing anything.
 
@@ -37,10 +37,10 @@ The most common options are the cloud, a computer, and an external card or disk.
 
 ### With DogNAS
 
-DogNAS turns a spare Android (7.0 or newer) into a file server for your home. On your phone, use DogNAS Client Lite, which is free:
+DogNAS turns a spare Android (7.0 or newer) into a file server for your home. On your phone, use DogNAS Client (or the lighter DogNAS Client Lite), which is free:
 
 1. Install the server on the old Android and create your profile.
-2. On the phone that is out of space, open Client Lite, point the camera at the profile's QR Code and type the PIN.
+2. On the phone that is out of space, open DogNAS Client, point the camera at the profile's QR Code and type the PIN.
 3. Send the photos and videos to DogNAS from the transfer queue.
 4. **Check that the files made it to the server** before deleting anything from the phone.
 

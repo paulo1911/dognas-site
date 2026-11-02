@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Casi todos tenemos un celular o una tablet Android guardado en un cajón. Todavía enciende, se conecta al Wi-Fi y tiene espacio de sobra. En lugar de dejarlo parado, puedes convertirlo en un pequeño servidor de archivos para tu casa: un lugar para guardar y acceder a fotos, videos y documentos por la red, sin nube y sin mensualidad.
 
@@ -36,14 +36,14 @@ Esta guía muestra el camino completo con **DogNAS**, una app gratuita que hace 
 1. **Instala DogNAS en el Android viejo.** Es el dispositivo que guardará los archivos. La app está en Google Play.
 2. **Elige dónde guardar los archivos** y toca Iniciar. El servidor empieza a funcionar en la red de tu casa.
 3. **Crea un perfil para cada persona.** Cada perfil tiene su PIN y sus carpetas, y nadie ve los archivos de los demás.
-4. **Conecta tu celular.** En el servidor, genera el código QR del perfil. En el celular que usará los archivos, abre DogNAS Client Lite, apunta la cámara al código QR e ingresa el PIN.
+4. **Conecta tu celular.** En el servidor, genera el código QR del perfil. En el celular que usará los archivos, abre DogNAS Client (o el más ligero DogNAS Client Lite), apunta la cámara al código QR e ingresa el PIN.
 5. **Úsalo día a día.** Navega por las carpetas, sube fotos y videos y descarga lo que necesites por el Wi-Fi de casa.
 
 Para acceder desde la computadora no necesitas una app especial: DogNAS habla SFTP, así que programas como FileZilla, WinSCP, Cyberduck y el `sftp` de OpenSSH funcionan.
 
 ## Sigue todo sin complicaciones
 
-El servidor muestra en tiempo real los clientes conectados y la velocidad de las transferencias. En el celular, Client Lite mantiene la cola de envíos y descargas, y reutilizas el dispositivo viejo en pocos minutos.
+El servidor muestra en tiempo real los clientes conectados y la velocidad de las transferencias. En el celular, DogNAS Client mantiene la cola de envíos y descargas, y reutilizas el dispositivo viejo en pocos minutos.
 
 ## Cuánto espacio tienes
 

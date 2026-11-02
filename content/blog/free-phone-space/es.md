@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 "Almacenamiento casi lleno" aparece siempre en el peor momento: en una fiesta, en un viaje, justo cuando ibas a grabar un video. La buena noticia es que puedes recuperar bastante espacio en pocos minutos, y sacar del celular lo que más pesa sin perder nada.
 
@@ -37,10 +37,10 @@ Las opciones más comunes son la nube, la computadora y una tarjeta o disco exte
 
 ### Con DogNAS
 
-DogNAS convierte un Android que te sobra (7.0 o más reciente) en un servidor de archivos para tu casa. En tu celular, usa DogNAS Client Lite, que es gratuito:
+DogNAS convierte un Android que te sobra (7.0 o más reciente) en un servidor de archivos para tu casa. En tu celular, usa DogNAS Client (o el más ligero DogNAS Client Lite), que es gratuito:
 
 1. Instala el servidor en el Android viejo y crea tu perfil.
-2. En el celular que se quedó sin espacio, abre Client Lite, apunta la cámara al código QR del perfil e ingresa el PIN.
+2. En el celular que se quedó sin espacio, abre DogNAS Client, apunta la cámara al código QR del perfil e ingresa el PIN.
 3. Envía las fotos y los videos a DogNAS desde la cola de transferencias.
 4. **Comprueba que los archivos llegaron al servidor** antes de borrar algo del celular.
 

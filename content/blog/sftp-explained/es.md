@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-01
 ---
 Si alguna vez viste "SFTP" y seguiste de largo, esta guía es para ti. La sigla asusta, pero la idea es simple: una forma segura de enviar y buscar archivos en otra computadora por la red. Es lo que DogNAS usa para entregar los archivos de tu servidor a los demás dispositivos de la casa.
 
@@ -43,7 +43,7 @@ En la práctica, esto significa que lo que viaja por la red no puede ser leído 
 DogNAS convierte un celular o tablet Android (7.0 o más reciente) en un servidor SFTP en tu red Wi-Fi. Cada dispositivo recibe una credencial propia, que puedes revocar en cualquier momento, y la clave del servidor se fija en el emparejamiento, para que sepas que hablas con el servidor correcto.
 
 1. **Instala e inicia el servidor** en el Android que guardará los archivos.
-2. **En el celular,** usa DogNAS Client Lite: apunta la cámara al código QR del perfil e ingresa el PIN.
+2. **En el celular,** usa DogNAS Client (o el más ligero DogNAS Client Lite): apunta la cámara al código QR del perfil e ingresa el PIN.
 3. **En la computadora,** abre un cliente SFTP como FileZilla, WinSCP o Cyberduck y usa los datos de conexión que el servidor muestra en la pantalla "Cómo conectar tu PC o iPhone".
 4. Navega, arrastra y suelta archivos. Para automatizaciones, herramientas como rclone y el `sftp` de OpenSSH también funcionan.
 
