@@ -50,6 +50,14 @@ Este guia vem de um teste real, não da ficha técnica: rodamos o DogNAS numa Aq
 ![A tela inicial da TV com o DogNAS entre os apps favoritos.](assets/photos/blog/tv-launcher.webp)
 ![A TV box sobre a mesa com um Moto G100 na frente, mostrando o DogNAS Client Lite conectado a ela.](assets/photos/blog/tv-box-g100.webp)
 
+## O que o servidor mostra na TV
+
+As telas do DogNAS foram feitas para a TV: texto grande, contorno de foco para o controle remoto e as mesmas três abas do celular. Estas são as telas reais enquanto um computador copiava arquivos para a box.
+
+![Status: servidor online e o espaço usado no disco da box.](assets/photos/tv-server/tv-server-status-pt.webp)
+![Monitor: a velocidade de envio em tempo real enquanto os arquivos chegam.](assets/photos/tv-server/tv-server-monitor-pt.webp)
+![Performance: o link do Wi-Fi, a velocidade de gravação no disco e o processador.](assets/photos/tv-server/tv-server-performance-pt.webp)
+
 ## O que medimos
 
 | | Resultado no nosso teste |

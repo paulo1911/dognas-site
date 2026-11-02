@@ -107,7 +107,7 @@ def _url(u, base, lang=None):
     return u
 
 
-PHOTO_DIMS = {'always-on': (900, 1129), 'usb-drive': (900, 1347), 'tv-launcher': (900, 1344), 'tv-box-g100': (900, 1600)}  # assets/photos/<name>.webp
+PHOTO_DIMS = {'always-on': (900, 1129), 'usb-drive': (900, 1347), 'tv-launcher': (900, 1344), 'tv-box-g100': (900, 1600), 'tv-server-status-en': (900, 506), 'tv-server-monitor-en': (900, 506), 'tv-server-performance-en': (900, 506), 'tv-server-status-pt': (900, 506), 'tv-server-monitor-pt': (900, 506), 'tv-server-performance-pt': (900, 506), 'tv-server-status-es': (900, 506), 'tv-server-monitor-es': (900, 506), 'tv-server-performance-es': (900, 506)}  # assets/photos/<name>.webp
 def _srcset(u, base):
     """srcset from the variants made by tools/optimize_images.py (assets/shots: 300/460, assets/photos: 450)."""
     stem = u[:-5]

@@ -50,6 +50,14 @@ This guide is based on a real test, not on the spec sheet: we ran DogNAS on an A
 ![The Android TV home screen with DogNAS among the favourite apps.](assets/photos/blog/tv-launcher.webp)
 ![The TV box on a desk with a Moto G100 in front, showing DogNAS Client Lite connected to it.](assets/photos/blog/tv-box-g100.webp)
 
+## What the server shows on the TV
+
+The DogNAS screens are made for the TV: large text, a focus ring for the remote and the same three tabs as on a phone. These are the real screens while a computer was copying files to the box.
+
+![Status: server online and the space used on the box's drive.](assets/photos/tv-server/tv-server-status-en.webp)
+![Monitor: the upload speed in real time while files arrive.](assets/photos/tv-server/tv-server-monitor-en.webp)
+![Performance: the Wi-Fi link, the disk writing speed and the processor.](assets/photos/tv-server/tv-server-performance-en.webp)
+
 ## What we measured
 
 | | Result in our test |
