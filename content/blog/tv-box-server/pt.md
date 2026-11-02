@@ -26,7 +26,7 @@ Este guia vem de um teste real, não da ficha técnica: rodamos o DogNAS numa Aq
 > - A box precisa de **Android 7.0 ou mais novo**. A nossa tinha Google Play, que também importa para o plano Pro.
 > - Os arquivos podem ficar na memória interna da box ou num **HD ou pendrive USB** ligado a ela. Os dois funcionaram igual no nosso teste.
 > - A velocidade é limitada pelo Wi-Fi e pelo processador fraco da box, não pelo disco: cerca de 3 MB/s de um computador e de 1 a 1,5 MB/s de um celular, na nossa rede de 5 GHz.
-> - Serve bem para backup e para acessar documentos e fotos, não para passar vídeo 4K direto da box.
+> - É aceitável para uso em casa: backup, documentos, fotos e vídeos. Avalie as especificações do seu aparelho (celular, TV box ou tablet), porque elas definem a velocidade.
 
 ## O que você precisa
 
@@ -76,7 +76,7 @@ Precisa de Android 7.0 ou mais novo e, na prática, de Google Play. Testamos uma
 Pode. No nosso teste, um disco USB ligado à box apareceu no assistente do primeiro uso e funcionou na mesma velocidade da memória interna. Um disco que pede mais energia do que a porta USB da box entrega pode não girar, então um dock com fonte própria é mais seguro.
 
 ?? É rápida o bastante para ver vídeos a partir dela?
-Não de forma confiável. A poucos MB/s um vídeo comum pode tocar, mas arquivos grandes demoram para copiar e um vídeo de alta qualidade pode travar. Use-a para guardar e acessar arquivos, e copie os vídeos para o aparelho em que você os assiste.
+Para uso em casa é aceitável. A velocidade depende das especificações do seu aparelho, então recomendamos avaliá-las (celular, TV box ou tablet): processador, Wi-Fi e armazenamento definem a rapidez. No nosso teste medimos alguns MB/s; vídeos muito grandes ou de alta qualidade demoram mais para copiar e podem precisar ser copiados para o aparelho em que você os assiste.
 
 ?? Preciso pagar?
 Não. O plano Grátis guarda até 64 GB de arquivos, com o perfil Home e mais dois perfis. O Pro tira esse limite e acrescenta as opções listadas no app.

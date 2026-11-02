@@ -26,7 +26,7 @@ This guide is based on a real test, not on the spec sheet: we ran DogNAS on an A
 > - The box needs **Android 7.0 or newer**. Ours had Google Play, which also matters for the Pro plan.
 > - Files can live on the box's internal storage or on a **USB drive** plugged into it. Both worked the same in our test.
 > - Speed is limited by Wi-Fi and the box's weak processor, not by the disk: about 3 MB/s from a computer and 1 to 1.5 MB/s from a phone on our 5 GHz network.
-> - It is good for backups and for reaching documents and photos, not for streaming 4K video from the box.
+> - It is acceptable for home use: backups, documents, photos and videos. Check the specifications of your device (phone, TV box or tablet), because they decide the speed.
 
 ## What you need
 
@@ -76,7 +76,7 @@ It needs Android 7.0 or newer and, in practice, Google Play. We tested one box; 
 Yes. In our test a USB drive plugged into the box was offered in the first-run wizard and worked at the same speed as the internal storage. A drive that needs more power than the box's USB port gives may not spin up, so a powered dock is safer.
 
 ?? Is it fast enough to watch videos from it?
-Not reliably. At a few MB/s a standard video can play, but large files will take a long time to copy and a high-quality video may stutter. Use it to keep and reach files, and copy videos to the device you watch them on.
+For home use it is acceptable. Speed depends on the specifications of your device, so we recommend checking them (phone, TV box or tablet): the processor, the Wi-Fi and the storage decide how fast files move. In our test we measured a few MB/s; very large or high-quality videos take longer to copy and may need to be copied to the device you watch them on.
 
 ?? Do I need to pay?
 No. The Free plan keeps up to 64 GB of files with the Home profile and two more profiles. Pro removes that limit and adds the options listed in the app.

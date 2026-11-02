@@ -26,7 +26,7 @@ Esta guía sale de una prueba real, no de la ficha técnica: ejecutamos DogNAS e
 > - La box necesita **Android 7.0 o posterior**. La nuestra tenía Google Play, que también importa para el plan Pro.
 > - Los archivos pueden estar en el almacenamiento interno de la box o en un **disco USB** conectado a ella. Los dos funcionaron igual en nuestra prueba.
 > - La velocidad la limitan el Wi-Fi y el procesador débil de la box, no el disco: unos 3 MB/s desde un ordenador y de 1 a 1,5 MB/s desde un móvil, en nuestra red de 5 GHz.
-> - Sirve para copias de seguridad y para consultar documentos y fotos, no para reproducir vídeo 4K desde la box.
+> - Es aceptable para uso doméstico: copias de seguridad, documentos, fotos y vídeos. Evalúa las especificaciones de tu aparato (móvil, TV box o tableta), porque ellas deciden la velocidad.
 
 ## Qué necesitas
 
@@ -76,7 +76,7 @@ Necesita Android 7.0 o posterior y, en la práctica, Google Play. Probamos una b
 Sí. En nuestra prueba un disco USB conectado a la box apareció en el asistente del primer uso y funcionó a la misma velocidad que el almacenamiento interno. Un disco que pide más energía de la que da el puerto USB de la box puede no arrancar, así que una base con alimentación propia es más segura.
 
 ?? ¿Es lo bastante rápida para ver vídeos desde ella?
-No de forma fiable. A unos pocos MB/s un vídeo normal puede reproducirse, pero los archivos grandes tardan en copiarse y un vídeo de alta calidad puede entrecortarse. Úsala para guardar y consultar archivos, y copia los vídeos al aparato donde los ves.
+Para uso doméstico es aceptable. La velocidad depende de las especificaciones de tu aparato, así que recomendamos evaluarlas (móvil, TV box o tableta): el procesador, el Wi-Fi y el almacenamiento deciden la rapidez. En nuestra prueba medimos unos pocos MB/s; los vídeos muy grandes o de alta calidad tardan más en copiarse y quizá convenga copiarlos al aparato donde los ves.
 
 ?? ¿Hay que pagar?
 No. El plan Gratis guarda hasta 64 GB de archivos, con el perfil Home y dos perfiles más. Pro quita ese límite y añade las opciones que lista la app.
