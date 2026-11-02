@@ -12,10 +12,11 @@ cover_alt: Illustration of a phone with an arrow taking files out, next to the D
 social_image: assets/blog/free-phone-space/social-en.jpg
 cta: client
 related: [free-phone-space, old-android-server, pc-phone-transfer]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-02
+published: 2026-11-02
 ---
 **WhatsApp fills your phone because, by default, it downloads and keeps the photos, videos, voice notes and documents that pass through your groups on the device**, even the ones you never opened. The way out that keeps what matters is to copy that media to a place of your own, check it, and only then delete it from the phone. Your text conversations stay in the app.
 
@@ -78,8 +79,8 @@ You need a DogNAS server at home. An [old Android works as a file server](/en/bl
 ?? Can I delete the media without losing my chats?
 Yes. The text stays; deleted files show as unavailable. That is why you copy and check first.
 
-?? Does DogNAS back up WhatsApp?
-No. It stores the media files you copy to the server. The chat history backup remains WhatsApp's own.
+?? Does DogNAS keep my WhatsApp chats?
+No. It stores only the media files you copy to the server. Your chat history stays with WhatsApp's own tools.
 
 ?? What if the picker does not show the WhatsApp folder?
 On newer Android, copy the folder to Downloads with a file manager and send it from there.

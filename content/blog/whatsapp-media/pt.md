@@ -12,10 +12,11 @@ cover_alt: Ilustração de um celular com uma seta tirando arquivos ao lado da t
 social_image: assets/blog/free-phone-space/social-pt.jpg
 cta: client
 related: [free-phone-space, old-android-server, pc-phone-transfer]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-02
+published: 2026-11-02
 ---
 **O WhatsApp enche o celular porque, por padrão, baixa e guarda no aparelho as fotos, vídeos, áudios e documentos que passam pelos seus grupos**, mesmo os que você nunca abriu. A saída que preserva o que importa é copiar essas mídias para um lugar seu, conferir, e só então apagar do celular. As conversas em texto continuam no app.
 
@@ -78,8 +79,8 @@ Você precisa de um servidor DogNAS em casa. Um [Android antigo serve de servido
 ?? Posso apagar as mídias sem perder as conversas?
 Sim. O texto fica; os arquivos apagados aparecem como indisponíveis. Por isso copie e confira antes.
 
-?? O DogNAS faz backup do WhatsApp?
-Não. Ele guarda os arquivos de mídia que você copiar para o servidor. O histórico de conversas continua sendo o backup do próprio WhatsApp.
+?? O DogNAS guarda as minhas conversas do WhatsApp?
+Não. Ele guarda só os arquivos de mídia que você copiar para o servidor. O histórico de conversas segue com as ferramentas do próprio WhatsApp.
 
 ?? E se o seletor não mostrar a pasta do WhatsApp?
 Em Android novos, copie a pasta com um gerenciador de arquivos para Downloads e envie de lá.

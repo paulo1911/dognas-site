@@ -12,10 +12,11 @@ cover_alt: Ilustración de un celular con una flecha que saca archivos, junto a 
 social_image: assets/blog/free-phone-space/social-es.jpg
 cta: client
 related: [free-phone-space, old-android-server, pc-phone-transfer]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-02
+published: 2026-11-02
 ---
 **WhatsApp llena el celular porque, por defecto, descarga y guarda en el aparato las fotos, vídeos, audios y documentos que pasan por tus grupos**, incluso los que nunca abriste. La salida que conserva lo importante es copiar esos archivos a un lugar tuyo, comprobarlos y solo entonces borrarlos del celular. Las conversaciones de texto siguen en la app.
 
@@ -78,8 +79,8 @@ Necesitas un servidor DogNAS en casa. Un [Android viejo sirve de servidor de arc
 ?? ¿Puedo borrar los archivos sin perder los chats?
 Sí. El texto se queda; los archivos borrados aparecen como no disponibles. Por eso se copia y se comprueba antes.
 
-?? ¿DogNAS hace copia de seguridad de WhatsApp?
-No. Guarda los archivos multimedia que copies al servidor. La copia del historial de chats sigue siendo la de WhatsApp.
+?? ¿DogNAS guarda mis chats de WhatsApp?
+No. Guarda solo los archivos multimedia que copies al servidor. El historial de chats sigue con las herramientas de WhatsApp.
 
 ?? ¿Y si el selector no muestra la carpeta de WhatsApp?
 En Android nuevos, copia la carpeta a Descargas con un administrador de archivos y envíala desde ahí.
