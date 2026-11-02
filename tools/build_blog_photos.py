@@ -23,7 +23,7 @@ PHOTOS = {
     'tv-box-g100':  ('4BA63DC1', (.0, .0, 1, 1), [], 'An Android TV box on a desk with a Moto G100 in front, connected to it with DogNAS Client Lite.'),
     'tv-launcher':  ('C72B8822', (.0, .08, 1, .92), [], 'The Android TV home screen with DogNAS among the favourite apps, on a TV box connected to a TV.'),
     # added 2026-11-01 (second batch): the framed family picture on the desk is blurred in these
-    'usb-dock-s20fe': ('065464F3', (.0, .0, 1, 1), [(.80, .28, 1.02, .62)], 'A Galaxy S20 FE running DogNAS next to a USB drive dock.'),
+    'usb-dock-s20fe': ('065464F3', (.0, .0, 1, 1), [(.80, .28, 1.02, .62)], 'A Galaxy S20 FE running DogNAS, with a dock holding a 500 GB hard disk reused from a laptop, powered by an external 20 W supply.'),
     'tv-box-client': ('0C14E719', (.0, .0, 1, 1), [], 'A Moto G100 showing DogNAS Client Lite connected to an Android TV box, with the "My files" button.'),
     'tablet-transfers': ('7F979992', (.0, .0, 1, 1), [(.76, .12, 1.02, .58)], 'An old tablet running the DogNAS server dashboard, with a phone showing a list of files being sent to it.'),
     'tablet-server-online': ('9D2A0748', (.0, .0, 1, 1), [(.78, .12, 1.02, .60)], 'The DogNAS server on an old tablet showing "Server ONLINE", with a phone connected to it in front.'),

@@ -10,7 +10,7 @@ Nada disso está ligado a nenhum artigo ainda. Todas saem sem EXIF, em 900 px e 
 | `s20fe-side` | mesmo, ângulo mais baixo | quase igual à primeira: escolha uma |
 | `tv-box-g100` | TV box + Moto G100 com o Client Lite | o app mostra "Home · STV-3000 Plus" |
 | `tv-launcher` | tela da TV (Aquário) com o DogNAS nos favoritos | sem pessoas |
-| `usb-dock-s20fe` | S20 FE ao lado de um dock de discos USB | 2º lote; moldura de família borrada |
+| `usb-dock-s20fe` | S20 FE com um dock com HDD de 500 GB reaproveitado de notebook, alimentação externa de 20 W (confirmado pelo dono do projeto) | 2º lote; moldura de família borrada; combina com o artigo `old-laptop-hdd` |
 | `tv-box-client` | Moto G100 com o Client Lite conectado à TV box ("My files") | 2º lote; sem pessoas |
 | `tablet-transfers` | tablet servidor + celular recebendo arquivos | 2º lote; moldura borrada; mostra nomes de arquivos de teste |
 | `tablet-server-online` | tablet "Server ONLINE" + celular na frente | 2º lote; moldura borrada; mostra o nome "Paulo" na tela do celular (decisão do dono do projeto, 2026-11-01: manter, dá realismo) |
