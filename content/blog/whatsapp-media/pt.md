@@ -6,6 +6,7 @@ meta_title: WhatsApp lotando o celular: como liberar espaço | DogNAS
 meta_description: O WhatsApp encheu o seu Android? Veja onde ficam as mídias, como copiá-las para um servidor seu em casa com o DogNAS e liberar espaço sem apagar as conversas.
 pillar: storage
 tags: [whatsapp, liberar espaço, armazenamento, android, fotos e vídeos]
+tested: Moto G100 · Android 12 · DogNAS Client 1.0.1 enviando para um servidor DogNAS (E13) · 2026-11-02
 cover: assets/blog/free-phone-space/cover-pt.webp
 cover_alt: Ilustração de um celular com uma seta tirando arquivos ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/free-phone-space/social-pt.jpg
@@ -42,7 +43,7 @@ Os caminhos dependem da versão do Android:
 Dentro de `Media` há uma pasta por tipo: `WhatsApp Images`, `WhatsApp Video`, `WhatsApp Audio`, `WhatsApp Voice Notes`, `WhatsApp Documents`, e uma subpasta `Sent` com o que você enviou. Os nomes podem variar com o idioma e a versão do app.
 
 > [!note]
-> Nas versões novas do Android, o seletor de arquivos do sistema pode não mostrar a pasta `Android/media`. Se for o seu caso, use um gerenciador de arquivos para copiá-la para uma pasta comum, como Downloads, e envie de lá. Não testamos todos os fabricantes.
+> Nas versões novas do Android, o seletor de arquivos do sistema pode não mostrar a pasta `Android/media`. Se for o seu caso, use um gerenciador de arquivos para copiá-la para uma pasta comum, como Downloads, e envie de lá. No nosso teste, num Android 12, o seletor do DogNAS Client chegou a `Android/media` sem precisar desse passo; não testamos outras versões nem fabricantes.
 
 ## Passo a passo com o DogNAS
 
@@ -50,7 +51,7 @@ Você precisa de um servidor DogNAS em casa. Um [Android antigo serve de servido
 
 1. **Veja o que pesa.** No WhatsApp, abra Gerenciar armazenamento e anote as conversas maiores.
 2. **Crie uma pasta no servidor**, por exemplo `WhatsApp-2026`, e pareie o celular com o QR Code e o PIN do perfil.
-3. **Envie as pastas de mídia** pelo botão de enviar, escolhendo `WhatsApp Images`, `WhatsApp Video` e, se quiser, `Documents` e `Voice Notes`. A fila de transferências mostra o progresso e retoma se o Wi-Fi cair.
+3. **Envie as mídias** pelo botão Novo, Enviar. O seletor de arquivos abre no celular: navegue até a pasta de mídia, toque e segure em um arquivo, escolha "Selecionar tudo" e envie. Repita para cada pasta (`WhatsApp Images`, `WhatsApp Video`, e, se quiser, `Documents` e `Voice Notes`, além de `Sent`). O envio é por arquivos, não por pasta inteira. A fila de transferências mostra o progresso e retoma se o Wi-Fi cair.
 4. **Confira no servidor.** Abra algumas fotos e vídeos e compare o número e o tamanho dos arquivos com o celular.
 5. **Só então apague do celular**, pelo próprio WhatsApp (Gerenciar armazenamento) ou apagando as pastas copiadas.
 

@@ -6,6 +6,7 @@ meta_title: WhatsApp filling your phone: free up space | DogNAS
 meta_description: WhatsApp filled your Android? See where its media lives, how to copy it to your own home server with DogNAS and free up space without deleting your chats.
 pillar: storage
 tags: [whatsapp, free up space, storage, android, photos and videos]
+tested: Moto G100 · Android 12 · DogNAS Client 1.0.1 uploading to a DogNAS server (E13) · 2026-11-02
 cover: assets/blog/free-phone-space/cover-en.webp
 cover_alt: Illustration of a phone with an arrow taking files out, next to the DogNAS Client Lite screen
 social_image: assets/blog/free-phone-space/social-en.jpg
@@ -42,7 +43,7 @@ The paths depend on your Android version:
 Inside `Media` there is one folder per type: `WhatsApp Images`, `WhatsApp Video`, `WhatsApp Audio`, `WhatsApp Voice Notes`, `WhatsApp Documents`, and a `Sent` subfolder with what you sent. Names can vary with the app language and version.
 
 > [!note]
-> On recent Android versions the system file picker may not show `Android/media`. If so, use a file manager to copy it to an ordinary folder such as Downloads and send it from there. We have not tested every manufacturer.
+> On recent Android versions the system file picker may not show `Android/media`. If so, use a file manager to copy it to an ordinary folder such as Downloads and send it from there. In our test, on Android 12, the DogNAS Client picker reached `Android/media` without this step; we did not test other versions or manufacturers.
 
 ## Step by step with DogNAS
 
@@ -50,7 +51,7 @@ You need a DogNAS server at home. An [old Android works as a file server](/en/bl
 
 1. **See what is heavy.** In WhatsApp open Manage storage and note the biggest chats.
 2. **Create a folder on the server**, for example `WhatsApp-2026`, and pair the phone with the profile's QR Code and PIN.
-3. **Send the media folders** with the upload button, choosing `WhatsApp Images`, `WhatsApp Video` and, if you like, `Documents` and `Voice Notes`. The transfer queue shows progress and resumes if the Wi-Fi drops.
+3. **Send the media** with New, Upload. The phone's file picker opens: go to the media folder, long-press a file, choose "Select all" and send. Repeat for each folder (`WhatsApp Images`, `WhatsApp Video` and, if you like, `Documents`, `Voice Notes` and `Sent`). Upload is per file, not a whole folder. The transfer queue shows progress and resumes if the Wi-Fi drops.
 4. **Check on the server.** Open a few photos and videos and compare the file count and size with the phone.
 5. **Only then delete from the phone**, either in WhatsApp (Manage storage) or by deleting the folders you copied.
 

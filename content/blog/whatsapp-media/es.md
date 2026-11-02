@@ -6,6 +6,7 @@ meta_title: WhatsApp llenando el celular: liberar espacio | DogNAS
 meta_description: ¿WhatsApp llenó tu Android? Mira dónde están sus archivos, cómo copiarlos a tu servidor en casa con DogNAS y liberar espacio sin borrar tus chats.
 pillar: storage
 tags: [whatsapp, liberar espacio, almacenamiento, android, fotos y vídeos]
+tested: Moto G100 · Android 12 · DogNAS Client 1.0.1 enviando a un servidor DogNAS (E13) · 2026-11-02
 cover: assets/blog/free-phone-space/cover-es.webp
 cover_alt: Ilustración de un celular con una flecha que saca archivos, junto a la pantalla de DogNAS Client Lite
 social_image: assets/blog/free-phone-space/social-es.jpg
@@ -42,7 +43,7 @@ Las rutas dependen de la versión de Android:
 Dentro de `Media` hay una carpeta por tipo: `WhatsApp Images`, `WhatsApp Video`, `WhatsApp Audio`, `WhatsApp Voice Notes`, `WhatsApp Documents` y una subcarpeta `Sent` con lo que enviaste. Los nombres pueden variar según el idioma y la versión de la app.
 
 > [!note]
-> En versiones recientes de Android, el selector de archivos del sistema puede no mostrar `Android/media`. Si te pasa, usa un administrador de archivos para copiarla a una carpeta normal, como Descargas, y envíala desde ahí. No probamos todos los fabricantes.
+> En versiones recientes de Android, el selector de archivos del sistema puede no mostrar `Android/media`. Si te pasa, usa un administrador de archivos para copiarla a una carpeta normal, como Descargas, y envíala desde ahí. En nuestra prueba, en Android 12, el selector de DogNAS Client llegó a `Android/media` sin este paso; no probamos otras versiones ni fabricantes.
 
 ## Paso a paso con DogNAS
 
@@ -50,7 +51,7 @@ Necesitas un servidor DogNAS en casa. Un [Android viejo sirve de servidor de arc
 
 1. **Mira qué pesa.** En WhatsApp abre Administrar almacenamiento y anota los chats más grandes.
 2. **Crea una carpeta en el servidor**, por ejemplo `WhatsApp-2026`, y empareja el celular con el código QR y el PIN del perfil.
-3. **Envía las carpetas de archivos** con el botón de subir, eligiendo `WhatsApp Images`, `WhatsApp Video` y, si quieres, `Documents` y `Voice Notes`. La cola de transferencias muestra el progreso y se reanuda si el Wi-Fi se corta.
+3. **Envía los archivos** con Nuevo, Subir. Se abre el selector de archivos del celular: ve a la carpeta, mantén pulsado un archivo, elige "Seleccionar todo" y envía. Repite para cada carpeta (`WhatsApp Images`, `WhatsApp Video` y, si quieres, `Documents`, `Voice Notes` y `Sent`). La subida es por archivos, no por carpeta entera. La cola de transferencias muestra el progreso y se reanuda si el Wi-Fi se corta.
 4. **Comprueba en el servidor.** Abre algunas fotos y vídeos y compara el número y el tamaño de los archivos con el celular.
 5. **Solo entonces borra del celular**, desde WhatsApp (Administrar almacenamiento) o borrando las carpetas copiadas.
 
