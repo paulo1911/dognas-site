@@ -19,6 +19,8 @@ updated: 2026-10-28
 ---
 Everyone has a tablet in a drawer: the kids' one, the one that got slow, the one replaced by a newer model. It usually has more storage than an old phone, a big screen and a larger battery. All of that makes it a good candidate for your home file server.
 
+![An old white 7-inch Android tablet standing next to a Wi-Fi router, running the DogNAS server dashboard.](assets/photos/blog/old-tablet.webp)
+
 ## Why a tablet works well
 
 - **Big screen.** Left on a shelf or a stand, it shows the server's dashboard (connected clients and transfer speed) at a glance.

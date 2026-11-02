@@ -19,6 +19,8 @@ updated: 2026-10-28
 ---
 Todo el mundo tiene una tablet en el cajón: la de los niños, la que se puso lenta, la que fue reemplazada por un modelo nuevo. Suele tener más almacenamiento que un celular viejo, una pantalla grande y una batería mayor. Todo eso la hace una buena candidata a servidor de archivos de la casa.
 
+![Una tableta Android antigua, blanca, de 7 pulgadas, junto a un router Wi-Fi, mostrando el panel del servidor DogNAS.](assets/photos/blog/old-tablet.webp)
+
 ## Por qué una tablet funciona bien
 
 - **Pantalla grande.** Dejada en un estante o en un soporte, muestra el panel del servidor (clientes conectados y velocidad de las transferencias) de un vistazo.
