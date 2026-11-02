@@ -8,8 +8,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 # Google Analytics 4 on the site only — the apps collect nothing; see the privacy page.
 ADSENSE_CLIENT = 'ca-pub-1648236694876178'
-# Ad unit id of the single banner shown on blog posts (AdSense > Ads > By ad unit > Display ads). Empty = no ad is rendered, only the account meta tag.
-ADSENSE_SLOT = ''
+# Ad unit ids (AdSense > Ads > By ad unit > Display ads). Empty = that banner is not rendered (only the account meta tag stays).
+# MID: one banner inside blog articles, mobile and desktop. SIDE: desktop sidebar only (the sidebar is display:none below 1000 px).
+ADSENSE_SLOT_MID = ''
+ADSENSE_SLOT_SIDE = ''
 GA_TAG = '''<meta name="google-adsense-account" content="ca-pub-1648236694876178">
 <script>
 // Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
@@ -29,7 +31,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (window.__dnGA) return; window.__dnGA = 1;
     gtag('consent', 'update', {analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted'});
     // The single blog banner (<ins class=adsbygoogle>) exists only on blog posts; its script loads only after the visitor accepts.
-    if (document.querySelector('ins.adsbygoogle')) { var a = document.createElement('script'); a.async = 1; a.crossOrigin = 'anonymous'; a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD; document.head.appendChild(a); document.querySelectorAll('ins.adsbygoogle').forEach(function () { (window.adsbygoogle = window.adsbygoogle || []).push({}); }); }
+    if (document.querySelector('ins.adsbygoogle')) { var a = document.createElement('script'); a.async = 1; a.crossOrigin = 'anonymous'; a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD; document.head.appendChild(a); document.querySelectorAll('ins.adsbygoogle').forEach(function (n) { if (n.offsetParent === null) return; (window.adsbygoogle = window.adsbygoogle || []).push({}); }); }
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }

@@ -19,7 +19,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (window.__dnGA) return; window.__dnGA = 1;
     gtag('consent', 'update', {analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted'});
     // The single blog banner (<ins class=adsbygoogle>) exists only on blog posts; its script loads only after the visitor accepts.
-    if (document.querySelector('ins.adsbygoogle')) { var a = document.createElement('script'); a.async = 1; a.crossOrigin = 'anonymous'; a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD; document.head.appendChild(a); document.querySelectorAll('ins.adsbygoogle').forEach(function () { (window.adsbygoogle = window.adsbygoogle || []).push({}); }); }
+    if (document.querySelector('ins.adsbygoogle')) { var a = document.createElement('script'); a.async = 1; a.crossOrigin = 'anonymous'; a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD; document.head.appendChild(a); document.querySelectorAll('ins.adsbygoogle').forEach(function (n) { if (n.offsetParent === null) return; (window.adsbygoogle = window.adsbygoogle || []).push({}); }); }
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
