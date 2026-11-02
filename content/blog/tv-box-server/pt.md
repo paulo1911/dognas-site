@@ -3,7 +3,7 @@ slug: tv-box-android-como-servidor-de-arquivos
 title: TV box Android como NAS caseiro: o que funciona e o que esperar (testamos uma)
 summary: Sim, uma TV box Android pode guardar seus arquivos em casa, sem nuvem. O que testamos numa box real, o que você precisa, qual a velocidade e onde ela deixa a desejar.
 meta_title: TV box Android como servidor de arquivos com o DogNAS | DogNAS
-meta_description: Use uma TV box Android como servidor de arquivos particular no Wi-Fi de casa com o DogNAS: testado numa box real, com passo a passo, velocidades medidas, limites e o que conferir antes.
+meta_description: Use uma TV box Android como servidor de arquivos no Wi-Fi de casa com o DogNAS: testado numa box real, com passo a passo, velocidades medidas e limites.
 pillar: reuse
 tags: [tv box android, servidor de arquivos, nas caseiro, sftp, hd externo]
 cover: assets/blog/tv-box-server/cover-pt.webp
@@ -12,10 +12,11 @@ social_image: assets/blog/tv-box-server/social-pt.jpg
 cta: server
 related: [old-android-server, home-nas, old-tablet]
 tested: Aquário STV-3000 Plus (TV box) · Android 11 · 2026-11-01
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-01
 updated: 2026-11-01
+published: 2026-11-01
 ---
 **Sim, uma TV box Android pode funcionar como servidor de arquivos de casa**, com alguns limites que explicamos abaixo. Ela é um pequeno computador sempre ligado que já fica ao lado da TV e do roteador, com Wi-Fi (muitas têm também porta de rede) e porta USB, e desde o **DogNAS 1.1.6** o app servidor foi preparado para rodar numa delas.
 
@@ -30,7 +31,7 @@ Este guia vem de um teste real, não da ficha técnica: rodamos o DogNAS numa Aq
 
 ## O que você precisa
 
-- Uma TV box Android com **Android 7.0 ou mais novo** e algum espaço livre, ou um disco USB (HD ou SSD num dock, ou um pendrive).
+- Uma TV box Android com **Android 7.0 ou mais novo** e algum espaço livre, ou um disco USB (HD ou SSD num dock, [como o HD de um notebook velho](/blog/reaproveitar-hd-de-notebook-como-armazenamento/), ou um pendrive).
 - A box ligada à rede de casa. O Wi-Fi funciona; se a sua box tem porta de rede, o cabo é a opção mais estável (não testamos com cabo).
 - Um celular para parear, para ler o QR Code mostrado na TV.
 - O app DogNAS na box. Ele vem do Google Play, então a box precisa ter a Play Store. Boxes sem ela podem ser um problema: não testamos instalar o app por outros meios.
@@ -83,4 +84,4 @@ Não para começar. O plano Grátis guarda até 64 GB de arquivos, com o perfil 
 
 ## Vale a pena
 
-Se você já tem uma TV box parada numa gaveta, é um jeito sem custo de guardar os arquivos de casa num só lugar, sem nuvem. Se vai comprar um aparelho para isso, um celular ou tablet antigo com processador melhor costuma ser mais rápido. Compare com as outras opções em [reaproveitar um Android antigo](old-android-server) e em [um tablet antigo como armazenamento da casa](old-tablet).
+Se você já tem uma TV box parada numa gaveta, é um jeito sem custo de guardar os arquivos de casa num só lugar, sem nuvem. Se vai comprar um aparelho para isso, um celular ou tablet antigo com processador melhor costuma ser mais rápido. Compare com as outras opções em [reaproveitar um Android antigo](/blog/transformar-android-antigo-em-servidor-de-arquivos/) e em [um tablet antigo como armazenamento da casa](/blog/tablet-antigo-como-armazenamento-da-casa/).
