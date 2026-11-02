@@ -135,6 +135,7 @@ Notes: do not state prices or device compatibility as fact; point to the Google 
 
 # ---- security.txt, 404.html, IndexNow key -------------------------------------------------------------------------------
 exp = (datetime.date.today() + datetime.timedelta(days=365)).isoformat() + 'T00:00:00.000Z'
+w('ads.txt', 'google.com, pub-1648236694876178, DIRECT, f08c47fec0942fa0\n')
 w('.well-known/security.txt', f'Contact: mailto:{EMAIL}\nExpires: {exp}\nPreferred-Languages: en, pt, es\nCanonical: {SITE}.well-known/security.txt\n')
 w('404.html', f'''<!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8">

@@ -7,23 +7,29 @@ from home_copy import NEW
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EMAIL = 'me.pauloleite.dev@gmail.com'
 # Google Analytics 4 on the site only — the apps collect nothing; see the privacy page.
-GA_TAG = '''<script>
+ADSENSE_CLIENT = 'ca-pub-1648236694876178'
+# Ad unit id of the single banner shown on blog posts (AdSense > Ads > By ad unit > Display ads). Empty = no ad is rendered, only the account meta tag.
+ADSENSE_SLOT = ''
+GA_TAG = '''<meta name="google-adsense-account" content="ca-pub-1648236694876178">
+<script>
 // Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
 (function () {
-  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', L = (document.documentElement.lang || 'pt').slice(0, 2);
+  var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', AD = 'ca-pub-1648236694876178', L = (document.documentElement.lang || 'pt').slice(0, 2);
   var TXT = {
-    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Política de privacidade', 'Preferências de cookies'],
-    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people. The apps collect nothing.', 'Accept', 'Decline', 'Privacy policy', 'Cookie preferences'],
-    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Política de privacidad', 'Preferencias de cookies']
+    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas, e o Google AdSense para mostrar um anúncio nos artigos do blog. Os apps não coletam nada nem têm anúncios.', 'Aceitar', 'Recusar', 'Política de privacidade', 'Preferências de cookies'],
+    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people, and Google AdSense to show one ad in blog articles. The apps collect nothing and have no ads.', 'Accept', 'Decline', 'Privacy policy', 'Cookie preferences'],
+    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas, y Google AdSense para mostrar un anuncio en los artículos del blog. Las apps no recogen nada ni tienen anuncios.', 'Aceptar', 'Rechazar', 'Política de privacidad', 'Preferencias de cookies']
   }[L] || [];
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   function load() {
     if (window.__dnGA) return; window.__dnGA = 1;
-    gtag('consent', 'update', {analytics_storage: 'granted'});
+    gtag('consent', 'update', {analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted'});
+    // The single blog banner (<ins class=adsbygoogle>) exists only on blog posts; its script loads only after the visitor accepts.
+    if (document.querySelector('ins.adsbygoogle')) { var a = document.createElement('script'); a.async = 1; a.crossOrigin = 'anonymous'; a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD; document.head.appendChild(a); document.querySelectorAll('ins.adsbygoogle').forEach(function () { (window.adsbygoogle = window.adsbygoogle || []).push({}); }); }
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
@@ -40,7 +46,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
     document.body.appendChild(d);
   }
-  if (read() === 'granted') load();
+  if (read() === 'granted') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load); else load(); }
   document.addEventListener('DOMContentLoaded', function () {
     if (!read()) banner();
     document.addEventListener('click', function (e) {
