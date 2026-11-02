@@ -55,6 +55,9 @@ You need a DogNAS server at home. An [old Android works as a file server](/en/bl
 4. **Check on the server.** Open a few photos and videos and compare the file count and size with the phone.
 5. **Only then delete from the phone**, either in WhatsApp (Manage storage) or by deleting the folders you copied.
 
+
+![The DogNAS Client file picker in a test folder with the same structure as WhatsApp's (Android/media/…/WhatsApp/Media/WhatsApp Images), with six photos selected for upload.](assets/blog/whatsapp-media/picker-en.webp)
+
 ## Things to keep in mind
 
 - **Check before you delete.** This is the step that prevents regret.

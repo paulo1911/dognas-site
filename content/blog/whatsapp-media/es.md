@@ -55,6 +55,9 @@ Necesitas un servidor DogNAS en casa. Un [Android viejo sirve de servidor de arc
 4. **Comprueba en el servidor.** Abre algunas fotos y vídeos y compara el número y el tamaño de los archivos con el celular.
 5. **Solo entonces borra del celular**, desde WhatsApp (Administrar almacenamiento) o borrando las carpetas copiadas.
 
+
+![El selector de archivos de DogNAS Client en una carpeta de prueba con la misma estructura que la de WhatsApp (Android/media/…/WhatsApp/Media/WhatsApp Images), con seis fotos seleccionadas para subir.](assets/blog/whatsapp-media/picker-es.webp)
+
 ## Cuidados importantes
 
 - **Comprueba antes de borrar.** Es el paso que evita arrepentirse.

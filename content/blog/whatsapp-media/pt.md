@@ -55,6 +55,9 @@ Você precisa de um servidor DogNAS em casa. Um [Android antigo serve de servido
 4. **Confira no servidor.** Abra algumas fotos e vídeos e compare o número e o tamanho dos arquivos com o celular.
 5. **Só então apague do celular**, pelo próprio WhatsApp (Gerenciar armazenamento) ou apagando as pastas copiadas.
 
+
+![O seletor de arquivos do DogNAS Client numa pasta de teste com a mesma estrutura do WhatsApp (Android/media/…/WhatsApp/Media/WhatsApp Images), com seis fotos selecionadas para envio.](assets/blog/whatsapp-media/picker-pt.webp)
+
 ## Cuidados importantes
 
 - **Confira antes de apagar.** É o passo que evita o arrependimento.
