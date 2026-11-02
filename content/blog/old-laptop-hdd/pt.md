@@ -37,6 +37,9 @@ Quando você troca o HD de um notebook por um SSD, o disco antigo costuma ir par
 
 A partir daí, o disco é o armazenamento do seu servidor, acessado pelo Wi-Fi da casa.
 
+![Um tablet antigo de 7 polegadas rodando o servidor DogNAS, com um dock com um HD de notebook de 320 GB atrás dele.](assets/photos/blog/tablet-hdd-dock.webp)
+![O mesmo tablet e o dock do HD de outro ângulo, com um celular conectado a ele.](assets/photos/blog/tablet-hdd-dock-2.webp)
+
 ## Cuidados importantes
 
 - **Energia.** HDs mecânicos podem pedir mais energia do que o celular fornece. Se o disco não ligar ou desconectar, use um hub USB com fonte própria. SSDs costumam gastar menos.

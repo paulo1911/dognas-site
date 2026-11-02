@@ -37,6 +37,9 @@ Cuando cambias el disco duro de una laptop por un SSD, el disco viejo suele ir a
 
 A partir de ahí, el disco es el almacenamiento de tu servidor, al que se accede por el Wi-Fi de casa.
 
+![Una tableta antigua de 7 pulgadas con el servidor DogNAS, con una base que aloja un disco duro de portátil de 320 GB detrás.](assets/photos/blog/tablet-hdd-dock.webp)
+![La misma tableta y la base del disco desde otro ángulo, con un móvil conectado.](assets/photos/blog/tablet-hdd-dock-2.webp)
+
 ## Precauciones importantes
 
 - **Energía.** Los discos duros mecánicos pueden pedir más energía de la que da un celular. Si el disco no arranca o se desconecta, usa un hub USB con fuente propia. Los SSD suelen gastar menos.

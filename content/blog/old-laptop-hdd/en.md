@@ -37,6 +37,9 @@ When you swap a laptop's hard drive for an SSD, the old disk usually goes into a
 
 From then on, the disk is your server's storage, reached over your home Wi-Fi.
 
+![An old 7-inch tablet running the DogNAS server, with a dock holding a 320 GB laptop hard disk behind it.](assets/photos/blog/tablet-hdd-dock.webp)
+![The same tablet and hard disk dock from another angle, with a phone connected to it.](assets/photos/blog/tablet-hdd-dock-2.webp)
+
 ## Important precautions
 
 - **Power.** Mechanical hard drives may ask for more power than a phone provides. If the disk won't spin up or disconnects, use a USB hub with its own power supply. SSDs usually draw less.
