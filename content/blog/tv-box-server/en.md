@@ -1,7 +1,7 @@
 ---
 slug: android-tv-box-as-home-server
-title: Android TV box as a home file server: what works and what to expect
-summary: A cheap Android TV box can keep your files at home too. What we tested on a real box, what you need, how fast it is and where it falls short.
+title: Turn an Android TV box into a home file server (we tested one)
+summary: Yes, an Android TV box can keep your files at home, with no cloud. What we tested on a real box, what you need, how fast it is and where it falls short.
 meta_title: Android TV box as a home file server with DogNAS | DogNAS
 meta_description: Use an Android TV box as a private file server on your home Wi-Fi with DogNAS: tested on a real box, with the setup steps, measured speeds, limits and what to check first.
 pillar: reuse
@@ -17,12 +17,12 @@ translation_review: pending
 created: 2026-11-01
 updated: 2026-11-01
 ---
-An Android TV box is a small always-on computer that already sits next to your TV and your router. It has Wi-Fi (many also have an Ethernet port), a USB port and no screen of its own to keep awake. That makes it a natural candidate for a home file server, and since **DogNAS 1.1.6** the server app is built to run on one.
+**Yes, an Android TV box can work as a home file server**, with some limits we explain below. It is a small always-on computer that already sits next to your TV and your router, with Wi-Fi (many also have an Ethernet port) and a USB port, and since **DogNAS 1.1.6** the server app is built to run on one.
 
 This guide is based on a real test, not on the spec sheet: we ran DogNAS on an Aquário STV-3000 Plus (Android 11, 2 GB of memory) and used it from two phones and a computer. It says what worked, what did not and what we could not test.
 
 > [!takeaways]
-> - DogNAS 1.1.6 or newer runs on an Android TV box: it appears in the TV launcher and can be used with the remote.
+> - **It works.** DogNAS 1.1.6 or newer runs on an Android TV box: it appears in the TV launcher and can be used with the remote, at no cost on the Free plan.
 > - The box needs **Android 7.0 or newer**. Ours had Google Play, which also matters for the Pro plan.
 > - Files can live on the box's internal storage or on a **USB drive** plugged into it. Both worked the same in our test.
 > - Speed is limited by Wi-Fi and the box's weak processor, not by the disk: about 3 MB/s from a computer and 1 to 1.5 MB/s from a phone on our 5 GHz network.
@@ -79,7 +79,7 @@ Yes. In our test a USB drive plugged into the box was offered in the first-run w
 For home use it is acceptable. Speed depends on the specifications of your device, so we recommend checking them (phone, TV box or tablet): the processor, the Wi-Fi and the storage decide how fast files move. In our test we measured a few MB/s; very large or high-quality videos take longer to copy and may need to be copied to the device you watch them on.
 
 ?? Do I need to pay?
-No. The Free plan keeps up to 64 GB of files with the Home profile and two more profiles. Pro removes that limit and adds the options listed in the app.
+Not to start. The Free plan keeps up to 64 GB of files, with the Home profile and two more profiles. Pro is a one-time purchase on Google Play: it removes the 64 GB limit and lets the server start by itself when the box turns on.
 
 ## Is it worth it
 

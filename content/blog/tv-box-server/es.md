@@ -1,7 +1,7 @@
 ---
 slug: tv-box-android-como-servidor-de-archivos
-title: TV box Android como servidor de archivos del hogar: qué funciona y qué esperar
-summary: Una TV box Android barata también puede guardar tus archivos en casa. Qué probamos en una box real, qué necesitas, qué velocidad tiene y dónde se queda corta.
+title: TV box Android como NAS casero: qué funciona y qué esperar (probamos una)
+summary: Sí, una TV box Android puede guardar tus archivos en casa, sin nube. Qué probamos en una box real, qué necesitas, qué velocidad tiene y dónde se queda corta.
 meta_title: TV box Android como servidor de archivos con DogNAS | DogNAS
 meta_description: Usa una TV box Android como servidor de archivos privado en el Wi-Fi de casa con DogNAS: probado en una box real, con pasos, velocidades medidas, límites y qué revisar antes.
 pillar: reuse
@@ -17,12 +17,12 @@ translation_review: pending
 created: 2026-11-01
 updated: 2026-11-01
 ---
-Una TV box Android es un pequeño ordenador siempre encendido que ya está junto a la tele y al router. Tiene Wi-Fi (muchas también puerto de red), puerto USB y ninguna pantalla propia que mantener encendida. Eso la convierte en una candidata natural a servidor de archivos del hogar, y desde **DogNAS 1.1.6** la app servidor está preparada para funcionar en una.
+**Sí, una TV box Android puede funcionar como servidor de archivos del hogar**, con algunos límites que explicamos abajo. Es un pequeño ordenador siempre encendido que ya está junto a la tele y al router, con Wi-Fi (muchas también puerto de red) y puerto USB, y desde **DogNAS 1.1.6** la app servidor está preparada para funcionar en una.
 
 Esta guía sale de una prueba real, no de la ficha técnica: ejecutamos DogNAS en una Aquário STV-3000 Plus (Android 11, 2 GB de memoria) y la usamos desde dos móviles y un ordenador. Dice qué funcionó, qué no y qué no pudimos probar.
 
 > [!takeaways]
-> - DogNAS 1.1.6 o posterior funciona en una TV box Android: aparece en el menú de la tele y se puede usar con el mando.
+> - **Funciona.** DogNAS 1.1.6 o posterior funciona en una TV box Android: aparece en el menú de la tele y se puede usar con el mando, sin coste en el plan Gratis.
 > - La box necesita **Android 7.0 o posterior**. La nuestra tenía Google Play, que también importa para el plan Pro.
 > - Los archivos pueden estar en el almacenamiento interno de la box o en un **disco USB** conectado a ella. Los dos funcionaron igual en nuestra prueba.
 > - La velocidad la limitan el Wi-Fi y el procesador débil de la box, no el disco: unos 3 MB/s desde un ordenador y de 1 a 1,5 MB/s desde un móvil, en nuestra red de 5 GHz.
@@ -79,7 +79,7 @@ Sí. En nuestra prueba un disco USB conectado a la box apareció en el asistente
 Para uso doméstico es aceptable. La velocidad depende de las especificaciones de tu aparato, así que recomendamos evaluarlas (móvil, TV box o tableta): el procesador, el Wi-Fi y el almacenamiento deciden la rapidez. En nuestra prueba medimos unos pocos MB/s; los vídeos muy grandes o de alta calidad tardan más en copiarse y quizá convenga copiarlos al aparato donde los ves.
 
 ?? ¿Hay que pagar?
-No. El plan Gratis guarda hasta 64 GB de archivos, con el perfil Home y dos perfiles más. Pro quita ese límite y añade las opciones que lista la app.
+No para empezar. El plan Gratis guarda hasta 64 GB de archivos, con el perfil Home y dos perfiles más. Pro es una compra única en Google Play: quita el límite de 64 GB y deja que el servidor arranque solo cuando se enciende la box.
 
 ## Merece la pena
 
