@@ -19,6 +19,10 @@ Nada disso está ligado a nenhum artigo ainda. Todas saem sem EXIF, em 900 px e 
 ## Segundo lote (10 fotos novas, 2026-11-01)
 Usadas 4 das 10. As outras 6 repetem enquadramentos (tablet + celular + moldura de família) ou são muito escuras (`3FD07428`); `62E0FA42`, `17D7EE1A`, `57D97CBB` e `A90B5F73` são variações do mesmo cenário e podem entrar se você quiser mais (a moldura precisa ser borrada em cada uma). `65054EA3` é quase igual a `065464F3`.
 
+## Hardware nas fotos (informado pelo dono do projeto)
+- **S20 FE:** dock com HDD de 500 GB reaproveitado de notebook, alimentação externa de 20 W.
+- **Tablet de 7" (E13):** usa o mesmo tipo de dock, com um HDD de 320 GB. O dock com o cabo vermelho aparece atrás do tablet nas fotos `62E0FA42` e `57D97CBB` (não usadas ainda); entram no artigo `old-laptop-hdd` se você quiser, com a moldura de família borrada.
+
 ## Ficaram de fora de propósito
 - **3 fotos de catálogo de terceiros** (Vivensis, Trendoca/Aquário, XSmart): imagens de outras marcas e de loja, com direitos próprios. Se quiser mostrar uma TV box no artigo, use a sua (`tv-box-g100`, `tv-launcher`).
 - **4 fotos com a foto de família emoldurada na mesa** (`1FD46A93`, `50A0F0E5`, `6BFBDF00`, `AB2E3A51`): aparecem pessoas. As que o site já usa (`always-on`, `usb-drive`) têm a moldura borrada pelo `build_photos.py`. `50A0F0E5` ainda mostra seu nome ("Paulo") e arquivos de teste no Moto G. Para incluí-las, é preciso definir a área a borrar em cada uma.
