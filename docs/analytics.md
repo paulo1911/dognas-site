@@ -1,6 +1,10 @@
 # Site analytics — comparing the calls to action
 
-GA4 (`G-HJDFSS9D15`) loads only after the visitor accepts the cookie notice. The apps collect nothing. No file names,
+GA4 (`G-HJDFSS9D15`) runs in **Consent Mode (advanced)**: `gtag.js` loads on every page with `analytics_storage`/`ad_*` denied, so without consent
+Google gets only cookieless pings (no cookies/identifiers) that feed **modelling**; they are not counted as users or events in standard reports,
+and the modelled figures appear only once the property has enough volume (~1,000 events/day from visitors who decline plus ~1,000 users/day who
+accept, for 7 days). Cookies, CTA events and the numbers in this doc exist only for visitors who accept. For an exact total of visits, use a
+cookieless counter alongside GA4. The apps collect nothing. No file names,
 PINs, credentials or personal data are ever sent.
 
 ## Events (all send the same parameters)
