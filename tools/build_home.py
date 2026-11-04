@@ -31,9 +31,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 (function () {
   var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', AD = 'ca-pub-1648236694876178', L = (document.documentElement.lang || 'pt').slice(0, 2);
   var TXT = {
-    pt: ['Usamos cookies de análise (Google Analytics) e de anúncio (AdSense) só se você aceitar. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Política de privacidade', 'Preferências de cookies'],
-    en: ['We use analytics (Google Analytics) and ad (AdSense) cookies only if you accept. The apps collect nothing.', 'Accept', 'Decline', 'Privacy policy', 'Cookie preferences'],
-    es: ['Usamos cookies de análisis (Google Analytics) y de anuncios (AdSense) solo si aceptas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Política de privacidad', 'Preferencias de cookies']
+    pt: ['<b>Cookies só com a sua permissão.</b>Usamos Google Analytics e AdSense apenas se você aceitar. O site funciona igual se você recusar. Os apps não coletam nada.', 'Aceitar', 'Não, obrigado', 'Política de privacidade', 'Preferências de cookies'],
+    en: ['<b>Cookies, only with your OK.</b>We use Google Analytics and AdSense only if you accept. The site works the same if you decline. The apps collect nothing.', 'Accept', 'No, thanks', 'Privacy policy', 'Cookie preferences'],
+    es: ['<b>Cookies, solo con tu permiso.</b>Usamos Google Analytics y AdSense solo si aceptas. El sitio funciona igual si rechazas. Las apps no recogen nada.', 'Aceptar', 'No, gracias', 'Política de privacidad', 'Preferencias de cookies']
   }[L] || [];
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
