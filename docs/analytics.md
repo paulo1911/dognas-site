@@ -3,6 +3,12 @@
 GA4 (`G-HJDFSS9D15`) loads only after the visitor accepts the cookie notice. The apps collect nothing. No file names,
 PINs, credentials or personal data are ever sent.
 
+## Total pageviews: GoatCounter (cookieless)
+GA4 only sees visitors who accept the cookie notice, so its numbers are a floor. `GC` in `GA_TAG` (`tools/build_home.py`) holds the GoatCounter site code; the script
+loads on every page, sets no cookie and stores no personal data, so it counts every visit, including decliners and Instagram's in-app browser. Use it as the
+source of truth for traffic; use GA4 for the CTA funnel. Accept rate ≈ GA4 visitors ÷ GoatCounter visitors. Tag links from Instagram with
+`?utm_source=instagram&utm_medium=social&utm_campaign=<post>` (in-app browsers often drop the referrer).
+
 ## Events (all send the same parameters)
 | Event | When |
 |---|---|
