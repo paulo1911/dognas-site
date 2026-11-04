@@ -32,6 +32,30 @@ UI = {
 
 
 # Floating CTA: after ~40 % of the page, never over the cookie banner, hidden while an in-page CTA is on screen (no stacking).
+def place_mid_ad(body, ad):
+    """The article's only ad: after a paragraph or list, before another paragraph, list or section heading (never right after a
+    heading), as close to 50 % of the text as possible, never inside a box and never next to the CTA band. If that cannot get within
+    35-65 % (media-heavy middles), a second pass also allows a table, figure or block as the next element. Falls back to the end."""
+    def tl(x): return len(re.sub(r'<[^>]+>', '', x))
+    total = max(tl(body), 1)
+    boxes = ('ul', 'ol', 'blockquote', 'table', 'aside', 'details', 'figure', 'pre', 'div')
+    def search(nxt):
+        best, best_d = None, 9.0
+        for m in re.finditer(r'</(?:p|ul|ol)>\s*(?=<(?:%s)[ >])' % nxt, body):
+            pos = m.end(); head = body[:pos]
+            if any(len(re.findall(r'<%s[ >]' % t, head)) != len(re.findall(r'</%s>' % t, head)) for t in boxes): continue
+            if 'cta-band' in body[max(0, pos - 40):pos + 40]: continue
+            d = abs(tl(head) / total - 0.5)
+            if d < best_d: best, best_d = pos, d
+        return best, best_d
+    pos, d = search('p|ul|ol|h2')
+    if pos is None or d > 0.15:
+        pos2, d2 = search('p|ul|ol|h2|div|table|figure')
+        if pos2 is not None and (pos is None or d2 < d): pos = pos2
+    if pos is None: pos = len(body)
+    return body[:pos] + ad + body[pos:]
+
+
 STICKY_JS = """(function(){var f=document.querySelector('.float-cta');if(!f||!('IntersectionObserver' in window))return;var past=false,busy=0,tick=false;
 function update(){f.hidden=!(past&&!busy);}
 function onScroll(){tick=false;var h=document.documentElement;past=(window.scrollY+window.innerHeight)/h.scrollHeight>.4;update();}
@@ -240,8 +264,7 @@ def main():
                 html_body = html_body[:heads[len(heads) // 2]] + mid + html_body[heads[len(heads) // 2]:]
             heads = [m.start() for m in re.finditer(r'<h2 id=', html_body)]
             if ad_mid:
-                k = min(len(heads) - 1, len(heads) // 2 + 1)
-                html_body = html_body[:heads[k]] + ad_mid + html_body[heads[k]:] if len(heads) >= 3 else html_body + ad_mid
+                html_body = place_mid_ad(html_body, ad_mid)
             sticky = f'<div class="float-cta" hidden>{cta_btn(a, first, "sticky", label)}</div>'
             rel = [by_group[(r, L)] for r in (a.get('related') or []) if (r, L) in by_group]
             rel_html = f'<section class="related"><h2>{t["related"]}</h2><div class="posts">{cards_html(rel, b, "blog_" + a["group"] + "_related", t["min"], ev="blog_related_article_click")}</div></section>' if rel else ''
