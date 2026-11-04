@@ -2,13 +2,10 @@
 <html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="google-adsense-account" content="ca-pub-1648236694876178">
 <script>
-// Google Analytics 4 in Consent Mode (advanced): gtag.js loads on every page with all storage DENIED, so without consent Google receives
-// only cookieless pings (no cookies, no identifiers; used for modelling, not shown as users). After the visitor accepts, consent is
-// updated to granted and events/cookies work normally. Site only: the apps collect nothing.
+// Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'});
-gtag('set', 'ads_data_redaction', true);
 (function () {
   var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', AD = 'ca-pub-1648236694876178', L = (document.documentElement.lang || 'pt').slice(0, 2);
   var TXT = {
@@ -18,19 +15,14 @@ gtag('set', 'ads_data_redaction', true);
   }[L] || [];
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
-  function consent() {
+  function load() {
+    if (window.__dnGA) return; window.__dnGA = 1;
     gtag('consent', 'update', {analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted'});
-  }
-  function ads() {
     // The single blog banner (<ins class=adsbygoogle>) exists only on blog posts; its script loads only after the visitor accepts.
     if (document.querySelector('ins.adsbygoogle')) { var a = document.createElement('script'); a.async = 1; a.crossOrigin = 'anonymous'; a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD; document.head.appendChild(a); document.querySelectorAll('ins.adsbygoogle').forEach(function (n) { if (n.offsetParent === null) return; (window.adsbygoogle = window.adsbygoogle || []).push({}); }); }
-  }
-  // Always runs (consent defaults to denied above); the consent update, when stored, is queued before config.
-  function start() {
     var s = document.createElement('script'); s.async = 1; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID; document.head.appendChild(s);
     gtag('js', new Date()); gtag('config', ID);
   }
-  function grant() { if (window.__dnGA) return; window.__dnGA = 1; consent(); ads(); }
   // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
   function ctaParams(a) {
     var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
@@ -41,11 +33,10 @@ gtag('set', 'ads_data_redaction', true);
     var old = document.getElementById('dn-consent'); if (old) old.remove();
     var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
     d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
-    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { grant(); window.dnEvent('page_view'); } else { window.__dnGA = 0; gtag('consent', 'update', {analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied'}); } });
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
     document.body.appendChild(d);
   }
-  if (read() === 'granted') { window.__dnGA = 1; consent(); if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ads); else ads(); }
-  start();
+  if (read() === 'granted') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load); else load(); }
   document.addEventListener('DOMContentLoaded', function () {
     if (!read()) banner();
     document.addEventListener('click', function (e) {
