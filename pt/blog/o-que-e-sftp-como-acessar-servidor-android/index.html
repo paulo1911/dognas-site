@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="google-adsense-account" content="ca-pub-1648236694876178">
 <script>
+// GoatCounter: cookieless pageview counter, no personal data, so it needs no consent and counts every visit, including visitors who
+// decline Google Analytics. Set GC to the site code (the part before .goatcounter.com); empty = off. Not loaded on localhost.
+(function () {
+  var GC = 'dognas';
+  if (!GC || /^(localhost|127\.|\[::1\])/.test(location.hostname)) return;
+  var s = document.createElement('script'); s.async = 1; s.src = 'https://gc.zgo.at/count.js';
+  s.setAttribute('data-goatcounter', 'https://' + GC + '.goatcounter.com/count'); document.head.appendChild(s);
+})();
+</script>
+<script>
 // Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
