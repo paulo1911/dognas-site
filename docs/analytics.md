@@ -16,6 +16,13 @@ Clicks on elements whose `data-ev` is `server|lite|client_store_click` or `blog_
 GA4-only on purpose (events share the pageview quota). GoatCounter has no funnel: click-through of a page = event visits ÷ page visits (`/pt/`). Real installs: Play Console
 (the Play links carry `utm_campaign=<cta_id>`).
 
+### Cookie banner experiment (A/B, 2026-11)
+Two texts, 50/50 per visitor (kept in `localStorage` `dognas_banner_v`): **a** = "Cookies só com a sua permissão" + *Aceitar / Não, obrigado*; **b** = "Ajude a melhorar nosso site e blog?" + *Sim, posso ajudar / Não, obrigado*.
+Preview a version with `?cb=a` or `?cb=b`. GoatCounter events (anonymous, no cookie): `consent/shown/<a|b>/<lang>` (once per browser session),
+`consent/accept/<a|b>/<lang>`, `consent/decline/<a|b>/<lang>` (not counted when the choice is changed from the footer link). Accept rate of a version =
+accept ÷ (accept + decline); also compare accept ÷ shown. Read it only with a few hundred choices per version (a 5-point gap on 100 choices is noise).
+To end the test, make `V` constant to the winner in `GA_TAG` and drop the other text.
+
 ## Events (all send the same parameters)
 | Event | When |
 |---|---|
