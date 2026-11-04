@@ -127,11 +127,14 @@ figure.real figcaption { margin-top:8px; }
 .hero .cta-sub a:hover, .hero .micro a:hover { color:var(--text); }
 .hero .btn.primary { font-size:18px; padding:14px 22px; }
 .note.backup { max-width:720px; }
-#dn-consent { position:fixed; left:12px; right:12px; bottom:12px; z-index:50; max-width:760px; margin:0 auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:space-between; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 14px; box-shadow:0 8px 30px rgba(0,0,0,.4); font-size:14px; }
-#dn-consent p { margin:0; flex:1 1 280px; color:var(--text); }
-#dn-consent a { color:var(--muted); text-decoration:underline; }
-#dn-consent button { font:inherit; font-weight:600; padding:8px 14px; border-radius:10px; border:1px solid var(--line); background:transparent; color:var(--text); cursor:pointer; margin-left:6px; }
+#dn-consent { position:fixed; left:8px; right:8px; bottom:8px; z-index:50; display:flex; flex-direction:column; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 14px; box-shadow:0 8px 30px rgba(0,0,0,.4); font-size:14px; line-height:1.45; padding-bottom:calc(12px + env(safe-area-inset-bottom)); }
+#dn-consent p { margin:0; color:var(--text); }
+#dn-consent a { color:var(--muted); text-decoration:underline; white-space:nowrap; }
+#dn-consent div { display:flex; gap:8px; }
+/* Accept and Decline: same size, same tap target; only the colour differs. */
+#dn-consent button { flex:1 1 0; min-height:44px; font:inherit; font-weight:600; padding:8px 14px; border-radius:10px; border:1px solid var(--muted); background:transparent; color:var(--text); cursor:pointer; }
 #dn-consent button[data-v=granted] { background:var(--btn); border-color:var(--btn); color:#fff; }
+@media (min-width:761px) { #dn-consent { left:20px; right:auto; bottom:20px; max-width:420px; } }
 /* Landing structure: plans by goal, FAQ, final CTA */
 .goals { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0; }
 .goal { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px; }
@@ -155,7 +158,7 @@ figure.real figcaption { margin-top:8px; }
 .cta-band .btn { flex:0 0 auto; }
 @media (max-width:760px) { .cta-band { text-align:center; justify-content:center; } .cta-band .btn { width:100%; text-align:center; } }
 /* Floating CTA: below the cookie banner (z-index 50) so it never hides the accept/decline buttons */
-.float-cta { position:fixed; left:12px; right:12px; bottom:12px; z-index:40; display:flex; justify-content:center; pointer-events:none; padding-bottom:env(safe-area-inset-bottom); }
+.float-cta { position:fixed; left:12px; right:12px; bottom:calc(12px + var(--dn-h, 0px)); z-index:40; display:flex; justify-content:center; pointer-events:none; padding-bottom:env(safe-area-inset-bottom); }
 .float-cta[hidden] { display:none; }
 .float-cta .btn { pointer-events:auto; width:100%; max-width:420px; text-align:center; font-size:17px; padding:14px 18px; box-shadow:0 8px 28px rgba(0,0,0,.55); }
 @media (min-width:761px) { .float-cta { left:auto; right:20px; bottom:20px; } .float-cta .btn { width:auto; } }
