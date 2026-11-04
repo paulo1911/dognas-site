@@ -35,6 +35,28 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     en: ['<b>Cookies, only with your OK.</b>We use Google Analytics and AdSense only if you accept. The site works the same if you decline. The apps collect nothing.', 'Accept', 'No, thanks', 'Privacy policy', 'Cookie preferences'],
     es: ['<b>Cookies, solo con tu permiso.</b>Usamos Google Analytics y AdSense solo si aceptas. El sitio funciona igual si rechazas. Las apps no recogen nada.', 'Aceptar', 'No, gracias', 'Política de privacidad', 'Preferencias de cookies']
   }[L] || [];
+  // Banner experiment (2026-11): A = the text above, B = friendlier (asks for help: "Ajude a melhorar nosso site e blog?" + "Sim, posso ajudar"). 50/50 per visitor, kept in localStorage;
+  // ?cb=a or ?cb=b previews a version. Anonymous counts go to GoatCounter: consent/<shown|accept|decline>/<a|b>/<lang>.
+  var TXTB = {
+    pt: ['<b>Ajude a melhorar nosso site e blog?</b>Usamos Google Analytics e AdSense, que usam cookies, mas só se você permitir. O site funciona igual se você não quiser. Os apps não coletam nada.', 'Sim, posso ajudar', 'Não, obrigado'],
+    en: ['<b>Help us improve our site and blog?</b>We use Google Analytics and AdSense, which use cookies, but only if you allow it. The site works the same if you don\u2019t. The apps collect nothing.', 'Yes, I can help', 'No, thanks'],
+    es: ['<b>\u00bfNos ayudas a mejorar nuestro sitio y blog?</b>Usamos Google Analytics y AdSense, que usan cookies, pero solo si lo permites. El sitio funciona igual si no quieres. Las apps no recogen nada.', 'S\u00ed, puedo ayudar', 'No, gracias']
+  }[L] || [];
+  var V = (function () {
+    var q = ''; try { q = new URLSearchParams(location.search).get('cb') || ''; } catch (e) {}
+    if (q === 'a' || q === 'b') return q;
+    var v = null; try { v = localStorage.getItem('dognas_banner_v'); } catch (e) {}
+    if (v !== 'a' && v !== 'b') { v = Math.random() < .5 ? 'a' : 'b'; try { localStorage.setItem('dognas_banner_v', v); } catch (e) {} }
+    return v;
+  })();
+  function T(i) { return (V === 'b' && TXTB[i] !== undefined) ? TXTB[i] : TXT[i]; }
+  function gcConsent(action) {
+    var n = 0; (function send() {
+      if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: 'consent/' + action + '/' + V + '/' + L, title: 'Cookie banner: ' + action + ' \u00b7 ' + V + ' \u00b7 ' + L, event: true});
+      else if (n++ < 20) setTimeout(send, 300);
+    })();
+  }
+  function shownOnce() { try { if (sessionStorage.getItem('dognas_bshown')) return; sessionStorage.setItem('dognas_bshown', '1'); } catch (e) {} gcConsent('shown'); }
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   function load() {
@@ -58,19 +80,20 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     var m = GCEV.exec(a.getAttribute('data-ev') || ''); if (!m || !window.goatcounter || !window.goatcounter.count) return;
     window.goatcounter.count({path: 'store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, title: 'Store click: ' + m[1] + ' · ' + (a.getAttribute('data-loc') || 'unknown') + ' · ' + L, event: true});
   }
-  function banner() {
+  function banner(fromPrefs) {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
     var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
-    d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
-    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); document.documentElement.style.removeProperty('--dn-h'); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    d.innerHTML = '<p>' + T(0) + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + T(1) + '</button><button type="button" data-v="denied">' + T(2) + '</button></div>';
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; if (!fromPrefs) gcConsent(v === 'granted' ? 'accept' : 'decline'); write(v); d.remove(); document.documentElement.style.removeProperty('--dn-h'); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
     document.body.appendChild(d);
+    if (!fromPrefs) shownOnce();
     document.documentElement.style.setProperty('--dn-h', (d.offsetHeight + 16) + 'px'); // lifts the floating CTA above the banner on phones
   }
   if (read() === 'granted') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load); else load(); }
   document.addEventListener('DOMContentLoaded', function () {
     if (!read()) banner();
     document.addEventListener('click', function (e) {
-      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
+      var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(true); return; }
       var a = e.target.closest && e.target.closest('[data-ev]'); if (a) { window.dnEvent(a.getAttribute('data-ev'), ctaParams(a)); gcEvent(a); }
     });
     // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
