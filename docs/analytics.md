@@ -9,6 +9,13 @@ loads on every page, sets no cookie and stores no personal data, so it counts ev
 source of truth for traffic; use GA4 for the CTA funnel. Accept rate ≈ GA4 visitors ÷ GoatCounter visitors. Tag links from Instagram with
 `?utm_source=instagram&utm_medium=social&utm_campaign=<post>` (in-app browsers often drop the referrer).
 
+### GoatCounter events (store clicks only)
+Clicks on elements whose `data-ev` is `server|lite|client_store_click` or `blog_server|client_download_click` also send a GoatCounter **event**
+(`event: true`, delivered with `sendBeacon`, so it survives the navigation to Google Play): path `store/<app>/<cta_id>/<lang>`, e.g.
+`store/server/hero_primary/pt`, `store/server/blog_reuse-old-android_end/en`; title = `Store click: <app> · <cta_id> · <lang>` (English, independent of the page language or button text). Views (`cta_view`), FAQ and navigation clicks are
+GA4-only on purpose (events share the pageview quota). GoatCounter has no funnel: click-through of a page = event visits ÷ page visits (`/pt/`). Real installs: Play Console
+(the Play links carry `utm_campaign=<cta_id>`).
+
 ## Events (all send the same parameters)
 | Event | When |
 |---|---|
