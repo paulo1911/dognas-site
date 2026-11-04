@@ -129,6 +129,7 @@ figure.real figcaption { margin-top:8px; }
 .note.backup { max-width:720px; }
 #dn-consent { position:fixed; left:8px; right:8px; bottom:8px; z-index:50; display:flex; flex-direction:column; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:12px 14px; box-shadow:0 8px 30px rgba(0,0,0,.4); font-size:14px; line-height:1.45; padding-bottom:calc(12px + env(safe-area-inset-bottom)); }
 #dn-consent p { margin:0; color:var(--text); }
+#dn-consent p b { display:block; margin-bottom:2px; font-size:15px; }
 #dn-consent a { color:var(--muted); text-decoration:underline; white-space:nowrap; }
 #dn-consent div { display:flex; gap:8px; }
 /* Accept and Decline: same size, same tap target; only the colour differs. */
@@ -136,7 +137,7 @@ figure.real figcaption { margin-top:8px; }
 #dn-consent button[data-v=granted] { background:var(--btn); border-color:var(--btn); color:#fff; }
 /* Desktop: centred at the bottom, one row (text left, buttons right), stronger shadow so it is hard to miss. */
 @media (min-width:761px) { #dn-consent { left:50%; right:auto; transform:translateX(-50%); bottom:20px; width:min(680px, calc(100% - 40px)); flex-direction:row; align-items:center; gap:18px; padding:14px 18px; box-shadow:0 12px 40px rgba(0,0,0,.65); }
-  #dn-consent div { flex:0 0 auto; } #dn-consent button { flex:0 0 auto; min-width:112px; } }
+  #dn-consent div { flex:0 0 auto; } #dn-consent button { flex:0 0 150px; } }
 /* Landing structure: plans by goal, FAQ, final CTA */
 .goals { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0; }
 .goal { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:18px; }
