@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="google-adsense-account" content="ca-pub-1648236694876178">
 <script>
+// GoatCounter: cookieless pageview counter, no personal data, so it needs no consent and counts every visit, including visitors who
+// decline Google Analytics. Set GC to the site code (the part before .goatcounter.com); empty = off. Not loaded on localhost.
+(function () {
+  var GC = 'dognas';
+  if (!GC || /^(localhost|127\.|\[::1\])/.test(location.hostname)) return;
+  var s = document.createElement('script'); s.async = 1; s.src = 'https://gc.zgo.at/count.js';
+  s.setAttribute('data-goatcounter', 'https://' + GC + '.goatcounter.com/count'); document.head.appendChild(s);
+})();
+</script>
+<script>
 // Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -31,6 +41,13 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
   }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  // GoatCounter event for the clicks that lead to the store (cookieless, so it counts every visitor): store/<app>/<cta_id>/<lang>.
+  // sendBeacon keeps it alive when the click navigates to Google Play. Views and navigation clicks are not sent (they would eat the quota).
+  var GCEV = /^(?:blog_)?(server|lite|client)_(?:store|download)_click$/;
+  function gcEvent(a) {
+    var m = GCEV.exec(a.getAttribute('data-ev') || ''); if (!m || !window.goatcounter || !window.goatcounter.count) return;
+    window.goatcounter.count({path: 'store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, title: 'Store click: ' + m[1] + ' · ' + (a.getAttribute('data-loc') || 'unknown') + ' · ' + L, event: true});
+  }
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
     var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
@@ -44,7 +61,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (!read()) banner();
     document.addEventListener('click', function (e) {
       var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
-      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) { window.dnEvent(a.getAttribute('data-ev'), ctaParams(a)); gcEvent(a); }
     });
     // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
     if ('IntersectionObserver' in window) {

@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="google-adsense-account" content="ca-pub-1648236694876178">
 <script>
+// GoatCounter: cookieless pageview counter, no personal data, so it needs no consent and counts every visit, including visitors who
+// decline Google Analytics. Set GC to the site code (the part before .goatcounter.com); empty = off. Not loaded on localhost.
+(function () {
+  var GC = 'dognas';
+  if (!GC || /^(localhost|127\.|\[::1\])/.test(location.hostname)) return;
+  var s = document.createElement('script'); s.async = 1; s.src = 'https://gc.zgo.at/count.js';
+  s.setAttribute('data-goatcounter', 'https://' + GC + '.goatcounter.com/count'); document.head.appendChild(s);
+})();
+</script>
+<script>
 // Google Analytics 4 runs only after the visitor accepts (nothing is loaded before). Site only: the apps collect nothing.
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -31,6 +41,13 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
   }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
+  // GoatCounter event for the clicks that lead to the store (cookieless, so it counts every visitor): store/<app>/<cta_id>/<lang>.
+  // sendBeacon keeps it alive when the click navigates to Google Play. Views and navigation clicks are not sent (they would eat the quota).
+  var GCEV = /^(?:blog_)?(server|lite|client)_(?:store|download)_click$/;
+  function gcEvent(a) {
+    var m = GCEV.exec(a.getAttribute('data-ev') || ''); if (!m || !window.goatcounter || !window.goatcounter.count) return;
+    window.goatcounter.count({path: 'store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, title: 'Store click: ' + m[1] + ' · ' + (a.getAttribute('data-loc') || 'unknown') + ' · ' + L, event: true});
+  }
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
     var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
@@ -44,7 +61,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     if (!read()) banner();
     document.addEventListener('click', function (e) {
       var prefs = e.target.closest && e.target.closest('[data-cookie-prefs]'); if (prefs) { e.preventDefault(); banner(); return; }
-      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) window.dnEvent(a.getAttribute('data-ev'), ctaParams(a));
+      var a = e.target.closest && e.target.closest('[data-ev]'); if (a) { window.dnEvent(a.getAttribute('data-ev'), ctaParams(a)); gcEvent(a); }
     });
     // cta_view = a CTA was actually on screen (>= 60 %), once per id and page view: clicks / views = that CTA's click rate.
     if ('IntersectionObserver' in window) {
@@ -122,7 +139,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 <h3>Seus controles</h3><ul>
 <li>Revogue o acesso de um dispositivo no DogNAS (Perfis → Dispositivos autorizados) ou remova um DogNAS no DogNAS Client Lite ou no DogNAS Client (pede o PIN do perfil).</li>
 <li>Desinstalar um app apaga os dados dele no aparelho. Os seus arquivos na pasta DogNAS <b>não</b> são apagados — eles são seus.</li></ul>
-<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b>, <b>somente depois que você aceita</b> no aviso de cookies, para contar visitas e entender quais páginas e botões (como os de download) ajudam as pessoas (páginas vistas, cliques, país aproximado, tipo de aparelho e navegador). Nos <b>artigos do blog</b> (e só neles) o site também mostra <b>um anúncio do Google AdSense</b>, que só é carregado se você aceitar: o Google pode usar cookies e identificadores para exibir e medir anúncios, conforme as <a href="https://policies.google.com/technologies/ads">regras de publicidade do Google</a>. Os apps não têm anúncios. Você pode recusar ou mudar a escolha em “Preferências de cookies”, no rodapé. Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
+<h3>Este site (dognas.app)</h3><p>O site usa o <b>Google Analytics</b>, <b>somente depois que você aceita</b> no aviso de cookies, para contar visitas e entender quais páginas e botões (como os de download) ajudam as pessoas (páginas vistas, cliques, país aproximado, tipo de aparelho e navegador). Nos <b>artigos do blog</b> (e só neles) o site também mostra <b>um anúncio do Google AdSense</b>, que só é carregado se você aceitar: o Google pode usar cookies e identificadores para exibir e medir anúncios, conforme as <a href="https://policies.google.com/technologies/ads">regras de publicidade do Google</a>. O site também usa o <b>GoatCounter</b>, um contador de visitas <b>sem cookies</b> e sem dados pessoais, que registra de forma agregada as páginas abertas, o site de origem, o país aproximado, o tipo de aparelho e o navegador e os cliques nos botões de download da loja, inclusive de quem recusa os cookies (<a href="https://www.goatcounter.com/">goatcounter.com</a>). Os apps não têm anúncios. Você pode recusar ou mudar a escolha em “Preferências de cookies”, no rodapé. Isso vale só para o site — os apps não usam o Google Analytics nem enviam dados. Saiba mais na <a href="https://policies.google.com/technologies/partner-sites">página do Google sobre dados de sites parceiros</a>.</p>
 <h3>Crianças</h3><p>Os apps não são direcionados a crianças e não coletam dados de ninguém.</p>
 <h3>Mudanças e contato</h3><p>Se esta política mudar, a nova versão será publicada neste mesmo endereço, com a data acima atualizada. Dúvidas: <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a>.</p></section><section class="legal" id="en"><h2>Privacy policy</h2><p class="meta">Last updated: October 21, 2026</p>
 <p>Applies to the three apps: <b>DogNAS</b> (the server, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (the access app for Android, <code>com.dognas.client.lite</code>) and <b>DogNAS Client</b> (the full access app, for Android and iOS, <code>com.dognas.client</code>).</p>
@@ -163,7 +180,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 <h3>Your controls</h3><ul>
 <li>Revoke a device in DogNAS (Profiles → Authorized devices) or remove a DogNAS in DogNAS Client Lite or DogNAS Client (asks for the profile PIN).</li>
 <li>Uninstalling an app deletes its data on the device. Your files in the DogNAS folder are <b>not</b> deleted — they are yours.</li></ul>
-<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b>, <b>only after you accept</b> in the cookie notice, to count visits and see which pages and buttons (such as the download ones) help people (page views, clicks, approximate country, device type and browser). On <b>blog articles</b> (and only there) the website also shows <b>one Google AdSense ad</b>, loaded only if you accept: Google may use cookies and identifiers to serve and measure ads, as described in <a href="https://policies.google.com/technologies/ads">Google’s advertising policies</a>. The apps have no ads. You can decline or change your choice under “Cookie preferences” in the footer. This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
+<h3>This website (dognas.app)</h3><p>The website uses <b>Google Analytics</b>, <b>only after you accept</b> in the cookie notice, to count visits and see which pages and buttons (such as the download ones) help people (page views, clicks, approximate country, device type and browser). On <b>blog articles</b> (and only there) the website also shows <b>one Google AdSense ad</b>, loaded only if you accept: Google may use cookies and identifiers to serve and measure ads, as described in <a href="https://policies.google.com/technologies/ads">Google’s advertising policies</a>. The website also uses <b>GoatCounter</b>, a <b>cookieless</b> visit counter with no personal data, which records in aggregate the pages opened, the referring site, approximate country, device type and browser and clicks on the store download buttons, including for visitors who decline cookies (<a href="https://www.goatcounter.com/">goatcounter.com</a>). The apps have no ads. You can decline or change your choice under “Cookie preferences” in the footer. This applies to the website only — the apps don't use Google Analytics and send no data. Learn more on <a href="https://policies.google.com/technologies/partner-sites">Google's page about data from partner sites</a>.</p>
 <h3>Children</h3><p>The apps are not directed to children and collect no data from anyone.</p>
 <h3>Changes and contact</h3><p>If this policy changes, the new version will be published at this same address with an updated date. Questions: <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a>.</p></section><section class="legal" id="es"><h2>Política de privacidad</h2><p class="meta">Última actualización: 21 de octubre de 2026</p>
 <p>Se aplica a las tres apps: <b>DogNAS</b> (el servidor, <code>com.dognas.server</code>), <b>DogNAS Client Lite</b> (la app de acceso para Android, <code>com.dognas.client.lite</code>) y <b>DogNAS Client</b> (la app de acceso completa, para Android e iOS, <code>com.dognas.client</code>).</p>
@@ -204,7 +221,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 <h3>Tus controles</h3><ul>
 <li>Revoca el acceso de un dispositivo en DogNAS (Perfiles → Dispositivos autorizados) o elimina un DogNAS en DogNAS Client Lite o en DogNAS Client (pide el PIN del perfil).</li>
 <li>Desinstalar una app borra sus datos en el dispositivo. Tus archivos en la carpeta DogNAS <b>no</b> se borran — son tuyos.</li></ul>
-<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b>, <b>solo después de que aceptes</b> en el aviso de cookies, para contar visitas y saber qué páginas y botones (como los de descarga) ayudan a las personas (páginas vistas, clics, país aproximado, tipo de dispositivo y navegador). En los <b>artículos del blog</b> (y solo ahí) el sitio también muestra <b>un anuncio de Google AdSense</b>, que solo se carga si aceptas: Google puede usar cookies e identificadores para mostrar y medir anuncios, según las <a href="https://policies.google.com/technologies/ads">políticas de publicidad de Google</a>. Las apps no tienen anuncios. Puedes rechazar o cambiar tu elección en «Preferencias de cookies», en el pie de página. Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
+<h3>Este sitio (dognas.app)</h3><p>El sitio usa <b>Google Analytics</b>, <b>solo después de que aceptes</b> en el aviso de cookies, para contar visitas y saber qué páginas y botones (como los de descarga) ayudan a las personas (páginas vistas, clics, país aproximado, tipo de dispositivo y navegador). En los <b>artículos del blog</b> (y solo ahí) el sitio también muestra <b>un anuncio de Google AdSense</b>, que solo se carga si aceptas: Google puede usar cookies e identificadores para mostrar y medir anuncios, según las <a href="https://policies.google.com/technologies/ads">políticas de publicidad de Google</a>. El sitio también usa <b>GoatCounter</b>, un contador de visitas <b>sin cookies</b> y sin datos personales, que registra de forma agregada las páginas abiertas, el sitio de origen, el país aproximado, el tipo de dispositivo y el navegador y los clics en los botones de descarga de la tienda, incluso de quienes rechazan las cookies (<a href="https://www.goatcounter.com/">goatcounter.com</a>). Las apps no tienen anuncios. Puedes rechazar o cambiar tu elección en «Preferencias de cookies», en el pie de página. Esto se aplica solo al sitio: las apps no usan Google Analytics ni envían datos. Más información en la <a href="https://policies.google.com/technologies/partner-sites">página de Google sobre datos de sitios asociados</a>.</p>
 <h3>Menores</h3><p>Las apps no están dirigidas a menores y no recopilan datos de nadie.</p>
 <h3>Cambios y contacto</h3><p>Si esta política cambia, la nueva versión se publicará en esta misma dirección, con la fecha actualizada. Dudas: <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a>.</p></section>
 <footer><span>© 2026 DogNAS</span><span><a href="../pt/blog/">Blog</a> · <a href="../privacy/#pt">Política de privacidade</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:me.pauloleite.dev@gmail.com">me.pauloleite.dev@gmail.com</a></span></footer>
