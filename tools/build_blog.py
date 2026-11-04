@@ -33,7 +33,7 @@ UI = {
 
 # Floating CTA: after ~40 % of the page, never over the cookie banner, hidden while an in-page CTA is on screen (no stacking).
 STICKY_JS = """(function(){var f=document.querySelector('.float-cta');if(!f||!('IntersectionObserver' in window))return;var past=false,busy=0,tick=false;
-function update(){f.hidden=!(past&&!busy&&!document.getElementById('dn-consent'));}
+function update(){f.hidden=!(past&&!busy);}
 function onScroll(){tick=false;var h=document.documentElement;past=(window.scrollY+window.innerHeight)/h.scrollHeight>.4;update();}
 window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll);}},{passive:true});onScroll();
 var io=new IntersectionObserver(function(es){es.forEach(function(x){busy+=x.isIntersecting?1:-1;});busy=Math.max(0,busy);update();});

@@ -21,9 +21,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
 (function () {
   var KEY = 'dognas_consent', ID = 'G-HJDFSS9D15', AD = 'ca-pub-1648236694876178', L = (document.documentElement.lang || 'pt').slice(0, 2);
   var TXT = {
-    pt: ['Usamos o Google Analytics, só neste site, para entender quais páginas e botões ajudam as pessoas, e o Google AdSense para mostrar um anúncio nos artigos do blog. Os apps não coletam nada nem têm anúncios.', 'Aceitar', 'Recusar', 'Política de privacidade', 'Preferências de cookies'],
-    en: ['We use Google Analytics, on this website only, to learn which pages and buttons help people, and Google AdSense to show one ad in blog articles. The apps collect nothing and have no ads.', 'Accept', 'Decline', 'Privacy policy', 'Cookie preferences'],
-    es: ['Usamos Google Analytics, solo en este sitio, para saber qué páginas y botones ayudan a las personas, y Google AdSense para mostrar un anuncio en los artículos del blog. Las apps no recogen nada ni tienen anuncios.', 'Aceptar', 'Rechazar', 'Política de privacidad', 'Preferencias de cookies']
+    pt: ['Usamos cookies de análise (Google Analytics) e de anúncio (AdSense) só se você aceitar. Os apps não coletam nada.', 'Aceitar', 'Recusar', 'Política de privacidade', 'Preferências de cookies'],
+    en: ['We use analytics (Google Analytics) and ad (AdSense) cookies only if you accept. The apps collect nothing.', 'Accept', 'Decline', 'Privacy policy', 'Cookie preferences'],
+    es: ['Usamos cookies de análisis (Google Analytics) y de anuncios (AdSense) solo si aceptas. Las apps no recogen nada.', 'Aceptar', 'Rechazar', 'Política de privacidad', 'Preferencias de cookies']
   }[L] || [];
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
@@ -45,8 +45,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     var old = document.getElementById('dn-consent'); if (old) old.remove();
     var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
     d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
-    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
+    d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; write(v); d.remove(); document.documentElement.style.removeProperty('--dn-h'); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
     document.body.appendChild(d);
+    document.documentElement.style.setProperty('--dn-h', (d.offsetHeight + 16) + 'px'); // lifts the floating CTA above the banner on phones
   }
   if (read() === 'granted') { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', load); else load(); }
   document.addEventListener('DOMContentLoaded', function () {
@@ -417,12 +418,12 @@ for L, t in T.items():
 </div>
 <div class="float-cta" hidden><a class="btn primary" data-ev="server_store_click" data-loc="float" href="{play('server', 'float_cta')}" rel="noopener">{t['cta']}</a></div>
 <script>
-// Floating CTA: shown only after the hero button scrolled away, never while the cookie banner is open, and hidden
+// Floating CTA: shown only after the hero button scrolled away, kept above the cookie banner (--dn-h) instead of hiding, and hidden
 // while an in-page CTA (bands / final) is on screen so it never stacks with them.
 (function () {{
   var f = document.querySelector('.float-cta'), hero = document.querySelector('.hero .cta'); if (!f || !hero || !('IntersectionObserver' in window)) return;
   var heroPast = false, busy = 0;
-  function update() {{ f.hidden = !(heroPast && !busy && !document.getElementById('dn-consent')); }}
+  function update() {{ f.hidden = !(heroPast && !busy); }}
   new IntersectionObserver(function (e) {{ heroPast = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; update(); }}).observe(hero);
   var io = new IntersectionObserver(function (es) {{ es.forEach(function (x) {{ busy += x.isIntersecting ? 1 : -1; }}); busy = Math.max(0, busy); update(); }});
   document.querySelectorAll('.cta-band, .final').forEach(function (n) {{ io.observe(n); }});
