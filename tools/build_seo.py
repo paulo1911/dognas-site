@@ -75,7 +75,7 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Home (English)]({SITE}): what DogNAS is, how it works, plans, requirements.
 - [Home (Português)]({SITE}pt/): same content in Portuguese.
 - [Home (Español)]({SITE}es/): same content in Spanish.
-- [Privacy policy]({SITE}privacy/): what the apps and this website collect (apps: nothing; website: Google Analytics, cookies only after consent).
+- [Privacy policy]({SITE}privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
 {blog_llms}## Optional
 - [Full text for LLMs]({SITE}llms-full.txt): longer plain-text description of the product.

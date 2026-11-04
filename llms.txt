@@ -13,7 +13,7 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Home (English)](https://dognas.app/): what DogNAS is, how it works, plans, requirements.
 - [Home (Português)](https://dognas.app/pt/): same content in Portuguese.
 - [Home (Español)](https://dognas.app/es/): same content in Spanish.
-- [Privacy policy](https://dognas.app/privacy/): what the apps and this website collect (apps: nothing; website: Google Analytics, cookies only after consent).
+- [Privacy policy](https://dognas.app/privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
 
 ## Blog
 - [Atom feed, English](https://dognas.app/blog/feed.xml)
