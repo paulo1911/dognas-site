@@ -56,7 +56,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
   var GCEV = /^(?:blog_)?(server|lite|client)_(?:store|download)_click$/;
   function gcEvent(a) {
     var m = GCEV.exec(a.getAttribute('data-ev') || ''); if (!m || !window.goatcounter || !window.goatcounter.count) return;
-    window.goatcounter.count({path: 'store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, title: L + ' · ' + (a.textContent || '').trim().slice(0, 80), event: true});
+    window.goatcounter.count({path: 'store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, title: 'Store click: ' + m[1] + ' · ' + (a.getAttribute('data-loc') || 'unknown') + ' · ' + L, event: true});
   }
   function banner() {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
