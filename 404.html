@@ -39,6 +39,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     })();
   }
   function shownOnce() { try { if (sessionStorage.getItem('dognas_bshown')) return; sessionStorage.setItem('dognas_bshown', '1'); } catch (e) {} gcConsent('shown'); }
+  // One-time re-ask (2026-11): visitors who declined while the A/B texts ran (stored variant a or b) are asked again with the current notice; those who accepted keep their choice.
+  // Runs once per browser (dognas_consent_v2) and then drops the experiment's dognas_banner_v.
+  (function () { try { if (localStorage.getItem('dognas_consent_v2')) return; var v = localStorage.getItem('dognas_banner_v'); if ((v === 'a' || v === 'b') && localStorage.getItem(KEY) === 'denied') localStorage.removeItem(KEY); localStorage.setItem('dognas_consent_v2', '1'); localStorage.removeItem('dognas_banner_v'); } catch (e) {} })();
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
   function load() {
