@@ -16,14 +16,11 @@ Clicks on elements whose `data-ev` is `server|lite|client_store_click` or `blog_
 GA4-only on purpose (events share the pageview quota). GoatCounter has no funnel: click-through of a page = event visits ÷ page visits (`/pt/`). Real installs: Play Console
 (the Play links carry `utm_campaign=<cta_id>`).
 
-### Cookie banner experiment (A/B/C, 2026-11)
-Three texts, a third of the new visitors each (kept in `localStorage` `dognas_banner_v`; visitors already assigned **a** or **b** keep theirs): **a** = "Cookies só com a sua permissão" + *Aceitar / Não, obrigado*; **b** = "Ajude a melhorar nosso site e blog?" + *Sim, posso ajudar / Não, obrigado*;
-**c** = short notice in the style of large Brazilian shops: "Cookies: a gente guarda estatísticas de visitas para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa política de privacidade." + a single button *Concordar e Fechar* (en: *Agree and Close*, es: *Aceptar y cerrar*; the privacy-policy words are the link).
-**C still needs the click:** GA4 and AdSense load only after *Concordar e Fechar*; "continuing" to browse is not consent (the privacy policy promises "only if you accept"). C has no decline button, so a visitor who ignores it stays without cookies; the footer's "Cookie preferences" link always opens the two-button text (a), so anyone can withdraw consent.
-Preview a version with `?cb=a`, `?cb=b` or `?cb=c`. GoatCounter events (anonymous, no cookie): `consent/shown/<a|b|c>/<lang>` (once per browser session),
-`consent/accept/<a|b|c>/<lang>`, `consent/decline/<a|b>/<lang>` (C never sends decline; not counted when the choice is changed from the footer link). Accept rate of a version A/B =
-accept ÷ (accept + decline); **to compare all three use accept ÷ shown** (C has no decline, so its accept ÷ (accept + decline) would always be 100 %). Read it only with a few hundred choices per version (a 5-point gap on 100 choices is noise).
-To end the test, make `V` constant to the winner in `GA_TAG` and drop the other texts.
+### Cookie banner (variant C won the A/B/C test, 2026-11; now 100 %)
+One short notice, in the style of large Brazilian shops: "Cookies: a gente guarda estatísticas de visitas para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa política de privacidade." + a single button *Concordar e Fechar* (en: *Agree and Close*, es: *Aceptar y cerrar*; the privacy-policy words are the link).
+Test result (04–09/11, GoatCounter, accept ÷ shown): **a** ~2 % of ~308, **b** ~1 % of ~283, **c** ~33 % of only 12 — c's sample was tiny but the gap was large, and a/b were also the variants shown to the Instagram traffic that produced no store click (confounded with audience). Re-check c's rate once it has a few hundred views.
+**It still needs the click:** GA4 and AdSense load only after *Concordar e Fechar*; "continuing" to browse is not consent (the privacy policy promises "only if you accept"). There is no decline button, so a visitor who ignores it stays without cookies; the footer's "Cookie preferences" link opens the two-button text (*Aceitar / Não, obrigado*), so anyone can decline or withdraw consent.
+GoatCounter events (anonymous, no cookie): `consent/shown/c/<lang>` (once per browser session) and `consent/accept/c/<lang>`; the constant `c` keeps the series of the experiment. Choices made from the footer link are not counted.
 
 ## Events (all send the same parameters)
 | Event | When |

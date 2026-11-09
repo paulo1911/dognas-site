@@ -35,27 +35,15 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     en: ['<b>Cookies, only with your OK.</b>We use Google Analytics and AdSense only if you accept. The site works the same if you decline. The apps collect nothing.', 'Accept', 'No, thanks', 'Privacy policy', 'Cookie preferences'],
     es: ['<b>Cookies, solo con tu permiso.</b>Usamos Google Analytics y AdSense solo si aceptas. El sitio funciona igual si rechazas. Las apps no recogen nada.', 'Aceptar', 'No, gracias', 'Política de privacidad', 'Preferencias de cookies']
   }[L] || [];
-  // Banner experiment (2026-11): A = the text above, B = friendlier (asks for help: "Ajude a melhorar nosso site e blog?" + "Sim, posso ajudar"),
-  // C = short notice with a single button ("Concordar e Fechar", in the style of large Brazilian shops). New visitors get one of the three at random, kept in localStorage;
-  // ?cb=a, ?cb=b or ?cb=c previews a version. Anonymous counts go to GoatCounter: consent/<shown|accept|decline>/<a|b|c>/<lang> (C has no decline button).
-  var TXTB = {
-    pt: ['<b>Ajude a melhorar nosso site e blog?</b>Usamos Google Analytics e AdSense, que usam cookies, mas só se você permitir. O site funciona igual se você não quiser. Os apps não coletam nada.', 'Sim, posso ajudar', 'Não, obrigado'],
-    en: ['<b>Help us improve our site and blog?</b>We use Google Analytics and AdSense, which use cookies, but only if you allow it. The site works the same if you don\u2019t. The apps collect nothing.', 'Yes, I can help', 'No, thanks'],
-    es: ['<b>\u00bfNos ayudas a mejorar nuestro sitio y blog?</b>Usamos Google Analytics y AdSense, que usan cookies, pero solo si lo permites. El sitio funciona igual si no quieres. Las apps no recogen nada.', 'S\u00ed, puedo ayudar', 'No, gracias']
-  }[L] || [];
+  // Cookie banner: a short notice with one button (the former variant C, which won the 2026-11 A/B/C test: ~33 % accepted vs 1-2 % for the two-button texts).
+  // Consent is given only by clicking it. The footer's "Cookie preferences" opens the two-button text (TXT) so anyone can decline or withdraw.
+  // Anonymous counts go to GoatCounter: consent/<shown|accept>/c/<lang> (the "c" is kept so the series continues the experiment's).
   var TXTC = {
     pt: ['<b>Cookies:</b> a gente guarda estat\u00edsticas de visitas para melhorar sua experi\u00eancia de navega\u00e7\u00e3o. Ao continuar, voc\u00ea concorda com nossa <a href="/privacy/#pt">pol\u00edtica de privacidade</a>.', 'Concordar e Fechar'],
     en: ['<b>Cookies:</b> we keep visit statistics to improve your browsing experience. By continuing, you agree to our <a href="/privacy/#en">privacy policy</a>.', 'Agree and Close'],
     es: ['<b>Cookies:</b> guardamos estad\u00edsticas de visitas para mejorar tu experiencia de navegaci\u00f3n. Al continuar, aceptas nuestra <a href="/privacy/#es">pol\u00edtica de privacidad</a>.', 'Aceptar y cerrar']
   }[L] || [];
-  var V = (function () {
-    var q = ''; try { q = new URLSearchParams(location.search).get('cb') || ''; } catch (e) {}
-    if (q === 'a' || q === 'b' || q === 'c') return q;
-    var v = null; try { v = localStorage.getItem('dognas_banner_v'); } catch (e) {}
-    if (v !== 'a' && v !== 'b' && v !== 'c') { v = ['a', 'b', 'c'][Math.floor(Math.random() * 3)]; try { localStorage.setItem('dognas_banner_v', v); } catch (e) {} }
-    return v;
-  })();
-  function T(i) { return (V === 'b' && TXTB[i] !== undefined) ? TXTB[i] : TXT[i]; }
+  var V = 'c';
   function gcConsent(action) {
     var n = 0; (function send() {
       if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: 'consent/' + action + '/' + V + '/' + L, title: 'Cookie banner: ' + action + ' \u00b7 ' + V + ' \u00b7 ' + L, event: true});
@@ -89,9 +77,9 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
   function banner(fromPrefs) {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
     var d = document.createElement('div'); d.id = 'dn-consent'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Cookies');
-    // C shows one button; consent is given only by clicking it (not by scrolling or browsing on). The footer's "Cookie preferences" always opens the two-button text (A), so anyone can withdraw consent.
-    if (V === 'c' && !fromPrefs && TXTC.length) d.innerHTML = '<p>' + TXTC[0] + '</p><div><button type="button" data-v="granted">' + TXTC[1] + '</button></div>';
-    else d.innerHTML = '<p>' + T(0) + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + T(1) + '</button><button type="button" data-v="denied">' + T(2) + '</button></div>';
+    // One button when first asked; the footer link (fromPrefs) shows both choices.
+    if (!fromPrefs && TXTC.length) d.innerHTML = '<p>' + TXTC[0] + '</p><div><button type="button" data-v="granted">' + TXTC[1] + '</button></div>';
+    else d.innerHTML = '<p>' + TXT[0] + ' <a href="/privacy/#' + L + '">' + TXT[3] + '</a></p><div><button type="button" data-v="granted">' + TXT[1] + '</button><button type="button" data-v="denied">' + TXT[2] + '</button></div>';
     d.addEventListener('click', function (e) { var v = e.target.getAttribute && e.target.getAttribute('data-v'); if (!v) return; if (!fromPrefs) gcConsent(v === 'granted' ? 'accept' : 'decline'); write(v); d.remove(); document.documentElement.style.removeProperty('--dn-h'); if (v === 'granted') { load(); window.dnEvent('page_view'); } });
     document.body.appendChild(d);
     if (!fromPrefs) shownOnce();
