@@ -214,3 +214,7 @@ html[data-pv=b] .pv-b { display:inline-block; }
 @media (min-width:760px) { .dl-app { padding:24px; } .dl-body { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:center; gap:28px; } .dl-car { padding:2px 0 12px; margin:0; } }
 .dl-hero .cta { justify-content:center; } .dl-hero .cta-sub { text-align:center; margin:12px auto 0; max-width:560px; }
 @media (min-width:760px) { .dl-car figure { flex-basis:196px; } .dl-body { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); } }
+.dl-gain { margin:8px 0 0; color:var(--text); font-weight:600; font-size:16px; max-width:640px; }
+.dl-gains .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (max-width:520px) { .dl-gains .grid { grid-template-columns:1fr; } }
+.dl-gain { border-left:3px solid var(--green); padding-left:10px; }
