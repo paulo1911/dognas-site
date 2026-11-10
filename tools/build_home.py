@@ -173,6 +173,14 @@ def blog_faq_link(L, base, i):
 def play(app, loc):
     # `referrer` lets Play Console attribute store visits to this site (the apps themselves collect nothing).
     return f"{PLAY[app]}&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D{loc}"
+# SITE-PLAY experiment: A = current red button, B = official Google Play badge. Both are rendered; CSS shows one by html[data-pv].
+# Assignment 50/50 per browser in localStorage (no cookie); without storage the visitor sees A. B links carry the cta_id suffix `_b`.
+PV_SCRIPT = "<script>(function(){try{var v=localStorage.getItem('dognas_play_v');if(v!=='a'&&v!=='b'){v=Math.random()<.5?'a':'b';localStorage.setItem('dognas_play_v',v)}document.documentElement.setAttribute('data-pv',v)}catch(e){}})()</script>"
+BADGE = {'pt': ('pt-br', 'Disponível no Google Play'), 'en': ('en', 'Get it on Google Play'), 'es': ('es-419', 'Disponible en Google Play')}
+TM_NOTE = {'pt': 'Google Play e o logotipo do Google Play são marcas da Google LLC.', 'en': 'Google Play and the Google Play logo are trademarks of Google LLC.', 'es': 'Google Play y el logotipo de Google Play son marcas registradas de Google LLC.'}
+def play_badge(L, base, loc, app='server'):
+    f, alt = BADGE[L]
+    return f'<a class="pv-b" data-ev="{app}_store_click" data-loc="{loc}_b" href="{play(app, loc + "_b")}" rel="noopener"><img src="{base}assets/badges/{f}.png" alt="{alt}" width="168" height="65"></a>'
 T = {
  'pt': dict(title='DogNAS — Seu Android! Seu armazenamento particular.', desc='Transforme um celular, tablet ou TV box Android em armazenamento particular pelo Wi-Fi: fotos, vídeos e documentos em casa. Sem nuvem, sem mensalidade e sem comprar um NAS.',
    h1='Seu Android! Seu armazenamento particular.', lead='Seu tablet, celular ou TV box Android compatível vira um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.',
@@ -379,6 +387,7 @@ for L, t in T.items():
 <html lang="{LANGS[L][0]}">
 <head>
 <meta charset="utf-8">
+{PV_SCRIPT}
 {GA_TAG}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
@@ -391,7 +400,7 @@ for L, t in T.items():
 <div class="hero-grid">
 <section class="hero"><img class="logo" src="{base}assets/icon-240.webp" alt="DogNAS" width="120" height="120"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <ul class="points">{points}</ul>
-<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="hero_primary" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a></div>
+<div class="cta"><a class="btn primary pv-a" data-ev="server_store_click" data-loc="hero_primary" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a>{play_badge(L, base, 'hero_primary')}</div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p>
 <p class="cta-sub">{sub_cta}</p></section>
 <div class="phones">{phone(sh + 'server-status.webp', t['alt1'], True)}{phone(sh + 'lite-files.webp', t['alt2'], True)}</div>
@@ -451,11 +460,11 @@ for L, t in T.items():
 <h2>{t['apps']}</h2>
 <div class="grid apps"><a class="card" data-ev="server_store_click" data-loc="apps_server" href="{play('server', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS</h3><p>{t['app1']}</p></div></a><a class="card" data-ev="client_store_click" data-loc="apps_client" href="{client_play('apps_card') if CLIENT_PLAY else base + LANGS[L][1] + 'client/'}" rel="noopener"><img src="{base}assets/icon-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client</h3><p>{t['app3']}</p></div></a><a class="card" data-ev="lite_store_click" data-loc="apps_lite" href="{play('lite', 'apps_card')}" rel="noopener"><img src="{base}assets/icon-lite-128.webp" alt="" width="64" height="64" loading="lazy"><div><h3>DogNAS Client Lite</h3><p>{t['app2']}</p></div></a></div>
 <section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
-<div class="cta"><a class="btn primary" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a></div>
+<div class="cta"><a class="btn primary pv-a" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a>{play_badge(L, base, 'final')}</div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
-<footer><span>© 2026 DogNAS</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div>
-<div class="float-cta" hidden><a class="btn primary" data-ev="server_store_click" data-loc="float" href="{play('server', 'float_cta')}" rel="noopener">{t['cta']}</a></div>
+<div class="float-cta" hidden><a class="btn primary pv-a" data-ev="server_store_click" data-loc="float" href="{play('server', 'float_cta')}" rel="noopener">{t['cta']}</a>{play_badge(L, base, 'float')}</div>
 <script>
 // Floating CTA: shown only after the hero button scrolled away, kept above the cookie banner (--dn-h) instead of hiding, and hidden
 // while an in-page CTA (bands / final) is on screen so it never stacks with them.

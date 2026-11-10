@@ -23,6 +23,9 @@ Test result (GoatCounter, accept ÷ shown): first read 04–09/11 had c at ~33 %
 **It still needs the click:** GA4 and AdSense load only after *Concordar e Fechar*; "continuing" to browse is not consent (the privacy policy promises "only if you accept"). There is no decline button, so a visitor who ignores it stays without cookies; the footer's "Cookie preferences" link opens the two-button text (*Aceitar / Não, obrigado*), so anyone can decline or withdraw consent.
 GoatCounter events (anonymous, no cookie): `consent/shown/c/<lang>` (once per browser session) and `consent/accept/c/<lang>`; the constant `c` keeps the series of the experiment. Choices made from the footer link are not counted.
 
+### Experiment SITE-PLAY: red button (A) × official Google Play badge (B)
+The three server CTAs of the home pages (`hero_primary`, `final`, `float`) render both variants; `html[data-pv]` (set before paint from `localStorage.dognas_play_v`, 50/50, no cookie; no storage = A) shows one. B links use `cta_id` `<id>_b` (e.g. `hero_primary_b`) and the same suffix in the Play `utm_campaign`, so GoatCounter (`store/server/hero_primary_b/pt`), GA4 and Play Console separate the variants without extra code. Click rate = store events ÷ visits of `/`, `/pt/`, `/es/` per variant (`<id>` = A, `<id>_b` = B); read it only with ≥ 300 visits (or ≥ 30 clicks) per variant and ≥ 2 weeks. Badges: official files in `assets/badges/` (unmodified, from the Google Play brand kit), trademark note in the footer. To end the test, keep the winner and delete the other markup, the `PV_SCRIPT` and the `.pv-*` CSS.
+
 ## Events (all send the same parameters)
 | Event | When |
 |---|---|
