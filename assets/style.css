@@ -182,7 +182,7 @@ nav.lang a.blog-link { color:var(--text); font-weight:600; margin-right:6px; }
 
 /* SITE-PLAY experiment: variant B shows the official Google Play badge (unmodified; clear space = 1/4 of its height). */
 .pv-b { display:none; line-height:0; padding:7px; }
-.pv-b img { display:block; height:56px; width:auto; }
+.pv-b img, .hero .pv-b img { display:block; height:76px; width:auto; max-width:none; border-radius:0; }
 html[data-pv=b] .pv-a { display:none; }
 html[data-pv=b] .pv-b { display:inline-block; }
 .float-cta .pv-b { pointer-events:auto; }
