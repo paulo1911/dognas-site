@@ -1,0 +1,254 @@
+{
+ "server": {
+  "pt": [
+   {
+    "n": "01",
+    "alt": "Seu Android vira o servidor da casa. Seus arquivos ficam na sua rede Wi-Fi, sem nuvem"
+   },
+   {
+    "n": "02",
+    "alt": "Conecte em segundos. Leia o QR Code no celular e digite o PIN"
+   },
+   {
+    "n": "03",
+    "alt": "Escolha onde guardar. No aparelho, num cartão SD ou num HD USB"
+   },
+   {
+    "n": "04",
+    "alt": "Um espaço e um PIN para cada pessoa. Cada perfil tem seus próprios arquivos"
+   },
+   {
+    "n": "05",
+    "alt": "Servidor online com um toque. Veja espaço, aparelhos e transferências"
+   },
+   {
+    "n": "06",
+    "alt": "Acompanhe em tempo real. Velocidade, aparelhos conectados e erros"
+   },
+   {
+    "n": "07",
+    "alt": "Comece no plano Grátis. Pro opcional: compra única, sem assinatura"
+   }
+  ],
+  "en": [
+   {
+    "n": "01",
+    "alt": "Your Android becomes the home server. Your files stay on your Wi-Fi, no cloud"
+   },
+   {
+    "n": "02",
+    "alt": "Connect in seconds. Scan the QR Code and enter the PIN"
+   },
+   {
+    "n": "03",
+    "alt": "Choose where to store. On the phone, an SD card or a USB drive"
+   },
+   {
+    "n": "04",
+    "alt": "One space and one PIN for each person. Each profile has its own files"
+   },
+   {
+    "n": "05",
+    "alt": "Server online with one tap. See space, devices and transfers"
+   },
+   {
+    "n": "06",
+    "alt": "Track it in real time. Speed, connected devices and errors"
+   },
+   {
+    "n": "07",
+    "alt": "Start on the Free plan. Pro is optional: one-time purchase, no subscription"
+   }
+  ],
+  "es": [
+   {
+    "n": "01",
+    "alt": "Tu Android es el servidor de casa. Tus archivos se guardan en tu red Wi-Fi, sin nube"
+   },
+   {
+    "n": "02",
+    "alt": "Conecta en segundos. Escanea el QR e introduce el PIN"
+   },
+   {
+    "n": "03",
+    "alt": "Elige dónde guardar. En el móvil, en tarjeta SD o en disco USB"
+   },
+   {
+    "n": "04",
+    "alt": "Un espacio y un PIN para cada persona. Cada perfil tiene sus propios archivos"
+   },
+   {
+    "n": "05",
+    "alt": "Servidor conectado con un toque. Consulta espacio, dispositivos y transferencias"
+   },
+   {
+    "n": "06",
+    "alt": "Supervisa en tiempo real. Velocidad, dispositivos conectados y errores"
+   },
+   {
+    "n": "07",
+    "alt": "Empieza con el plan Gratis. Pro opcional: pago único, sin suscripción"
+   }
+  ]
+ },
+ "client": {
+  "pt": [
+   {
+    "n": "01",
+    "alt": "Conecte ao seu DogNAS. Leia o QR Code e digite o PIN"
+   },
+   {
+    "n": "02",
+    "alt": "Pastas prontas em um toque. Modelos Casa, Trabalho e Mínimo"
+   },
+   {
+    "n": "03",
+    "alt": "Navegue com miniaturas. Lista ou grade, com busca"
+   },
+   {
+    "n": "04",
+    "alt": "Veja sem baixar antes. Fotos, vídeos, músicas, PDFs e textos"
+   },
+   {
+    "n": "05",
+    "alt": "Escaneie documentos para o DogNAS. Guarde em PDF ou JPEG pela câmera"
+   },
+   {
+    "n": "06",
+    "alt": "Envios que continuam. Fila com progresso, pausa e retomada"
+   },
+   {
+    "n": "07",
+    "alt": "Feito para Wi-Fi lento. Tempo limite, escaneamento e idioma"
+   }
+  ],
+  "en": [
+   {
+    "n": "01",
+    "alt": "Connect to your DogNAS. Scan the QR Code and enter the PIN"
+   },
+   {
+    "n": "02",
+    "alt": "Folders ready in one tap. Home, Work and Minimal templates"
+   },
+   {
+    "n": "03",
+    "alt": "Browse with thumbnails. List or grid, with search"
+   },
+   {
+    "n": "04",
+    "alt": "View it without downloading. Photos, videos, music, PDFs and text"
+   },
+   {
+    "n": "05",
+    "alt": "Scan documents to your DogNAS. Save as PDF or JPEG with the camera"
+   },
+   {
+    "n": "06",
+    "alt": "Uploads that resume. Queue with progress, pause and resume"
+   },
+   {
+    "n": "07",
+    "alt": "Made for slow Wi-Fi. Connection timeout, scanning and language"
+   }
+  ],
+  "es": [
+   {
+    "n": "01",
+    "alt": "Conecta con tu DogNAS. Escanea el QR e introduce el PIN"
+   },
+   {
+    "n": "02",
+    "alt": "Carpetas listas en un toque. Plantillas Casa, Trabajo y Mínimo"
+   },
+   {
+    "n": "03",
+    "alt": "Navega con miniaturas. Lista o cuadrícula, con búsqueda"
+   },
+   {
+    "n": "04",
+    "alt": "Ve sin descargar antes. Fotos, vídeos, música, PDF y textos"
+   },
+   {
+    "n": "05",
+    "alt": "Escanea documentos a tu DogNAS. Guarda en PDF o JPEG con la cámara"
+   },
+   {
+    "n": "06",
+    "alt": "Envíos que continúan. Cola con progreso, pausa y reanudación"
+   },
+   {
+    "n": "07",
+    "alt": "Hecho para Wi-Fi lento. Tiempo de espera, escaneo e idioma"
+   }
+  ]
+ },
+ "lite": {
+  "pt": [
+   {
+    "n": "01",
+    "alt": "Conecte ao seu DogNAS. Leia o QR Code e digite o PIN"
+   },
+   {
+    "n": "02",
+    "alt": "Pastas prontas em um toque. Modelos Casa, Trabalho e Mínimo"
+   },
+   {
+    "n": "03",
+    "alt": "Veja todas as suas pastas. E o espaço usado pelo seu perfil"
+   },
+   {
+    "n": "04",
+    "alt": "Navegue e baixe. Abra as pastas e baixe o que precisar"
+   },
+   {
+    "n": "05",
+    "alt": "Escolha o seu idioma. Português, inglês ou espanhol"
+   }
+  ],
+  "en": [
+   {
+    "n": "01",
+    "alt": "Connect to your DogNAS. Scan the QR Code and enter the PIN"
+   },
+   {
+    "n": "02",
+    "alt": "Folders ready in one tap. Home, Work and Minimal templates"
+   },
+   {
+    "n": "03",
+    "alt": "See all your folders. And the space your profile uses"
+   },
+   {
+    "n": "04",
+    "alt": "Browse and download. Open folders and get what you need"
+   },
+   {
+    "n": "05",
+    "alt": "Choose your language. English, Portuguese or Spanish"
+   }
+  ],
+  "es": [
+   {
+    "n": "01",
+    "alt": "Conecta con tu DogNAS. Escanea el QR e introduce el PIN"
+   },
+   {
+    "n": "02",
+    "alt": "Carpetas listas en un toque. Plantillas Casa, Trabajo y Mínimo"
+   },
+   {
+    "n": "03",
+    "alt": "Ve todas tus carpetas. Y el espacio que usa tu perfil"
+   },
+   {
+    "n": "04",
+    "alt": "Navega y descarga. Abre carpetas y descarga lo que necesites"
+   },
+   {
+    "n": "05",
+    "alt": "Elige tu idioma. Inglés, portugués o español"
+   }
+  ]
+ }
+}
