@@ -58,7 +58,7 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
   // One shape for every click and view so GA4 can rank CTAs: cta_id (position on the page), cta_text, cta_target, lang, page_depth.
   function ctaParams(a) {
     var h = document.documentElement, depth = Math.round(100 * (window.scrollY + window.innerHeight) / Math.max(h.scrollHeight, 1));
-    return {cta_id: a.getAttribute('data-loc') || '', cta_text: (a.textContent || '').trim().slice(0, 60), cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
+    var img = a.querySelector('img'); return {cta_id: a.getAttribute('data-loc') || '', cta_text: ((a.textContent || '').trim() || (img && img.alt) || '').slice(0, 60), variant: h.getAttribute('data-pv') || '', cta_target: (a.getAttribute('data-ev') || '').replace(/_(store_)?click$/, ''), lang: L, page_depth: Math.min(depth, 100)};
   }
   window.dnEvent = function (name, params) { if (window.__dnGA) gtag('event', name, params || {}); };
   // GoatCounter event for the clicks that lead to the store (cookieless, so it counts every visitor): store/<app>/<cta_id>/<lang>.
