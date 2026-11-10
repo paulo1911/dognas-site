@@ -35,12 +35,17 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
     es: ['<b>Cookies:</b> guardamos estadísticas de visitas para mejorar tu experiencia de navegación. Al continuar, aceptas nuestra <a href="/privacy/#es">política de privacidad</a>.', 'Aceptar y cerrar']
   }[L] || [];
   var V = 'c';
-  function gcConsent(action) {
-    var n = 0; (function send() {
-      if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path: 'consent/' + action + '/' + V + '/' + L, title: 'Cookie banner: ' + action + ' · ' + V + ' · ' + L, event: true});
-      else if (n++ < 20) setTimeout(send, 300);
-    })();
+  // Sends a GoatCounter event. Uses count.js when it is ready; otherwise (slow or late third-party script, tap on the CTA right
+  // after load) posts straight to the same endpoint, so a store click is never dropped. Mirrors count.js' own filters (local host, #toggle-goatcounter).
+  function gcSend(path, title) {
+    try {
+      if (/^(localhost|127\.|\[::1\])/.test(location.hostname) || localStorage.getItem('skipgc') === 't') return;
+      if (window.goatcounter && window.goatcounter.count) { window.goatcounter.count({path: path, title: title, event: true}); return; }
+      var e = encodeURIComponent, u = 'https://dognas.goatcounter.com/count?p=' + e(path) + '&t=' + e(title) + '&e=true&s=' + screen.width + '&r=' + e(document.referrer) + '&q=' + e(location.search) + '&rnd=' + Math.random().toString(36).slice(2, 7);
+      if (!(navigator.sendBeacon && navigator.sendBeacon(u))) new Image().src = u;
+    } catch (err) {}
   }
+  function gcConsent(action) { gcSend('consent/' + action + '/' + V + '/' + L, 'Cookie banner: ' + action + ' · ' + V + ' · ' + L); }
   function shownOnce() { try { if (sessionStorage.getItem('dognas_bshown')) return; sessionStorage.setItem('dognas_bshown', '1'); } catch (e) {} gcConsent('shown'); }
   // One-time re-ask (2026-11): visitors who declined while the A/B texts ran (stored variant a or b) are asked again with the current notice; those who accepted keep their choice.
   // Runs once per browser (dognas_consent_v2) and then drops the experiment's dognas_banner_v.
@@ -65,8 +70,8 @@ gtag('consent', 'default', {analytics_storage: 'denied', ad_storage: 'denied', a
   // sendBeacon keeps it alive when the click navigates to Google Play. Views and navigation clicks are not sent (they would eat the quota).
   var GCEV = /^(?:blog_)?(server|lite|client)_(?:store|download)_click$/;
   function gcEvent(a) {
-    var m = GCEV.exec(a.getAttribute('data-ev') || ''); if (!m || !window.goatcounter || !window.goatcounter.count) return;
-    window.goatcounter.count({path: 'store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, title: 'Store click: ' + m[1] + ' · ' + (a.getAttribute('data-loc') || 'unknown') + ' · ' + L, event: true});
+    var m = GCEV.exec(a.getAttribute('data-ev') || ''); if (!m) return;
+    gcSend('store/' + m[1] + '/' + (a.getAttribute('data-loc') || 'unknown') + '/' + L, 'Store click: ' + m[1] + ' · ' + (a.getAttribute('data-loc') || 'unknown') + ' · ' + L);
   }
   function banner(fromPrefs) {
     var old = document.getElementById('dn-consent'); if (old) old.remove();
