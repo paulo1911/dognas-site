@@ -55,6 +55,7 @@ for a in barts:
     sib = {x['lang']: bc.article_path(x) for x in barts if x['group'] == a['group']}
     urls.append(f'<url><loc>{SITE}{bc.article_path(a)}</loc><lastmod>{a.get("updated") or a["created"]}</lastmod><priority>0.6</priority>{alt_links(sib)}</url>')
 urls.append(f'<url><loc>{SITE}privacy/</loc><lastmod>{lastmod("build_privacy.py")}</lastmod><priority>0.3</priority></url>')
+urls.append(f'<url><loc>{SITE}terms/</loc><lastmod>{lastmod("build_terms.py")}</lastmod><priority>0.3</priority></url>')
 w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + '\n'.join(urls) + '\n</urlset>\n')
 
 # ---- llms.txt (llmstxt.org format) and llms-full.txt --------------------------------------------------------------
@@ -76,6 +77,7 @@ Key facts: the server app runs on Android 7.0 or newer; files stay in the storag
 - [Home (Português)]({SITE}pt/): same content in Portuguese.
 - [Home (Español)]({SITE}es/): same content in Spanish.
 - [Privacy policy]({SITE}privacy/): what the apps and this website collect (apps: nothing; website: analytics only after consent).
+- [Terms of Service]({SITE}terms/): terms of use of the three apps (no account, no cloud; storage is not a backup).
 
 {blog_llms}## Optional
 - [Full text for LLMs]({SITE}llms-full.txt): longer plain-text description of the product.
