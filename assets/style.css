@@ -189,3 +189,53 @@ html[data-pv=b] .pv-b { display:inline-block; }
 .float-cta .pv-b img { height:72px; }
 .float-cta .pv-b { pointer-events:auto; }
 .float-cta .pv-b img { filter:drop-shadow(0 8px 20px rgba(0,0,0,.6)); }
+
+/* Downloads page: install steps, one card per app with a scroll-snap screenshot carousel */
+.dl-steps { list-style:none; padding:0; margin:22px auto 0; display:grid; gap:8px; max-width:560px; text-align:left; }
+.dl-steps a { display:flex; gap:12px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:10px 14px; color:var(--text); text-decoration:none; font-size:15px; }
+.dl-steps b { flex:none; width:28px; height:28px; border-radius:50%; background:var(--btn); color:#fff; display:grid; place-items:center; font-size:14px; }
+.dl-steps strong { display:block; font-size:16px; } .dl-steps span { color:var(--muted); }
+.hero .cta-sub { margin-top:12px; }
+.dl-app { margin-top:28px; padding:20px 16px; scroll-margin-top:16px; }
+.dl-head { display:flex; gap:12px; align-items:center; } .dl-head h2 { margin:0; font-size:24px; }
+.dl-tag { color:var(--red); font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; }
+.dl-role { color:var(--muted); font-size:16px; margin:10px 0 0; max-width:640px; }
+.dl-body { display:grid; gap:18px; margin-top:16px; }
+.dl-carwrap { position:relative; min-width:0; }
+.dl-car { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:2px 16px 12px; margin:0 -16px; scrollbar-width:thin; }
+.dl-car figure { flex:0 0 min(62vw,240px); scroll-snap-align:center; margin:0; }
+.dl-car img { width:100%; height:auto; display:block; border-radius:16px; border:1px solid var(--line); background:#0a0a0a; }
+.dl-nav { display:none; position:absolute; top:42%; width:40px; height:40px; border-radius:50%; border:1px solid var(--line); background:rgba(22,22,22,.92); color:var(--text); font-size:24px; line-height:1; cursor:pointer; }
+.dl-nav.prev { left:-6px; } .dl-nav.next { right:-6px; }
+@media (hover:hover) and (pointer:fine) { .dl-nav { display:block; } }
+.dl-info .points { list-style:none; padding:0; margin:0; display:grid; gap:8px; color:var(--text); font-size:16px; }
+.dl-info .points li::before { content:"✓"; color:var(--green); font-weight:700; margin-right:8px; }
+.dl-info .cta { margin-top:18px; } .dl-info .note { margin:12px 0 0; color:var(--muted); font-size:14px; }
+@media (min-width:760px) { .dl-app { padding:24px; } .dl-body { grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:center; gap:28px; } .dl-car { padding:2px 0 12px; margin:0; } }
+.dl-hero .cta { justify-content:center; } .dl-hero .cta-sub { text-align:center; margin:12px auto 0; max-width:560px; }
+@media (min-width:760px) { .dl-car figure { flex-basis:196px; } .dl-body { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); } }
+.dl-gain { margin:8px 0 0; color:var(--text); font-weight:600; font-size:16px; max-width:640px; }
+.dl-gains .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (max-width:520px) { .dl-gains .grid { grid-template-columns:1fr; } }
+.dl-gain { border-left:3px solid var(--green); padding-left:10px; }
+/* Downloads: two-device diagram (everyday phone ⇄ home Wi-Fi ⇄ old Android server). Mobile: stacked cards; desktop: one row per device, phone left/right (zigzag). */
+.dl-flow { margin-top:36px; }
+.dl-flow-grid { display:grid; gap:14px; margin-top:14px; }
+.dl-dev { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 16px; text-align:center; }
+.dl-dev h3 { margin:2px 0 12px; font-size:20px; }
+.dl-ph { width:250px; max-width:100%; margin:0 auto; }
+.dl-ph img { display:block; width:100%; height:auto; border:7px solid #2a2a2a; border-radius:28px; box-shadow:0 0 0 1px #3a3a3a, 0 10px 30px rgba(0,0,0,.5); background:#0a0a0a; }
+.dl-dev .points { list-style:none; padding:0; margin:16px 0 0; display:grid; gap:10px; text-align:left; font-size:15px; }
+.dl-dev .points li::before { content:"✓"; color:var(--green); font-weight:700; margin-right:8px; }
+.dl-link { display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--muted); font-size:14px; padding:4px 0; }
+.dl-link svg { color:var(--red); } .dl-link strong { color:var(--text); font-size:16px; }
+.dl-arrows { font-size:30px; line-height:1; color:var(--red); transform:rotate(90deg); margin:6px 0; }
+.dl-result { margin:16px 0 0; text-align:center; font-weight:600; font-size:17px; color:var(--text); }
+.dl-result::before { content:""; display:block; width:40px; height:3px; background:var(--green); margin:0 auto 10px; border-radius:2px; }
+@media (min-width:820px) {
+  .dl-dev { display:grid; grid-template-columns:300px minmax(0,1fr); column-gap:36px; align-items:center; align-content:center; grid-auto-rows:min-content; text-align:left; padding:26px 28px; }
+  .dl-dev .dl-tag, .dl-dev h3, .dl-dev .points { grid-column:2; } .dl-dev .dl-ph { grid-column:1; grid-row:1 / span 3; width:300px; margin:0; }
+  .dl-dev h3 { font-size:26px; margin:0 0 6px; } .dl-dev .points { font-size:17px; gap:14px; margin-top:14px; }
+  .dl-server { grid-template-columns:minmax(0,1fr) 300px; } .dl-server .dl-tag, .dl-server h3, .dl-server .points { grid-column:1; } .dl-server .dl-ph { grid-column:2; }
+  .dl-link { flex-direction:row; justify-content:center; gap:14px; padding:2px 0; } .dl-arrows { transform:rotate(90deg); margin:0 6px; }
+}
