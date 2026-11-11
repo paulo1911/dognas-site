@@ -239,3 +239,27 @@ html[data-pv=b] .pv-b { display:inline-block; }
   .dl-server { grid-template-columns:minmax(0,1fr) 300px; } .dl-server .dl-tag, .dl-server h3, .dl-server .points { grid-column:1; } .dl-server .dl-ph { grid-column:2; }
   .dl-link { flex-direction:row; justify-content:center; gap:14px; padding:2px 0; } .dl-arrows { transform:rotate(90deg); margin:0 6px; }
 }
+/* Downloads: sub pages + mobile breathing room */
+.dl-needs { margin-top:8px; } .dl-needs h2 { margin:0 0 6px; font-size:18px; } .dl-needs p { max-width:640px; }
+.dl-needs a, .dl-more a, .dl-final a, .card.wide a { color:var(--text); text-decoration:underline; text-underline-offset:3px; }
+.dl-more { margin:14px 0 0; font-weight:600; }
+.dl-one { display:flex; justify-content:center; } .dl-one img { width:min(220px,60vw); height:auto; border-radius:16px; border:1px solid var(--line); background:#0a0a0a; }
+.dl-app > h2 { margin:0 0 4px; font-size:20px; }
+.dl-how { list-style:none; padding:0; margin:14px 0 0; display:grid; gap:12px; counter-reset:s; }
+.dl-how li { display:flex; gap:14px; align-items:flex-start; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+.dl-how b { flex:none; width:28px; height:28px; border-radius:50%; background:var(--btn); color:#fff; display:grid; place-items:center; font-size:14px; }
+.dl-how span { padding-top:2px; }
+.dl-final { margin-top:28px; } .dl-final h2 { margin:0 0 12px; font-size:22px; } .dl-final .note { margin-top:12px; font-size:14px; }
+@media (max-width:760px) {
+  body.dl .wrap { padding-left:20px; padding-right:20px; }
+  .dl-hero { padding:36px 0 24px; } .dl-hero h1 { line-height:1.2; } .dl-hero p { font-size:17px; line-height:1.65; }
+  .dl-steps { gap:12px; } .dl-steps a { padding:12px 14px; line-height:1.45; }
+  .dl-app { padding:22px 18px; margin-top:24px; } .dl-app .dl-body { gap:22px; margin-top:20px; }
+  .dl-car { padding-left:20px; padding-right:20px; margin:0 -18px; }
+  .dl-role, .dl-gain { line-height:1.65; margin-top:14px; } .dl-gain { padding-left:12px; }
+  .dl-info .points { gap:12px; line-height:1.55; } .dl-info .points li { padding-left:2px; }
+  .dl-info .note { line-height:1.6; margin-top:16px; }
+  .dl-gains .card, .dl-needs, .dl-final, .card.wide { padding:20px 18px; } .dl-gains .card p, .card.wide p, .dl-needs p { line-height:1.65; }
+  .dl-gains .grid, .dl-flow-grid { gap:16px; } h2 { margin-top:36px; line-height:1.3; }
+  .dl-how li { padding:14px; }
+}

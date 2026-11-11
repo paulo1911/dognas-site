@@ -24,7 +24,7 @@ T = {
       bullets=['Acesse os arquivos do DogNAS num celular mais simples ou com pouco espaço', 'Conecte em segundos pelo QR Code do servidor', 'Comece com modelos de pasta prontos', 'Veja quanto espaço o seu perfil já usa no servidor', 'Baixe os arquivos do DogNAS para o celular quando precisar'],
       cta='Baixar o Client Lite', note='Precisa do servidor DogNAS (passo 1) rodando em outro Android, na mesma rede Wi-Fi. Android 7.0 ou superior.')},
    cmp_h='Client ou Client Lite?', cmp='Os dois rodam no seu celular e acessam o mesmo servidor. O Client é o completo (escanear documentos, ver arquivos sem baixar, miniaturas); o Client Lite é mais leve e simples. Escolha um, ou instale os dois.',
-   car='Capturas de tela', prev='Anterior', next='Próxima', back='Voltar ao início', privacy='Política de privacidade'),
+   more='Ver {} em detalhes', car='Capturas de tela', prev='Anterior', next='Próxima', back='Voltar ao início', privacy='Política de privacidade'),
  'en': dict(title='Download DogNAS — server and apps for Android', desc='Download DogNAS: the server that turns an old Android into your home storage, and the DogNAS Client and Client Lite apps to use on your everyday phone.',
    h1='Download the DogNAS apps', lead='Use an old or idle Android as your home storage. Install DogNAS on it: that is the server. On your everyday phone, install the DogNAS Client to move photos, videos and documents to the server over Wi-Fi.',
    steps=[('1', 'Old or idle Android', 'Install the DogNAS server: it keeps the files'), ('2', 'Your everyday phone', 'Install the Client: it moves files to the server'), ('3', 'Light alternative to the Client', 'Client Lite, for a simpler phone')],
@@ -40,7 +40,7 @@ T = {
       bullets=['Reach your DogNAS files on a simpler phone or one with little space', 'Connect in seconds with the server’s QR Code', 'Start with ready-made folder templates', 'See how much space your profile already uses on the server', 'Download files from DogNAS to your phone when you need them'],
       cta='Download the Client Lite', note='Needs the DogNAS server (step 1) running on another Android, on the same Wi-Fi network. Android 7.0 or newer.')},
    cmp_h='Client or Client Lite?', cmp='Both run on your phone and reach the same server. The Client is the full app (scan documents, view files without downloading, thumbnails); the Client Lite is lighter and simpler. Pick one, or install both.',
-   car='Screenshots', prev='Previous', next='Next', back='Back to home', privacy='Privacy policy'),
+   more='See {} in detail', car='Screenshots', prev='Previous', next='Next', back='Back to home', privacy='Privacy policy'),
  'es': dict(title='Descargar DogNAS — servidor y apps para Android', desc='Descarga DogNAS: el servidor que convierte un Android antiguo en el almacenamiento de casa y las apps DogNAS Client y Client Lite para usar en tu móvil de todos los días.',
    h1='Descarga las apps de DogNAS', lead='Usa un Android antiguo o parado como el almacenamiento de tu casa. Instala DogNAS en él: es el servidor. En tu móvil de todos los días, instala DogNAS Client para pasar fotos, vídeos y documentos al servidor por Wi-Fi.',
    steps=[('1', 'Android antiguo o parado', 'Instala el servidor DogNAS: guarda los archivos'), ('2', 'Tu móvil de todos los días', 'Instala el Client: pasa archivos al servidor'), ('3', 'Alternativa ligera al Client', 'Client Lite, para un móvil más sencillo')],
@@ -56,7 +56,7 @@ T = {
       bullets=['Accede a los archivos de DogNAS en un móvil más sencillo o con poco espacio', 'Conecta en segundos con el código QR del servidor', 'Empieza con plantillas de carpetas listas', 'Mira cuánto espacio usa ya tu perfil en el servidor', 'Descarga los archivos de DogNAS al móvil cuando los necesites'],
       cta='Descargar el Client Lite', note='Necesita el servidor DogNAS (paso 1) funcionando en otro Android, en la misma red Wi-Fi. Android 7.0 o superior.')},
    cmp_h='¿Client o Client Lite?', cmp='Los dos funcionan en tu móvil y acceden al mismo servidor. El Client es la app completa (escanear documentos, ver archivos sin descargar, miniaturas); el Client Lite es más ligero y simple. Elige uno, o instala los dos.',
-   car='Capturas de pantalla', prev='Anterior', next='Siguiente', back='Volver al inicio', privacy='Política de privacidad'),
+   more='Ver {} en detalle', car='Capturas de pantalla', prev='Anterior', next='Siguiente', back='Volver al inicio', privacy='Política de privacidad'),
 }
 GAINS = {
  'pt': ('O que você ganha com o DogNAS', [('phone-free', 'Libere espaço no celular do dia a dia', 'Passe fotos, vídeos e documentos do seu celular para o DogNAS, que roda no Android antigo da casa. Confira que chegaram e apague do celular o que já está guardado.'), ('devices', 'Dê nova vida a um Android parado', 'O celular ou tablet que está na gaveta vira o armazenamento da casa: é nele que o DogNAS (servidor) roda.'), ('people', 'Arquivos organizados em perfis', 'Cada pessoa da casa tem o seu perfil, com espaço e PIN próprios.'), ('no-cloud', 'Sem mensalidade de nuvem', 'Os arquivos ficam no seu Android, na sua rede Wi-Fi. Sem conta e sem anúncios.')]),
@@ -104,6 +104,10 @@ def cta(app, loc, label, L, base):
     a = f'<a class="btn primary pv-a" data-ev="{ev}" data-loc="{loc}" href="{store(app, loc)}" rel="noopener">{label}</a>'
     b = f'<a class="pv-b" data-ev="{ev}" data-loc="{loc}_b" href="{store(app, loc + "_b")}" rel="noopener"><img src="{base}assets/badges/{f}.png" alt="{alt}" width="168" height="65"></a>'
     return f'<div class="cta">{a}{b}</div>'
+def one_shot(app, L, base):
+    c = CAPS[app][L][4 if app == 'client' else 2]  # client: scan documents; lite: all folders + space used
+    stem = f'{base}assets/downloads/{app}/{L}/{c["n"]}'
+    return f'<div class="dl-one"><img src="{stem}-480.webp" srcset="{stem}-300.webp 300w, {stem}-480.webp 480w" sizes="220px" alt="{html.escape(c["alt"])}" width="480" height="853" loading="lazy"></div>'
 def carousel(app, L, base, t):
     figs = ''
     for i, c in enumerate(CAPS[app][L]):
@@ -136,8 +140,13 @@ for L, t in T.items():
     for app in ('server', 'client', 'lite'):
         a = t['apps'][app]
         bullets = ''.join(f'<li>{x}</li>' for x in a['bullets'])
+        if app == 'server':
+            media, more = carousel(app, L, base, t), ''
+        else:
+            media = one_shot(app, L, base)
+            more = f'<p class="dl-more"><a data-ev="downloads_detail_click" data-loc="dl_detail_{app}" href="{ANCHOR[app]}/">{t["more"].format(a["name"])} →</a></p>'
         sections += f'''<section class="dl-app card" id="{ANCHOR[app]}"><div class="dl-head">{icon(ICON[app])}<div><span class="dl-tag">{a['tag']}</span><h2>{a['name']}</h2></div></div><p class="dl-role">{a['role']}</p><p class="dl-gain">{a['gain']}</p>
-<div class="dl-body">{carousel(app, L, base, t)}<div class="dl-info"><ul class="points">{bullets}</ul>{cta(app, 'dl_' + app, a['cta'], L, base)}<p class="note">{a['note']}</p></div></div></section>
+<div class="dl-body">{media}<div class="dl-info"><ul class="points">{bullets}</ul>{cta(app, 'dl_' + app, a['cta'], L, base)}{more}<p class="note">{a['note']}</p></div></div></section>
 '''
     page = f'''<!doctype html>
 <html lang="{LANGS[L][0]}">
@@ -151,7 +160,7 @@ for L, t in T.items():
 {seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'downloads/' for l in LANGS}, noindex=NOINDEX)}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('Downloads', path)]))}
 {CSS_INLINE}
 </head>
-<body><div class="wrap">
+<body class="dl"><div class="wrap">
 <header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 <section class="hero dl-hero"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <ol class="dl-steps">{steps}</ol>
@@ -168,4 +177,95 @@ for L, t in T.items():
     out = os.path.join(ROOT, path, 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w').write(page)
+
+# ---- Subpages: one per Client app (/downloads/client/, /downloads/lite/), benefit-led, real-screenshot carousel ----
+SUB = {
+ 'pt': dict(
+  steps_h='Como começar', needs_h='Antes de instalar', needs='O {app} se conecta ao servidor DogNAS, que roda em outro Android (o antigo ou parado da sua casa), na mesma rede Wi-Fi.', needs_link='Ver o servidor DogNAS', car_h='Veja o app por dentro',
+  other_h='Client ou Client Lite?', back='← Todos os apps', cta_h='Pronto para começar?',
+  client=dict(title='DogNAS Client — libere espaço no celular do dia a dia', desc='O DogNAS Client passa fotos, vídeos e documentos do seu celular para o servidor DogNAS, no Android antigo da sua casa, pelo Wi-Fi. Libere espaço sem nuvem.',
+    h1='DogNAS Client: libere espaço no celular do dia a dia', lead='Passe fotos, vídeos e documentos do seu celular para o DogNAS, o servidor no Android antigo da sua casa. Depois, abra tudo quando quiser, pelo Wi-Fi, sem nuvem e sem mensalidade.',
+    groups=[('phone-free', 'Libere espaço no celular', 'Passe o que ocupa espaço para o DogNAS. Confira que chegou e apague do celular o que já está guardado.'), ('briefcase', 'Escaneie e guarde papéis', 'Fotografe documentos com a câmera e guarde como PDF ou JPEG direto no DogNAS.'), ('home', 'Comece organizado', 'Pastas prontas em um toque: Casa, Trabalho e Mínimo.'), ('no-cloud', 'Abra sem baixar antes', 'Veja fotos, vídeos, músicas e PDFs que estão no DogNAS, pelo Wi-Fi da sua casa.')],
+    steps=['Instale o servidor DogNAS no Android antigo ou parado', 'Instale o DogNAS Client no seu celular do dia a dia', 'Leia o QR Code do servidor, digite o PIN e passe o primeiro arquivo'],
+    other='Prefere algo mais leve para um celular simples ou antigo? O Client Lite acessa o mesmo servidor.', other_link='Conhecer o Client Lite'),
+  lite=dict(title='DogNAS Client Lite — acesse o DogNAS até num celular simples', desc='O DogNAS Client Lite é o app leve para acessar o servidor DogNAS em um celular simples, antigo ou com pouco espaço, pelo Wi-Fi da sua casa.',
+    h1='DogNAS Client Lite: o DogNAS até no celular mais simples', lead='A versão leve para acessar os arquivos guardados no DogNAS, o servidor da sua casa. Ideal para um celular antigo ou com pouco espaço: instala rápido e conecta pelo QR Code.',
+    groups=[('devices', 'Leve para aparelhos simples', 'Roda bem em celulares antigos ou com pouco espaço livre.'), ('qr', 'Conecte em segundos', 'Leia o QR Code do servidor, digite o PIN e pronto.'), ('home', 'Comece organizado', 'Modelos de pasta prontos: Casa, Trabalho e Mínimo.'), ('server', 'Veja o espaço do seu perfil', 'Saiba quanto já usa no servidor e baixe o que precisar para o celular.')],
+    steps=['Instale o servidor DogNAS no Android antigo ou parado', 'Instale o DogNAS Client Lite no seu celular', 'Leia o QR Code do servidor e digite o PIN'],
+    other='Quer escanear documentos e abrir arquivos sem baixar antes? O Client é o app completo.', other_link='Conhecer o DogNAS Client')),
+ 'en': dict(
+  steps_h='How to start', needs_h='Before you install', needs='{app} connects to the DogNAS server, which runs on another Android (the old or idle one at home), on the same Wi-Fi network.', needs_link='See the DogNAS server', car_h='See the app inside',
+  other_h='Client or Client Lite?', back='← All apps', cta_h='Ready to start?',
+  client=dict(title='DogNAS Client — free up space on your everyday phone', desc='DogNAS Client moves photos, videos and documents from your phone to the DogNAS server, on the old Android at home, over Wi-Fi. Free up space with no cloud.',
+    h1='DogNAS Client: free up space on your everyday phone', lead='Move photos, videos and documents from your phone to DogNAS, the server on the old Android at home. Then open everything whenever you want, over Wi-Fi, with no cloud and no subscription.',
+    groups=[('phone-free', 'Free up space on your phone', 'Move what takes space to DogNAS. Check it arrived, then delete from your phone what is already stored.'), ('briefcase', 'Scan and keep paper', 'Photograph documents with the camera and save them as PDF or JPEG straight to DogNAS.'), ('home', 'Start organized', 'Ready-made folders in one tap: Home, Work and Minimal.'), ('no-cloud', 'Open without downloading first', 'See photos, videos, music and PDFs stored on DogNAS, over your home Wi-Fi.')],
+    steps=['Install the DogNAS server on the old or idle Android', 'Install DogNAS Client on your everyday phone', 'Scan the server’s QR Code, enter the PIN and move your first file'],
+    other='Prefer something lighter for a simple or older phone? Client Lite reaches the same server.', other_link='Meet Client Lite'),
+  lite=dict(title='DogNAS Client Lite — reach DogNAS even on a simple phone', desc='DogNAS Client Lite is the light app to reach the DogNAS server from a simple, older or low-storage phone, over your home Wi-Fi.',
+    h1='DogNAS Client Lite: DogNAS even on the simplest phone', lead='The light version to reach the files stored on DogNAS, your home server. Ideal for an older phone or one with little space: it installs fast and connects with a QR Code.',
+    groups=[('devices', 'Light for simple devices', 'Runs well on older phones or ones with little free space.'), ('qr', 'Connect in seconds', 'Scan the server’s QR Code, enter the PIN and you are in.'), ('home', 'Start organized', 'Ready-made folder templates: Home, Work and Minimal.'), ('server', 'See your profile’s space', 'Know how much you already use on the server and download what you need to your phone.')],
+    steps=['Install the DogNAS server on the old or idle Android', 'Install DogNAS Client Lite on your phone', 'Scan the server’s QR Code and enter the PIN'],
+    other='Want to scan documents and open files without downloading first? The Client is the full app.', other_link='Meet DogNAS Client')),
+ 'es': dict(
+  steps_h='Cómo empezar', needs_h='Antes de instalar', needs='{app} se conecta al servidor DogNAS, que funciona en otro Android (el antiguo o parado de tu casa), en la misma red Wi-Fi.', needs_link='Ver el servidor DogNAS', car_h='Mira la app por dentro',
+  other_h='¿Client o Client Lite?', back='← Todas las apps', cta_h='¿Listo para empezar?',
+  client=dict(title='DogNAS Client — libera espacio en tu móvil de todos los días', desc='DogNAS Client pasa fotos, vídeos y documentos de tu móvil al servidor DogNAS, en el Android antiguo de casa, por Wi-Fi. Libera espacio sin nube.',
+    h1='DogNAS Client: libera espacio en tu móvil de todos los días', lead='Pasa fotos, vídeos y documentos de tu móvil a DogNAS, el servidor en el Android antiguo de tu casa. Después, abre todo cuando quieras, por Wi-Fi, sin nube y sin mensualidad.',
+    groups=[('phone-free', 'Libera espacio en el móvil', 'Pasa lo que ocupa espacio a DogNAS. Comprueba que llegó y borra del móvil lo que ya está guardado.'), ('briefcase', 'Escanea y guarda papeles', 'Fotografía documentos con la cámara y guárdalos como PDF o JPEG directo en DogNAS.'), ('home', 'Empieza ordenado', 'Carpetas listas en un toque: Casa, Trabajo y Mínimo.'), ('no-cloud', 'Abre sin descargar antes', 'Mira fotos, vídeos, música y PDF guardados en DogNAS, con el Wi-Fi de tu casa.')],
+    steps=['Instala el servidor DogNAS en el Android antiguo o parado', 'Instala DogNAS Client en tu móvil de todos los días', 'Lee el código QR del servidor, escribe el PIN y pasa tu primer archivo'],
+    other='¿Prefieres algo más ligero para un móvil sencillo o antiguo? Client Lite accede al mismo servidor.', other_link='Conocer Client Lite'),
+  lite=dict(title='DogNAS Client Lite — accede a DogNAS hasta en un móvil sencillo', desc='DogNAS Client Lite es la app ligera para acceder al servidor DogNAS desde un móvil sencillo, antiguo o con poco espacio, por el Wi-Fi de tu casa.',
+    h1='DogNAS Client Lite: DogNAS hasta en el móvil más sencillo', lead='La versión ligera para acceder a los archivos guardados en DogNAS, el servidor de tu casa. Ideal para un móvil antiguo o con poco espacio: se instala rápido y conecta con un código QR.',
+    groups=[('devices', 'Ligera para equipos sencillos', 'Funciona bien en móviles antiguos o con poco espacio libre.'), ('qr', 'Conecta en segundos', 'Lee el código QR del servidor, escribe el PIN y listo.'), ('home', 'Empieza ordenado', 'Plantillas de carpetas listas: Casa, Trabajo y Mínimo.'), ('server', 'Mira el espacio de tu perfil', 'Sabe cuánto usas ya en el servidor y descarga al móvil lo que necesites.')],
+    steps=['Instala el servidor DogNAS en el Android antiguo o parado', 'Instala DogNAS Client Lite en tu móvil', 'Lee el código QR del servidor y escribe el PIN'],
+    other='¿Quieres escanear documentos y abrir archivos sin descargar antes? Client es la app completa.', other_link='Conocer DogNAS Client')),
+}
+SLUG = {'client': 'client', 'lite': 'lite'}
+def sub_page(L, app):
+    t, s = T[L], SUB[L]
+    d = s[app]
+    a = t['apps'][app]
+    base = '../../' if L == 'en' else '../../../'
+    home = f'{base}{LANGS[L][1]}'
+    hub = f'{base}{LANGS[L][1]}downloads/'
+    path = f'{LANGS[L][1]}downloads/{app}/'
+    other = 'lite' if app == 'client' else 'client'
+    nav = blog_nav(L, base, f'downloads_{app}') + ''.join(f'<a href="{base}{LANGS[l][1]}downloads/{app}/"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
+    needs = s['needs'].format(app=a['name'])
+    bullets = ''.join(f'<li>{x}</li>' for x in a['bullets'])
+    steps = ''.join(f'<li><b>{i}</b><span>{x}</span></li>' for i, x in enumerate(d['steps'], 1))
+    groups = '<div class="dl-gains">' + cards([(h, p) for _, h, p in d['groups']], [k for k, _, _ in d['groups']]) + '</div>'
+    return f"""<!doctype html>
+<html lang="{LANGS[L][0]}">
+<head>
+<meta charset="utf-8">
+{PV_SCRIPT}
+{GA_TAG}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(d['title'])}</title>
+<meta name="description" content="{html.escape(d['desc'])}">
+{seo.meta(L, path, d['title'], d['desc'], {l: LANGS[l][1] + f'downloads/{app}/' for l in LANGS}, noindex=NOINDEX)}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, d['title'], d['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('Downloads', LANGS[L][1] + 'downloads/'), (a['name'], path)]))}
+{CSS_INLINE}
+</head>
+<body class="dl"><div class="wrap">
+<header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
+<section class="hero dl-hero"><span class="dl-tag">{a['tag']}</span><h1>{d['h1']}</h1><p>{d['lead']}</p>
+{cta(app, f'{app}_page_hero', a['cta'], L, base)}<p class="cta-sub">{t['trust']}</p></section>
+<section class="dl-needs card"><h2>{s['needs_h']}</h2><p>{needs} <a data-ev="downloads_server_link_click" data-loc="{app}_page_server_link" href="{hub}#servidor">{s['needs_link']} →</a></p></section>
+{groups}
+<section class="dl-app card"><h2>{s['car_h']}</h2>
+<div class="dl-body">{carousel(app, L, base, t)}<div class="dl-info"><ul class="points">{bullets}</ul></div></div></section>
+<section class="dl-start"><h2>{s['steps_h']}</h2><ol class="dl-how">{steps}</ol></section>
+<section class="card wide dl-final"><h2>{s['cta_h']}</h2>{cta(app, f'{app}_page_bottom', a['cta'], L, base)}<p class="note">{a['note']}</p></section>
+<h2>{s['other_h']}</h2><div class="card wide"><p>{d['other']} <a data-ev="downloads_compare_click" data-loc="{app}_page_other" href="../{other}/">{d['other_link']} →</a></p></div>
+<p><a href="{hub}">{s['back']}</a></p>
+<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+</div>{JS}</body>
+</html>
+"""
+for L in T:
+    for app in ('client', 'lite'):
+        out = os.path.join(ROOT, LANGS[L][1], 'downloads', app, 'index.html')
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        open(out, 'w').write(sub_page(L, app))
 print('ok')
