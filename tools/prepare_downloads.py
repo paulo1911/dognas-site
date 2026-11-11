@@ -36,11 +36,11 @@ for L, loc in LANGS.items():
     out = os.path.join(ROOT, 'assets', 'downloads', 'diagram', L)
     os.makedirs(out, exist_ok=True)
     c = Image.open(os.path.join(STORE, 'dognas-client', 'play-console', 'screenshots-2026-11-10', 'raw-g100', RAW[L], '03-photos.png')).convert('RGB')
-    c = c.crop((0, 130, c.width, 1500))
+    c = c.crop((0, 130, c.width, 1690))
     sv = Image.open(os.path.join(STORE, 'dognas-server', 'play-console', 'screenshots-2026-11-10', loc, 'src', 'status.png')).convert('RGB')
-    sv = sv.crop((0, 110, sv.width, 1870))
+    sv = sv.crop((0, 110, sv.width, 1670))
     for name, im in (('client', c), ('server', sv)):
-        for w in (320, 480):
+        for w in (300, 600):
             im.resize((w, round(w * im.height / im.width)), Image.LANCZOS).save(os.path.join(out, f'{name}-{w}.webp'), 'WEBP', quality=82, method=6)
 print('diagram ok')
 

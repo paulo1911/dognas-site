@@ -86,7 +86,7 @@ def flow(L, base):
         stem = f'{base}assets/downloads/diagram/{L}/{kind}'
         lis = ''.join(f'<li>{x}</li>' for x in items)
         return (f'<div class="dl-dev dl-{kind}"><span class="dl-tag">{tag}</span><h3>{name}</h3>'
-                f'<div class="dl-ph"><img src="{stem}-480.webp" srcset="{stem}-320.webp 320w, {stem}-480.webp 480w" sizes="260px" alt="{html.escape(alt)}" width="480" height="{1370 * 480 // 1080 if kind == "client" else 1760 * 480 // 1080}" loading="lazy"></div>'
+                f'<div class="dl-ph"><img src="{stem}-600.webp" srcset="{stem}-300.webp 300w, {stem}-600.webp 600w" sizes="(min-width:820px) 300px, 250px" alt="{html.escape(alt)}" width="600" height="867" loading="lazy"></div>'
                 f'<ul class="points">{lis}</ul></div>')
     arrow = (f'<div class="dl-link" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></svg>'
              f'<span class="dl-arrows">⇄</span><strong>{f["wifi"]}</strong><span>{f["wifi_sub"]}</span></div>')
