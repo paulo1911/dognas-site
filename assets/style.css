@@ -263,3 +263,18 @@ html[data-pv=b] .pv-b { display:inline-block; }
   .dl-gains .grid, .dl-flow-grid { gap:16px; } h2 { margin-top:36px; line-height:1.3; }
   .dl-how li { padding:14px; }
 }
+/* Downloads subpages: home-like hero + illustrated feature rows */
+.dl-subhero { grid-template-columns:1.1fr 1fr; }
+.dl-subhero .hero h1 { margin-top:14px; } .dl-subhero .hero .points { text-align:left; }
+.dl-hshots { display:flex; gap:14px; justify-content:center; align-items:flex-start; }
+.dl-hshot { flex:1 1 0; min-width:0; max-width:240px; } .dl-hshot:nth-child(2) { margin-top:36px; }
+.dl-hshot img, .dl-fimg img { width:100%; height:auto; display:block; border-radius:16px; border:1px solid var(--line); background:#0a0a0a; }
+.dl-feat { display:grid; grid-template-columns:1fr minmax(0,260px); gap:28px; align-items:center; }
+.dl-feat.flip .dl-ftxt { order:2; } .dl-feat.flip .dl-fimg { order:1; }
+.dl-feat .kicker { margin-top:16px; } .dl-feat h2 { margin-bottom:8px; } .dl-fimg { justify-self:center; width:100%; max-width:260px; }
+@media (max-width:760px) {
+  .dl-subhero { grid-template-columns:1fr; } .dl-subhero .hero { text-align:center; } .dl-subhero .hero .points { display:inline-grid; }
+  .dl-hshot { max-width:170px; } .dl-hshot:nth-child(2) { margin-top:24px; }
+  .dl-feat { grid-template-columns:1fr; gap:20px; text-align:center; } .dl-feat.flip .dl-ftxt, .dl-feat.flip .dl-fimg { order:0; }
+  .dl-fimg { max-width:230px; justify-self:center; } .dl-feat .lead { margin:0 auto; line-height:1.65; }
+}

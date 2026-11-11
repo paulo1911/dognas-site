@@ -28,6 +28,7 @@ The three server CTAs of the home pages (`hero_primary`, `final`, `float`) rende
 
 ### Downloads page (`/downloads/`, `/pt/downloads/`, `/es/downloads/`; noindex, not in the sitemap)
 Same A/B (red button × official badge, `html[data-pv]`). `cta_id` per app: `dl_hero_server` (hero), `dl_server`, `dl_client`, `dl_lite`; the badge adds `_b` (e.g. `dl_client_b`). Events: `server|client|lite_store_click` (GA4 + GoatCounter `store/<app>/<cta_id>/<lang>`), Play `utm_campaign` = `cta_id`. GA4-only engagement: `carousel_interact` (params `app`, `lang`; once per carousel and page view, when the visitor scrolls it). Click rate per page = store events ÷ pageviews of `/downloads/` (GoatCounter); compare with the home's `hero_primary` rate. Checked in headless Chrome: all 8 CTAs send the right GA4 event and GoatCounter path in pt and en; the page is not indexed, so any traffic comes from links we place.
+Subpages `/downloads/client/` and `/downloads/lite/` (home-like: CTA on top, illustrated benefits): `cta_id` `<app>_page_hero`, `<app>_page_bottom` (A/B, `_b` badge) and `<app>_page_mid` (red band button, no badge, like the home bands); same store events and GoatCounter path. GA4-only internal links: `downloads_detail_click` (hub → subpage, `dl_detail_<app>`), `downloads_server_link_click` (`<app>_page_server_link`), `downloads_compare_click` (`<app>_page_other`). Also `noindex`, unlinked, out of the sitemap.
 
 ## Events (all send the same parameters)
 | Event | When |
