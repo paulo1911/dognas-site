@@ -63,6 +63,37 @@ GAINS = {
  'en': ('What you get with DogNAS', [('phone-free', 'Free up your everyday phone', 'Move photos, videos and documents from your phone to DogNAS, which runs on the old Android at home. Check they arrived, then delete from your phone what is already stored.'), ('devices', 'Give an idle Android a new life', 'The phone or tablet in the drawer becomes the home storage: it is where DogNAS (the server) runs.'), ('people', 'Files organized in profiles', 'Everyone at home has their own profile, with its own space and PIN.'), ('no-cloud', 'No cloud subscription', 'Files stay on your Android, on your Wi-Fi. No account and no ads.')]),
  'es': ('Lo que ganas con DogNAS', [('phone-free', 'Libera espacio en tu móvil de todos los días', 'Pasa fotos, vídeos y documentos de tu móvil a DogNAS, que funciona en el Android antiguo de casa. Comprueba que llegaron y borra del móvil lo que ya está guardado.'), ('devices', 'Dale nueva vida a un Android parado', 'El móvil o tablet del cajón se convierte en el almacenamiento de casa: ahí funciona DogNAS (el servidor).'), ('people', 'Archivos organizados en perfiles', 'Cada persona de casa tiene su perfil, con espacio y PIN propios.'), ('no-cloud', 'Sin suscripción de nube', 'Los archivos se quedan en tu Android, en tu Wi-Fi. Sin cuenta y sin anuncios.')]),
 }
+FLOW = {
+ 'pt': dict(h='Como os dois aparelhos trabalham juntos', client_tag='No seu celular do dia a dia', client_name='DogNAS Client', server_tag='No Android antigo ou parado', server_name='DogNAS (servidor)',
+   client=['Passe fotos, vídeos e documentos para o DogNAS', 'Libere espaço: apague do celular o que já está guardado', 'Abra os arquivos guardados, no Wi-Fi da casa'],
+   server=['Guarda os arquivos de toda a família', 'Cada pessoa tem o seu perfil, com espaço e PIN', 'Sem mensalidade de nuvem'],
+   wifi='Wi-Fi da sua casa', wifi_sub='Sem nuvem no meio', result='O resultado: o celular do dia a dia com espaço livre e os arquivos guardados em casa.',
+   alt_c='Captura real do DogNAS Client no celular: pasta de fotos com miniaturas', alt_s='Captura real do servidor DogNAS no Android antigo: servidor online, um cliente transferindo e o armazenamento da casa'),
+ 'en': dict(h='How the two devices work together', client_tag='On your everyday phone', client_name='DogNAS Client', server_tag='On the old or idle Android', server_name='DogNAS (server)',
+   client=['Move photos, videos and documents to DogNAS', 'Free up space: delete from your phone what is already stored', 'Open the stored files, on the home Wi-Fi'],
+   server=['Keeps the whole family’s files', 'Everyone gets their own profile, with space and PIN', 'No cloud subscription'],
+   wifi='Your home Wi-Fi', wifi_sub='No cloud in between', result='The result: your everyday phone with free space and your files kept at home.',
+   alt_c='Real screenshot of DogNAS Client on the phone: photo folder with thumbnails', alt_s='Real screenshot of the DogNAS server on the old Android: server online, one client transferring and the home storage'),
+ 'es': dict(h='Cómo trabajan juntos los dos dispositivos', client_tag='En tu móvil de todos los días', client_name='DogNAS Client', server_tag='En el Android antiguo o parado', server_name='DogNAS (servidor)',
+   client=['Pasa fotos, vídeos y documentos a DogNAS', 'Libera espacio: borra del móvil lo que ya está guardado', 'Abre los archivos guardados, con el Wi-Fi de casa'],
+   server=['Guarda los archivos de toda la familia', 'Cada persona tiene su perfil, con espacio y PIN', 'Sin suscripción de nube'],
+   wifi='El Wi-Fi de tu casa', wifi_sub='Sin nube de por medio', result='El resultado: tu móvil de todos los días con espacio libre y tus archivos guardados en casa.',
+   alt_c='Captura real de DogNAS Client en el móvil: carpeta de fotos con miniaturas', alt_s='Captura real del servidor DogNAS en el Android antiguo: servidor online, un cliente transfiriendo y el almacenamiento de casa'),
+}
+def flow(L, base):
+    f = FLOW[L]
+    def dev(kind, tag, name, items, alt):
+        stem = f'{base}assets/downloads/diagram/{L}/{kind}'
+        lis = ''.join(f'<li>{x}</li>' for x in items)
+        return (f'<div class="dl-dev dl-{kind}"><span class="dl-tag">{tag}</span><h3>{name}</h3>'
+                f'<div class="dl-ph"><img src="{stem}-480.webp" srcset="{stem}-320.webp 320w, {stem}-480.webp 480w" sizes="260px" alt="{html.escape(alt)}" width="480" height="{1370 * 480 // 1080 if kind == "client" else 1760 * 480 // 1080}" loading="lazy"></div>'
+                f'<ul class="points">{lis}</ul></div>')
+    arrow = (f'<div class="dl-link" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></svg>'
+             f'<span class="dl-arrows">⇄</span><strong>{f["wifi"]}</strong><span>{f["wifi_sub"]}</span></div>')
+    return (f'<section class="dl-flow"><h2>{f["h"]}</h2><div class="dl-flow-grid">'
+            + dev('client', f['client_tag'], f['client_name'], f['client'], f['alt_c']) + arrow
+            + dev('server', f['server_tag'], f['server_name'], f['server'], f['alt_s'])
+            + f'</div><p class="dl-result">{f["result"]}</p></section>')
 ICON = {'server': 'server', 'client': 'phone-free', 'lite': 'devices'}
 ANCHOR = {'server': 'servidor', 'client': 'client', 'lite': 'lite'}
 def store(app, loc):
@@ -125,6 +156,7 @@ for L, t in T.items():
 <section class="hero dl-hero"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <ol class="dl-steps">{steps}</ol>
 {cta('server', 'dl_hero_server', t['apps']['server']['cta'], L, base)}<p class="cta-sub">{t['trust']}</p></section>
+{flow(L, base)}
 {gains}
 {sections}
 <h2>{t['cmp_h']}</h2><div class="card wide"><p>{t['cmp']}</p></div>

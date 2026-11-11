@@ -218,3 +218,18 @@ html[data-pv=b] .pv-b { display:inline-block; }
 .dl-gains .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 @media (max-width:520px) { .dl-gains .grid { grid-template-columns:1fr; } }
 .dl-gain { border-left:3px solid var(--green); padding-left:10px; }
+/* Downloads: two-device diagram (everyday phone ⇄ home Wi-Fi ⇄ old Android server) */
+.dl-flow { margin-top:36px; }
+.dl-flow-grid { display:grid; gap:14px; margin-top:14px; align-items:start; }
+.dl-dev { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 16px; text-align:center; }
+.dl-dev h3 { margin:2px 0 12px; font-size:20px; }
+.dl-ph { height:340px; margin:0 auto; display:flex; justify-content:center; }
+.dl-ph img { height:100%; width:auto; border:7px solid #2a2a2a; border-radius:26px; box-shadow:0 0 0 1px #3a3a3a, 0 10px 30px rgba(0,0,0,.5); object-fit:cover; object-position:top; background:#0a0a0a; }
+.dl-dev .points { list-style:none; padding:0; margin:16px 0 0; display:grid; gap:8px; text-align:left; font-size:15px; }
+.dl-dev .points li::before { content:"✓"; color:var(--green); font-weight:700; margin-right:8px; }
+.dl-link { display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--muted); font-size:14px; padding:4px 0; }
+.dl-link svg { color:var(--red); } .dl-link strong { color:var(--text); font-size:16px; }
+.dl-arrows { font-size:30px; line-height:1; color:var(--red); transform:rotate(90deg); margin:6px 0; }
+.dl-result { margin:16px 0 0; text-align:center; font-weight:600; font-size:17px; color:var(--text); }
+.dl-result::before { content:""; display:block; width:40px; height:3px; background:var(--green); margin:0 auto 10px; border-radius:2px; }
+@media (min-width:820px) { .dl-flow-grid { grid-template-columns:minmax(0,1fr) 150px minmax(0,1fr); align-items:stretch; } .dl-link { align-self:center; } .dl-arrows { transform:none; } .dl-ph { height:380px; } .dl-link { padding:0; text-align:center; } .dl-dev { padding:22px 20px; } }

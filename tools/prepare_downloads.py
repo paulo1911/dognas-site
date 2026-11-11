@@ -28,3 +28,19 @@ for app, repo in APPS.items():
         caps[app][L] = items
 json.dump(caps, open(os.path.join(ROOT, 'content', 'downloads_captions.json'), 'w'), ensure_ascii=False, indent=1)
 print({a: len(v['pt']) for a, v in caps.items()})
+
+# Two-device diagram (Downloads page): real captures, status bar and empty lower part cropped.
+# client = Client explorer on the everyday phone (G100 raw); server = DogNAS server status screen (Play set).
+RAW = {'pt': 'pt', 'en': 'en', 'es': 'es'}
+for L, loc in LANGS.items():
+    out = os.path.join(ROOT, 'assets', 'downloads', 'diagram', L)
+    os.makedirs(out, exist_ok=True)
+    c = Image.open(os.path.join(STORE, 'dognas-client', 'play-console', 'screenshots-2026-11-10', 'raw-g100', RAW[L], '03-photos.png')).convert('RGB')
+    c = c.crop((0, 130, c.width, 1500))
+    sv = Image.open(os.path.join(STORE, 'dognas-server', 'play-console', 'screenshots-2026-11-10', loc, 'src', 'status.png')).convert('RGB')
+    sv = sv.crop((0, 110, sv.width, 1870))
+    for name, im in (('client', c), ('server', sv)):
+        for w in (320, 480):
+            im.resize((w, round(w * im.height / im.width)), Image.LANCZOS).save(os.path.join(out, f'{name}-{w}.webp'), 'WEBP', quality=82, method=6)
+print('diagram ok')
+
