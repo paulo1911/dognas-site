@@ -26,7 +26,7 @@ def page(lang, title, desc, body, base):
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{base}{LANGS[lang][1].lstrip("/")}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 {body}
-<footer><span>© 2026 DogNAS</span><span>{blog_link(lang, base)}<a href="{base}privacy/#{lang}">{priv}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span>{blog_link(lang, base)}<a href="{base}privacy/#{lang}">{priv}</a> · {seo.terms_link(lang, base)}<a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
 

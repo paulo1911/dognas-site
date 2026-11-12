@@ -64,3 +64,8 @@ def webpage(lang, path, title, desc, breadcrumbs=None):
 def faq(items):
     """FAQPage from (question, answer) pairs; the same text is visible on the page."""
     return {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}
+
+TERMS_LABEL = {'pt': 'Termos de Serviço', 'en': 'Terms of Service', 'es': 'Términos del servicio'}
+def terms_link(lang, base):
+    """Footer link to /terms/ (one trilingual page, jumps to the language section)."""
+    return f'<a href="{base}terms/#{lang}">{TERMS_LABEL[lang]}</a> · '
