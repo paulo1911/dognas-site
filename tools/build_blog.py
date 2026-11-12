@@ -76,7 +76,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 <body{" class=wide" if wide else ""}><div class="wrap">
 <header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang"><a class="btn primary hdr-cta" data-ev="blog_server_download_click" data-loc="blog_header" href="{play('server', 'blog_header')}" rel="noopener">{t['get']}</a>{nav}</nav></header>
 {main}
-<footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}{bc.about_path(L)}">{ab.LABEL[L]['how']}</a> · <a href="{base}{bc.blog_dir(L)}feed.xml">RSS</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS</span><span><a href="{base}{bc.blog_dir(L)}">{t['blog']}</a> · <a href="{base}{bc.about_path(L)}">{ab.LABEL[L]['how']}</a> · <a href="{base}{bc.blog_dir(L)}feed.xml">RSS</a> · <a href="{base}privacy/#{L}">{t['privacy']}</a> · {seo.terms_link(L, base)}<a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div></body></html>
 '''
 

@@ -467,7 +467,7 @@ for L, t in T.items():
 <section class="final"><h2>{t['final_h2']}</h2><p>{t['final_lead']}</p>
 <div class="cta"><a class="btn primary pv-a" data-ev="server_store_click" data-loc="final" href="{play('server', 'final_cta')}" rel="noopener">{t['cta']}</a>{play_badge(L, base, 'final')}</div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p></section>
-<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · {seo.terms_link(L, base)}<a href="#" data-cookie-prefs>{t['cookies']}</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div>
 <div class="float-cta" hidden><a class="btn primary pv-a" data-ev="server_store_click" data-loc="float" href="{play('server', 'float_cta')}" rel="noopener">{t['cta']}</a>{play_badge(L, base, 'float')}</div>
 <script>

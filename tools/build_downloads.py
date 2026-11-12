@@ -170,7 +170,7 @@ for L, t in T.items():
 {sections}
 <h2>{t['cmp_h']}</h2><div class="card wide"><p>{t['cmp']}</p></div>
 <p><a href="{home}">← {t['back']}</a></p>
-<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · {seo.terms_link(L, base)}<a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div>{JS}</body>
 </html>
 '''
@@ -303,7 +303,7 @@ def sub_page(L, app):
 <section class="card wide dl-final"><h2>{s['cta_h']}</h2>{cta(app, f'{app}_page_bottom', a['cta'], L, base)}<p class="note">{a['note']}</p></section>
 <h2>{s['other_h']}</h2><div class="card wide"><p>{d['other']} <a data-ev="downloads_compare_click" data-loc="{app}_page_other" href="../{other}/">{d['other_link']} →</a></p></div>
 <p><a href="{hub}">{s['back']}</a></p>
-<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · <a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
+<footer><span>© 2026 DogNAS · {TM_NOTE[L]}</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · {seo.terms_link(L, base)}<a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
 </div>{JS}</body>
 </html>
 """
