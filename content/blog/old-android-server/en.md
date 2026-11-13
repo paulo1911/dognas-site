@@ -1,11 +1,11 @@
 ---
 slug: turn-old-android-into-file-server
-title: How to turn an old Android into a file server
+title: How to turn an old Android into a NAS server
 summary: That phone or tablet sitting in a drawer can keep your home's photos, videos and documents over Wi-Fi, with no cloud and no monthly fee.
-meta_title: Turn an old Android into a home file server | DogNAS
-meta_description: Step-by-step guide to use an old Android phone or tablet as a file server on your home Wi-Fi, with no cloud and no monthly fee, using DogNAS.
+meta_title: Turn an old Android into a home NAS server | DogNAS
+meta_description: Step-by-step guide to use an old Android phone or tablet as a NAS server on your home Wi-Fi, with no cloud and no monthly fee, using DogNAS.
 pillar: reuse
-tags: [old android, file server, home nas, sftp]
+tags: [old android, file server, home nas, sftp, nas server, android nas]
 cover: assets/blog/old-android-server/cover-en.webp
 cover_alt: Illustration of a phone with Wi-Fi next to the DogNAS server screen
 social_image: assets/blog/old-android-server/social-en.jpg
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-11-01
+updated: 2026-11-12
 ---
 Almost everyone has an old Android phone or tablet in a drawer. It still turns on, joins Wi-Fi and has plenty of storage. Instead of leaving it idle, you can turn it into a small file server for your home: a place to keep and reach photos, videos and documents over your network, with no cloud and no monthly fee.
 
@@ -69,3 +69,7 @@ Real screenshots of the app: the server running, the profile's QR Code and the f
 ## Next step
 
 Dig out the old Android, install the server and connect your phone. In a few minutes, that drawer becomes your home storage.
+
+Keep reading: [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).
+
+DogNAS is accessed over SFTP, not as a Windows network folder (SMB): see [what SFTP is](/blog/what-is-sftp-access-android-server/).

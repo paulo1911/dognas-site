@@ -1,11 +1,11 @@
 ---
 slug: convertir-android-viejo-en-servidor-de-archivos
-title: Cómo convertir un Android viejo en un servidor de archivos
+title: Cómo convertir un Android viejo en un servidor NAS
 summary: Ese celular o tablet guardado en un cajón puede almacenar las fotos, los videos y los documentos de la casa por Wi-Fi, sin nube y sin mensualidad.
-meta_title: Convierte un Android viejo en servidor de archivos | DogNAS
-meta_description: Guía paso a paso para usar un celular o tablet Android viejo como servidor de archivos en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.
+meta_title: Convierte un Android viejo en servidor NAS | DogNAS
+meta_description: Guía paso a paso para usar un celular o tablet Android viejo como servidor NAS en el Wi-Fi de casa, sin nube y sin mensualidad, con DogNAS.
 pillar: reuse
-tags: [android viejo, servidor de archivos, nas casero, sftp]
+tags: [android viejo, servidor de archivos, nas casero, sftp, servidor nas, android nas]
 cover: assets/blog/old-android-server/cover-es.webp
 cover_alt: Ilustración de un celular con Wi-Fi junto a la pantalla del servidor DogNAS
 social_image: assets/blog/old-android-server/social-es.jpg
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-11-01
+updated: 2026-11-12
 ---
 Casi todos tenemos un celular o una tablet Android guardado en un cajón. Todavía enciende, se conecta al Wi-Fi y tiene espacio de sobra. En lugar de dejarlo parado, puedes convertirlo en un pequeño servidor de archivos para tu casa: un lugar para guardar y acceder a fotos, videos y documentos por la red, sin nube y sin mensualidad.
 
@@ -69,3 +69,7 @@ Capturas de pantalla reales de la app: el servidor encendido, el código QR del 
 ## Próximo paso
 
 Saca el Android viejo, instala el servidor y conecta tu celular. En pocos minutos, ese cajón se convierte en el almacenamiento de la casa.
+
+Sigue leyendo: [NAS casero sin comprar un NAS](/blog/nas-casero-sin-comprar-un-nas/), [NAS tradicional o servidor Android](/blog/nas-tradicional-o-servidor-android/), [TV box Android como NAS casero](/blog/tv-box-android-como-servidor-de-archivos/).
+
+El acceso a DogNAS es por SFTP, no por carpeta de red de Windows (SMB): mira [qué es SFTP](/blog/que-es-sftp-acceder-servidor-android/).
