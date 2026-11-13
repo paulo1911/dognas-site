@@ -2,10 +2,10 @@
 slug: tv-box-android-como-servidor-de-arquivos
 title: TV box Android como NAS caseiro: o que funciona e o que esperar (testamos uma)
 summary: Sim, uma TV box Android pode guardar seus arquivos em casa, sem nuvem. O que testamos numa box real, o que você precisa, qual a velocidade e onde ela deixa a desejar.
-meta_title: TV box Android como servidor de arquivos com o DogNAS | DogNAS
-meta_description: Use uma TV box Android como servidor de arquivos no Wi-Fi de casa com o DogNAS: testado numa box real, com passo a passo, velocidades medidas e limites.
+meta_title: TV box Android como servidor NAS com o DogNAS | DogNAS
+meta_description: Use uma TV box Android como servidor NAS no Wi-Fi de casa com o DogNAS: testado numa box real, com passo a passo, velocidades medidas e limites.
 pillar: reuse
-tags: [tv box android, servidor de arquivos, nas caseiro, sftp, hd externo]
+tags: [tv box android, servidor de arquivos, nas caseiro, sftp, hd externo, servidor nas]
 cover: assets/blog/tv-box-server/cover-pt.webp
 cover_alt: A tela inicial de uma TV box Android com o app DogNAS entre os apps favoritos
 social_image: assets/blog/tv-box-server/social-pt.jpg
@@ -15,7 +15,7 @@ tested: Aquário STV-3000 Plus (TV box) · Android 11 · 2026-11-01
 status: published
 translation_review: reviewed
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-12
 published: 2026-11-01
 ---
 **Sim, uma TV box Android pode funcionar como servidor de arquivos de casa**, com alguns limites que explicamos abaixo. Ela é um pequeno computador sempre ligado que já fica ao lado da TV e do roteador, com Wi-Fi (muitas têm também porta de rede) e porta USB, e desde o **DogNAS 1.1.6** o app servidor foi preparado para rodar numa delas.
@@ -93,3 +93,5 @@ Não para começar. O plano Grátis guarda até 64 GB de arquivos, com o perfil 
 ## Vale a pena
 
 Se você já tem uma TV box parada numa gaveta, é um jeito sem custo de guardar os arquivos de casa num só lugar, sem nuvem. Se vai comprar um aparelho para isso, um celular ou tablet antigo com processador melhor costuma ser mais rápido. Compare com as outras opções em [reaproveitar um Android antigo](/blog/transformar-android-antigo-em-servidor-de-arquivos/) e em [um tablet antigo como armazenamento da casa](/blog/tablet-antigo-como-armazenamento-da-casa/).
+
+Continue lendo: [servidor NAS no Android](/blog/transformar-android-antigo-em-servidor-de-arquivos/), [NAS caseiro sem comprar um NAS](/blog/nas-caseiro-sem-comprar-nas/), [NAS tradicional ou servidor Android](/blog/nas-tradicional-ou-servidor-android/).

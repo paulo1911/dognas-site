@@ -3,9 +3,9 @@ slug: nas-casero-sin-comprar-un-nas
 title: Un NAS casero sin comprar un NAS: usa el Android que ya tienes
 summary: Para guardar en casa las fotos, los videos y los documentos de la familia no siempre hace falta comprar un NAS. Mira cuándo basta un Android viejo y cuándo no.
 meta_title: NAS casero sin comprar un NAS: usa un Android | DogNAS
-meta_description: Arma un NAS casero con un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.
+meta_description: Arma un servidor NAS en un Android viejo, sin comprar equipo y sin mensualidad. Mira qué hace bien, sus límites y cuándo conviene comprar un NAS.
 pillar: compare
-tags: [nas casero, android viejo, servidor de archivos, almacenamiento]
+tags: [nas casero, android viejo, servidor de archivos, almacenamiento, servidor nas, android nas]
 cover: assets/blog/home-nas/cover-es.webp
 cover_alt: Ilustración de una casa con una caja de almacenamiento junto a la pantalla del DogNAS Client Lite
 social_image: assets/blog/home-nas/social-es.jpg
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-11-01
+updated: 2026-11-12
 ---
 Un NAS (almacenamiento conectado a la red) es un pequeño servidor que guarda tus archivos y se los entrega a cualquier dispositivo de la casa por Wi-Fi. Es la idea correcta para quien se cansó de los pendrives, del celular sin espacio y de las mensualidades de la nube. El problema es que un NAS comercial con disco cuesta dinero y requiere algo de configuración.
 
@@ -64,3 +64,5 @@ Si en tu casa muchas personas transmiten video a la vez, necesitas redundancia d
 Para la mayoría de los hogares, que solo quieren fotos, videos y documentos en un lugar seguro, el Android que ya está en el cajón resuelve, sin costo extra de equipo.
 
 Saca el dispositivo, instala el servidor y conecta tu celular. En pocos minutos, tienes un NAS casero.
+
+Sigue leyendo: [servidor NAS en Android](/blog/convertir-android-viejo-en-servidor-de-archivos/), [NAS tradicional o servidor Android](/blog/nas-tradicional-o-servidor-android/), [TV box Android como NAS casero](/blog/tv-box-android-como-servidor-de-archivos/).

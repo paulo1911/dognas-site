@@ -3,9 +3,9 @@ slug: home-nas-without-buying-a-nas
 title: A home NAS without buying a NAS: use the Android you already own
 summary: To keep your family's photos, videos and documents at home you don't always need to buy a NAS. See when an old Android is enough and when it isn't.
 meta_title: Home NAS without buying a NAS: use an Android | DogNAS
-meta_description: Build a home NAS with an old Android, with no new hardware and no monthly fee. See what it does well, its limits and when it is worth buying a NAS.
+meta_description: Build a home NAS server on an old Android, with no new hardware and no monthly fee. See what it does well, its limits and when to buy a NAS.
 pillar: compare
-tags: [home nas, old android, file server, storage]
+tags: [home nas, old android, file server, storage, nas server, android nas]
 cover: assets/blog/home-nas/cover-en.webp
 cover_alt: Illustration of a house with a storage box next to the DogNAS Client Lite screen
 social_image: assets/blog/home-nas/social-en.jpg
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-11-01
+updated: 2026-11-12
 ---
 A NAS (network-attached storage) is a small server that keeps your files and serves them to any device in the house over Wi-Fi. It is the right idea for anyone tired of USB sticks, full phones and cloud subscriptions. The catch is that a store-bought NAS with a disk costs money and takes some setup.
 
@@ -64,3 +64,5 @@ If your home has many people streaming video at once, needs disk redundancy, or 
 For most homes that just want photos, videos and documents in a safe place, the Android already in the drawer does the job, with no extra hardware cost.
 
 Grab the device, install the server and connect your phone. In a few minutes, you have a home NAS.
+
+Keep reading: [NAS server on Android](/blog/turn-old-android-into-file-server/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).

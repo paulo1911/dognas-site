@@ -1,11 +1,11 @@
 ---
 slug: android-tv-box-as-home-server
-title: Turn an Android TV box into a home file server (we tested one)
+title: Turn an Android TV box into a home NAS server (we tested one)
 summary: Yes, an Android TV box can keep your files at home, with no cloud. What we tested on a real box, what you need, how fast it is and where it falls short.
-meta_title: Android TV box as a home file server with DogNAS | DogNAS
-meta_description: Use an Android TV box as a private file server on your home Wi-Fi with DogNAS: tested on a real box, with setup steps, measured speeds and limits.
+meta_title: Android TV box as a home NAS server with DogNAS | DogNAS
+meta_description: Use an Android TV box as a private NAS server on your home Wi-Fi with DogNAS: tested on a real box, with setup steps, measured speeds and limits.
 pillar: reuse
-tags: [android tv box, file server, home nas, sftp, usb drive]
+tags: [android tv box, file server, home nas, sftp, usb drive, nas server]
 cover: assets/blog/tv-box-server/cover-en.webp
 cover_alt: The home screen of an Android TV box with the DogNAS app among the favourite apps
 social_image: assets/blog/tv-box-server/social-en.jpg
@@ -15,7 +15,7 @@ tested: Aquário STV-3000 Plus (TV box) · Android 11 · 2026-11-01
 status: published
 translation_review: reviewed
 created: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-12
 published: 2026-11-01
 ---
 **Yes, an Android TV box can work as a home file server**, with some limits we explain below. It is a small always-on computer that already sits next to your TV and your router, with Wi-Fi (many also have an Ethernet port) and a USB port, and since **DogNAS 1.1.6** the server app is built to run on one.
@@ -93,3 +93,5 @@ Not to start. The Free plan keeps up to 64 GB of files, with the Home profile an
 ## Is it worth it
 
 If you already have a TV box that is idle in a drawer, it is a zero-cost way to keep your home files in one place without the cloud. If you are going to buy a device for this, an old phone or tablet with a better processor will usually be faster. Compare it with the other options in [reusing an old Android](/en/blog/turn-old-android-into-file-server/) and in [an old tablet as home storage](/en/blog/old-tablet-as-home-storage/).
+
+Keep reading: [NAS server on Android](/blog/turn-old-android-into-file-server/), [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/).
