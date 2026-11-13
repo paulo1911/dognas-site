@@ -278,3 +278,5 @@ html[data-pv=b] .pv-b { display:inline-block; }
   .dl-feat { grid-template-columns:1fr; gap:20px; text-align:center; } .dl-feat.flip .dl-ftxt, .dl-feat.flip .dl-fimg { order:0; }
   .dl-fimg { max-width:230px; justify-self:center; } .dl-feat .lead { margin:0 auto; line-height:1.65; }
 }
+.nas-points { list-style:none; padding:0; margin:16px 0 0; display:grid; gap:10px; max-width:680px; } .nas-points li::before { content:"✓"; color:var(--green); font-weight:700; margin-right:8px; }
+.audience .note a { color:var(--text); text-decoration:underline; text-underline-offset:3px; }

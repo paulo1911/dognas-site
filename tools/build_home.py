@@ -175,6 +175,20 @@ def blog_teasers(L, base):
 def blog_faq_link(L, base, i):
     a = blog_articles(L).get(BLOG_FAQ.get(i, ''))
     return f' <a class="faq-guide" data-ev="blog_home_context_click" data-loc="home_faq_{a["group"]}" href="{base}{article_path(a)}">{BLOG_HOME[L]["guide"]} {html.escape(a["title"])}</a>' if a else ''
+NAS_SEC = {
+ 'pt': dict(k='O que é um NAS', h='Um servidor NAS no seu Android', p='NAS quer dizer armazenamento em rede: um aparelho que guarda os arquivos e que os outros aparelhos da casa acessam pelo Wi-Fi. O DogNAS faz do seu Android antigo esse servidor NAS, sem nuvem e sem comprar equipamento.',
+   pts=['No celular, use o app DogNAS Client (ou o Client Lite) para ver, enviar e baixar arquivos.', 'No PC e no Mac, use qualquer app de SFTP, como FileZilla ou WinSCP.', 'O acesso é por SFTP, cifrado: o DogNAS não cria uma pasta de rede do Windows.'], guides='Guias sobre NAS caseiro:'),
+ 'en': dict(k='What is a NAS', h='A NAS server on your Android', p='NAS means network-attached storage: a device that keeps the files and that the other devices at home reach over Wi-Fi. DogNAS turns your old Android into that NAS server, with no cloud and no hardware to buy.',
+   pts=['On your phone, use the DogNAS Client (or Client Lite) app to browse, upload and download files.', 'On a PC or Mac, use any SFTP app, such as FileZilla or WinSCP.', 'Access is over encrypted SFTP: DogNAS does not create a Windows network folder.'], guides='Guides on a home NAS:'),
+ 'es': dict(k='Qué es un NAS', h='Un servidor NAS en tu Android', p='NAS significa almacenamiento en red: un dispositivo que guarda los archivos y al que los demás dispositivos de casa acceden por Wi-Fi. DogNAS convierte tu Android antiguo en ese servidor NAS, sin nube y sin comprar equipo.',
+   pts=['En el móvil, usa la app DogNAS Client (o Client Lite) para ver, subir y descargar archivos.', 'En PC y Mac, usa cualquier app de SFTP, como FileZilla o WinSCP.', 'El acceso es por SFTP cifrado: DogNAS no crea una carpeta de red de Windows.'], guides='Guías sobre NAS casero:'),
+}
+def nas_section(L, base):
+    n, arts = NAS_SEC[L], blog_articles(L)
+    pts = ''.join(f'<li>{x}</li>' for x in n['pts'])
+    links = ' · '.join(f'<a data-ev="blog_home_context_click" data-loc="home_nas_{g}" href="{base}{article_path(arts[g])}">{html.escape(arts[g]["title"])}</a>' for g in ('home-nas', 'nas-vs-android') if g in arts)
+    guides = f'<p class="note">{n["guides"]} {links}</p>' if links else ''
+    return f'<section id="nas" class="audience"><p class="kicker">{n["k"]}</p><h2>{n["h"]}</h2><p class="lead">{n["p"]}</p><ul class="points nas-points">{pts}</ul>{guides}</section>'
 def play(app, loc):
     # `referrer` lets Play Console attribute store visits to this site (the apps themselves collect nothing).
     return f"{PLAY[app]}&referrer=utm_source%3Ddognas.app%26utm_medium%3Dwebsite%26utm_campaign%3D{loc}"
@@ -187,8 +201,8 @@ def play_badge(L, base, loc, app='server'):
     f, alt = BADGE[L]
     return f'<a class="pv-b" data-ev="{app}_store_click" data-loc="{loc}_b" href="{play(app, loc + "_b")}" rel="noopener"><img src="{base}assets/badges/{f}.png" alt="{alt}" width="168" height="65"></a>'
 T = {
- 'pt': dict(title='DogNAS — Seu Android! Seu armazenamento particular.', desc='Transforme um celular, tablet ou TV box Android em armazenamento particular pelo Wi-Fi: fotos, vídeos e documentos em casa. Sem nuvem, sem mensalidade e sem comprar um NAS.',
-   h1='Seu Android! Seu armazenamento particular.', lead='Seu tablet, celular ou TV box Android compatível vira um espaço para guardar e acessar fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem precisar comprar um NAS.',
+ 'pt': dict(title='DogNAS — Servidor NAS no Android, em casa', desc='Transforme um celular, tablet ou TV box Android em servidor NAS da sua casa pelo Wi-Fi: fotos, vídeos e documentos em casa. Sem nuvem, sem mensalidade.',
+   h1='Seu Android! Seu armazenamento particular.', lead='Seu tablet, celular ou TV box Android compatível vira um servidor NAS na sua casa: guarde e acesse fotos, vídeos e documentos pelo Wi-Fi. Sem nuvem, sem mensalidade e sem comprar equipamento.',
    points=['Use um Android que você já tem', 'Conecte outros celulares por QR Code', 'Comece grátis, sem assinatura'], cta='Baixar o DogNAS grátis',
    micro='Android 7.0 ou superior · celular, tablet ou TV box · na mesma rede Wi-Fi. Confira os requisitos.', sub='Já tem o servidor? Baixe o Client Lite', sub_client='Já tem o servidor? Baixe o DogNAS Client', lite_alt='Prefere algo mais leve? Use o Client Lite',
    important='Seus arquivos ficam no armazenamento configurado no seu dispositivo servidor. O acesso depende da configuração de rede e das credenciais do DogNAS. Para arquivos importantes, mantenha uma cópia de backup independente.', important_h='Importante', cookies='Preferências de cookies',
@@ -240,8 +254,8 @@ T = {
    rows=[('Armazenamento', '64 GB', 'Todo o aparelho'), ('Perfis', 'Casa + 2', 'Ilimitados'), ('Dispositivos pareados', '3', 'Ilimitados'), ('Performance', 'Boa', 'Máxima otimizada'), ('Transferências no app cliente, com o app fechado', 'Pausam', 'Continuam'), ('Após reiniciar', 'Toque para iniciar', 'Inicia sozinho')],
    plannote='DogNAS Pro: compra única, sem assinatura. O DogNAS Client e o DogNAS Client Lite são sempre gratuitos.',
    apps='Os apps', app1='O servidor: instale no Android que vai guardar os arquivos.', app2='A versão leve do app de acesso: instale no celular para ver, enviar e baixar os arquivos.', app3='O app completo para acessar seus arquivos no Android: navegue, envie, baixe e visualize fotos, vídeos e PDFs. iPhone em breve.', privacy='Política de privacidade'),
- 'en': dict(title='DogNAS — Your Android! Your private storage.', desc='Turn an Android phone, tablet or TV box into private storage over Wi-Fi: photos, videos and documents at home. No cloud, no monthly fee, and no NAS to buy.',
-   h1='Your Android! Your private storage.', lead='Your compatible Android tablet, phone or TV box becomes a space to keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no need to buy a NAS.',
+ 'en': dict(title='DogNAS — Android NAS server for your home', desc='Turn an Android phone, tablet or TV box into a home NAS server over Wi-Fi: photos, videos and documents kept at home. No cloud, no monthly fee.',
+   h1='Your Android! Your private storage.', lead='Your compatible Android tablet, phone or TV box becomes a NAS server at home: keep and reach photos, videos and documents over Wi-Fi. No cloud, no monthly fee, and no hardware to buy.',
    points=['Use an Android you already own', 'Connect other phones with a QR Code', 'Start free, no subscription'], cta='Download DogNAS free',
    micro='Android 7.0 or later · phone, tablet or TV box · same Wi-Fi network. Check the requirements.', sub='Already have the server? Get DogNAS Client Lite', sub_client='Already have the server? Get DogNAS Client', lite_alt='Want something lighter? Use Client Lite',
    important='Your files stay in the storage set up on your server device. Access depends on your network setup and your DogNAS credentials. For important files, keep an independent backup copy.', important_h='Important', cookies='Cookie preferences',
@@ -293,8 +307,8 @@ T = {
    rows=[('Storage', '64 GB', 'All of it'), ('Profiles', 'Home + 2', 'Unlimited'), ('Paired devices', '3', 'Unlimited'), ('Performance', 'Good', 'Maximum, optimized'), ('Client app transfers, with the app closed', 'Pause', 'Keep going'), ('After a reboot', 'Tap to start', 'Starts by itself')],
    plannote='DogNAS Pro: one-time purchase, no subscription. DogNAS Client and DogNAS Client Lite are always free.',
    apps='The apps', app1='The server: install it on the Android that will keep your files.', app2='The lightweight access app: install it on your phone to browse, upload and download.', app3='The full app to reach your files on Android: browse, upload, download and preview photos, videos and PDFs. iPhone coming soon.', privacy='Privacy policy'),
- 'es': dict(title='DogNAS — ¡Tu Android! Tu almacenamiento privado.', desc='Convierte un móvil, tableta o TV box Android en almacenamiento privado por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
-   h1='¡Tu Android! Tu almacenamiento privado.', lead='Tu tableta, móvil o TV box Android compatible se convierte en un espacio para guardar y acceder a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar un NAS.',
+ 'es': dict(title='DogNAS — Servidor NAS en Android, en casa', desc='Convierte un móvil, tableta o TV box Android en un servidor NAS por Wi-Fi: fotos, vídeos y documentos en casa. Sin nube, sin cuotas mensuales.',
+   h1='¡Tu Android! Tu almacenamiento privado.', lead='Tu tableta, móvil o TV box Android compatible se convierte en un servidor NAS en tu casa: guarda y accede a fotos, vídeos y documentos por Wi-Fi. Sin nube, sin cuotas mensuales y sin comprar equipo.',
    points=['Usa un Android que ya tienes', 'Conecta otros móviles con un código QR', 'Empieza gratis, sin suscripción'], cta='Descargar DogNAS gratis',
    micro='Android 7.0 o superior · móvil, tableta o TV box · misma red Wi-Fi. Consulta los requisitos.', sub='¿Ya tienes el servidor? Descarga DogNAS Client Lite', sub_client='¿Ya tienes el servidor? Descarga DogNAS Client', lite_alt='¿Prefieres algo más ligero? Usa Client Lite',
    important='Tus archivos se guardan en el almacenamiento configurado en tu dispositivo servidor. El acceso depende de la configuración de tu red y de las credenciales de DogNAS. Para archivos importantes, mantén una copia de respaldo independiente.', important_h='Importante', cookies='Preferencias de cookies',
@@ -424,6 +438,7 @@ for L, t in T.items():
 <p class="kicker">{t['home_kicker']}</p><h2>{t['home_h2']}</h2><p class="lead">{t['home_lead']}</p>
 {cards(t['home_feats'], HOME_ICONS)}
 </section>
+{nas_section(L, base)}
 <h2>{t['watch']}</h2>
 <div class="twoup"><figure>{phone(sh + 'server-monitor.webp', t['cap1'])}<figcaption>{t['cap1']}</figcaption></figure><figure>{phone(sh + 'lite-transfers.webp', t['cap2'])}<figcaption>{t['cap2']}</figcaption></figure></div>
 <section id="privacidade" class="audience">
