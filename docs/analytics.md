@@ -59,7 +59,7 @@ Blog funnel: article → download click is measured here; `server_started`, `cli
 
 Parameters: `cta_id`, `cta_text` (≤ 60 chars), `cta_target` (server / lite / client / client_page / support), `lang`, `page_depth` (% of the page scrolled at the time).
 
-`cta_id` values: `hero_primary`, `hero_secondary` (Lite) / `hero_client` + `hero_lite` (when `CLIENT_PLAY` is set), `mid_how`, `mid_plans`, `mid_faq`, `final`, `float`, `apps_server`, `apps_lite`, `apps_client`, `support_0`, `support_1`.
+`cta_id` values: `hero_primary`, `hero_secondary` (Lite) / `hero_client` + `hero_lite` (when `CLIENT_PLAY` is set), `mid_how`, `mid_plans`, `mid_faq`, `final`, `float`, `apps_server`, `apps_lite`, `apps_client`, `client_page` (Play button on `/client/`; the visit from the server's QR carries `utm_source=server_qr`, and a script puts that source in the Play `referrer`), `support_0`, `support_1`.
 The Play links also carry `referrer=utm_source=dognas.app&utm_medium=website&utm_campaign=<cta_id>` so Play Console's acquisition report can attribute store visits per CTA.
 
 ## One-time GA4 setup (Admin → Data display)

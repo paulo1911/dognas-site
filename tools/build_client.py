@@ -3,7 +3,7 @@ Run: python3 tools/build_client.py. Reuses the shell of build_home.py. Store lin
 "Coming soon" until the app is published (BACKLOG REL-7 / FC-74): then fill STORE below."""
 import os, html
 import seo
-from build_home import CSS_INLINE, blog_link, blog_nav, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone
+from build_home import CSS_INLINE, blog_link, blog_nav, ROOT, GA_TAG, CSS_V, LANGS, NAMES, EMAIL, icon, cards, phone, client_play
 # Fill with the real URLs when published; empty = shows "Coming soon".
 STORE = {'play': 'https://play.google.com/store/apps/details?id=com.dognas.client', 'apple': ''}
 T = {
@@ -20,7 +20,7 @@ T = {
    plans='O DogNAS Client é gratuito. Os limites e o Pro (compra única, sem assinatura) pertencem ao servidor DogNAS: no plano Grátis, 64 GB, perfil Casa + 2 e 3 dispositivos; no Pro, o aparelho inteiro e envios e downloads do app cliente que continuam com o app fechado (no Grátis eles pausam quando você sai do app cliente; o servidor continua rodando).',
    req_h='Requisitos', req='Um servidor DogNAS na mesma rede Wi-Fi. Android e iPhone (iOS 15 ou mais recente).',
    lite_h='E o Client Lite?', lite='O DogNAS Client Lite continua disponível na Google Play: é o app leve, ideal para aparelhos mais simples.',
-   back='Voltar ao início', privacy='Política de privacidade'),
+   back='Voltar ao início', shot1='Arquivos no DogNAS Client', shot2='Fila de transferências no celular', privacy='Política de privacidade'),
  'en': dict(title='DogNAS Client — The full app to reach your DogNAS', desc='DogNAS Client: the free app for Android and iPhone that reaches your files on DogNAS over your home Wi-Fi. No cloud.',
    h1='DogNAS Client', lead='The full app to reach the files on your DogNAS, on Android and iPhone, over your home Wi-Fi. No cloud, no account.',
    play='Google Play', apple='App Store', soon='Coming soon', note_ios='Available on Android. The iPhone version is not on the App Store yet. Prefer a lighter app? DogNAS Client Lite also reaches your DogNAS on Android.', note_soon='Not in the stores yet. Meanwhile, DogNAS Client Lite already reaches your DogNAS on Android.',
@@ -34,7 +34,7 @@ T = {
    plans='DogNAS Client is free. The limits and Pro (one-time purchase, no subscription) belong to the DogNAS server: Free means 64 GB, Home + 2 profiles and 3 devices; Pro means the whole device and client-app transfers that keep going with the app closed (on Free they pause when you leave the client app; the server keeps running).',
    req_h='Requirements', req='A DogNAS server on the same Wi-Fi network. Android and iPhone (iOS 15 or newer).',
    lite_h='What about Client Lite?', lite='DogNAS Client Lite stays available on Google Play: it is the light app, ideal for simpler devices.',
-   back='Back to home', privacy='Privacy policy'),
+   back='Back to home', shot1='Files in DogNAS Client', shot2='Transfer queue on your phone', privacy='Privacy policy'),
  'es': dict(title='DogNAS Client — La app completa para acceder a tu DogNAS', desc='DogNAS Client: la app gratuita para Android y iPhone que accede a tus archivos en DogNAS por el Wi-Fi de casa. Sin nube.',
    h1='DogNAS Client', lead='La app completa para acceder a los archivos de tu DogNAS, en Android y iPhone, por el Wi-Fi de tu casa. Sin nube y sin cuenta.',
    play='Google Play', apple='App Store', soon='Próximamente', note_ios='Disponible en Android. La versión para iPhone aún no está en la App Store. ¿Prefieres una app más ligera? DogNAS Client Lite también accede a tu DogNAS en Android.', note_soon='Aún no está en las tiendas. Mientras tanto, DogNAS Client Lite ya accede a tu DogNAS en Android.',
@@ -48,16 +48,23 @@ T = {
    plans='DogNAS Client es gratuito. Los límites y el Pro (compra única, sin suscripción) pertenecen al servidor DogNAS: en el plan Gratis, 64 GB, perfil Casa + 2 y 3 dispositivos; en el Pro, todo el dispositivo y subidas y descargas de la app cliente que continúan con la app cerrada (en Gratis se pausan al salir de la app cliente; el servidor sigue funcionando).',
    req_h='Requisitos', req='Un servidor DogNAS en la misma red Wi-Fi. Android y iPhone (iOS 15 o más reciente).',
    lite_h='¿Y Client Lite?', lite='DogNAS Client Lite sigue disponible en Google Play: es la app ligera, ideal para dispositivos más sencillos.',
-   back='Volver al inicio', privacy='Política de privacidad'),
+   back='Volver al inicio', shot1='Archivos en DogNAS Client', shot2='Cola de transferencias en el teléfono', privacy='Política de privacidad'),
 }
-def btn(label, url, soon):
-    return f'<a class="btn primary" href="{url}">{label}</a>' if url else f'<span class="btn soon">{label} · {soon}</span>'
+def btn(label, url, soon, track=False):
+    if not url: return f'<span class="btn soon">{label} · {soon}</span>'
+    # The Play button carries the store-click event and the Play referrer; the script below swaps the referrer's source
+    # when the visit comes from the server's QR (utm_source=server_qr), so Play Console and GoatCounter can attribute it.
+    ev = ' data-ev="client_store_click" data-loc="client_page"' if track else ''
+    return f'<a class="btn primary"{ev} href="{client_play("client_page") if track else url}" rel="noopener">{label}</a>'
+QR_REFERRER_JS = """<script>(function(){try{var q=new URLSearchParams(location.search),s=q.get('utm_source');if(s!=='server_qr')return;
+var a=document.querySelector('a[data-loc=client_page]');if(a)a.href=a.href.replace(/referrer=[^&]*/,'referrer='+encodeURIComponent('utm_source=server_qr&utm_medium='+(q.get('utm_medium')||'qr')+'&utm_campaign=client_page'));}catch(e){}})();</script>"""
 for L, t in T.items():
     base = '../' if L == 'en' else '../../'
     home = f'{base}{LANGS[L][1]}'
     path = LANGS[L][1] + 'client/'
+    sh = f'{base}assets/shots/{L}/'
     nav = blog_nav(L, base, 'client') + ''.join(f'<a href="{base}{LANGS[l][1]}client/"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
-    ctas = btn(t['play'], STORE['play'], t['soon']) + btn(t['apple'], STORE['apple'], t['soon'])
+    ctas = btn(t['play'], STORE['play'], t['soon'], True) + btn(t['apple'], STORE['apple'], t['soon'])
     lite_link = '<a href="https://play.google.com/store/apps/details?id=com.dognas.client.lite" rel="noopener">DogNAS Client Lite</a>'
     note_key = 'note_soon' if not STORE['play'] else 'note_ios'
     soon_note = '' if all(STORE.values()) else f'<p class="note">{t[note_key].replace("DogNAS Client Lite", lite_link)}</p>'
@@ -69,13 +76,14 @@ for L, t in T.items():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(t['title'])}</title>
 <meta name="description" content="{html.escape(t['desc'])}">
-{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], '', L, os_='Android, iOS')])}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{seo.meta(L, path, t['title'], t['desc'], {l: LANGS[l][1] + 'client/' for l in LANGS})}{seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, t['title'], t['desc'], [('DogNAS', LANGS[L][1].lstrip('/')), ('DogNAS Client', path)]) + [seo.app('DogNAS Client', t['desc'], STORE['play'], L, os_='Android, iOS', app_id='#app-client')])}<link rel="icon" type="image/png" href="{base}assets/icon-96.png">
 {CSS_INLINE}
 </head>
 <body><div class="wrap">
 <header class="top"><a class="brand" href="{home}"><img src="{base}assets/icon-80.webp" alt="" width="36" height="36"><span>Dog<b>NAS</b></span></a><nav class="lang">{nav}</nav></header>
 <section class="hero"><img class="logo" src="{base}assets/icon-240.webp" alt="DogNAS Client" width="120" height="120"><h1>{t['h1']}</h1><p>{t['lead']}</p>
 <div class="cta" style="justify-content:center">{ctas}</div>{soon_note}</section>
+<div class="phones">{phone(sh + 'client-files.webp', t['shot1'], True)}{phone(sh + 'client-transfers.webp', t['shot2'], True)}</div>
 <h2>{t['feats_h']}</h2>
 {cards(t['feats'], t['icons'])}
 <h2>{t['plans_h']}</h2><div class="card wide"><p>{t['plans']}</p></div>
@@ -83,7 +91,7 @@ for L, t in T.items():
 <h2>{t['lite_h']}</h2><p>{t['lite']}</p>
 <p><a href="{home}">← {t['back']}</a></p>
 <footer><span>© 2026 DogNAS</span><span>{blog_link(L, base)}<a href="{base}privacy/#{L}">{t['privacy']}</a> · {seo.terms_link(L, base)}<a href="#" data-cookie-prefs>Cookies</a> · <a href="mailto:{EMAIL}">{EMAIL}</a></span></footer>
-</div></body></html>
+</div>{QR_REFERRER_JS}</body></html>
 '''
     out = os.path.join(ROOT, path, 'index.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)

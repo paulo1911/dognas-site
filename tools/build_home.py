@@ -206,7 +206,7 @@ T = {
    points=['Use um Android que você já tem', 'Conecte outros celulares por QR Code', 'Comece grátis, sem assinatura'], cta='Baixar o DogNAS grátis',
    micro='Android 7.0 ou superior · celular, tablet ou TV box · na mesma rede Wi-Fi. Confira os requisitos.', sub='Já tem o servidor? Baixe o Client Lite', sub_client='Já tem o servidor? Baixe o DogNAS Client', lite_alt='Prefere algo mais leve? Use o Client Lite',
    important='Seus arquivos ficam no armazenamento configurado no seu dispositivo servidor. O acesso depende da configuração de rede e das credenciais do DogNAS. Para arquivos importantes, mantenha uma cópia de backup independente.', important_h='Importante', cookies='Preferências de cookies',
-   soon='Em breve na Google Play', get_server='Baixar o DogNAS (servidor)', get_lite='Baixar o DogNAS Client Lite', alt1='Servidor DogNAS online', alt2='Arquivos no DogNAS Client Lite',
+   soon='Em breve na Google Play', get_server='Baixar o DogNAS (servidor)', get_lite='Baixar o DogNAS Client Lite', alt1='Servidor DogNAS online', alt2='Arquivos no DogNAS Client',
    who='Para quem é o DogNAS?',
    ben_kicker='Benefícios', ben_h2='Os problemas que o DogNAS resolve', ben_lead='Em casa, no home office ou na casa inteligente, o DogNAS acaba com dores do dia a dia usando um Android que você já tem.',
    ben=[('home', 'Uso doméstico', [
@@ -232,7 +232,7 @@ T = {
    how='Como funciona',
    steps=[('Ligue o servidor', 'Instale o DogNAS no Android que vai guardar os arquivos — no aparelho, num cartão SD ou num HD USB — e toque em Iniciar.', 'server-status'),
           ('Conecte seu celular', 'Gere o QR Code de um perfil e leia com o DogNAS Client (ou o mais leve DogNAS Client Lite). Cada perfil tem seu PIN e seu espaço.', 'server-qr'),
-          ('Use seus arquivos', 'Navegue, envie e baixe pelo Wi-Fi de casa. PCs e Macs conectam por SFTP.', 'lite-files')],
+          ('Use seus arquivos', 'Navegue, envie e baixe pelo Wi-Fi de casa. PCs e Macs conectam por SFTP.', 'client-files')],
    tech_kicker='Para tech, smart home e escritório', tech_h2='Um servidor SFTP no Android, na sua rede',
    tech_lead='Um servidor NAS leve para casa ou escritório: qualquer dispositivo, script ou automação que fale SFTP envia e busca arquivos pela rede Wi-Fi.',
    tech_feats=[('Servidor NAS em casa ou no escritório', 'Pastas por perfil, acessadas de PC, Mac e Linux com FileZilla, WinSCP, Cyberduck, rclone ou o sftp do OpenSSH.'),
@@ -259,7 +259,7 @@ T = {
    points=['Use an Android you already own', 'Connect other phones with a QR Code', 'Start free, no subscription'], cta='Download DogNAS free',
    micro='Android 7.0 or later · phone, tablet or TV box · same Wi-Fi network. Check the requirements.', sub='Already have the server? Get DogNAS Client Lite', sub_client='Already have the server? Get DogNAS Client', lite_alt='Want something lighter? Use Client Lite',
    important='Your files stay in the storage set up on your server device. Access depends on your network setup and your DogNAS credentials. For important files, keep an independent backup copy.', important_h='Important', cookies='Cookie preferences',
-   soon='Coming soon to Google Play', get_server='Get DogNAS (server)', get_lite='Get DogNAS Client Lite', alt1='DogNAS server online', alt2='Files in DogNAS Client Lite',
+   soon='Coming soon to Google Play', get_server='Get DogNAS (server)', get_lite='Get DogNAS Client Lite', alt1='DogNAS server online', alt2='Files in DogNAS Client',
    who='Who is DogNAS for?',
    ben_kicker='Benefits', ben_h2='The problems DogNAS solves', ben_lead='At home, in your home office or in your smart home, DogNAS ends everyday headaches with an Android you already own.',
    ben=[('home', 'Home use', [
@@ -285,7 +285,7 @@ T = {
    how='How it works',
    steps=[('Start the server', 'Install DogNAS on the Android that will keep your files — on the device, an SD card or a USB drive — and tap Start.', 'server-status'),
           ('Connect your phone', "Generate a profile's QR Code and scan it with DogNAS Client (or the lighter DogNAS Client Lite). Each profile has its own PIN and space.", 'server-qr'),
-          ('Use your files', 'Browse, upload and download over your home Wi-Fi. PCs and Macs connect via SFTP.', 'lite-files')],
+          ('Use your files', 'Browse, upload and download over your home Wi-Fi. PCs and Macs connect via SFTP.', 'client-files')],
    tech_kicker='For tech, smart home and office', tech_h2='An SFTP server on Android, on your network',
    tech_lead='A lightweight NAS server for home or office: any device, script or automation that speaks SFTP can send and fetch files over Wi-Fi.',
    tech_feats=[('NAS server for home or office', 'Per-profile folders, reached from PC, Mac and Linux with FileZilla, WinSCP, Cyberduck, rclone or OpenSSH’s sftp.'),
@@ -312,7 +312,7 @@ T = {
    points=['Usa un Android que ya tienes', 'Conecta otros móviles con un código QR', 'Empieza gratis, sin suscripción'], cta='Descargar DogNAS gratis',
    micro='Android 7.0 o superior · móvil, tableta o TV box · misma red Wi-Fi. Consulta los requisitos.', sub='¿Ya tienes el servidor? Descarga DogNAS Client Lite', sub_client='¿Ya tienes el servidor? Descarga DogNAS Client', lite_alt='¿Prefieres algo más ligero? Usa Client Lite',
    important='Tus archivos se guardan en el almacenamiento configurado en tu dispositivo servidor. El acceso depende de la configuración de tu red y de las credenciales de DogNAS. Para archivos importantes, mantén una copia de respaldo independiente.', important_h='Importante', cookies='Preferencias de cookies',
-   soon='Próximamente en Google Play', get_server='Descargar DogNAS (servidor)', get_lite='Descargar DogNAS Client Lite', alt1='Servidor DogNAS en línea', alt2='Archivos en DogNAS Client Lite',
+   soon='Próximamente en Google Play', get_server='Descargar DogNAS (servidor)', get_lite='Descargar DogNAS Client Lite', alt1='Servidor DogNAS en línea', alt2='Archivos en DogNAS Client',
    who='¿Para quién es DogNAS?',
    ben_kicker='Beneficios', ben_h2='Los problemas que DogNAS resuelve', ben_lead='En casa, en la oficina en casa o en tu casa inteligente, DogNAS acaba con molestias diarias usando un Android que ya tienes.',
    ben=[('home', 'Uso doméstico', [
@@ -338,7 +338,7 @@ T = {
    how='Cómo funciona',
    steps=[('Enciende el servidor', 'Instala DogNAS en el Android que guardará los archivos — en el dispositivo, una tarjeta SD o un disco USB — y toca Iniciar.', 'server-status'),
           ('Conecta tu teléfono', 'Genera el código QR de un perfil y escanéalo con DogNAS Client (o el más ligero DogNAS Client Lite). Cada perfil tiene su PIN y su espacio.', 'server-qr'),
-          ('Usa tus archivos', 'Navega, sube y descarga por el Wi-Fi de casa. PC y Mac se conectan por SFTP.', 'lite-files')],
+          ('Usa tus archivos', 'Navega, sube y descarga por el Wi-Fi de casa. PC y Mac se conectan por SFTP.', 'client-files')],
    tech_kicker='Para tecnología, casa inteligente y oficina', tech_h2='Un servidor SFTP en Android, en tu red',
    tech_lead='Un servidor NAS ligero para casa u oficina: cualquier dispositivo, script o automatización que hable SFTP envía y recoge archivos por Wi-Fi.',
    tech_feats=[('Servidor NAS en casa o en la oficina', 'Carpetas por perfil, accesibles desde PC, Mac y Linux con FileZilla, WinSCP, Cyberduck, rclone o el sftp de OpenSSH.'),
@@ -383,6 +383,7 @@ for L, t in T.items():
     nav = blog_nav(L, base, 'home') + ''.join(f'<a data-ev="lang_switch" data-loc="{l}" href="{base}{LANGS[l][1]}"{" class=on" if l == L else ""}>{NAMES[l]}</a>' for l in LANGS)
     jsonld = seo.ld([seo.ORG, seo.website(L, LANGS[L][1])] + seo.webpage(L, LANGS[L][1], t['title'], t['desc']) + [
         seo.app('DogNAS', {'pt': 'Servidor de arquivos para Android: transforma um Android compatível em armazenamento particular na rede Wi-Fi, com SFTP.', 'en': 'File server for Android: turns a compatible Android into private storage on your Wi-Fi network, with SFTP.', 'es': 'Servidor de archivos para Android: convierte un Android compatible en almacenamiento privado en tu red Wi-Fi, con SFTP.'}[L], seo.PLAY_SERVER, L, app_id='#app-server'),
+        seo.app('DogNAS Client', {'pt': 'App gratuito para Android que acessa os arquivos do seu DogNAS pelo Wi-Fi de casa.', 'en': 'Free Android app that reaches your DogNAS files over your home Wi-Fi.', 'es': 'App gratuita para Android que accede a los archivos de tu DogNAS por el Wi-Fi de casa.'}[L], CLIENT_PLAY, L, app_id='#app-client'),
         seo.app('DogNAS Client Lite', {'pt': 'App leve e gratuito para Android que acessa os arquivos do seu DogNAS pelo Wi-Fi de casa.', 'en': 'Lightweight, free Android app that reaches your DogNAS files over your home Wi-Fi.', 'es': 'App ligera y gratuita para Android que accede a los archivos de tu DogNAS por el Wi-Fi de casa.'}[L], seo.PLAY_LITE, L, app_id='#app-lite')])
     faq_ld = seo.ld([seo.faq(t['faq'])])
     points = ''.join(f'<li>{x}</li>' for x in t['points'])
@@ -422,7 +423,7 @@ for L, t in T.items():
 <div class="cta"><a class="btn primary pv-a" data-ev="server_store_click" data-loc="hero_primary" href="{play('server', 'hero_primary')}" rel="noopener">{t['cta']}</a>{play_badge(L, base, 'hero_primary')}</div>
 <p class="micro"><a data-ev="requirements_click" href="#requisitos">{t['micro']}</a></p>
 <p class="cta-sub">{sub_cta}</p></section>
-<div class="phones">{phone(sh + 'server-status.webp', t['alt1'], True)}{phone(sh + 'lite-files.webp', t['alt2'], True)}</div>
+<div class="phones">{phone(sh + 'server-status.webp', t['alt1'], True)}{phone(sh + 'client-files.webp', t['alt2'], True)}</div>
 </div>
 <section id="como-funciona" class="audience">
 <h2>{t['how_h2']}</h2><p class="lead">{t['how_lead']}</p>
@@ -440,7 +441,7 @@ for L, t in T.items():
 </section>
 {nas_section(L, base)}
 <h2>{t['watch']}</h2>
-<div class="twoup"><figure>{phone(sh + 'server-monitor.webp', t['cap1'])}<figcaption>{t['cap1']}</figcaption></figure><figure>{phone(sh + 'lite-transfers.webp', t['cap2'])}<figcaption>{t['cap2']}</figcaption></figure></div>
+<div class="twoup"><figure>{phone(sh + 'server-monitor.webp', t['cap1'])}<figcaption>{t['cap1']}</figcaption></figure><figure>{phone(sh + 'client-transfers.webp', t['cap2'])}<figcaption>{t['cap2']}</figcaption></figure></div>
 <section id="privacidade" class="audience">
 <p class="kicker">{t['priv_kicker']}</p><h2>{t['priv_h2']}</h2><p class="lead">{t['priv_lead']}</p>
 {cards(t['priv'], PRIV_ICONS)}
