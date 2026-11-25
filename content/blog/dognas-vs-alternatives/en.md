@@ -11,8 +11,9 @@ related: [nas-vs-android, home-nas, sftp-clients, cloud-subscription-savings]
 cover: assets/blog/dognas-vs-alternatives/cover-en.webp
 cover_alt: Illustration of a NAS box facing a phone next to the DogNAS server screen
 social_image: assets/blog/dognas-vs-alternatives/social-en.jpg
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
+reviewed_by: Paulo Leite
 created: 2026-10-30
 published: 2026-11-24
 updated: 2026-11-24
