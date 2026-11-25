@@ -72,4 +72,4 @@ PILLARS = {
 ASSIGN = {'old-android-server': 'reuse', 'old-tablet': 'reuse', 'old-laptop-hdd': 'reuse', 'old-phone-ideas': 'reuse',
           'free-phone-space': 'storage', 'cloud-subscription-savings': 'storage', 'pc-phone-transfer': 'storage',
           'sftp-explained': 'sftp', 'sftp-clients': 'sftp',
-          'nas-vs-android': 'compare', 'home-nas': 'compare', 'sell-or-reuse': 'compare'}
+          'nas-vs-android': 'compare', 'home-nas': 'compare', 'sell-or-reuse': 'compare', 'dognas-vs-alternatives': 'compare'}
