@@ -2,8 +2,8 @@
 slug: what-to-do-with-an-old-android-phone
 title: What to do with an old Android phone: 10 ideas that are actually useful
 summary: Camera, webcam, media hub, file server and more: 10 uses for the Android sitting in a drawer, and how to pick the best one for you.
-meta_title: What to do with an old Android phone: 10 ideas | DogNAS
-meta_description: 10 ways to reuse an old Android phone: camera, webcam, media hub, file server and more, with the limits of each one.
+meta_title: 10 Uses for an Old Android Phone: Ideas That Actually Work | DogNAS
+meta_description: Things to do with an old Android phone: security camera, webcam, media hub, file server and more. 10 ideas to repurpose it, with the limits of each.
 pillar: reuse
 tags: [old phone, reuse android, ideas, file server]
 cover: assets/blog/old-phone-ideas/cover-en.webp
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-24
 ---
 Almost everyone has an old phone put away. Throwing it out is a waste and selling it brings little. The good news is that an Android that still turns on and joins Wi-Fi is useful for a lot of things. Here are 10 ideas, with what each one asks of you.
 

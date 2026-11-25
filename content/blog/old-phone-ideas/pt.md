@@ -2,8 +2,8 @@
 slug: o-que-fazer-com-celular-antigo
 title: O que fazer com um celular antigo: 10 ideias que realmente servem
 summary: Câmera, webcam, central de mídia, servidor de arquivos e mais: 10 usos para o Android que está parado na gaveta, e como escolher o melhor para você.
-meta_title: O que fazer com celular antigo: 10 ideias úteis | DogNAS
-meta_description: 10 formas de reaproveitar um celular Android antigo: câmera, webcam, central de mídia, servidor de arquivos e mais, com os limites de cada uma.
+meta_title: O que fazer com celular antigo: 10 ideias e usos | DogNAS
+meta_description: O que fazer com um celular Android antigo: câmera, webcam, central de mídia, servidor de arquivos e mais. 10 ideias para reaproveitar, com os limites de cada uma.
 pillar: reuse
 tags: [celular antigo, reaproveitar android, ideias, servidor de arquivos]
 cover: assets/blog/old-phone-ideas/cover-pt.webp
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-24
 ---
 Quase todo mundo tem um celular antigo guardado. Jogar fora é desperdício, e vender rende pouco. A boa notícia é que um Android que ainda liga e conecta no Wi-Fi serve para muita coisa. Aqui estão 10 ideias, com o que cada uma pede de você.
 
