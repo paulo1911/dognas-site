@@ -2,8 +2,8 @@
 slug: que-hacer-con-un-celular-android-viejo
 title: Qué hacer con un celular Android viejo: 10 ideas que sí sirven
 summary: Cámara, webcam, centro multimedia, servidor de archivos y más: 10 usos para el Android que está parado en el cajón, y cómo elegir el mejor para ti.
-meta_title: Qué hacer con un celular Android viejo: 10 ideas | DogNAS
-meta_description: 10 formas de reutilizar un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más, con los límites de cada una.
+meta_title: Qué hacer con un celular viejo: 10 ideas y usos | DogNAS
+meta_description: Qué hacer con un celular Android viejo: cámara, webcam, centro multimedia, servidor de archivos y más. 10 ideas para reutilizarlo, con los límites de cada una.
 pillar: reuse
 tags: [celular viejo, reutilizar android, ideas, servidor de archivos]
 cover: assets/blog/old-phone-ideas/cover-es.webp
@@ -15,7 +15,7 @@ status: published
 translation_review: reviewed
 created: 2026-10-28
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-24
 ---
 Casi todos tenemos un celular viejo guardado. Tirarlo es un desperdicio y venderlo deja poco. La buena noticia es que un Android que todavía enciende y se conecta al Wi-Fi sirve para muchas cosas. Aquí van 10 ideas, con lo que cada una te pide.
 
