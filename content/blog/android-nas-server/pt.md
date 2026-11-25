@@ -8,6 +8,9 @@ pillar: reuse
 tags: [servidor nas, android nas, nas caseiro, servidor de arquivos, sftp, android antigo, tv box]
 cta: server
 related: [old-android-server, home-nas, nas-vs-android, tv-box-server]
+cover: assets/blog/android-nas-server/cover-pt.webp
+cover_alt: Um tablet com o servidor DogNAS ao lado de um dock de HD USB, com um celular conectado
+social_image: assets/blog/android-nas-server/social-pt.jpg
 status: review
 translation_review: pending
 created: 2026-11-24
