@@ -7,7 +7,7 @@ meta_description: Google Drive ou Fotos lotado? Veja como exportar com o Google 
 pillar: storage
 tags: [google fotos cheio, google drive cheio, google takeout, armazenamento em nuvem, servidor em casa]
 cover: assets/blog/google-storage-full/cover-pt.webp
-cover_alt: Tablet com o servidor DogNAS conectado por cabo a um disco USB, em cima de uma mesa
+cover_alt: Celular com o servidor DogNAS ligado por cabo, ao lado de um HD em uma caixa de apoio, sobre uma mesa
 social_image: assets/blog/google-storage-full/social-pt.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]

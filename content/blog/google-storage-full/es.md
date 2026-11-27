@@ -7,7 +7,7 @@ meta_description: ¿Google Drive o Fotos lleno? Exporta con Google Takeout, guar
 pillar: storage
 tags: [google fotos lleno, google drive lleno, google takeout, almacenamiento en la nube, servidor en casa]
 cover: assets/blog/google-storage-full/cover-es.webp
-cover_alt: Una tableta con el servidor DogNAS conectada por cable a un disco USB, sobre una mesa
+cover_alt: Un móvil con el servidor DogNAS conectado por cable, junto a un disco duro en un soporte, sobre una mesa
 social_image: assets/blog/google-storage-full/social-es.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]

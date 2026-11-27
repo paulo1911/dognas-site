@@ -7,7 +7,7 @@ meta_description: Google Drive or Photos full? Export with Google Takeout, keep 
 pillar: storage
 tags: [google photos full, google drive full, google takeout, cloud storage, home server]
 cover: assets/blog/google-storage-full/cover-en.webp
-cover_alt: A tablet running the DogNAS server, connected by cable to a USB drive, on a desk
+cover_alt: A phone running the DogNAS server, connected by cable, next to a hard drive in a stand, on a desk
 social_image: assets/blog/google-storage-full/social-en.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]
