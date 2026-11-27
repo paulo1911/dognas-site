@@ -6,6 +6,9 @@ meta_title: Google Photos full: keep your photos at home | DogNAS
 meta_description: Google Drive or Photos full? Export with Google Takeout, keep everything on a server of your own at home, and free up space in your account without paying more.
 pillar: storage
 tags: [google photos full, google drive full, google takeout, cloud storage, home server]
+cover: assets/blog/google-storage-full/cover-en.webp
+cover_alt: A tablet running the DogNAS server, connected by cable to a USB drive, on a desk
+social_image: assets/blog/google-storage-full/social-en.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]
 status: review

@@ -6,6 +6,9 @@ meta_title: Google Fotos cheio: como guardar suas fotos em casa | DogNAS
 meta_description: Google Drive ou Fotos lotado? Veja como exportar com o Google Takeout, guardar tudo em um servidor seu em casa e liberar espaço na conta sem pagar mais.
 pillar: storage
 tags: [google fotos cheio, google drive cheio, google takeout, armazenamento em nuvem, servidor em casa]
+cover: assets/blog/google-storage-full/cover-pt.webp
+cover_alt: Tablet com o servidor DogNAS conectado por cabo a um disco USB, em cima de uma mesa
+social_image: assets/blog/google-storage-full/social-pt.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]
 status: review
