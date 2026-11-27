@@ -121,3 +121,14 @@ a.cat { text-decoration:none; } a.cat:hover { text-decoration:underline; }
 .post-ad { margin:28px 0; text-align:center; min-height:100px; }
 .post-ad small { display:block; margin-bottom:6px; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--muted, #8a8f98); }
 .side .post-ad { margin:16px 0 0; }
+/* Share bar (top of the article): round icon buttons that take the brand colour on hover, plus a "copy link" pill. Wraps on phones. */
+.share { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0 8px; }
+.share-label { font-size:13px; color:var(--muted); margin-right:4px; text-transform:uppercase; letter-spacing:.06em; }
+.share a, .share button { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; padding:0; border:1px solid var(--line); border-radius:50%; background:transparent; color:var(--muted); cursor:pointer; text-decoration:none; transition:background .15s, color .15s, border-color .15s; }
+.share svg { width:18px; height:18px; fill:currentColor; }
+.share a:hover, .share a:focus-visible { background:var(--c); border-color:var(--c); color:#fff; }
+.share button.share-copy { width:auto; padding:0 14px 0 11px; gap:7px; border-radius:999px; color:var(--text); font:inherit; font-size:14px; font-weight:600; }
+.share svg[stroke] { fill:none; }
+.share button:hover, .share button:focus-visible { border-color:var(--muted); color:var(--text); }
+.share [hidden] { display:none; }
+@media (max-width:520px) { .share { gap:6px; } .share-label { flex-basis:100%; margin-bottom:2px; } .share a, .share button { width:40px; height:40px; } .share button.share-copy { width:auto; } }

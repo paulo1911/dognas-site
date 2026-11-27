@@ -3,7 +3,8 @@ Run: python3 tools/build_blog.py            (published articles only; fails on a
      python3 tools/build_blog.py --preview  (also drafts/review, written under _preview/, git-ignored)
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
 import os, sys, re, html, shutil
-import check_blog, seo, blog_content as bc, blog_about as ab, blog_pillars as bp
+from urllib.parse import quote
+import check_blog, seo, blog_content as bc, blog_about as ab, blog_pillars as bp, blog_share_icons as si
 from build_home import inline_css, ROOT, GA_TAG, ADSENSE_CLIENT, ADSENSE_SLOT_MID, ADSENSE_SLOT_SIDE, CSS_V, LANGS, NAMES, EMAIL, play, CLIENT_PLAY
 
 BLOG_CSS = inline_css('style.css', 'blog.css')
@@ -59,7 +60,7 @@ def write(path, text):
     full = os.path.join(OUT, path, 'index.html'); os.makedirs(os.path.dirname(full), exist_ok=True); open(full, 'w').write(text)
 
 
-def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None, wide=False):
+def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None, wide=False, social_title=None, image_alt=None, article=None):
     t = UI[L]
     home = f'{base}{LANGS[L][1]}'
     return f'''<!doctype html>
@@ -70,7 +71,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="alternate" type="application/atom+xml" title="{html.escape(t['h1'])}" href="{seo.SITE}{bc.blog_dir(L)}feed.xml"><link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image, social_title, image_alt, article)}{jsonld}<link rel="alternate" type="application/atom+xml" title="{html.escape(t['h1'])}" href="{seo.SITE}{bc.blog_dir(L)}feed.xml"><link rel="icon" type="image/png" href="{base}assets/icon-96.png">
 {BLOG_CSS}
 </head>
 <body{" class=wide" if wide else ""}><div class="wrap">
@@ -107,6 +108,38 @@ LIST_UI = {'pt': dict(start='Comece por aqui', feat='Em destaque', all='Todos os
 NEXT = {g: 'old-android-server' for g in ('old-phone-ideas', 'sell-or-reuse', 'home-nas', 'nas-vs-android', 'old-tablet', 'old-laptop-hdd')}  # funnel: decide -> set up -> use -> go further
 NEXT.update({'old-android-server': 'pc-phone-transfer', 'pc-phone-transfer': 'free-phone-space', 'free-phone-space': 'cloud-subscription-savings', 'cloud-subscription-savings': 'sftp-explained', 'sftp-explained': 'sftp-clients'})
 ART_UI = {'pt': dict(next='Próximo passo'), 'en': dict(next='Next step'), 'es': dict(next='Siguiente paso')}
+
+SHARE_UI = {'pt': dict(label='Compartilhar', copy='Copiar link', copied='Link copiado', more='Mais opções', email='E-mail'),
+            'en': dict(label='Share', copy='Copy link', copied='Link copied', more='More options', email='Email'),
+            'es': dict(label='Compartir', copy='Copiar enlace', copied='Enlace copiado', more='Más opciones', email='Correo')}
+# Plain links, no third-party scripts (nothing loads before the reader clicks). Each network gets its own utm_source so shares show up in GA4/Search Console referrals.
+SHARE_NETS = [('whatsapp', 'WhatsApp', 'https://wa.me/?text={t}%20{u}'), ('telegram', 'Telegram', 'https://t.me/share/url?url={u}&text={t}'),
+              ('linkedin', 'LinkedIn', 'https://www.linkedin.com/sharing/share-offsite/?url={u}'), ('facebook', 'Facebook', 'https://www.facebook.com/sharer/sharer.php?u={u}'),
+              ('x', 'X', 'https://twitter.com/intent/tweet?url={u}&text={t}'), ('reddit', 'Reddit', 'https://www.reddit.com/submit?url={u}&title={t}'),
+              ('email', None, 'mailto:?subject={t}&body={t}%0A{u}')]
+
+
+def share_bar(L, path, title, group):
+    """Icon-only circles (name in aria-label/title) + one labelled "copy link" pill; the native-share button is for touch devices only."""
+    ui = SHARE_UI[L]
+    links = ''
+    for key, name, tpl in SHARE_NETS:
+        url = f'{seo.SITE}{path}?utm_source={key}&utm_medium=share&utm_campaign=blog_share'
+        href = tpl.format(u=quote(url, safe=''), t=quote(title, safe=''))
+        label = html.escape(name or ui['email'])
+        links += (f'<a class="sh-{key}" style="--c:{si.COLORS[key]}" href="{html.escape(href)}" target="_blank" rel="noopener noreferrer" aria-label="{label}" title="{label}" '
+                  f'data-ev="blog_share_click" data-loc="blog_share_{key}_{group}">{si.icon(key)}</a>')
+    u = f'{seo.SITE}{path}?utm_source=%s&utm_medium=share&utm_campaign=blog_share'
+    links += (f'<button type="button" class="share-copy" data-url="{u % "copy"}" data-done="{ui["copied"]}" data-ev="blog_share_click" data-loc="blog_share_copy_{group}">{si.icon("copy")}<span>{ui["copy"]}</span></button>'
+              f'<button type="button" class="share-native" hidden data-title="{html.escape(title)}" data-url="{u % "native"}" aria-label="{ui["more"]}" title="{ui["more"]}" data-ev="blog_share_click" data-loc="blog_share_native_{group}">{si.icon("native")}</button>')
+    return f'<div class="share" role="group" aria-label="{ui["label"]}"><span class="share-label">{ui["label"]}</span>{links}</div>'
+
+
+SHARE_JS = """(function(){var c=document.querySelector('.share-copy'),n=document.querySelector('.share-native');
+if(c)c.addEventListener('click',function(){var u=c.getAttribute('data-url'),d=c.getAttribute('data-done'),sp=c.querySelector('span'),t=sp.textContent;
+function ok(){sp.textContent=d;setTimeout(function(){sp.textContent=t;},2000);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('',u);});}else{window.prompt('',u);}});
+if(n&&navigator.share&&matchMedia('(pointer:coarse)').matches){n.hidden=false;n.addEventListener('click',function(){navigator.share({title:n.getAttribute('data-title'),url:n.getAttribute('data-url')}).catch(function(){});});}})();"""
 
 
 def cards_html(items, b, loc, mins=None, ev='blog_list_article_click'):
@@ -255,7 +288,7 @@ def main():
             words = len(a['body'].split())
             tested = f'<p class="tested"><strong>{ab.LABEL[L]["tested"]}:</strong> {html.escape(a["tested"])}</p>' if a.get('tested') else ''
             main_html = f'''{crumbs}{draft}<article class="post-full"><header><a class="cat" href="{b}{bc.pillar_path(L, a["pillar"])}" data-ev="blog_pillar_click" data-loc="blog_article_{a["group"]}_pillar">{html.escape(a["category"])}</a><h1>{html.escape(a["title"])}</h1>
-<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}</header><div class="art-grid"><div class="art-main">{cover}{toc_html}<div class="prose">{html_body}</div>{cta}{next_html}</div><aside class="side">{side_toc}{side_cta}{ad_side}</aside></div></article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',c.getAttribute('data-'+b[0]));x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["pillar"]}',cta:'{a["cta"]}',lang:'{L}'}});}});(function(){{var p=document.querySelector('.prose'),done=false,tick=false;if(!p)return;function chk(){{tick=false;if(done||!window.dnEvent)return;var r=p.getBoundingClientRect();if((innerHeight-r.top)/r.height>=.5){{done=true;dnEvent('blog_read_50',{{article:'{a["group"]}',category:'{a["pillar"]}',lang:'{L}'}});}}}}addEventListener('scroll',function(){{if(!tick){{tick=true;requestAnimationFrame(chk);}}}},{{passive:true}});}})();</script>'''
+<p class="meta">{ab.LABEL[L]["by"]} <a href="{b}{bc.about_path(L)}" data-ev="blog_about_click" data-loc="blog_article_{a["group"]}_byline">{ab.TEAM[L]}</a> · {t["updated"]} {fmt(upd, L)} · {max(1, round(words / 200))} {t["min"]}</p>{tested}{share_bar(L, path, a["title"], a["group"])}</header><div class="art-grid"><div class="art-main">{cover}{toc_html}<div class="prose">{html_body}</div>{cta}{next_html}</div><aside class="side">{side_toc}{side_cta}{ad_side}</aside></div></article>{rel_html}{sticky}<script>(function(){{document.querySelectorAll('.carousel').forEach(function(c){{var t=c.querySelector('.track');[['prev','\u2039',-1],['next','\u203a',1]].forEach(function(b){{var x=document.createElement('button');x.type='button';x.className='nav '+b[0];x.textContent=b[1];x.setAttribute('aria-label',c.getAttribute('data-'+b[0]));x.onclick=function(){{t.scrollBy({{left:b[2]*t.clientWidth*.8,behavior:'smooth'}});}};c.appendChild(x);}});}});}})();</script><script>{STICKY_JS}</script><script>{SHARE_JS}</script><script>document.addEventListener('DOMContentLoaded',function(){{if(window.dnEvent)dnEvent('blog_article_view',{{article:'{a["group"]}',category:'{a["pillar"]}',cta:'{a["cta"]}',lang:'{L}'}});}});(function(){{var p=document.querySelector('.prose'),done=false,tick=false;if(!p)return;function chk(){{tick=false;if(done||!window.dnEvent)return;var r=p.getBoundingClientRect();if((innerHeight-r.top)/r.height>=.5){{done=true;dnEvent('blog_read_50',{{article:'{a["group"]}',category:'{a["pillar"]}',lang:'{L}'}});}}}}addEventListener('scroll',function(){{if(!tick){{tick=true;requestAnimationFrame(chk);}}}},{{passive:true}});}})();</script>'''
             image = a.get('social_image') or a.get('cover')
             ld = seo.ld([seo.ORG, seo.website(L, path)] + seo.webpage(L, path, a['meta_title'], a['meta_description'], [('DogNAS', LANGS[L][1]), (t['blog'], bc.list_path(L)), (a['category'], bc.pillar_path(L, a['pillar'])), (a['title'], path)])
                         + [{'@type': 'BlogPosting', '@id': seo.SITE + path + '#post', 'headline': a['title'], 'description': a['meta_description'], 'inLanguage': seo.HREFLANG[L],
@@ -263,7 +296,9 @@ def main():
                             'author': {'@type': 'Organization', 'name': ab.TEAM[L], 'url': seo.SITE + bc.about_path(L)}, 'publisher': {'@id': seo.SITE + '#org'}, 'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'},
                             'wordCount': words, 'articleSection': a['category'], **({'keywords': ', '.join(a['tags'])} if a.get('tags') else {}),
                             **({'image': [seo.SITE + x for x in dict.fromkeys([a.get('cover'), a.get('social_image')]) if x]} if image else {})}])
-            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image, wide=True))
+            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image, wide=True,
+                       social_title=a['title'], image_alt=a.get('cover_alt'),
+                       article=dict(published=a.get('published') or a['created'], modified=upd, section=a['category'], tags=a.get('tags'))))
             n += 1
     print(f'ok: {n} pages ({len(arts)} articles){" [preview -> _preview/]" if PREVIEW else ""}')
 
