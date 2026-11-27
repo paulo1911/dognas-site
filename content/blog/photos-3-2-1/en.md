@@ -11,8 +11,9 @@ cover_alt: A phone running the DogNAS server, connected by cable, next to a hard
 social_image: assets/blog/google-storage-full/social-en.jpg
 cta: server
 related: [google-storage-full, cloud-subscription-savings, android-nas-server, free-phone-space, pc-phone-transfer]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
+reviewed_by: Paulo Leite
 created: 2026-11-27
 published: 2026-11-27
 updated: 2026-11-27
@@ -38,7 +39,7 @@ Also remember that the account is a single point: a forgotten password, a blocke
 - **2 kinds of media.** Don't put every copy on the same type of thing. A phone and a cloud account are already two. Add a drive and you have three.
 - **1 outside the house.** Fire, flood, theft or a power surge hit everything at home at once. One copy has to live elsewhere: the cloud usually plays that role well.
 
-None of this guarantees you'll never lose anything. It just makes losing everything at once much less likely.
+None of this makes a loss impossible. It just makes losing everything at once much less likely.
 
 ## A realistic setup with what you already have
 

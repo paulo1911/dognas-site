@@ -11,8 +11,9 @@ cover_alt: Celular con el servidor DogNAS conectado por cable, junto a un disco 
 social_image: assets/blog/google-storage-full/social-es.jpg
 cta: server
 related: [google-storage-full, cloud-subscription-savings, android-nas-server, free-phone-space, pc-phone-transfer]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
+reviewed_by: Paulo Leite
 created: 2026-11-27
 published: 2026-11-27
 updated: 2026-11-27
@@ -38,7 +39,7 @@ Recuerda también que la cuenta es un punto único: contraseña olvidada, cuenta
 - **2 tipos de medio.** No pongas todas las copias en el mismo tipo de cosa. Celular y cuenta en la nube ya son dos. Suma un disco y tienes tres.
 - **1 fuera de casa.** Un incendio, una inundación, un robo o una descarga eléctrica afectan a todo lo de casa a la vez. Una copia tiene que vivir en otro lugar: la nube suele cumplir bien ese papel.
 
-Nada de esto garantiza que nunca perderás nada. Solo hace mucho menos probable perderlo todo a la vez.
+Nada de esto hace imposible una pérdida. Solo hace mucho menos probable perderlo todo a la vez.
 
 ## Un arreglo realista con lo que ya tienes
 
