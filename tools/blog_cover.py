@@ -13,7 +13,7 @@ PILLAR_COLOR = {'reuse': (229, 72, 59), 'storage': (31, 185, 138), 'sftp': (79, 
 COVERS = {'old-android-server': ('phone-wifi', 'server-status'), 'old-tablet': ('tablet', 'server-monitor'), 'old-laptop-hdd': ('disk', 'server-monitor'),
           'old-phone-ideas': ('phone-spark', 'lite-home'), 'free-phone-space': ('phone-out', 'lite-files'), 'cloud-subscription-savings': ('cloud-coin', 'server-status'),
           'pc-phone-transfer': ('pc-phone', 'lite-transfers'), 'sftp-explained': ('lock', 'server-qr'), 'sftp-clients': ('terminal', 'lite-files'),
-          'nas-vs-android': ('versus', 'server-status'), 'home-nas': ('house', 'lite-files'), 'sell-or-reuse': ('recycle', 'lite-home')}
+          'nas-vs-android': ('versus', 'server-status'), 'home-nas': ('house', 'lite-files'), 'sell-or-reuse': ('recycle', 'lite-home'), 'dognas-vs-alternatives': ('versus', 'server-status')}
 ICON_ALT = {  # cover_alt = pictogram + screen (the covers carry no text)
  'phone-wifi': dict(en='a phone with Wi-Fi', pt='um celular com Wi-Fi', es='un celular con Wi-Fi'), 'tablet': dict(en='a tablet with Wi-Fi', pt='um tablet com Wi-Fi', es='una tablet con Wi-Fi'),
  'disk': dict(en='a hard drive', pt='um HD', es='un disco duro'), 'phone-spark': dict(en='a phone with sparks of ideas', pt='um celular com faíscas de ideias', es='un celular con destellos de ideas'),

@@ -8,10 +8,15 @@ pillar: compare
 tags: [comparación, nextcloud, syncthing, termux, google drive]
 cta: server
 related: [nas-vs-android, home-nas, sftp-clients, cloud-subscription-savings]
-status: review
-translation_review: pending
+cover: assets/blog/dognas-vs-alternatives/cover-es.webp
+cover_alt: Ilustración de una caja de NAS frente a un celular junto a la pantalla del servidor DogNAS
+social_image: assets/blog/dognas-vs-alternatives/social-es.jpg
+status: published
+translation_review: reviewed
+reviewed_by: Paulo Leite
 created: 2026-10-30
-updated: 2026-10-30
+published: 2026-11-24
+updated: 2026-11-24
 ---
 Estas herramientas se superponen, pero resuelven problemas distintos. Esta guía las compara con DogNAS sin nombrar un ganador: la correcta depende de si quieres un servidor de archivos privado, una herramienta de sincronización, una plataforma completa o una cuenta en la nube.
 
