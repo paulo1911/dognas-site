@@ -4,7 +4,7 @@ Run: python3 tools/build_blog.py            (published articles only; fails on a
 Reuses the shell of the other generators. A language with no published article gets no blog pages."""
 import os, sys, re, html, shutil
 from urllib.parse import quote
-import check_blog, seo, blog_content as bc, blog_about as ab, blog_pillars as bp
+import check_blog, seo, blog_content as bc, blog_about as ab, blog_pillars as bp, blog_share_icons as si
 from build_home import inline_css, ROOT, GA_TAG, ADSENSE_CLIENT, ADSENSE_SLOT_MID, ADSENSE_SLOT_SIDE, CSS_V, LANGS, NAMES, EMAIL, play, CLIENT_PLAY
 
 BLOG_CSS = inline_css('style.css', 'blog.css')
@@ -120,22 +120,26 @@ SHARE_NETS = [('whatsapp', 'WhatsApp', 'https://wa.me/?text={t}%20{u}'), ('teleg
 
 
 def share_bar(L, path, title, group):
+    """Icon-only circles (name in aria-label/title) + one labelled "copy link" pill; the native-share button is for touch devices only."""
     ui = SHARE_UI[L]
     links = ''
     for key, name, tpl in SHARE_NETS:
         url = f'{seo.SITE}{path}?utm_source={key}&utm_medium=share&utm_campaign=blog_share'
         href = tpl.format(u=quote(url, safe=''), t=quote(title, safe=''))
-        links += (f'<a href="{html.escape(href)}" target="_blank" rel="noopener noreferrer" data-ev="blog_share_click" data-loc="blog_share_{key}_{group}">{html.escape(name or ui["email"])}</a>')
-    links += (f'<button type="button" class="share-copy" data-url="{seo.SITE}{path}?utm_source=copy&utm_medium=share&utm_campaign=blog_share" data-done="{ui["copied"]}" data-ev="blog_share_click" data-loc="blog_share_copy_{group}">{ui["copy"]}</button>'
-              f'<button type="button" class="share-native" hidden data-title="{html.escape(title)}" data-url="{seo.SITE}{path}?utm_source=native&utm_medium=share&utm_campaign=blog_share" data-ev="blog_share_click" data-loc="blog_share_native_{group}">{ui["more"]}</button>')
+        label = html.escape(name or ui['email'])
+        links += (f'<a class="sh-{key}" style="--c:{si.COLORS[key]}" href="{html.escape(href)}" target="_blank" rel="noopener noreferrer" aria-label="{label}" title="{label}" '
+                  f'data-ev="blog_share_click" data-loc="blog_share_{key}_{group}">{si.icon(key)}</a>')
+    u = f'{seo.SITE}{path}?utm_source=%s&utm_medium=share&utm_campaign=blog_share'
+    links += (f'<button type="button" class="share-copy" data-url="{u % "copy"}" data-done="{ui["copied"]}" data-ev="blog_share_click" data-loc="blog_share_copy_{group}">{si.icon("copy")}<span>{ui["copy"]}</span></button>'
+              f'<button type="button" class="share-native" hidden data-title="{html.escape(title)}" data-url="{u % "native"}" aria-label="{ui["more"]}" title="{ui["more"]}" data-ev="blog_share_click" data-loc="blog_share_native_{group}">{si.icon("native")}</button>')
     return f'<div class="share" role="group" aria-label="{ui["label"]}"><span class="share-label">{ui["label"]}</span>{links}</div>'
 
 
 SHARE_JS = """(function(){var c=document.querySelector('.share-copy'),n=document.querySelector('.share-native');
-if(c)c.addEventListener('click',function(){var u=c.getAttribute('data-url'),d=c.getAttribute('data-done'),t=c.textContent;
-function ok(){c.textContent=d;setTimeout(function(){c.textContent=t;},2000);}
+if(c)c.addEventListener('click',function(){var u=c.getAttribute('data-url'),d=c.getAttribute('data-done'),sp=c.querySelector('span'),t=sp.textContent;
+function ok(){sp.textContent=d;setTimeout(function(){sp.textContent=t;},2000);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(ok,function(){window.prompt('',u);});}else{window.prompt('',u);}});
-if(n&&navigator.share){n.hidden=false;n.addEventListener('click',function(){navigator.share({title:n.getAttribute('data-title'),url:n.getAttribute('data-url')}).catch(function(){});});}})();"""
+if(n&&navigator.share&&matchMedia('(pointer:coarse)').matches){n.hidden=false;n.addEventListener('click',function(){navigator.share({title:n.getAttribute('data-title'),url:n.getAttribute('data-url')}).catch(function(){});});}})();"""
 
 
 def cards_html(items, b, loc, mins=None, ev='blog_list_article_click'):
