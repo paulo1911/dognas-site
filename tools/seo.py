@@ -8,9 +8,11 @@ HREFLANG = {'pt': 'pt-BR', 'en': 'en', 'es': 'es'}
 PLAY_SERVER = 'https://play.google.com/store/apps/details?id=com.dognas.server'
 PLAY_LITE = 'https://play.google.com/store/apps/details?id=com.dognas.client.lite'
 
-def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=False, image=None):
+def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=False, image=None, social_title=None, image_alt=None, article=None):
     """`path`: this page's path from the site root ('' = home); `alternates`: {lang: path} of translations."""
     t, d = html.escape(title), html.escape(desc)
+    st = html.escape(social_title) if social_title else t  # the share card drops the " | DogNAS" suffix: the domain already shows under it
+    alt = html.escape(image_alt) if image_alt else st
     url = SITE + path
     img = SITE + (image or f'assets/og-{lang}.jpg')
     out = [
@@ -26,13 +28,20 @@ def meta(lang, path, title, desc, alternates=None, og_type='website', noindex=Fa
         f'<meta property="og:type" content="{og_type}">', '<meta property="og:site_name" content="DogNAS">',
         f'<meta property="og:locale" content="{LOCALES[lang]}">',
     ] + [f'<meta property="og:locale:alternate" content="{LOCALES[l]}">' for l in (alternates or {}) if l != lang] + [
-        f'<meta property="og:title" content="{t}">', f'<meta property="og:description" content="{d}">',
+        f'<meta property="og:title" content="{st}">', f'<meta property="og:description" content="{d}">',
         f'<meta property="og:url" content="{url}">', f'<meta property="og:image" content="{img}">',
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">',
-        f'<meta property="og:image:alt" content="{t}">',
-        '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{t}">',
+        f'<meta property="og:image:type" content="{"image/jpeg" if img.endswith((".jpg", ".jpeg")) else "image/webp" if img.endswith(".webp") else "image/png"}">',
+        f'<meta property="og:image:alt" content="{alt}">',
+        '<meta name="twitter:card" content="summary_large_image">', f'<meta name="twitter:title" content="{st}">',
         f'<meta name="twitter:description" content="{d}">', f'<meta name="twitter:image" content="{img}">',
+        f'<meta name="twitter:image:alt" content="{alt}">',
     ]
+    if article:  # BlogPosting pages: dates as ISO 8601, section = pillar name, one article:tag per tag
+        out += [f'<meta property="article:published_time" content="{article["published"]}">',
+                f'<meta property="article:modified_time" content="{article["modified"]}">',
+                f'<meta property="article:section" content="{html.escape(article["section"])}">']
+        out += [f'<meta property="article:tag" content="{html.escape(x)}">' for x in article.get('tags') or []]
     return '\n'.join(out) + '\n'
 
 def ld(graph):
