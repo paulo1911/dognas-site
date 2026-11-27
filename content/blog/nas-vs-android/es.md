@@ -10,7 +10,7 @@ cover: assets/blog/nas-vs-android/cover-es.webp
 cover_alt: Ilustración de una caja de NAS frente a un celular junto a la pantalla del servidor DogNAS
 social_image: assets/blog/nas-vs-android/social-es.jpg
 cta: server
-related: [home-nas, old-android-server, old-laptop-hdd]
+related: [android-nas-server, home-nas, old-android-server, old-laptop-hdd]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -57,4 +57,4 @@ Mucha gente empieza con el Android que ya tiene y, si la necesidad crece, pasa a
 
 Para ver cómo armar el tuyo, lee [un NAS casero sin comprar un NAS](/es/blog/nas-casero-sin-comprar-un-nas/) o el paso a paso de [cómo convertir un Android viejo en un servidor de archivos](/es/blog/convertir-android-viejo-en-servidor-de-archivos/).
 
-Sigue leyendo: [servidor NAS en Android](/blog/convertir-android-viejo-en-servidor-de-archivos/), [NAS casero sin comprar un NAS](/blog/nas-casero-sin-comprar-un-nas/), [TV box Android como NAS casero](/blog/tv-box-android-como-servidor-de-archivos/).
+Sigue leyendo: [servidor NAS en Android: guía completa](/blog/servidor-nas-android-guia-completa/), [convertir un Android viejo en servidor de archivos](/blog/convertir-android-viejo-en-servidor-de-archivos/), [NAS casero sin comprar un NAS](/blog/nas-casero-sin-comprar-un-nas/), [TV box Android como NAS casero](/blog/tv-box-android-como-servidor-de-archivos/).

@@ -10,7 +10,7 @@ cover: assets/blog/nas-vs-android/cover-en.webp
 cover_alt: Illustration of a NAS box facing a phone next to the DogNAS server screen
 social_image: assets/blog/nas-vs-android/social-en.jpg
 cta: server
-related: [home-nas, old-android-server, old-laptop-hdd]
+related: [android-nas-server, home-nas, old-android-server, old-laptop-hdd]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -57,4 +57,4 @@ Many people start with the Android they already have and, if the need grows, mov
 
 To see how to set yours up, read [a home NAS without buying a NAS](/en/blog/home-nas-without-buying-a-nas/) or the walkthrough in [how to turn an old Android into a file server](/en/blog/turn-old-android-into-file-server/).
 
-Keep reading: [NAS server on Android](/blog/turn-old-android-into-file-server/), [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).
+Keep reading: [NAS server on Android: the complete guide](/blog/android-nas-server-guide/), [turn an old Android into a file server](/blog/turn-old-android-into-file-server/), [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).
