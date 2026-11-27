@@ -3,7 +3,7 @@ slug: servidor-nas-android-guia-completa
 title: "Servidor NAS en Android: guía completa para tener un NAS en casa con un móvil"
 summary: Qué es un servidor NAS en Android, qué necesitas, cómo funciona, qué velocidad tiene de verdad y dónde se queda corto. El mapa de todas las demás guías del sitio.
 meta_title: Servidor NAS en Android: guía completa | DogNAS
-meta_description: Qué es un servidor NAS en Android, qué necesitas, cómo viajan los archivos, velocidades reales, seguridad y límites. Guía completa para un NAS casero en un móvil, tableta o TV box.
+meta_description: Qué es un servidor NAS en Android, qué necesitas, velocidades reales, seguridad y límites. Guía completa para un NAS casero en un móvil, tableta o TV box.
 pillar: reuse
 tags: [servidor nas, android nas, nas casero, servidor de archivos, sftp, android viejo, tv box]
 cta: server
@@ -11,11 +11,11 @@ related: [old-android-server, home-nas, nas-vs-android, tv-box-server]
 cover: assets/blog/android-nas-server/cover-es.webp
 cover_alt: Una tablet con el servidor DogNAS junto a una base de disco duro USB, con un celular conectado
 social_image: assets/blog/android-nas-server/social-es.jpg
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-24
-published: 2026-11-24
-updated: 2026-11-24
+published: 2026-11-26
+updated: 2026-11-26
 ---
 Un servidor NAS en Android es un móvil, una tableta o una TV box Android que se queda en casa, enchufada, guardando tus archivos para que todos los demás dispositivos del Wi-Fi puedan acceder a ellos. NAS son las siglas de almacenamiento conectado a la red: un pequeño servidor en tu red local que solo guarda y entrega archivos. La diferencia es que el equipo es el que ya tienes.
 

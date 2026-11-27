@@ -11,11 +11,11 @@ related: [old-android-server, home-nas, nas-vs-android, tv-box-server]
 cover: assets/blog/android-nas-server/cover-en.webp
 cover_alt: A tablet running the DogNAS server next to a USB hard drive dock, with a phone connected to it
 social_image: assets/blog/android-nas-server/social-en.jpg
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-24
-published: 2026-11-24
-updated: 2026-11-24
+published: 2026-11-26
+updated: 2026-11-26
 ---
 An Android NAS server is an Android phone, tablet or TV box that stays at home, plugged in, and keeps your files so that every other device on the Wi-Fi can reach them. NAS stands for network-attached storage: a small server on your local network whose only job is to store and serve files. The difference is that the hardware is the one you already own.
 
