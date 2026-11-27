@@ -10,7 +10,7 @@ cover: assets/blog/tv-box-server/cover-pt.webp
 cover_alt: A tela inicial de uma TV box Android com o app DogNAS entre os apps favoritos
 social_image: assets/blog/tv-box-server/social-pt.jpg
 cta: server
-related: [old-android-server, home-nas, old-tablet]
+related: [android-nas-server, old-android-server, home-nas, old-tablet]
 tested: Aquário STV-3000 Plus (TV box) · Android 11 · 2026-11-01
 status: published
 translation_review: reviewed
@@ -94,4 +94,4 @@ Não para começar. O plano Grátis guarda até 64 GB de arquivos, com o perfil 
 
 Se você já tem uma TV box parada numa gaveta, é um jeito sem custo de guardar os arquivos de casa num só lugar, sem nuvem. Se vai comprar um aparelho para isso, um celular ou tablet antigo com processador melhor costuma ser mais rápido. Compare com as outras opções em [reaproveitar um Android antigo](/blog/transformar-android-antigo-em-servidor-de-arquivos/) e em [um tablet antigo como armazenamento da casa](/blog/tablet-antigo-como-armazenamento-da-casa/).
 
-Continue lendo: [servidor NAS no Android](/blog/transformar-android-antigo-em-servidor-de-arquivos/), [NAS caseiro sem comprar um NAS](/blog/nas-caseiro-sem-comprar-nas/), [NAS tradicional ou servidor Android](/blog/nas-tradicional-ou-servidor-android/).
+Continue lendo: [servidor NAS no Android: guia completo](/blog/servidor-nas-android-guia-completo/), [transformar um Android antigo em servidor de arquivos](/blog/transformar-android-antigo-em-servidor-de-arquivos/), [NAS caseiro sem comprar um NAS](/blog/nas-caseiro-sem-comprar-nas/), [NAS tradicional ou servidor Android](/blog/nas-tradicional-ou-servidor-android/).

@@ -10,7 +10,7 @@ cover: assets/blog/tv-box-server/cover-en.webp
 cover_alt: The home screen of an Android TV box with the DogNAS app among the favourite apps
 social_image: assets/blog/tv-box-server/social-en.jpg
 cta: server
-related: [old-android-server, home-nas, old-tablet]
+related: [android-nas-server, old-android-server, home-nas, old-tablet]
 tested: Aquário STV-3000 Plus (TV box) · Android 11 · 2026-11-01
 status: published
 translation_review: reviewed
@@ -94,4 +94,4 @@ Not to start. The Free plan keeps up to 64 GB of files, with the Home profile an
 
 If you already have a TV box that is idle in a drawer, it is a zero-cost way to keep your home files in one place without the cloud. If you are going to buy a device for this, an old phone or tablet with a better processor will usually be faster. Compare it with the other options in [reusing an old Android](/en/blog/turn-old-android-into-file-server/) and in [an old tablet as home storage](/en/blog/old-tablet-as-home-storage/).
 
-Keep reading: [NAS server on Android](/blog/turn-old-android-into-file-server/), [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/).
+Keep reading: [NAS server on Android: the complete guide](/blog/android-nas-server-guide/), [turn an old Android into a file server](/blog/turn-old-android-into-file-server/), [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/).

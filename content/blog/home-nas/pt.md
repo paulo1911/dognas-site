@@ -10,7 +10,7 @@ cover: assets/blog/home-nas/cover-pt.webp
 cover_alt: Ilustração de uma casa com uma caixa de armazenamento ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/home-nas/social-pt.jpg
 cta: server
-related: [old-android-server, old-phone-ideas]
+related: [android-nas-server, old-android-server, old-phone-ideas]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -65,4 +65,4 @@ Para a maioria das casas, que só quer fotos, vídeos e documentos num lugar seg
 
 Pegue o aparelho, instale o servidor e conecte o seu celular. Em poucos minutos, você tem um NAS caseiro.
 
-Continue lendo: [servidor NAS no Android](/blog/transformar-android-antigo-em-servidor-de-arquivos/), [NAS tradicional ou servidor Android](/blog/nas-tradicional-ou-servidor-android/), [TV box Android como NAS caseiro](/blog/tv-box-android-como-servidor-de-arquivos/).
+Continue lendo: [servidor NAS no Android: guia completo](/blog/servidor-nas-android-guia-completo/), [transformar um Android antigo em servidor de arquivos](/blog/transformar-android-antigo-em-servidor-de-arquivos/), [NAS tradicional ou servidor Android](/blog/nas-tradicional-ou-servidor-android/), [TV box Android como NAS caseiro](/blog/tv-box-android-como-servidor-de-arquivos/).

@@ -10,7 +10,7 @@ cover: assets/blog/old-phone-ideas/cover-pt.webp
 cover_alt: Ilustração de um celular com faíscas de ideias ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/old-phone-ideas/social-pt.jpg
 cta: server
-related: [old-android-server, home-nas, nas-vs-android, old-tablet, tv-box-server, sell-or-reuse]
+related: [android-nas-server, old-android-server, home-nas, nas-vs-android, old-tablet, tv-box-server, sell-or-reuse]
 status: published
 translation_review: reviewed
 created: 2026-10-28

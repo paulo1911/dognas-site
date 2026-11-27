@@ -10,7 +10,7 @@ cover: assets/blog/home-nas/cover-en.webp
 cover_alt: Illustration of a house with a storage box next to the DogNAS Client Lite screen
 social_image: assets/blog/home-nas/social-en.jpg
 cta: server
-related: [old-android-server, old-phone-ideas]
+related: [android-nas-server, old-android-server, old-phone-ideas]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -65,4 +65,4 @@ For most homes that just want photos, videos and documents in a safe place, the 
 
 Grab the device, install the server and connect your phone. In a few minutes, you have a home NAS.
 
-Keep reading: [NAS server on Android](/blog/turn-old-android-into-file-server/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).
+Keep reading: [NAS server on Android: the complete guide](/blog/android-nas-server-guide/), [turn an old Android into a file server](/blog/turn-old-android-into-file-server/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).

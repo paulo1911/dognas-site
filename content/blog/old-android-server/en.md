@@ -10,7 +10,7 @@ cover: assets/blog/old-android-server/cover-en.webp
 cover_alt: Illustration of a phone with Wi-Fi next to the DogNAS server screen
 social_image: assets/blog/old-android-server/social-en.jpg
 cta: server
-related: [home-nas, old-phone-ideas]
+related: [android-nas-server, home-nas, old-phone-ideas]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -70,6 +70,6 @@ Real screenshots of the app: the server running, the profile's QR Code and the f
 
 Dig out the old Android, install the server and connect your phone. In a few minutes, that drawer becomes your home storage.
 
-Keep reading: [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).
+Keep reading: [NAS server on Android: the complete guide](/blog/android-nas-server-guide/), [home NAS without buying a NAS](/blog/home-nas-without-buying-a-nas/), [traditional NAS or Android server](/blog/traditional-nas-vs-android-server/), [Android TV box as a home NAS](/blog/android-tv-box-as-home-server/).
 
 DogNAS is accessed over SFTP, not as a Windows network folder (SMB): see [what SFTP is](/blog/what-is-sftp-access-android-server/).
