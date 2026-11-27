@@ -10,7 +10,7 @@ cover: assets/blog/cloud-subscription-savings/cover-en.webp
 cover_alt: Illustration of a cloud with a coin next to the DogNAS server screen
 social_image: assets/blog/cloud-subscription-savings/social-en.jpg
 cta: server
-related: [old-android-server, home-nas, free-phone-space]
+related: [google-storage-full, old-android-server, home-nas, free-phone-space]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -57,3 +57,5 @@ Be fair to both options. The cloud is good for reaching files from anywhere, sha
 ## Next step
 
 Make a list of your subscriptions, clean out what is left over and move photos and videos to a place of your own. To start, see [how to turn an old Android into a file server](/en/blog/turn-old-android-into-file-server/).
+
+If the full-storage warning comes from Google, also see [how to move everything out of Drive and Photos and keep it at home](/blog/google-drive-photos-full-store-files-at-home/).

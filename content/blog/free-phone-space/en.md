@@ -10,7 +10,7 @@ cover: assets/blog/free-phone-space/cover-en.webp
 cover_alt: Illustration of a phone with an arrow moving files out next to the DogNAS Client Lite screen
 social_image: assets/blog/free-phone-space/social-en.jpg
 cta: client
-related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]
+related: [google-storage-full, old-android-server, pc-phone-transfer, cloud-subscription-savings]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -58,3 +58,5 @@ DogNAS turns a spare Android (7.0 or newer) into a file server for your home. On
 ## Summary
 
 Clear the cache, the apps and the duplicates, then send photos and videos to a place of your own. If you don't have one yet, [use an old Android as a file server](/en/blog/turn-old-android-into-file-server/) and keep your phone light.
+
+If the full-storage warning comes from Google, also see [how to move everything out of Drive and Photos and keep it at home](/blog/google-drive-photos-full-store-files-at-home/).

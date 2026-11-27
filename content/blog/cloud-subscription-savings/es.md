@@ -10,7 +10,7 @@ cover: assets/blog/cloud-subscription-savings/cover-es.webp
 cover_alt: Ilustración de una nube con una moneda junto a la pantalla del servidor DogNAS
 social_image: assets/blog/cloud-subscription-savings/social-es.jpg
 cta: server
-related: [old-android-server, home-nas, free-phone-space]
+related: [google-storage-full, old-android-server, home-nas, free-phone-space]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -57,3 +57,5 @@ Sé justo con las dos opciones. La nube es buena para acceder desde cualquier lu
 ## Próximo paso
 
 Haz la lista de tus suscripciones, limpia lo que sobra y lleva fotos y videos a un lugar propio. Para empezar, mira [cómo convertir un Android viejo en un servidor de archivos](/es/blog/convertir-android-viejo-en-servidor-de-archivos/).
+
+Si el aviso de espacio lleno viene de Google, mira también [cómo sacar todo de Drive y de Fotos y guardarlo en casa](/es/blog/google-drive-fotos-lleno-guardar-en-casa/).

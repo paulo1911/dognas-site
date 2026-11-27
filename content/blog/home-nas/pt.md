@@ -10,7 +10,7 @@ cover: assets/blog/home-nas/cover-pt.webp
 cover_alt: Ilustração de uma casa com uma caixa de armazenamento ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/home-nas/social-pt.jpg
 cta: server
-related: [android-nas-server, old-android-server, old-phone-ideas]
+related: [google-storage-full, android-nas-server, old-android-server, old-phone-ideas]
 status: published
 translation_review: reviewed
 created: 2026-10-28

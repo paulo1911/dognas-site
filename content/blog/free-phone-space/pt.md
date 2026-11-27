@@ -10,7 +10,7 @@ cover: assets/blog/free-phone-space/cover-pt.webp
 cover_alt: Ilustração de um celular com uma seta tirando arquivos ao lado da tela do DogNAS Client Lite
 social_image: assets/blog/free-phone-space/social-pt.jpg
 cta: client
-related: [old-android-server, pc-phone-transfer, cloud-subscription-savings]
+related: [google-storage-full, old-android-server, pc-phone-transfer, cloud-subscription-savings]
 status: published
 translation_review: reviewed
 created: 2026-10-28
@@ -58,3 +58,5 @@ O DogNAS transforma um Android que está sobrando (7.0 ou mais recente) em um se
 ## Resumo
 
 Limpe o cache, os apps e os duplicados, depois mande fotos e vídeos para um lugar seu. Se você ainda não tem onde guardar, [use um Android antigo como servidor de arquivos](/blog/transformar-android-antigo-em-servidor-de-arquivos/) e deixe o celular leve.
+
+Se o aviso de espaço cheio vem do Google, veja também [como tirar tudo do Drive e do Fotos e guardar em casa](/pt/blog/google-drive-fotos-cheio-guardar-em-casa/).
