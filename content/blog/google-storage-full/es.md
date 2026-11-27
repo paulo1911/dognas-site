@@ -11,8 +11,8 @@ cover_alt: Un móvil con el servidor DogNAS conectado por cable, junto a un disc
 social_image: assets/blog/google-storage-full/social-es.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-26
 published: 2026-11-26
 updated: 2026-11-26
@@ -45,6 +45,7 @@ Takeout es la herramienta de Google para descargar tus datos (takeout.google.com
 1. Entra con la cuenta que está llena y deja marcado solo lo que quieres: **Google Fotos**, **Drive**, o los dos. Desmarcar el resto hace la exportación mucho más ligera.
 2. En Drive y en Fotos puedes elegir solo algunos álbumes o carpetas. Si la biblioteca es enorme, conviene hacerlo por etapas.
 3. Elige el formato del archivo y el tamaño de las partes. Partes más pequeñas (2 GB, por ejemplo) son más fáciles de descargar y de repetir si una falla.
+   Como destino, usa el **enlace por correo**. Enviar la exportación a tu propio Drive gasta justo el espacio que quieres liberar.
 4. Pide la exportación y espera. En bibliotecas grandes puede tardar de horas a unos días. Google te avisa por correo.
 5. Descarga todas las partes. El enlace funciona por tiempo limitado, así que no lo dejes para después.
 

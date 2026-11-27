@@ -11,8 +11,8 @@ cover_alt: A phone running the DogNAS server, connected by cable, next to a hard
 social_image: assets/blog/google-storage-full/social-en.jpg
 cta: server
 related: [android-nas-server, cloud-subscription-savings, free-phone-space, pc-phone-transfer, sftp-clients]
-status: review
-translation_review: pending
+status: published
+translation_review: reviewed
 created: 2026-11-26
 published: 2026-11-26
 updated: 2026-11-26
@@ -45,6 +45,7 @@ Takeout is Google's own tool for downloading your data (takeout.google.com).
 1. Sign in with the account that is full and tick only what you want: **Google Photos**, **Drive**, or both. Unticking the rest makes the export much lighter.
 2. In Drive and Photos you can pick just some albums or folders. If the library is huge, it's worth doing it in stages.
 3. Choose the file format and the size of the parts. Smaller parts (2 GB, for example) are easier to download and to repeat if one fails.
+   For the destination, use the **email link**. Sending the export to your own Drive uses up the very space you are trying to free.
 4. Request the export and wait. For big libraries it can take anywhere from hours to a few days. Google emails you when it's ready.
 5. Download every part. The link only works for a limited time, so don't put it off.
 
