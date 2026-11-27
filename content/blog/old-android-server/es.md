@@ -10,7 +10,7 @@ cover: assets/blog/old-android-server/cover-es.webp
 cover_alt: Ilustración de un celular con Wi-Fi junto a la pantalla del servidor DogNAS
 social_image: assets/blog/old-android-server/social-es.jpg
 cta: server
-related: [android-nas-server, home-nas, old-phone-ideas]
+related: [google-storage-full, android-nas-server, home-nas, old-phone-ideas]
 status: published
 translation_review: reviewed
 created: 2026-10-28
