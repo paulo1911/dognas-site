@@ -59,7 +59,7 @@ def write(path, text):
     full = os.path.join(OUT, path, 'index.html'); os.makedirs(os.path.dirname(full), exist_ok=True); open(full, 'w').write(text)
 
 
-def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None, wide=False):
+def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_type='website', noindex=False, image=None, wide=False, social_title=None, image_alt=None, article=None):
     t = UI[L]
     home = f'{base}{LANGS[L][1]}'
     return f'''<!doctype html>
@@ -70,7 +70,7 @@ def shell(L, path, title, desc, main, base, nav, jsonld, alternates=None, og_typ
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
-{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image)}{jsonld}<link rel="alternate" type="application/atom+xml" title="{html.escape(t['h1'])}" href="{seo.SITE}{bc.blog_dir(L)}feed.xml"><link rel="icon" type="image/png" href="{base}assets/icon-96.png">
+{seo.meta(L, path, title, desc, alternates, og_type, noindex or PREVIEW, image, social_title, image_alt, article)}{jsonld}<link rel="alternate" type="application/atom+xml" title="{html.escape(t['h1'])}" href="{seo.SITE}{bc.blog_dir(L)}feed.xml"><link rel="icon" type="image/png" href="{base}assets/icon-96.png">
 {BLOG_CSS}
 </head>
 <body{" class=wide" if wide else ""}><div class="wrap">
@@ -263,7 +263,9 @@ def main():
                             'author': {'@type': 'Organization', 'name': ab.TEAM[L], 'url': seo.SITE + bc.about_path(L)}, 'publisher': {'@id': seo.SITE + '#org'}, 'isPartOf': {'@id': seo.SITE + bc.list_path(L) + '#blog'},
                             'wordCount': words, 'articleSection': a['category'], **({'keywords': ', '.join(a['tags'])} if a.get('tags') else {}),
                             **({'image': [seo.SITE + x for x in dict.fromkeys([a.get('cover'), a.get('social_image')]) if x]} if image else {})}])
-            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image, wide=True))
+            write(path, shell(L, path, a['meta_title'], a['meta_description'], main_html, b, nav, ld, alts if len(alts) > 1 else None, 'article', image=image, wide=True,
+                       social_title=a['title'], image_alt=a.get('cover_alt'),
+                       article=dict(published=a.get('published') or a['created'], modified=upd, section=a['category'], tags=a.get('tags'))))
             n += 1
     print(f'ok: {n} pages ({len(arts)} articles){" [preview -> _preview/]" if PREVIEW else ""}')
 
